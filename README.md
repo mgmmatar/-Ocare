@@ -1,0 +1,1 @@
+Ocare Application will be a new Technology which will impact our Global
