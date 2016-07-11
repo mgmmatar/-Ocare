@@ -1,0 +1,23 @@
+@font-face {
+	font-family: 'bold-65';
+	src: url('../fonts/FrutigerLTArabic-65Bold.eot') format('eot'), 
+		 url('../fonts/FrutigerLTArabic-65Bold.svg') format('svg'),
+	     url('../fonts/FrutigerLTArabic-65Bold.woff') format('woff'), 
+	     url('../fonts/FrutigerLTArabic-65Bold.ttf')  format('truetype');
+	     
+
+	font-weight:normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'HelveticaNeueL';
+	src: url('../fonts/HelveticaNeueLTW20-Roman.eot') format('eot'), 
+		 url('../fonts/HelveticaNeueLTW20-Roman.svg') format('svg'),
+	     url('../fonts/HelveticaNeueLTW20-Roman.woff') format('woff'), 
+	     url('../fonts/HelveticaNeueLTW20-Roman.ttf')  format('truetype');
+	     
+
+	font-weight:normal;
+	font-style: normal;
+}

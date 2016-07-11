@@ -1,0 +1,345 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 30, 2015, 1:48:27 AM
+    Author     : khaledeng
+*/
+
+img.userImg {
+    width: 60px;
+    height: 70px;
+    border-radius: 60%;
+    float: left;
+}
+
+img.patientImg {
+    width: 110px;
+    height: 121px;
+    border-radius: 60%;
+    float: left;
+    margin-top: 5px;
+    margin-right: 15px;
+}
+
+img.patientReport {
+    width: 77px;
+    height: 77px;
+    border-radius: 60%;
+    float: left;
+    margin-top: 5px;
+    margin-right: 15px;
+}
+
+.patientData {
+    padding-top: 10px;
+}
+
+.reportHighlightRow{
+    background-color: #F0EB1E;
+}
+
+.details {
+    float: left;
+    width: 90%;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+#pinfo{
+    padding-left: 300px;
+        padding-top: 15px;
+}
+
+.clear{
+    clear:both;
+}
+
+h3.name,h3.examineType {
+    float: left;
+    clear: both;
+    font-size: 16px;
+    line-height: 20px;
+    margin: 0px;
+    padding: 0px;
+}
+
+
+h3.code,h3.date {
+    float: right;
+    font-size: 16px;
+    line-height: 20px;
+    margin: 0px;
+    padding: 0px;
+}
+
+
+
+.actions {
+    width: 110px;
+    float: right;
+    text-align: right;
+    margin-top: 10px;
+}
+
+.actions img {
+    width: 30px;
+    margin-left: 15px;
+}
+
+.actions a:hover {
+    padding: 5px;
+   -webkit-transition:all .25s linear;
+    -moz-transition:al .25s linear;
+    -ms-transition:all .25s linear;
+}
+
+.card {
+    padding: 5px;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: box-shadow .25s;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+	margin-bottom: 5px;
+}
+
+a.ViewMore:hover {
+    font-size: 16px;
+	
+	-webkit-transition:all .25s linear;
+    -moz-transition:al .25s linear;
+    -ms-transition:all .25s linear;
+}		
+			
+	.ViewMoreContainer {
+    margin-left: 85px;
+    margin-top: 70px;
+    text-align: center;
+}		
+.modal-body .details {
+    width: 100%;
+    padding-right: 25px;
+}
+
+.modal-body .actions {
+    margin-right: 10px;
+}
+.modal-body  .userImgContainer {
+    width: 100%;
+    height: 70px;
+    text-align: center;
+}
+
+.modal-body  .userImgContainer img.userImg {
+    float: none;
+    width:90px;
+    height:90px;
+}
+
+.patientInfo{
+    padding-left: 50px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    display: inline-flex;
+    width: 850px;
+}
+
+.costViewer{
+    padding-top: 3px;
+    padding-left: 80px;
+}
+
+.price-circle {
+   width: 100px;
+   height: 100px;
+   background: #394A59;
+   -moz-border-radius: 50px;
+   -webkit-border-radius: 50px;
+   border-radius: 50px;
+   border: 7px solid rgb(3, 29, 41);
+}
+
+.price-value{
+    margin-left: 10px;
+    margin-top: 20px;
+    font-size: 20px;
+    color: white;
+}
+
+
+/// Adding Section of Price 
+
+@media (min-width: 992px)
+.col-md-3 {
+    width: 25%;
+}
+
+@media (min-width: 992px)
+.col-md-3{
+    float: left;
+}
+
+.col-md-3{
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.circle{
+  background: #2A3940;
+  padding: 35px;
+  font-size: 14px;
+  text-align: center;
+  height: 140px;
+  width: 140px;
+  border: 8px solid #5C6B7A;
+    
+    transition: all 0.5s;
+  -moz-transition: all 0.5s; /* Firefox 4 */
+  -webkit-transition: all 0.5s; /* Safari and Chrome */
+  -o-transition: all 0.5s; /* Opera */
+ 
+}
+.circle {
+  margin: 0;
+  padding: 0;
+}
+.circle p{}
+.circle span{}
+.circle span.icon{
+}
+.circle span.icon i{
+  font-size: 48px;
+}
+.circle span.price-large{
+    font-size: 35px;
+    margin-left: -32px;
+}
+.price-small{
+    font-size: 18px;
+    margin-right: -21px;
+    color: #FCC409;
+}
+
+.c2:hover .price-small{
+    color: #000000;
+}
+
+.c2:hover .btn-warning{
+    background: #2A3940;
+    color:#FCC409;
+    border-color:#2A3940; 
+}
+
+.c1:hover{
+  background: #39b3d7;
+  color: #ffffff;
+}
+.c1 .blue{
+  color: #39b3d7;
+}
+.c1:hover .blue{
+  color: #ffffff;
+}
+
+.c2:hover{
+  background: #FCC409;
+  color: #000000;
+}
+.c2 .yellow{
+    color: #FCC409;
+    margin-top: -23px;
+    font-size: 30px;
+}
+.c2:hover .yellow{
+  color: #000000;
+}
+
+.c3:hover{
+  background: #47a447;
+  color: #ffffff;
+}
+.c3 .green{
+  color: #47a447;
+}
+.c3:hover .green{
+  color: #ffffff;
+}
+
+.c4:hover{
+  background: #d2322d;
+  color: #000000;
+}
+.c4 .red{
+  color: #d2322d;
+}
+.c4:hover .red{
+  color: #ffffff;
+}
+
+.cost-area{
+    margin-top: 23px;
+    margin-left: 8px;
+}
+
+.paid-button{
+    width: 70px;
+    border-radius: 11%!important;
+    margin-left: 5px;
+    margin-top: 1px;
+}
+
+.examineTypeSelector{
+    color: #000000;
+    width: 200px;
+    color: white;
+    height: 45px;
+    background: #2A3940;
+    text-align: center;
+    font-size: 18px;
+}
+
+.infoData{
+    font-size: 18px;
+}
+
+.dropDownList{
+    width: 200px;
+    height: 35px;
+    padding: 5px;
+    background: #2A3940; 
+    color: white;
+}
+
+table.patientInfoViwer td{
+    height: 40px;
+}
+
+.reserveButton{
+    margin: 20px;
+    background-color: #268D51!important;
+    border-radius: 25px;
+    height: 45px;
+    width: 135px;
+    color: white;
+    font-size: 18px;
+}
+
+.reserveButton:hover {
+    background-color: #FCC409 !important;
+    color: #000;
+}
+
+.cancelPayment{
+    background-color: #268D51!important;
+    border-color: #268D51!important;
+    color: #FFFFFF!important;
+}
+
+.agreePayment{
+    background: #FCC409;
+    border-color: #FCC409;
+    color: black;
+}

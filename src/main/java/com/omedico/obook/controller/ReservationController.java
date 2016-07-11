@@ -1,0 +1,235 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.omedico.obook.controller;
+
+import com.obird.utility.ODate;
+import com.omedico.obook.domain.ExamineType;
+import com.omedico.obook.domain.InsuranceProfile;
+import com.omedico.obook.domain.Patient;
+import com.omedico.obook.domain.Reservation;
+import com.omedico.obook.domain.ReservationWay;
+import com.omedico.obook.domain.WeekDay;
+import com.omedico.obook.holder.ReservationCost;
+import com.omedico.obook.holder.ReservationHolder;
+import com.omedico.obook.holder.ShiftReservation;
+import com.omedico.obook.holder.ShiftSlice;
+import com.omedico.obook.service.ExamineTypeService;
+import com.omedico.obook.service.InsuranceProfileService;
+import com.omedico.obook.service.PatientService;
+import com.omedico.obook.service.ReservationService;
+import com.omedico.obook.service.ReservationWayService;
+import com.omedico.obook.service.WeekDayService;
+import java.io.IOException;
+import java.util.Date;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+/**
+ *
+ * @author khaledeng
+ */
+@Controller("reservationController")
+@RequestMapping("/reservation")
+public class ReservationController {
+
+    private final String MODULE_ROOT = "/OBook/reservation/";
+
+    @Autowired
+    private ReservationService reservationService;
+
+    @Autowired
+    private WeekDayService weekDayService;
+
+    @Autowired
+    private PatientService patientService;
+
+    @Autowired
+    private ReservationWayService reservationWayService;
+
+    @Autowired
+    private ExamineTypeService examineTypeService;
+    
+    @Autowired
+    private InsuranceProfileService insuranceProfileService;
+
+    @RequestMapping("/process/{id}")
+    public String processReservation(@PathVariable("id") Integer patientId, Model model) {
+        // Get patient
+        Patient patient = patientService.getPatientById(patientId);
+        /// Load For Today
+        Date currentDate = new Date();
+        String dayShortName = ODate.getWeekDay(currentDate);
+        WeekDay weekDay = weekDayService.getWeekDay(dayShortName);
+        /// Preparing List of data 
+        List<ExamineType> examineTypes=examineTypeService.getAllExamineTypes();
+        List<ReservationWay> reservationWays = reservationWayService.getAllReservationWays();
+        /// Retrieve defaultExamineType
+        ExamineType defaultExamineType = examineTypeService.getDefaultExamineType();
+        // Choose First ExamineType as the Default One
+        if(defaultExamineType==null){
+             defaultExamineType = examineTypes.get(0);
+        }//end if Condition 
+       /// Model Data to View
+        model.addAttribute("patient", patient);
+        model.addAttribute("defaultExamineType", defaultExamineType);
+        model.addAttribute("reservationWays", reservationWays);
+        model.addAttribute("examineTypes", examineTypes);
+        model.addAttribute("currentDate", ODate.getStringDateForCalendar(currentDate));
+        model.addAttribute("weekDay", weekDay);
+        // Send View 
+        return MODULE_ROOT + "reservationProcess";
+    }//end registerPatient
+
+    @RequestMapping("/preview")
+    public String reservationPreviewProcess(Model model) {
+        // Get Important Information for Preview 
+        Date currentDate = new Date();
+        String dayShortName = ODate.getWeekDay(currentDate);
+        WeekDay weekDay = weekDayService.getWeekDay(dayShortName);
+        /// Preparing List of data 
+        List<ExamineType> examineTypes=examineTypeService.getAllExamineTypes();
+        /// Getting All Time Slices
+        List<ShiftSlice> shifts = reservationService.getTimeSlices(currentDate,examineTypes.get(0).getEstimatedPeriod());
+        /// Model Data to View
+        model.addAttribute("examineTypes", examineTypes);
+        model.addAttribute("currentDate", ODate.getStringDateForCalendar(currentDate));
+        model.addAttribute("weekDay", weekDay);
+        model.addAttribute("shifts", shifts);
+        //model.addAttribute("", model)
+        return MODULE_ROOT + "reservationPreview";
+    }//end registerPatient
+    
+    
+    @RequestMapping("/list")
+    public String reservationProcess2(Model model) {
+        // Get patient
+        //Date currentDate = ODate.getDateFromString("2015-10-17");
+        Date currentDate = new Date();
+        String dayShortName = ODate.getWeekDay(currentDate);
+        WeekDay weekDay = weekDayService.getWeekDay(dayShortName);
+        /// Model Data to View
+        model.addAttribute("currentDate", ODate.getStringDateForCalendar(currentDate));
+        model.addAttribute("weekDay", weekDay);
+        // Return result 
+        return MODULE_ROOT + "reservationList";
+    }//end registerPatient
+
+    @RequestMapping(value = "/processReservation", method = RequestMethod.POST)
+    public String registerationProcess(@ModelAttribute ReservationHolder reservationHolder, BindingResult result, Model model, HttpServletRequest request) {
+        // TODO Validate PatientHolder
+        Reservation reservation = reservationService.reservePatient(reservationHolder);
+        // redirect to Patient List
+        return MODULE_ROOT + "reservationList";
+    }//end registerPatient
+///////////////////////////////////////////////////////////////////////////////////////////
+///          TimeSlicing Loader
+//////////////////////////////////////////////////////////////////////////////////////////
+
+    @RequestMapping(value = "/timeSlice/{date},{examineType}", method = RequestMethod.GET, produces = "application/json")
+    public String slicingTimeForDate(@PathVariable("date") String dateString, @PathVariable("examineType") Integer examineTypeId, Model model) {
+        ////////////////////////////////////////////////////////////        
+        Date currentDate = ODate.getDateFromString(dateString);
+        ExamineType examineType = examineTypeService.get(examineTypeId);
+        // Getting Day Shifts 
+        String dayShortName = ODate.getWeekDay(currentDate);
+        WeekDay weekDay = weekDayService.getWeekDay(dayShortName);
+        /// Getting All Time Slices
+        List<ShiftSlice> shifts = reservationService.getTimeSlices(currentDate, examineType.getEstimatedPeriod());
+        // Sent Data tO View
+        model.addAttribute("currentDate", ODate.getStringDateForCalendar(currentDate));
+        model.addAttribute("weekDay", weekDay);
+        model.addAttribute("shifts", shifts);
+        //////////////////////////////////////////////////////////////
+        // returning Wanted Page
+        return MODULE_ROOT + "timeSlices";
+    }
+    
+    ////////////////////////////////////////////////////////
+    @RequestMapping(value = "/examineCost/{patient},{examineType}", method = RequestMethod.GET, produces = "application/json")
+    public String costForExamine(@PathVariable("patient") Integer patientId, @PathVariable("examineType") Integer examineTypeId, Model model) {
+        ////////////////////////////////////////////////////////////
+        /// Getting PatientInfo
+        Patient patient=patientService.getPatientById(patientId);
+        ExamineType examineType=examineTypeService.get(examineTypeId);
+        //check if He is Insurred
+        boolean insurred = false;
+        ReservationCost cost=null;
+        float totalCost = examineType.getCost();
+        if(patient.getInsuranceCompany()!=null){
+            InsuranceProfile insuranceProfile=insuranceProfileService.getProfileForCompanyAndExamine(patient.getInsuranceCompany().getId(),examineType.getId());
+            insurred = true; 
+            if(insuranceProfile!=null){
+                cost=new ReservationCost(totalCost,insuranceProfile.getPercentage());
+            }//end if Condition
+            
+        }else{
+            cost=new ReservationCost(totalCost,0);
+        }//end else
+        // Sent Data tO View
+        model.addAttribute("totalCost", cost.getTotalCost());
+        model.addAttribute("integerCost", cost.getIntegerString());
+        model.addAttribute("fractionCost", cost.getFractionString());
+        //////////////////////////////////////////////////////////////
+        // returning Wanted Page
+        return MODULE_ROOT + "examineCost";
+    }
+    
+/////////////////////////////////////////////////////////////////////////////////////////
+    @RequestMapping(value = "/reservationElement/{date}", method = RequestMethod.GET, produces = "application/json")
+    public String reservationListForDate(@PathVariable("date") String dateString, Model model) {
+        ////////////////////////////////////////////////////////////
+        Date currentDate = ODate.getDateFromString(dateString);
+        // Getting All Reservations Per Shift 
+        List<ShiftReservation> shifts=reservationService.getAllShiftReservations(currentDate);
+        // Getting Reservation Shifts
+        String dayShortName = ODate.getWeekDay(currentDate);
+        WeekDay weekDay = weekDayService.getWeekDay(dayShortName);
+        ///////////////////////
+        // Sent Data to View
+        model.addAttribute("currentDate", ODate.getStringDateForCalendar(currentDate));
+        model.addAttribute("weekDay", weekDay);
+        model.addAttribute("shifts", shifts);
+        // returning Wanted Page
+        return MODULE_ROOT + "reservationElement";
+    }
+    
+    /////////////////////////////////////////////////////////////////////////////////////////
+    @RequestMapping(value = "/cancelReservation/{reservationId}", method = RequestMethod.GET)
+    public void cancelPatientReservation(@PathVariable("reservationId") Integer reservationId, Model model,HttpServletResponse response) throws IOException {
+        /// Getting Reservation 
+        boolean cancelled=reservationService.cancelReservation(reservationId);
+        String done="true";
+        if(!cancelled){
+             done="false";
+        }
+        ////////////////////////////////////////////////////////////
+        response.getWriter().write(done);
+    }//cancelReservation process 
+        /////////////////////////////////////////////////////////////////////////////////////////
+    @RequestMapping(value = "/confirmReservation/{reservationId}", method = RequestMethod.GET)
+    public void confirmPatientReservation(@PathVariable("reservationId") Integer reservationId, Model model,HttpServletResponse response) throws IOException {
+        /// Getting Reservation 
+        boolean confirmed=reservationService.confirmReservation(reservationId);
+        ////////////////////////////////////////////////////////////
+        String done="true";
+        if(!confirmed){
+             done="false";
+        }//end if 
+        ////////////////////////////////////////////////////////////
+        response.getWriter().write(done);
+    }//cancelReservation process 
+    
+    
+}

@@ -1,0 +1,237 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 26, 2015, 4:27:06 PM
+    Author     : khaledeng
+*/
+@import url('fonts.css');
+.calendar_head{
+    width: 800px;
+    margin-bottom: 10px;
+    margin:auto;
+}
+.calender_title_head{
+    max-width: 540px;
+    height: 70px;
+    overflow: hidden;
+}
+
+.bg_container{
+//    background-color: rgba(28, 51, 58, 0.8);
+    padding: 8px;
+    border: 1px solid #335f6f;
+}
+
+.calender_body{
+    font-family: 'HelveticaNeueL';
+//    background-color: #123341;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+//    color: #ffffff;
+    font-size: 20px;
+     background-repeat: no-repeat;
+    background-position: 100% 95%;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    overflow-x: hidden;
+}
+
+.month_year_color{
+    color: #ffffff;
+}
+
+.calendar .item{
+    background: #031d29;
+    color: #FFF;
+    text-align: center;
+    padding-bottom: 5px;
+    display: block;
+}
+.customNavigation{
+    text-align: center;
+}
+
+.con{
+    width: 600px;
+    float: left;
+    margin-left: 35px;
+}
+.padding_0{
+    padding: 0;
+}
+.padding_r_0{
+    padding-right: 0;
+}
+
+.owl-nav div{
+    position: absolute;
+
+    background-repeat:  no-repeat ;
+    width: 20px;
+    height: 30px
+
+}
+.calendar .owl-nav div{
+    width: 41px;
+    background-color: #031d29;
+    background-position: top 27px left 10px;
+    padding-top: 35px;
+    padding-bottom: 49px;
+    padding-right: 9px;
+    padding-left: 9px;
+    top: 0;
+    left: -36px;
+}
+.calendar .owl-nav div:hover{
+    transition: all 200ms linear;
+    -webkit-transition: all 200ms linear;
+    -moz-transition: all 200ms linear;
+    -o-transition: all 200ms linear;
+    -ms-transition: all 200ms linear;
+    background-color: #21355E;
+}
+.con_month , .con_year{
+    position: relative;
+}
+.calender_matches{
+    margin-top: -10px;
+    width: 786px;
+}
+
+.owl-prev{
+    background-image: url(../images/calendar_right.png)  ;
+}
+.owl-next{
+    background-image: url(../images/1.png)  ;
+
+}
+.calendar h1 , .calendar h4{
+    margin: 0 0 10px 0!important;
+    padding: 0!important;
+}
+.calendar .owl-prev{
+    right: -40px;
+}
+
+.calendar  .owl-next{
+
+    left: -39px;
+
+}
+
+
+.month_year_wrap{
+    width: 110px;
+    height:84px;
+    background:#2a3940;
+    float: right
+
+}
+.month_year_wrap .item{
+    color:white;
+    text-align: center;
+    padding-top: 10px;
+}
+.month_year_wrap .owl-nav div{
+    top: 14px;
+}
+
+.month_year_wrap .owl-prev{
+    background-image: url(../images/m-y-right.png)  ;
+
+}
+.month_year_wrap .owl-next{
+
+    background-image: url(../images/m-y-left.png)  ;
+    left:5px;
+
+}
+.con_month{
+    margin-top: 2px;
+
+}
+.con_month .item{
+    width: 113px;
+}
+.con_year{
+    margin-top: -10px;
+}
+.calendar .item:hover{
+    transition: all 200ms linear;
+    -webkit-transition: all 200ms linear;
+    -moz-transition: all 200ms linear;
+    -o-transition: all 200ms linear;
+    -ms-transition: all 200ms linear;
+    background-color: #fcc409;
+    color: #031d29;
+    border-bottom: 1px solid #ffffff;
+}
+.calendar .item.active{
+    background-color: #fcc409;
+    color: #031d29;
+    border-bottom: 1px solid #ffffff;
+
+}
+.tab_1, .tab_2{
+    display: none;
+}
+
+.b_logo_container{
+    width: 168px;
+    height: 188px;
+    display: table
+}
+.big_logo_con{
+    width: 150px;
+    height: 150px;
+}
+.biger_logo{
+    max-height: 143px;
+    display: block;
+    vertical-align: middle;
+    margin: 0 auto;
+    max-width: 135px;
+}
+.height_145{
+    width: 135px;
+}
+.t_container{
+    height: 145px;
+}
+.padding_top_35{
+    padding-top: 35px!important;
+}
+.d_tc{
+    display: table-cell;
+    vertical-align: middle;
+}
+.calendar_sub_title{
+    font-family: 'bold-65';
+    font-size: 16px;
+    margin-top: 10px;
+    color: #fcc409;
+}
+.calendar_img_slide{
+    width: 785px;
+}
+.calendar_footer_slider{
+    width: 785px;
+}
+
+.days .owl-item{
+    cursor: pointer;
+}
+
+.space_top{
+    margin-top: 10px;
+}
+
+.space_bottom{
+    margin-bottom: 3px;
+}

@@ -1,0 +1,372 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 4, 2016, 4:05:11 AM
+    Author     : khaledeng
+*/
+.leftSection{
+    position:relative;
+    float:left;
+    width:30%;
+}
+
+.centerSection{
+    position:relative;
+    float:left;
+    width:35%;
+}
+
+.rightSection{
+    position:relative;
+    float:right;
+    width:30%;
+    //background-color:#FF6633;
+}
+
+    .leftElements {
+        border: 1px dashed #CCC;
+        position: relative;
+        width: 85%;
+        height: 420px!important;
+        margin-left: 25px;
+        margin-right: 25px;
+        float: left;
+        overflow-x: hidden;
+        white-space: nowrap;
+    }
+
+    .leftElements > div {
+       
+      background-color: #fcf8e3;
+      border: 1px solid #fbeed5;
+      color: #c09853;
+      position: absolute;
+      height: 50px;
+      width: 250px;
+      border-radius: 50px;
+      cursor: pointer;
+    }
+
+    .leftElements > .ss-placeholder-child {
+      background: transparent;
+      border: 1px dashed blue;
+    }
+
+
+   .workspace {
+      border: 1px dashed #CCC;
+      position: relative;
+      width: 100%;
+      height: 420px!important;
+      margin-left: 25px;
+      margin-right: 25px;
+      float: left;
+      cursor: pointer;
+      overflow-x: hidden;
+      white-space: nowrap;
+      margin-top: 30px;
+    }
+
+    .workspace > div {
+      background-color: #ebf5e6;
+      border: 1px solid #d6e9c6;
+      color: #468847;
+      position: absolute;
+      height: 50px;
+      width: 300px;
+    }
+
+    .workspace > .ss-placeholder-child {
+      background: transparent;
+      border: 1px dashed blue;
+    }
+
+
+    .rightElements {
+      border: 1px dashed #CCC;
+      position: relative;
+      width: 85%;
+      float: left;
+    }
+
+    .rightElements > div {
+      background-color: #CCD1F7;
+      border: 1px solid #000000;
+      color: #010871;
+      position: absolute;
+      height: 50px;
+      width: 300px;
+      border-radius: 50px;
+      cursor: pointer;
+    }
+
+    .rightElements > .ss-placeholder-child {
+      background: transparent;
+      border: 1px dashed blue;
+    }
+
+    .myLabel{
+    	height: 30px; 
+    	line-height: 50px; 
+    	margin: 30px;
+
+    }
+    
+    .examineSearch{
+        width: 500px;
+        border-radius: 10px;
+        outline: 0;
+        border: 1px solid #268D51;
+        height: 34px;
+        color: #000;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        margin: 10px;
+        text-align: center;
+    }
+    
+    .addNewButton{
+        width: 30px;
+        height: 30px;
+    //    margin-right: -43px;
+        margin-top: -2px;
+        cursor: pointer;
+    }
+    
+    .nextButton{
+        width: 150px;
+        height: 40px;
+        float: right;
+        //position: absolute;
+        bottom: 0px;
+        margin-top: 10px;
+        //margin-right: 30px;
+        color: white;
+        background-color: #268D51!important;
+        border-radius: 25px;
+        font-size: 16px;
+        outline: none !important;
+        border: 0;
+    }
+
+    .previousButton{
+        width: 150px;
+        height: 40px;
+        float: left;
+        //position: absolute;
+        bottom: 0px;
+        margin-top: 10px;
+        margin-left: 50px;
+        color: white;
+        background-color: #268D51!important;
+        border-radius: 25px;
+        font-size: 16px;
+        outline: none !important;
+        border: 0;
+    }
+    
+    
+    .diagnosisSearch{
+        width: 300px;
+        border-radius: 10px;
+        outline: 0;
+        border: 1px solid #268D51;
+        height: 34px;
+        color: #000;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        text-align: center;
+        margin-left: 27px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-right: 5px;
+    }
+    
+    .noteDesign{
+        margin-left: 25px;
+        margin-top: 15px;
+        width: 85%;
+        padding: 5px;
+        font-size: 16px;
+        border-radius: 10px;
+        max-width: 85%; 
+        max-height: 100px;
+        border: 3px solid #cccccc;
+
+    }
+    
+   .noteDesign:focus {
+        border:5px solid #fbeed5;
+        box-shadow: 0 0 10px #719ECE;
+        background-color: #fcf8e3;
+    }
+    
+    .commentLabel{
+        margin-left: 25px;
+        font-size: 19px;
+        margin-top: 10px;
+    }
+    
+
+.dropdown-menu {
+    font-size: 15px;
+    margin-left: 26px;
+    margin-top: 3px;
+}
+/////////////////////////////////////////////////////////////////////////////////
+//// ThermoMeter
+/////////////////////////////////////////////////////////////////////////////////
+ /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+.panel {
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-color: #fff;
+  background: none;
+  box-shadow: none;
+}
+
+.panel:last-child {
+  border-bottom: none;
+}
+
+.panel-group > .panel:first-child .panel-heading {
+  border-radius: 4px 4px 0 0;
+}
+
+.panel-group .panel {
+  border-radius: 0;
+}
+
+.panel-group .panel + .panel {
+  margin-top: 0;
+}
+
+.panel-heading {
+  background-color: #1A2732;
+  border-radius: 0;
+  border: none;
+  color: #fff;
+  padding: 0;
+}
+
+.panel-title a {
+  display: block;
+  color: #fff;
+  padding: 15px;
+  position: relative;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.panel-body {
+  background: #fff;
+}
+
+.panel:last-child .panel-body {
+  border-radius: 0 0 4px 4px;
+}
+
+.panel:last-child .panel-heading {
+  border-radius: 0 0 4px 4px;
+  -webkit-transition: border-radius 0.3s linear 0.2s;
+  transition: border-radius 0.3s linear 0.2s;
+}
+
+.panel:last-child .panel-heading.active {
+  border-radius: 0;
+  -webkit-transition: border-radius linear 0s;
+  transition: border-radius linear 0s;
+}
+/* #bs-collapse icon scale option */
+
+.panel-heading a:before {
+  content: '\e146';
+  position: absolute;
+  font-family: 'Material Icons';
+  right: 5px;
+  top: 10px;
+  font-size: 24px;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.panel-heading.active a:before {
+  content: ' ';
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+}
+
+#bs-collapse .panel-heading a:after {
+  content: ' ';
+  font-size: 24px;
+  position: absolute;
+  font-family: 'Material Icons';
+  right: 5px;
+  top: 10px;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+#bs-collapse .panel-heading.active a:after {
+  content: '\e909';
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+/* #accordion rotate icon option */
+
+#accordion .panel-heading a:before {
+  content: '\e316';
+  font-size: 24px;
+  position: absolute;
+  font-family: 'Material Icons';
+  right: 5px;
+  top: 10px;
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+#accordion .panel-heading.active a:before {
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+﻿/* fallback */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Material Icons'), local('MaterialIcons-Regular'), url(icon.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
