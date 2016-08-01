@@ -138,6 +138,7 @@ public class PatientController {
        return MODULE_PATH+"patientSearch";
     }//end 
    
+    
     @RequestMapping(value = "/fastSearch", method = RequestMethod.GET)
     public @ResponseBody String fastSearchPatient(@RequestParam("q") String query, Model model, HttpServletRequest request, HttpServletResponse response){
         /// Initialize the ModelView to be Returned 
