@@ -26,7 +26,7 @@
                                         <th style="font-size: 16px" >Gender</th>
                                         <th style="font-size: 16px">Telephone</th>
                                         <th style="font-size: 16px">Profile</th>
-                                        <th><img src="<c:url value='/resources/images/add-sign.png'/>" id="AddNewExamineType" class="examineTypeAddButton"/></th>
+                                        <th><img src="<c:url value='/resources/images/add-sign.png'/>" id="AddNewPatient" class="examineTypeAddButton"/></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -34,13 +34,26 @@
                                         <tr class="patientRow">
                                             <input type="hidden" name="patientId" value="${patient.id}"/>
                                             <th>${counter.count}</th>
-                                            <td tabindex="1">${patient.fName} ${patient.midName} ${patient.lName} <img src="<c:url value='/resources/images/editable-icon.png'/>" class="editableIcon"/></td>
-                                            <td tabindex="1">${patient.code} <img src="<c:url value='/resources/images/editable-icon.png'/>" class="editableIcon"/></td>
-                                            <td tabindex="1">${patient.age} <img src="<c:url value='/resources/images/editable-icon.png'/>" class="editableIcon"/></td>
-                                            <td tabindex="1">${patient.gender} <img src="<c:url value='/resources/images/editable-icon.png'/>" class="editableIcon"/></td>
-                                            <td tabindex="1">${patient.phoneNumber1} <img src="<c:url value='/resources/images/editable-icon.png'/>" class="editableIcon"/></td>
-                                            <th>PROFILE</th>
-                                            <th tabindex="1"><img src="<c:url value='/resources/images/delete-sign.png'/>" id="DeleteExamineType" class="examineTypeDeleteButton"/></th>
+                                            <td tabindex="1">${patient.fName} ${patient.midName} ${patient.lName} </td>
+                                            <td tabindex="1">${patient.code} </td>
+                                            <td tabindex="1">${patient.age} </td>
+                                            <td tabindex="1">${patient.gender} </td>
+                                            <c:choose>
+                                                <c:when test="${not empty patient.phoneNumber1}">
+                                                    <td tabindex="1">${patient.phoneNumber1} </td>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <td tabindex="1">${patient.phoneNumber2} </td>
+                                                </c:otherwise>
+                                            </c:choose>
+                                            <th><a href="">Open</a></th>
+                                            <th tabindex="1"><img src="<c:url value='/resources/images/delete-sign.png'/>" 
+                                                                  class="examineTypeDeleteButton"
+                                                                  data-ssd-confirm-trigger="remove"
+                                                                  data-ssd-confirm-message="Are you sure you wish to remove ${patient.fName} ${patient.midName} ${patient.lName} ?<br />There is no undo!"
+                                                                  data-ssd-confirm-url="/zmed/patient/delete/${patient.id}"
+                                                                  data-ssd-confirm-behaviour="reloadReservations()"/>
+                                            </th>
                                         </tr>
                                     </c:forEach>
                                     </tbody>

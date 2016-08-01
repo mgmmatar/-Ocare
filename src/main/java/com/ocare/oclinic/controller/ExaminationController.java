@@ -46,7 +46,7 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author khaledeng
  */
-@Controller("examinationController2")
+@Controller("examinationController")
 @RequestMapping("/monitor/examination")
 public class ExaminationController {
     

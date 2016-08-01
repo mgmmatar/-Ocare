@@ -40,11 +40,7 @@
                             <li class=""><a><i class="fa fa-edit"></i> <label class="menuText">Patient </label><span
                                     class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="/zmed/patient/register">Patient Register</a>
-                                    </li>
                                     <li><a href="/zmed/patient/list">Patient List</a>
-                                    </li>
-                                    <li><a href="/zmed/patient/search">Patient Search</a>
                                     </li>
                                 </ul>
                             </li>

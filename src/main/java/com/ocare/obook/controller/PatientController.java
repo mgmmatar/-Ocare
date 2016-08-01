@@ -8,6 +8,7 @@ import com.ocare.obook.holder.PatientHolder;
 import com.ocare.obook.service.InsuranceCompanyService;
 import com.ocare.obook.service.PatientService;
 import com.ocare.obook.service.ReservationService;
+import java.io.IOException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -117,13 +118,16 @@ public class PatientController {
     *   Delete Process
     ******************************************************************/
     @RequestMapping("/delete/{id}")
-    public String deletePatientByCode(@PathVariable("id") Integer patientId, Model model, HttpServletRequest request) {
+    public void deletePatientByCode(@PathVariable("id") Integer patientId, Model model, HttpServletRequest request,HttpServletResponse response) throws IOException {
         /// Getting List of Patients 
-         Patient patient = patientService.getPatientById(patientId);
+        String done="true";
+        ////////////////////////////////////////////////////////////
+        Patient patient = patientService.getPatientById(patientId);
+        System.out.println(">>>>>>>>>>>>>>>>>> "+patientId);
          // delete Patient 
-         patientService.delete(patient);
+        patientService.delete(patient);
         // open List        
-        return "redirect:/patient/list";
+        response.getWriter().write(done);
     }//end registerPatient
     /******************************************************
      * search Patient  

@@ -62,7 +62,8 @@ height:6px;
 -webkit-animation-direction:normal;
 -ms-border-radius:3px 3px 0 0;
 -ms-transform:scale(0.4);
--ms-animation-name:fadeG;
+-ms-animation-nameexamine
+:fadeG;
 -ms-animation-duration:0.8800000000000001s;
 -ms-animation-iteration-count:infinite;
 -ms-animation-direction:normal;
@@ -4250,6 +4251,57 @@ input.custom_save{
     width: 30px;
     height: 30px;
     cursor: pointer;
+}
+
+.confirmMessage{
+    font-size: 22px;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    text-rendering: optimizeLegibility;
+}
+
+.confirmMessageNoButton{
+    display: inline-block;
+    text-align: center;
+    line-height: 1;
+    cursor: pointer;
+    -webkit-appearance: none;
+    transition: background-color .25s ease-out,color .25s ease-out;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    border-radius: 0;
+    padding: .85em 1em;
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
+    background-color: #2199e8;
+    color: #fefefe;
+}
+
+.confirmMessageNoButton:hover {
+    background-color: #1583cc;
+    color: #fefefe;
+}
+
+.confirmMessageYesButton{
+    display: inline-block;
+    text-align: center;
+    line-height: 1;
+    cursor: pointer;
+    -webkit-appearance: none;
+    transition: background-color .25s ease-out,color .25s ease-out;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    border-radius: 0;
+    padding: .85em 1em;
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
+    background-color: #ec5840;
+    color: #fefefe;
+}
+
+.confirmMessageYesButton:hover {
+    background-color: #CE3219;
+    color: #fefefe;
 }
 
 .examineTypeDeleteButton{

@@ -21,7 +21,8 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/owl.theme.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/reservation.css'/>">
-
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/ssd-confirm.css'/>">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
         <!---  JS Scripts Files --->
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
@@ -29,8 +30,8 @@
         <script type="text/javascript" src="<c:url value='/resources/js/squad.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/underscore.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery.ssd-confirm.js'/>"></script>
         
-
         <!-- NEW -->
         <script type="text/javascript" src="<c:url value='/resources/js/nprogress.js'/>"></script>
         <script>
@@ -50,14 +51,61 @@
 
         <script type="text/javascript">
             $(document).ready(function() {
-              $('#registerNew').on("click", function(e) {
+              ///// Registering Actions  
+              $('[data-ssd-confirm-trigger]').ssdConfirm();
+              
+               $(".container").on("click","#registerNew", function(e) { 
                     window.location.href = "/zmed/patient/register";   
                 });
+              
+               $(".container").on("click","#AddNewPatient", function(e) {
+                    window.location.href = "/zmed/patient/register";   
+                }); 
                 
+               $(".container").on("click",".deletePatient", function(e) { 
+                   // var patientId=$(this).parents("tr").find('input[type="hidden"][name="patientId"]').val();
+                    // delete Current Patient
+                    alert("Hello");
+                   // deletePatient(patientId);
+               }); 
+               //////////////////////////////////////////////////////////////////////
+               // Functions 
+               ////////////////////////////////////////////////////////////////////////
+               function deletePatient(patientId) {
+                    var b;
+                    var request = $.ajax({
+                        url: "/zmed/patient/delete/" + patientId,
+                        data: {
+                        },
+                        async: false
+                    });
+
+                    request.done(function(msg) {
+                        b = (msg == "true" ? true : false);
+                    });
+
+                    request.fail(function(jqXHR, textStatus) {
+                        b = false;
+                    });
+                    if (b == true) {
+                        LoadPatientTableFor("");
+                    }//end if    
+                }//end DeleteUserFunction
+               ////////////////////////////////////////////////////////////////////////
+               function reloadReservations(){
+                   // LoadPatientTableFor("");
+                   alert("welcome");
+               }//end reloadReservations
+                ///////////////////////////////////////////////////////////////////////
                 $( "#searchForPatient" ).keyup(function() {
                     var searchValue=$(this).val();
-                    /// Sending Ajax Request 
-                    var request = $.ajax({
+                    /// Reloading Patient Table Result
+                      LoadPatientTableFor(searchValue);
+                 });
+                 ///////////////////////////////////////////////////////////////////////
+                 function LoadPatientTableFor(searchValue){
+                      /// Sending Ajax Request To Reload Table
+                        var request = $.ajax({
                         url: "/zmed/patient/loadPatientTable",
                         type: "POST",
                         dataType: 'json',
@@ -73,7 +121,8 @@
                             // Adding New examineType 
                         }//end Complete Function
                     });
-                 });
+                 }//end SearchForPatient 
+                 ///////////////////////////////////////////////////////////////////////
             });
         </script>
             
@@ -121,13 +170,7 @@
                                 </div>
                                     <!--- Patient List --->
                                     <div class="panel-body">
-
                                         <c:import  url="/patient/loadPatientTable" />
-                                        
-                                        <center>
-                                                <button type="button" id="registerNew" class="registerbuttonheader controlAction">New Patient</button>
-                                        </center>
-                                      
                                     </div>
                             </div>        
 
@@ -159,6 +202,39 @@
             </div><!--End Main Container-->
 
     </div><!--End Body Container-->
-          
+     
+    <div data-ssd-confirm>
+
+    <div data-ssd-confirm-block="remove">
+
+        <p class="confirmMessage" data-ssd-confirm-content></p>
+
+        <nav>
+
+            <span data-button-wrapper>
+
+                <span
+                    class="alert confirmMessageYesButton deletePatient"
+                    data-ssd-confirm-yes
+                    data-trigger
+                >YES</span>
+
+                <span
+                    class="small alert disabled button hide"
+                    data-processing
+                ><i class="fa fa-spinner fa-spin fa-fw"></i></span>
+
+            </span>
+
+            <span class="small confirmMessageNoButton" data-ssd-confirm-no>NO</span>
+
+        </nav>
+
+    </div>
+
+</div>
+
+<div data-ssd-confirm-overlay></div>
+    
     </body>
 </html>
