@@ -8,14 +8,19 @@ package com.ocare.obook.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 /**
  *
@@ -30,7 +35,8 @@ public class InsuranceCompany  {
     private String nameEn;
     private String description;
     private Date joinDate;
-    private Boolean isDeleted;
+    private Boolean isDeleted=new Boolean(false);
+    private List<InsuranceProfile> profiles;
 
     @Id
     @Column(name="id")
@@ -89,12 +95,25 @@ public class InsuranceCompany  {
         this.isDeleted = isDeleted;
     }
 
+    @OneToMany( mappedBy = "insurranceCompany", fetch = FetchType.EAGER)
+    @Cascade(CascadeType.SAVE_UPDATE)
+    public List<InsuranceProfile> getProfiles() {
+        return profiles;
+    }
+
+    public void setProfiles(List<InsuranceProfile> profiles) {
+        this.profiles = profiles;
+    }
+
     @Override
     public String toString() {
-        return "InsuranceCompany{" 
-                + "id=" + id + ", nameAr=" + nameAr + 
-                ", nameEn=" + nameEn + ", description=" + description 
-                + ", joinDate=" + joinDate + ", isDeleted=" + isDeleted + '}';
+        String result="InsuranceCompany{" + "id=" + id + ", nameAr=" + nameAr + ", nameEn=" + nameEn + ", description=" + description + ", joinDate=" + joinDate + ", isDeleted=" + isDeleted + ", profiles="; 
+                for(InsuranceProfile profile:profiles) {
+                    result+=profile.toString();
+                }//for 
+                result+= "}";
+                
+        return result;        
     }
     
     

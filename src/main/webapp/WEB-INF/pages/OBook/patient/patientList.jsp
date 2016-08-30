@@ -165,9 +165,11 @@
                                    Patient List
                                 </div>
           
-                                <div class="searchPanel"> 
-                                        <input type="text" id="searchForPatient" name="Search" class="patientSearchBox" placeholder="Search For Patient"  required />
+                                <div class="patientListSearchBox"> 
+                                    <input type="text" id="searchForPatient" name="Search" class="patientSearchBox" placeholder="Search For Patient"  required />    
+                                    <input type="submit" value="Submit" id="searchPatientButton">
                                 </div>
+                                
                                     <!--- Patient List --->
                                     <div class="panel-body">
                                         <c:import  url="/patient/loadPatientTable" />

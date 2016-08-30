@@ -7,15 +7,18 @@ package com.ocare.obook.controller;
 
 import com.ocare.obook.domain.ExamineType;
 import com.ocare.obook.domain.InsuranceCompany;
+import com.ocare.obook.domain.InsuranceProfile;
 import com.ocare.obook.domain.ReservationWay;
 import com.ocare.obook.domain.WeekDay;
 import com.ocare.obook.holder.WorkingDayHolder;
 import com.ocare.obook.service.ExamineTypeService;
 import com.ocare.obook.service.InsuranceCompanyService;
+import com.ocare.obook.service.InsuranceProfileService;
 import com.ocare.obook.service.ReservationWayService;
 import com.ocare.obook.service.WeekDayService;
 import com.ocare.obook.service.WorkingTimeService;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -55,6 +58,9 @@ public class SettingsController {
     @Autowired
     private InsuranceCompanyService insuranceCompanyService;
 
+    @Autowired
+    private InsuranceProfileService insuranceProfileService;
+    
     @RequestMapping("/home")
     public String settingsHome(Model model) {
         /// return Setting Home Page
@@ -123,9 +129,12 @@ public class SettingsController {
     public void examineTypeEditable(@PathVariable("examineTypeID") Integer examineTypeID
                                     ,@PathVariable("changedColumn") Integer changedColumn
                                     ,@PathVariable("changedValue") String changedValue
-                                    , Model model,HttpServletResponse response) throws IOException {
+                                    , Model model,HttpServletResponse response,HttpServletRequest request) throws IOException {
         /// Getting Reservation 
+        request.setCharacterEncoding("utf-8");
+
         ExamineType examineType = examineTypeService.get(examineTypeID);
+            System.out.println("?????????????? "+changedValue.getBytes("UTF-8"));
         /// chossing the result
         switch(changedColumn){
             case 2:
@@ -288,7 +297,8 @@ public class SettingsController {
         // Getting Insurrance Company
         InsuranceCompany insuranceCompany = insuranceCompanyService.get(insurranceCompanyID);
         // Deleting Insurrance Company
-        insuranceCompanyService.delete(insuranceCompany);
+        insuranceCompany.setIsDeleted(true);
+        insuranceCompanyService.update(insuranceCompany);
         // Getting all Insurrance Company List 
         List<InsuranceCompany> insuranceCompanys = insuranceCompanyService.getAllInsuranceCompanys();
         /// Append Models
@@ -329,6 +339,90 @@ public class SettingsController {
         ////////////////////////////////////////////////////////////
         response.getWriter().write(done);
     }//cancelReservation process 
+    
+    @RequestMapping(value = "/insurrance/profile/{insurranceCompanyId}", method = RequestMethod.GET, produces = "application/json")
+    public String insurranceCompanyProfiles(@PathVariable("insurranceCompanyId") Integer insurranceCompanyId, Model model) {
+        
+        // Getting the targetted Company
+        InsuranceCompany company=insuranceCompanyService.get(insurranceCompanyId);
+        List<ExamineType> examineTypes=examineTypeService.getAllExamineTypes();
+        List<Float> percentages=new ArrayList<Float>();
+        for(float i=0f;i<=100;i+=5){
+            percentages.add(i);
+        }//end for Loop
+        // Adding data to Model
+        model.addAttribute("company", company);
+        model.addAttribute("examineTypes", examineTypes);
+        model.addAttribute("percentages", percentages);
+        //////////////////////////////////////////////////////////////
+        // returning Wanted Page
+        return PACKAGE_ROOT + "insurranceProfiles";
+    }
+    
+    @RequestMapping(value = "/insurrance/profile/{profileId}/edit/{attribute},{value}", method = RequestMethod.GET, produces = "application/json")
+    public void editInsurranceProfile(@PathVariable("profileId") Integer profileId,
+            @PathVariable("attribute") String attribute,
+            @PathVariable("value") String value,
+            HttpServletResponse response,
+            Model model) throws IOException {
+        // Getting Profile 
+        InsuranceProfile profile=insuranceProfileService.get(profileId);
+        if(attribute.equals("examine")){
+             ExamineType examineType=examineTypeService.get(Integer.parseInt(value));
+             profile.setExamineType(examineType);
+        }//end ifs
+        else if(attribute.equals("percentage")){
+             profile.setPercentage(Float.parseFloat(value));
+        }//end else if
+        
+        // Saving Data 
+        insuranceProfileService.update(profile);
+        //////////////////////////////////////////////////////////////
+        // returning Wanted Page
+        String done="true";
+        ////////////////////////
+        // returning Wanted Page
+        response.getWriter().write(done);
+    }
+    
+    @RequestMapping(value = "/insurrance/profile/create", method = RequestMethod.POST)
+    public void createProfileForCompany(@ModelAttribute("insurranceId") Integer insurranceId,
+            @ModelAttribute("examineTypeId") Integer examineTypeId,
+            @ModelAttribute("percentage") Float percentage,
+            Model model,HttpServletResponse response) throws IOException {
+        // Done
+        String done="false";
+        // Getting the Submitted ExamineType
+        ExamineType examineType=examineTypeService.get(examineTypeId);
+        InsuranceCompany company=insuranceCompanyService.get(insurranceId);
+        /// Setting the Profile
+        InsuranceProfile profile= new InsuranceProfile();
+        profile.setPercentage(percentage);
+        profile.setExamineType(examineType);
+        profile.setInsurranceCompany(company);
+        // Saving Profile 
+        insuranceProfileService.save(profile);
+        done="true";
+        ////////////////////////
+        // returning Wanted Page
+        response.getWriter().write(done);
+    }
+    
+    
+    @RequestMapping(value = "/insurrance/profile/delete", method = RequestMethod.POST)
+    public void createProfileForCompany(@ModelAttribute("profileId") Integer profileId,
+            Model model,HttpServletResponse response) throws IOException {
+        // Done
+        String done="false";
+        // Getting the Submitted ExamineType
+        InsuranceProfile profile=insuranceProfileService.get(profileId);
+        // Deleting Profile 
+        insuranceProfileService.delete(profile);
+        done="true";
+        ////////////////////////
+        // returning Wanted Page
+        response.getWriter().write(done);
+    }
     ///////////////////////////////////////////////////
    /*
      * Settings -- Working Days Module

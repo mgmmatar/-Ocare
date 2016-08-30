@@ -5,7 +5,7 @@
  */
 package com.ocare.obook.domain;
 
-import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,10 +26,10 @@ import org.hibernate.annotations.ForeignKey;
 public class InsuranceProfile {
 
     private Integer id;
-    private InsuranceCompany insuranceCompany;
     private ExamineType examineType;
     private Float percentage;
-
+    private InsuranceCompany insurranceCompany;
+    
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,16 +41,16 @@ public class InsuranceProfile {
         this.id = id;
     }
 
-    @ForeignKey(name = "companyId")
-    @JoinColumn(name = "companyId", nullable = true)
-    @ManyToOne(fetch = FetchType.LAZY)
-    public InsuranceCompany getInsuranceCompany() {
-        return insuranceCompany;
-    }
-
-    public void setInsuranceCompany(InsuranceCompany insuranceCompany) {
-        this.insuranceCompany = insuranceCompany;
-    }
+//    @ForeignKey(name = "companyId")
+//    @JoinColumn(name = "companyId", nullable = true)
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    public InsuranceCompany getInsuranceCompany() {
+//        return insuranceCompany;
+//    }
+//
+//    public void setInsuranceCompany(InsuranceCompany insuranceCompany) {
+//        this.insuranceCompany = insuranceCompany;
+//    }
 
     @ForeignKey(name = "examineTypeId")
     @JoinColumn(name = "examineTypeId", nullable = true)
@@ -71,5 +71,17 @@ public class InsuranceProfile {
     public void setPercentage(Float percentage) {
         this.percentage = percentage;
     }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "companyId", nullable = false )
+    public InsuranceCompany getInsurranceCompany() {
+        return insurranceCompany;
+    }
+
+    public void setInsurranceCompany(InsuranceCompany insurranceCompany) {
+        this.insurranceCompany = insurranceCompany;
+    }
+
+    
 
 }

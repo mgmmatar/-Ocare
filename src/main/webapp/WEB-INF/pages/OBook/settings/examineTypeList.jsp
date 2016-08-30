@@ -4,13 +4,13 @@
     Author     : khaledeng
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <html>
-    
-    
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -127,7 +127,7 @@
                             +"<td id='cost'> </td>"
                             +"<td id='period'> </td>"
                             +"<th id='isDefault'> <input type='checkbox' name='examineDefault' value='default'></th>"
-                            +"<th><img src='<c:url value='/resources/images/save-icon.png'/>' id='saveNewExamine' class='examineTypeDeleteButton'/> <img src='<c:url value='/resources/images/cancel-icon.png'/>' id='cancelAddExamine' class='examineTypeDeleteButton'/></th>"
+                            +"<th><img src='<c:url value='/resources/images/save-icon.png'/>' id='saveNewExamine' class='examineTypeCancelButton'/> <img src='<c:url value='/resources/images/cancel-icon.png'/>' id='cancelAddExamine' class='examineTypeCancelButton'/></th>"
                             +"</tr>");
                             // refresh Table
                             $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).examineTypeEditable().find('td:last').focus();            
@@ -164,31 +164,19 @@
                                         
                                     }); // Save Button Click Action 
                                     
+                                    
                                     $('#cancelAddExamine').on("click", function(e) {
-                                                var request = $.ajax({
-                                                    url: "/zmed/settings/examineType/loadExamineTable",
-                                                    type: "GET",
-                                                    dataType: 'json',
-                                                    complete: function(data) {
-                                                        $('.panel-body').empty();
-                                                        // Draw New Search Results
-                                                        $('.panel-body').append(data.responseText);
-                                                        ///// Adding the Action Again 
-                                                        $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).examineTypeEditable().find('td:first').focus();             
-                                                        // Rise Flag to Add Another
-                                                        newClicked = 0 ; 
-                                                        //alert("Hello");
-                                                    }//end Complete Function
-                                                });  // End AJax call for Save ExamineType
-                                                //////////////// Adding Action fpr Cancel Add Button
-                                        
+                                                $(this).closest('tr').remove();
+                                                newClicked=0;    
                                     }); // Save Button Click Action   
                                     // Flag that Add Button Clicked
                                     newClicked=1;
                         }//end if  
                     });
-                                            
-
+               
+               //setInterval(function() { document.body.scrollIntoView() = document.body.scrollHeight; }, 50);
+               document.body.scrollIntoView();
+               
             });
         </script>
             

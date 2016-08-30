@@ -53,19 +53,19 @@ $.fn.insurranceCompanyEditable= function () {
                             // Draw New Search Results
                             $('.panel-body').append(data.responseText);
                             ///// Adding the Action Again 
-                            $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).examineTypeEditable().find('td:first').focus();            
+                            $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).insurranceCompanyEditable().find('td:first').focus();            
                             // Adding New examineType 
-                              $('#AddNewInsurranceCompany').on("click", function(e) {
-                                  $('#mainTable').append("<tr>"
-                                          +"<th> # </th>"
-                                          +"<td> </td>"
-                                          +"<td> </td>"
-                                          +"<td> </td>"
-                                          +"<th> <input type='checkbox' name='examineDefault' value='default'></th>"
-                                          +"<th><img src='../images/save-icon.png' id='AddNewInsurranceCompany' class='insurranceCompanyDeleteButton'/></th>"
-                                          +"</tr>");
-                                  $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).examineTypeEditable().find('td:last').focus();            
-                              });
+//                              $('#AddNewInsurranceCompany').on("click", function(e) {
+//                                  $('#mainTable').append("<tr>"
+//                                          +"<th> # </th>"
+//                                          +"<td> </td>"
+//                                          +"<td> </td>"
+//                                          +"<td> </td>"
+//                                          +"<th> <input type='checkbox' name='examineDefault' value='default'></th>"
+//                                          +"<th><img src='../images/save-icon.png' id='AddNewInsurranceCompany' class='insurranceCompanyDeleteButton'/></th>"
+//                                          +"</tr>");
+//                                  $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).insurranceCompanyEditable().find('td:last').focus();            
+//                              });
                         },
                         async: false
                     });

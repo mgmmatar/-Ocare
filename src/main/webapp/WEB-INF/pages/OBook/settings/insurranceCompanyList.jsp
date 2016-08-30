@@ -21,6 +21,7 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/owl.theme.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/reservation.css'/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/popup.css'/>">
 
         <!---  JS Scripts Files --->
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
@@ -29,10 +30,11 @@
         <script type="text/javascript" src="<c:url value='/resources/js/squad.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/underscore.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery.bpopup.min.js'/>"></script>
         
         <script type="text/javascript" src="<c:url value='/resources/js/mindmup-editabletable.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/insurranceCompany-editable.js'/>"></script>
-        
+        <script type="text/javascript" src="<c:url value='/resources/js/leanModal.js'/>"></script>
         
 
         <!-- NEW -->
@@ -50,25 +52,69 @@
             <!-- Google Fonts-->
             <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
         <style>
-			
-			.current-row{background-color:#B24926;color:#FFF;}
-			.current-col{background-color:#1b1b1b;color:#FFF;}
-			.tbl-qa{width: 100%;font-size:0.9em;background-color: #f5f5f5;}
-			.tbl-qa th.table-header {padding: 5px;text-align: left;padding:10px;}
-			.tbl-qa .table-row td {padding:10px;background-color: #FDFDFD;}
+		.current-row{background-color:#B24926;color:#FFF;}
+		.current-col{background-color:#1b1b1b;color:#FFF;}
+		.tbl-qa{width: 100%;font-size:0.9em;background-color: #f5f5f5;}
+		.tbl-qa th.table-header {padding: 5px;text-align: left;padding:10px;}
+		.tbl-qa .table-row td {padding:10px;background-color: #FDFDFD;}
+                #lean_overlay {
+                    position: fixed;
+                    z-index:100;
+                    top: 0px;
+                    left: 0px;
+                    height:100%;
+                    width:100%;
+                    background: #000;
+                    display: none;
+                }
+
+                .popupContainer{
+                        position:absolute;
+                        width:330px;
+                        height: auto;
+                        left:45%;
+                        top:80px;
+                        background: #FFF;
+                }
+                .popupHeader {font-size:16px; text-transform: uppercase;}
+                .popupHeader {background:#F4F4F2; position:relative; padding:10px 20px; border-bottom:1px solid #DDD; font-weight:bold;}
+                .popupHeader .modal_close {position: absolute; right: 0; top:0; padding:10px 15px; background:#E4E4E2; cursor: pointer; color:#aaa; font-size:16px;}
+                .popupBody {padding:20px;}                    
 	</style>        
         <script type="text/javascript">
             $(document).ready(function() {
-            var newClicked=0;
-            $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).insurranceCompanyEditable().find('td:first').focus();            
-              //////////////////////////////////////////////////////////////////////////////////
+           // $(".profiles").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+             var newClicked=0;
+             $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).insurranceCompanyEditable().find('td:first').focus();
+            
+             // Click Profile Link 
+             $(".container").on("click",".profiles", function(e) {
+                   var insurranceCompanyID = $(this).closest("tr").find('input[type="hidden"][name="insurranceCompanyId"]').val();
+                   // URL for insurrance Profile
+                   var profileURL = "/zmed/settings/insurrance/profile/"+insurranceCompanyID;
+                    // getting visit
+                    var request = $.ajax({
+                        url: profileURL,
+                        type: "GET",
+                        dataType: 'json',
+                        data: {
+                        },
+                        complete: function(data) {
+                            $('#profilePopup').empty();
+                            // Filling Last Information
+                            $('#profilePopup').append(data.responseText);
+                        }//end onComplete Method
+                     });/// end Ajax Call Request
+                     // Showing the Popup After Call
+                     $('#profilePopup').bPopup();  
+                });  
+             ////////////////////////////////////////////////////////
               //// Delete Operation 
               //////////////////////////////////////////////////////////////////////////////////
               $(".container").on("click",".insurranceCompanyDeleteButton", function(e) {
                    var insurranceCompanyID = $(this).closest("tr").find('input[type="hidden"][name="insurranceCompanyId"]').val();
                    // Sending Delete Request 
-                    var b;
-                    var request = $.ajax({
+                   var request = $.ajax({
                         url: "/zmed/settings/insurrance/delete",
                         type: "POST",
                         dataType: 'json',
@@ -95,10 +141,14 @@
                             +"<td id='nameAr'> </td>"
                             +"<td id='nameEn'> </td>"
                             +"<td id='description'> </td>"
-                            +"<th><img src='<c:url value='/resources/images/save-icon.png'/>' id='saveNewExamine' class='insurranceCompanyDeleteButton'/> <img src='<c:url value='/resources/images/cancel-icon.png'/>' id='cancelAddExamine' class='insurranceCompanyDeleteButton'/></th>"
+                            +"<th id='profile'>Profile</th>"
+                            +"<th><img src='<c:url value='/resources/images/save-icon.png'/>' id='saveNewInsurrance' class='insurranceCompanyCancelButton'/> <img src='<c:url value='/resources/images/cancel-icon.png'/>' id='cancelAddInsurrance' class='insurranceCompanyCancelButton'/></th>"
                             +"</tr>");
+                            
+                            
                             // refresh Table
                             $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).insurranceCompanyEditable().find('td:last').focus();            
+                                
                                 $('#saveNewInsurrance').on("click", function(e) {
                                     var nameAr=$('#nameAr').text();
                                     var nameEn=$('#nameEn').text();
@@ -127,26 +177,16 @@
                                     }); // Save Button Click Action 
                                     
                                     $('#cancelAddInsurrance').on("click", function(e) {
-                                                var request = $.ajax({
-                                                    url: "/zmed/settings/insurrance/loadInsurranceCompanyTable",
-                                                    type: "GET",
-                                                    dataType: 'json',
-                                                    complete: function(data) {
-                                                        $('.panel-body').empty();
-                                                        // Draw New Search Results
-                                                        $('.panel-body').append(data.responseText);
-                                                        ///// Adding the Action Again 
-                                                        $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).insurranceCompanyEditable().find('td:first').focus();             
-                                                        // Rise Flag to Add Another
-                                                        newClicked = 0 ; 
-                                                    }//end Complete Function
-                                                });  // End AJax call for Save ExamineType
-                                                //////////////// Adding Action fpr Cancel Add Button
-                                    }); // Save Button Click Action   
+                                            $(this).closest('tr').remove();
+                                            newClicked=0;    
+                                    }); // Cancel Save Button Click Action   
                                     // Flag that Add Button Clicked
                                     newClicked=1;
                         }//end if  
                     });
+                    
+                    // Scrol Top Again
+                    document.body.scrollIntoView();
             });
         </script>
             
@@ -224,5 +264,24 @@
 
     </div><!--End Body Container-->
           
+    <!--START Popup Section-->
+        <div id="modal" class="popupContainer" style="display:none;">
+		<header class="popupHeader">
+			<span class="header_title">Login</span>
+			<span class="modal_close"><i class="fa fa-times"></i></span>
+		</header>
+		
+		<section class="popupBody">
+			<!-- Social Login -->
+			<div class="social_login">
+                            Profile Viewer 
+                        </div>	
+		</section>
+	</div>
+    <!--END Popup Section-->
+    
+     <div id="profilePopup" class="popupDesign popup">
+      
+    </div>
     </body>
 </html>

@@ -122,7 +122,7 @@
                             +"<td id='nameEn'> </td>"
                             +"<td id='description'> </td>"
                             +"<th id='isDefault'> <input type='checkbox' name='examineDefault' value='default'></th>"
-                            +"<th><img src='<c:url value='/resources/images/save-icon.png'/>' id='saveNewReservationWay' class='reservationWayDeleteButton'/> <img src='<c:url value='/resources/images/cancel-icon.png'/>' id='cancelAddReservationWay' class='reservationWayDeleteButton'/></th>"
+                            +"<th><img src='<c:url value='/resources/images/save-icon.png'/>' id='saveNewReservationWay' class='reservationWayCancelButton'/> <img src='<c:url value='/resources/images/cancel-icon.png'/>' id='cancelAddReservationWay' class='reservationWayCancelButton'/></th>"
                             +"</tr>");
                             // refresh Table
                             $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).reservationWayEditable().find('td:last').focus();            
@@ -145,7 +145,7 @@
                                                 // Draw New Search Results
                                                 $('.panel-body').append(data.responseText);
                                                 ///// Adding the Action Again 
-                                                $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).examineTypeEditable().find('td:first').focus();             
+                                                $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).reservationWayEditable().find('td:first').focus();             
                                                 /// Rising Flag
                                                 newClicked = 0 ; 
                                                 
@@ -155,30 +155,18 @@
                                         
                                     }); // Save Button Click Action 
                                     
+                                    
                                     $('#cancelAddReservationWay').on("click", function(e) {
-                                                var request = $.ajax({
-                                                    url: "/zmed/settings/reservationWay/loadReservationWayTable",
-                                                    type: "GET",
-                                                    dataType: 'json',
-                                                    complete: function(data) {
-                                                        $('.panel-body').empty();
-                                                        // Draw New Search Results
-                                                        $('.panel-body').append(data.responseText);
-                                                        ///// Adding the Action Again 
-                                                        $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).reservationWayEditable().find('td:first').focus();             
-                                                        // Rise Flag to Add Another
-                                                        newClicked = 0 ; 
-                                                        //alert("Hello");
-                                                    }//end Complete Function
-                                                });  // End AJax call for Save 
-                                                //////////////// Adding Action fpr Cancel Add Button
-                                        
-                                    }); // Save Button Click Action   
+                                            $(this).closest('tr').remove();
+                                            newClicked=0;    
+                                    }); // Cancel Save Button Click Action   
+                                   
                                     // Flag that Add Button Clicked
                                     newClicked=1;
                         }//end if  
                     });
-                                            
+                   // Scrol Top Again
+                    document.body.scrollIntoView();                         
 
             });
         </script>

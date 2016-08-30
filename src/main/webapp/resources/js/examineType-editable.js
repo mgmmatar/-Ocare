@@ -16,8 +16,8 @@ $.fn.examineTypeEditable= function () {
 				footer.children().eq(column).text(total);
 			};
 		};
-	element.find('td').on('change', function (evt) {
-              
+	element.find('td').on('change', function (evt) 
+        {
                 // check if there is new One 
                 var newExamine=$('#newExamine');
                 
@@ -34,6 +34,7 @@ $.fn.examineTypeEditable= function () {
                     var b;    
                     var request = $.ajax({
                         url: "/zmed/settings/examineTypeEditable/" +examineTypeId+","+changedIndex+","+changedValue,
+                        contentType : 'charset=utf-8',
                         data: {
                         },
                         async: false
@@ -58,19 +59,19 @@ $.fn.examineTypeEditable= function () {
                             ///// Adding the Action Again 
                             $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).examineTypeEditable().find('td:first').focus();            
                             // Adding New examineType 
-                              $('#AddNewExamineType').on("click", function(e) {
-                                  $('#mainTable').append("<tr>"
-                                          +"<th> # </th>"
-                                          +"<td> </td>"
-                                          +"<td> </td>"
-                                          +"<td> </td>"
-                                          +"<td> </td>"
-                                          +"<td> </td>"
-                                          +"<th> <input type='checkbox' name='examineDefault' value='default'></th>"
-                                          +"<th><img src='../images/save-icon.png' id='AddNewExamineType' class='examineTypeDeleteButton'/></th>"
-                                          +"</tr>");
-                                  $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).examineTypeEditable().find('td:last').focus();            
-                              });
+//                              $('#AddNewExamineType').on("click", function(e) {
+//                                  $('#mainTable').append("<tr>"
+//                                          +"<th> # </th>"
+//                                          +"<td> </td>"
+//                                          +"<td> </td>"
+//                                          +"<td> </td>"
+//                                          +"<td> </td>"
+//                                          +"<td> </td>"
+//                                          +"<th> <input type='checkbox' name='examineDefault' value='default'></th>"
+//                                          +"<th><img src='../images/save-icon.png' id='AddNewExamineType' class='examineTypeDeleteButton'/></th>"
+//                                          +"</tr>");
+//                                  $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).examineTypeEditable().find('td:last').focus();            
+//                              });
                         },
                         async: false
                     });
@@ -98,9 +99,11 @@ $.fn.examineTypeEditable= function () {
 			column = cell.index();
                 if (column === 0) {
 			return !!value && value.trim().length > 0;
-		} else {
-			//return !isNaN(parseFloat(value)) && isFinite(value);
+		} 
+                else if(column === 4){
+			
 		}
+                
 	});
 	initialTotal();
 	return this;

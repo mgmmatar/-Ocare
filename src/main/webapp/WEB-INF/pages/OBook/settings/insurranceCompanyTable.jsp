@@ -15,7 +15,8 @@
                                         <th style="font-size: 18px">#</th>
                                         <th style="font-size: 16px">Name Ar</th>
                                         <th style="font-size: 16px">Name En</th>
-                                        <th style="font-size: 16px">Desc</th>
+                                        <th style="font-size: 16px">Description</th>
+                                        <th style="font-size: 16px">Profile</th>
                                         <th><img src="<c:url value='/resources/images/add-sign.png'/>" id="AddNewInsurranceCompany" class="insurranceCompanyAddButton"/></th>
                                     </tr>
                                 </thead>
@@ -27,6 +28,7 @@
                                             <td tabindex="1">${insuranceCompany.nameAr} <img src="<c:url value='/resources/images/editable-icon.png'/>" class="editableIcon"/></td>
                                             <td tabindex="1">${insuranceCompany.nameEn} <img src="<c:url value='/resources/images/editable-icon.png'/>" class="editableIcon"/></td>
                                             <td tabindex="1">${insuranceCompany.description} <img src="<c:url value='/resources/images/editable-icon.png'/>" class="editableIcon"/></td>
+                                            <th><a class="btn profiles" style="display: inline-table;">Profile</a></th>
                                             <th tabindex="1"><img src="<c:url value='/resources/images/delete-sign.png'/>" id="DeleteInsurranceCompany" class="insurranceCompanyDeleteButton"/></th>
                                         </tr>
                                     </c:forEach>

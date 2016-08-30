@@ -27,11 +27,11 @@
                                         <tr class="examineRow">
                                             <input type="hidden" name="examineTypeId" value="${examineType.id}"/>
                                             <th>${counter.count}</th>
-                                            <td tabindex="1">${examineType.nameAr} <img src="<c:url value='/resources/images/editable-icon.png'/>" class="editableIcon"/></td>
-                                            <td tabindex="1">${examineType.nameEn} <img src="<c:url value='/resources/images/editable-icon.png'/>" class="editableIcon"/></td>
-                                            <td tabindex="1">${examineType.description} <img src="<c:url value='/resources/images/editable-icon.png'/>" class="editableIcon"/></td>
-                                            <td tabindex="1">${examineType.cost} <img src="<c:url value='/resources/images/editable-icon.png'/>" class="editableIcon"/></td>
-                                            <td tabindex="1">${examineType.estimatedPeriod} <img src="<c:url value='/resources/images/editable-icon.png'/>" class="editableIcon"/></td>
+                                            <td tabindex="1"><img src="<c:url value='/resources/images/editable-icon.png'/>" class="editableIcon"/> ${examineType.nameAr} </td>
+                                            <td tabindex="1"><img src="<c:url value='/resources/images/editable-icon.png'/>" class="editableIcon"/> ${examineType.nameEn}</td>
+                                            <td tabindex="1"><img src="<c:url value='/resources/images/editable-icon.png'/>" class="editableIcon"/> ${examineType.description}</td>
+                                            <td tabindex="1"><img src="<c:url value='/resources/images/editable-icon.png'/>" class="editableIcon"/> ${examineType.cost} </td>
+                                            <td tabindex="1"><img src="<c:url value='/resources/images/editable-icon.png'/>" class="editableIcon"/> ${examineType.estimatedPeriod} </td>
                                             <th tabindex="1">
                                                 <c:choose>
                                                     <c:when test="${examineType.defaultOne}">

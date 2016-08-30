@@ -32,7 +32,8 @@ public class InsuranceCompanyDaoImpl extends GenericDAO<InsuranceCompany> implem
         return getHibernateTemplate().execute(new HibernateCallback<List<InsuranceCompany>>() {
             @Override
             public List<InsuranceCompany> doInHibernate(Session sn) throws HibernateException {
-                Query query = sn.createQuery("from InsuranceCompany ");
+                Query query = sn.createQuery("from InsuranceCompany where isDeleted = :deleted");
+                query.setBoolean("deleted", false);
                 return (List<InsuranceCompany>)query.list();
             }
         });
