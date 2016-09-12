@@ -168,11 +168,15 @@ public class ReservationController {
         ReservationCost cost=null;
         float totalCost = examineType.getCost();
         if(patient.getInsuranceCompany()!=null){
+            
             InsuranceProfile insuranceProfile=insuranceProfileService.getProfileForCompanyAndExamine(patient.getInsuranceCompany().getId(),examineType.getId());
+            
             insurred = true; 
             if(insuranceProfile!=null){
                 cost=new ReservationCost(totalCost,insuranceProfile.getPercentage());
-            }//end if Condition
+            }else{
+                cost=new ReservationCost(totalCost,0);
+            }//end else 
             
         }else{
             cost=new ReservationCost(totalCost,0);

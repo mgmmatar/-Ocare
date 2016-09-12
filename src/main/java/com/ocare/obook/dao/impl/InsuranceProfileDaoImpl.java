@@ -38,7 +38,7 @@ public class InsuranceProfileDaoImpl extends GenericDAO<InsuranceProfile> implem
         return getHibernateTemplate().execute(new HibernateCallback<InsuranceProfile>() {
             @Override
             public InsuranceProfile doInHibernate(Session sn) throws HibernateException {
-                Query query = sn.createQuery("select p from InsuranceProfile p inner join p.insuranceCompany c inner join p.examineType e where c.id = :insurranceCompanyId and e.id = :examineTypeId");
+                Query query = sn.createQuery("select p from InsuranceProfile p inner join p.insurranceCompany c inner join p.examineType e where c.id = :insurranceCompanyId and e.id = :examineTypeId");
                 query.setInteger("insurranceCompanyId", insurranceCompanyId);
                 query.setInteger("examineTypeId", examineTypeId);
                 return (InsuranceProfile) query.uniqueResult();

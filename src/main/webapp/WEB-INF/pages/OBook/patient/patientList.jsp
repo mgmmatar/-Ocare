@@ -23,6 +23,7 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/reservation.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/ssd-confirm.css'/>">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/popup.css'/>">
         <!---  JS Scripts Files --->
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
@@ -31,7 +32,7 @@
         <script type="text/javascript" src="<c:url value='/resources/js/underscore.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery.ssd-confirm.js'/>"></script>
-        
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery.bpopup.min.js'/>"></script>
         <!-- NEW -->
         <script type="text/javascript" src="<c:url value='/resources/js/nprogress.js'/>"></script>
         <script>
@@ -52,7 +53,10 @@
         <script type="text/javascript">
             $(document).ready(function() {
               ///// Registering Actions  
+             
               $('[data-ssd-confirm-trigger]').ssdConfirm();
+              
+              //$('#patientDataPopup').bPopup();
               
                $(".container").on("click","#registerNew", function(e) { 
                     window.location.href = "/zmed/patient/register";   
@@ -68,6 +72,30 @@
                     alert("Hello");
                    // deletePatient(patientId);
                }); 
+               
+               $(".container").on("click",".thePatientProfile", function(e) { 
+                    // delete Current Patient
+                    var patientId=$(this).parents("tr").find('input[type="hidden"][name="patientId"]').val();
+                     // URL for insurrance Profile
+                    var profileURL = "/zmed/patient/data/"+patientId;
+                    // getting visit
+                    var request = $.ajax({
+                        url: profileURL,
+                        type: "GET",
+                        dataType: 'json',
+                        data: {
+                        },
+                        complete: function(data) {
+                            $('#patientDataPopup').empty();
+                            // Filling Last Information
+                            $('#patientDataPopup').append(data.responseText);
+                        }//end onComplete Method
+                     });/// end Ajax Call Request
+                     // Showing the Popup After Call
+                     $('#patientDataPopup').bPopup();  
+                     $('#birthDatePicker').datepicker();    
+                }); 
+               
                //////////////////////////////////////////////////////////////////////
                // Functions 
                ////////////////////////////////////////////////////////////////////////
@@ -237,6 +265,12 @@
 </div>
 
 <div data-ssd-confirm-overlay></div>
+    
+    <!-- Popup-->
+
+     <div id="patientDataPopup" class="popupDesign popup">
+        <c:import  url="/patient/data/0" />
+    </div>
     
     </body>
 </html>

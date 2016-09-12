@@ -9,8 +9,10 @@ package com.obird.utility;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -191,6 +193,53 @@ public class ODate {
             return true;
 
     }//isValidateDate
+    
+    public static List<String> getMonthNameList(){
+    
+        List<String> months=new ArrayList<String>();
+        /// Set Names
+        months.add("January");
+        months.add("February");
+        months.add("March");
+        months.add("April");
+        months.add("May");
+        months.add("June");
+        months.add("July");
+        months.add("August");
+        months.add("September");
+        months.add("October");
+        months.add("November");
+        months.add("December");
+        
+        // return result 
+        return months;
+    }//end getMonthNameList
+    
+    public static List<Integer> getDaysList(){
+    
+        List<Integer> days=new ArrayList<Integer>();
+        /// Set Names
+        for(int i=1;i<=31;i++){
+            days.add(i);
+        }//end for 
+        // return result 
+        return days;
+    }//end getMonthNameList
+    
+    public static List<Integer> getYearsList(){
+    
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        
+        List<Integer> years=new ArrayList<Integer>();
+        /// Set Names
+        for(int i=year;i>=1920;i--){
+            years.add(i);
+        }//end for 
+        // return result 
+        return years;
+    }//end getMonthNameList
+    
+    
     
     public static void main(String[] args) {
 

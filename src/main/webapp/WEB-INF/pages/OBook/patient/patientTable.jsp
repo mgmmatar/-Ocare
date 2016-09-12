@@ -14,7 +14,7 @@
                 <c:choose>
                     <c:when  test="${not empty patients}">
                         
-                        <center><h4>Patient List</h4></center>
+                        <center><h4 class="patientListTitle">Patient List</h4></center>
                         
                         <table id="mainTable" class="table table-striped" style="cursor: pointer;">
                                 <thead>
@@ -46,7 +46,7 @@
                                                     <td tabindex="1">${patient.phoneNumber2} </td>
                                                 </c:otherwise>
                                             </c:choose>
-                                            <th><a href="">Open</a></th>
+                                            <th><a class="thePatientProfile">Open</a></th>
                                             <th tabindex="1"><img src="<c:url value='/resources/images/delete-sign.png'/>" 
                                                                   class="examineTypeDeleteButton"
                                                                   data-ssd-confirm-trigger="remove"

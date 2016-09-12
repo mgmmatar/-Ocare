@@ -1,6 +1,8 @@
 package com.ocare.obook.controller;
 
 import com.google.gson.Gson;
+import com.obird.utility.ODate;
+import com.ocare.obook.domain.InsuranceCompany;
 import com.ocare.obook.domain.Patient;
 import com.ocare.obook.domain.Reservation;
 import com.ocare.obook.holder.FastPatient;
@@ -9,6 +11,7 @@ import com.ocare.obook.service.InsuranceCompanyService;
 import com.ocare.obook.service.PatientService;
 import com.ocare.obook.service.ReservationService;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -123,7 +126,6 @@ public class PatientController {
         String done="true";
         ////////////////////////////////////////////////////////////
         Patient patient = patientService.getPatientById(patientId);
-        System.out.println(">>>>>>>>>>>>>>>>>> "+patientId);
          // delete Patient 
         patientService.delete(patient);
         // open List        
@@ -137,8 +139,42 @@ public class PatientController {
         model.addAttribute("result", "search");
        return MODULE_PATH+"patientSearch";
     }//end 
-   
     
+    ///////////////////////////////////////////////////////////////////////////////////
+    /*
+        **  Patient Data Popup 
+    */
+    ///////////////////////////////////////////////////////////////////////////////////
+    
+    @RequestMapping(value = "/data/{patientId}", method = RequestMethod.GET, produces = "application/json")
+    public String insurranceCompanyProfiles(@PathVariable("patientId") Integer patientId, Model model) {
+       
+        // Preparing the BirthDate Lists
+        List<Integer> days=ODate.getDaysList();
+        List<String> months=ODate.getMonthNameList();
+        List<Integer> years=ODate.getYearsList();
+        
+        //Getting List of All Insurrance Companies
+        List<InsuranceCompany> companys=insuranceCompanyService.getAllInsuranceCompanys();
+        // Check if the Request for Registeration or Editing Profile 
+        if(patientId==0){
+            model.addAttribute("mode", "Register");
+        }else{
+             Patient patient=patientService.getPatientById(patientId);
+             
+             model.addAttribute("patient", patient);
+             model.addAttribute("mode", "Save Changes");
+             
+        }//end Else If Block 
+            model.addAttribute("companys", companys);
+            model.addAttribute("days", days);
+            model.addAttribute("months", months);
+            model.addAttribute("years", years);
+        //////////////////////////////////////////////////////////////
+        // returning Wanted Page
+        return MODULE_PATH + "patientData";
+    }
+    ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value = "/fastSearch", method = RequestMethod.GET)
     public @ResponseBody String fastSearchPatient(@RequestParam("q") String query, Model model, HttpServletRequest request, HttpServletResponse response){
         /// Initialize the ModelView to be Returned 
@@ -150,7 +186,6 @@ public class PatientController {
             List<FastPatient> fastPatients=patientService.getFastPatientList(query);
             Gson gson = new Gson();
             jsonString = gson.toJson(fastPatients);
-            System.out.println(">> TO SENT : "+jsonString);
         }//end if 
       return jsonString;
     }//end fastSearchPatient 
