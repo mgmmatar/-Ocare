@@ -75,8 +75,6 @@
                         data: {
                         },
                         complete: function(data) {
-//                            // Empty Slider
-                            console.log('done :' + JSON.stringify(data));
                             $('.no_matches').empty();
                             // Draw New Search Results
                             $('.no_matches').append(data.responseText);

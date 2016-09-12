@@ -26,16 +26,15 @@
          <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/popup.css'/>">
         <!---  JS Scripts Files --->
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/owl.carousel.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/calender.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/squad.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/underscore.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/calendarTemplate.js'/>"></script>
-        <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery.fancybox.pack.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery.bpopup.min.js'/>"></script>
-
         <!-- NEW -->
         <script type="text/javascript" src="<c:url value='/resources/js/nprogress.js'/>"></script>
         <script>
@@ -188,25 +187,6 @@
                             }//end if Condition
                         });
                         
-                        /// Register Payment Button Action 
-                            $('.paid').on("click", function(e) {
-                                // Getting the totalCost
-                                var totalCost = $("#totalCost").val();                     
-                                // Getting Paid Cost
-                                var paidCost= $("#paidCost");
-                                var paidButton= $("#paidButton");
-                                // Check if already Paid or Not
-                                if(paidCost.hasClass("donePaid")){
-                                    paidCost.removeClass("donePaid");
-                                    paidCost.val("0");
-                                    paidButton.html("Cancel").button("refresh");
-                                    alert("CANCEL TEXT APPEAE");
-                                }else{
-                                    paidCost.addClass("donePaid");
-                                    paidCost.val(totalCost);
-                                    paidButton.html("Paid");
-                                }//end if-else Block 
-                           });
                             //////////////////////////////////////////////////////
                         }
                     });
@@ -230,7 +210,66 @@
                 });
 
                 $('#reserveNow').click(function() {
-                    //// ReserrvationURL 
+                    // Months and days 
+                    var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+                    var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+                    /////// For Reservation Confirmation
+                    var reservationWay = $("#reservationWayId").find(":selected").text();
+                    var examineType = $("#examineTypeId").find(":selected").text();   // Getting ExamineType 
+                    var reservationDate= $("#currentDate").val();
+                    var attendenceTime = $(".reserved").clone().children().remove().end().text();
+                   // var dateFormat = require('dateformat');
+                    var formattedDate = new Date(reservationDate);
+                    var fullDateInfo=days[formattedDate.getDay()]+" , "+ formattedDate.getDate() +" "+ months[formattedDate.getMonth()]+" "+formattedDate.getFullYear();
+                    var paidCost= $("#paidCost").val();
+                    var totalCost = $("#totalCost").val();
+                    //// Formulate the Confirmation Message
+                           $('#confirmationMessage').empty();
+                            // Draw New Search Results
+                            var messageBody="<table class='confirmationDesign'>"
+                                                +"<tr>"
+                                                      +"<td><b>Date </b></td>"
+                                                      +"<td>"+fullDateInfo+"</td>"
+                                                +"<tr>" 
+                                                +"<tr>"
+                                                      +"<td><b>Time </b></td>"
+                                                      +"<td>"+attendenceTime+"</td>"
+                                                +"<tr>" 
+                                                +"<tr>"
+                                                      +"<td><b>Examine </b></td>"
+                                                      +"<td>"+examineType+"</td>"
+                                                +"<tr>" 
+                                                +"<tr>"
+                                                      +"<td><b>Way </b></td>"
+                                                      +"<td>"+reservationWay+"</td>"
+                                                +"<tr>" 
+                                                +"<tr>"
+                                                      +"<td><b>Cost </b></td>"
+                                                      +"<td>"+totalCost+" LE "+"</td>"
+                                                +"<tr>" 
+                                                +"<tr>"
+                                                      +"<td><b>Paid </b></td>"
+                                                      +"<td>"+paidCost+" LE "+"</td>"
+                                                +"<tr>"     
+                                                +"<tr>"
+                                                      +"<td><b>Remain </b></td>"
+                                                      +"<td>"+(totalCost-paidCost)+" LE "+"</td>"
+                                                +"<tr>"     
+                                            +"</table>";
+                                    
+                            $('#confirmationMessage').append(messageBody);
+                    ///////////////////////////////////////////////////////////////
+                             $('#reservationConfirmPopup').bPopup(); 
+                                
+                });
+                
+                 $('#confirmAction').click(function(){
+                      $("#reservationConfirmPopup").bPopup().close();
+                      reserveNow();  
+                 }); 
+                
+                function reserveNow(){
+                    //// Collect Reservation Confirmation Data  
                     var reservationURL = "/zmed/reservation/processReservation";
                     // Getting Reservation Information
                     var patientId = $("#patientId").val();   // Gertting Patient Information
@@ -241,9 +280,7 @@
                     var workingTimeId=$(".nav-tabs").find("li.active").find('input[type="hidden"][name="workingTimeId"]').val();
                     var paidCost= $("#paidCost").val();
                     var totalCost = $("#totalCost").val();
-                    // Viewing Entered Data         
-//                  ///////////////////////////////////////////////////////////////
-                    // Submitting the Payment
+                    /// Send Reservation To Server
                     var b;
                     var request = $.ajax({
                         url: reservationURL,
@@ -260,15 +297,21 @@
                             totalCost:totalCost
                         },
                         complete: function(data) {
-                            console.log('done :' + JSON.stringify(data));
                             // Show Success Message 
-                             $('#popup').bPopup(); 
+                              var doneMessage=$("#reservationDone").bPopup();
+                              setTimeout(function () { 
+                                  doneMessage.close();
+                                  window.location.href = "/zmed/reservation/list";
+                              }, 1000);
+                              
                         }//end Complete Function
                     });
-                 ////////////////////////////////////////////////////////////////
-                });
+                }//end Function reserveNow
+                
+                
                 /// Paid Button Click 
-                $('.paid').on("click", function(e) {
+                $(".container").on("click",".paid", function(e) {
+                                 //$('.paid').on("click", function(e) {
                                 // Getting the totalCost
                                 var totalCost = $("#totalCost").val();                     
                                 // Getting Paid Cost
@@ -281,7 +324,6 @@
                                     paidButton.removeClass("cancelPayment");
                                     paidCost.val("0");
                                     paidButton.text("Paid").button("refresh");
-                                    alert("CANCEL TEXT APPEAE");
                                 }else{
                                     paidCost.addClass("donePaid");
                                     paidCost.val(totalCost);
@@ -630,10 +672,34 @@
                                                 </div>
                                             </div>
                              
-                        <!-- POPUPS END-->
+                        <!-- Confirmation Message-->
                         <div id="popup" class="popupDesign">
                               <span class="button b-close"><span>X</span></span>
                                SuccessFully Reserved <br><span class="logo">bPopup</span>    
+                        </div>
+                        
+                        <div id="reservationConfirmPopup" class="popupDesign popup">
+                            <span class="button b-close"><span class="popup_close_icon">X</span></span>
+    
+                                <div class="popupMyHeader">
+                                    <span class="logo">Reservation Confirm</span>
+                                </div> 
+                                
+                                <div id="confirmationMessage">
+                                    
+                                </div>
+                                
+                                 <center>
+                                    <button id="confirmAction" class="reserveButton">Confirm Now</button>  
+                               </center>  
+                            
+                        </div>
+                        
+                        <div id="reservationDone" class="popupDesign popup">
+                            <span class="button b-close"><span class="popup_close_icon">X</span></span>
+                            
+                            <center><h1>Done Successfully</h1></center>
+                               
                         </div>
     
     </body>

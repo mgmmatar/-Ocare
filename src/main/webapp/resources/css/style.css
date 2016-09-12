@@ -4481,6 +4481,17 @@ input.custom_save{
    background-color:#FCC409  !important;
    color: #000;
 }
+
+
+.confirmationDesign{
+    margin-left: 50px;
+}
+
+table.confirmationDesign td{
+    padding-right: 60px;
+    padding-bottom:  10px;
+    font-size: 20px;
+}
 /*.patientSearchBox{
     width: 600px;
     border-radius: 10px;
