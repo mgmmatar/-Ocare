@@ -14,12 +14,13 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-         <title> Reservation List </title>
+         <title> Reservation </title>
         <!-- Styles -->
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/calendar.css'/>" >
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/bootstrap.css'/>" />
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/owl.carousel.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/owl.theme.css'/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/reservation.css'/>">
         <!---  JS Scripts Files --->
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
@@ -28,8 +29,9 @@
         <script type="text/javascript" src="<c:url value='/resources/js/calender.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/squad.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/underscore.js'/>"></script>
-        <script type="text/javascript" src="<c:url value='/resources/js/calendarTemplate.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/calendarReservationList.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
+        
         <!-- NEW -->
         <script type="text/javascript" src="<c:url value='/resources/js/nprogress.js'/>"></script>
         <script>
@@ -37,119 +39,129 @@
         </script>
         <!--- Page Styles--->
         <!-- Bootstrap Styles-->
-            <link href="<c:url value='/resources/css/bootstrap.css'/>" rel="stylesheet" />
             <!-- FontAwesome Styles-->
             <link href="<c:url value='/resources/css/font-awesome.css'/>" rel="stylesheet" />
             <!-- Morris Chart Styles-->
-            <link href="<c:url value='/resources/css/morris-0.4.3.min.css'/>" rel="stylesheet" />
+            <link href="<c:url value='/resources/js/morris/morris-0.4.3.min.css'/>" rel="stylesheet" />
             <link href="<c:url value='/resources/css/animation.css'/>" rel="stylesheet" />
             <!-- Custom Styles-->
             <!-- Google Fonts-->
             <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-
+        
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/timeRanges.css'/>">
+        <script type="text/javascript" src="<c:url value='/resources/js/timeRanges.js'/>"></script>
 
         <script type="text/javascript">
             $(document).ready(function() {
-                
-                $(".check").click(function() {
-                    alert("clicked") ;
-                });
-                
-
-                $(".Slice").click(function() {
+      
+                $(".cancelReservation").click(function() {
                     ///// Checking the Item Clicked Class
-                    if ($(this).hasClass("Available")) {
-                        alert("Availble Time");
-                    }//end if Condition
+                     var reservationId= $(this).closest("div").find('input[name="reservationId"]').val();
+                     cancelReservation(reservationId);
+                }); 
+                
+                $(".confirmReservation").click(function() {
+                    ///// Checking the Item Clicked Class
+                    var reservationId= $(this).closest("div").find('input[name="reservationId"]').val();
+                    confirmReservation(reservationId);
+                }); 
+
+                
+                function cancelReservation(reservationId) {
+                    var b;
+                   // var reservationId= 1;
+
+                    var request = $.ajax({
+                        url: "/zmed/reservation/cancelReservation/" + reservationId,
+                        data: {
+                        },
+                        async: false
+                    });
+
+                    request.done(function(msg) {
+                        b = (msg == "true" ? true : false);
+                    });
+
+                    request.fail(function(jqXHR, textStatus) {
+                        b = false;
+                    });
+                    if (b == true) {
+                       reloadReservations();
+                    }//end if
                     
+                }//end DeleteUserFunction
+                
+                ///////////////////////////////////////////////////
+                function confirmReservation(reservationId) {
+                    var b;
+                  //  var reservationId= 1;
 
-                    if ($(this).hasClass("Busy")) {
-                        alert("Busy Time");
-                    }//end if Condition
+                    var request = $.ajax({
+                        url: "/zmed/reservation/confirmReservation/" + reservationId,
+                        data: {
+                        },
+                        async: false
+                    });
 
-                    if ($(this).hasClass("Less")) {
-                        alert("Less Time");
-                    }//end if Condition
+                    request.done(function(msg) {
+                        b = (msg == "true" ? true : false);
+                    });
 
-                });
-
-                $('#examineTypeId').on('change', function() {
-                    ///// Getting Data
-                    var examineTypeId = $("#examineTypeId").val();
-                    var currentDate = $("#currentDate").val();
-
-                    var reservationURL = "/zmed/reservation/timeSlice/" + currentDate + "," + examineTypeId;
-
-                    //alert(reservationURL);
-                    // Getting Ajax
+                    request.fail(function(jqXHR, textStatus) {
+                        b = false;
+                    });
+                    if (b == true) {
+                        reloadReservations();
+                    }//end if    
+                }//end DeleteUserFunction
+                
+                function reloadReservations(){
+                    
+                     var currentDate = $('#currentDate').val();
+                     // reservationURL
+                     var reservationURL="/zmed/reservation/reservationElement/"+currentDate;
+                    // Getting Ajax 
                     var b;
                     var request = $.ajax({
                         url: reservationURL,
                         type: "GET",
                         dataType: 'json',
                         data: {
+       
                         },
                         complete: function(data) {
-//                            // Empty Slider
-                            console.log('done :' + JSON.stringify(data));
+                            //console.log('done :' + JSON.stringify( data));
+                            var mm=$('.no_matches').html();
+                            //console.log('DDDDD :' + JSON.stringify( mm));
                             $('.no_matches').empty();
-                            // Draw New Search Results
-//
                             $('.no_matches').append(data.responseText);
-                            //    $('.slider>div').css('display', 'block');
-                            //
-                            //////////////////////////////////////////////////
-                            //// Registering Slice Click Action
-                            $(".Slice").click(function() {
+                            $('#accordion').show();
+                            /// Reload Actions 
+                            $(".cancelReservation").click(function() {
                                 ///// Checking the Item Clicked Class
-                                if ($(this).hasClass("Available")) {
-                                    alert("Availble Time ");
-                                }//end if Condition
-
-                                if ($(this).hasClass("Busy")) {
-                                    alert("Busy Time ");
-                                }//end if Condition
-
-                                if ($(this).hasClass("Less")) {
-                                    alert("Less Time ");
-                                }//end if Condition
-                            });
-                            //////////////////////////////////////////////////////
-                        }
-//
+                                 var reservationId= $(this).closest("div").find('input[name="reservationId"]').val();
+                                 cancelReservation(reservationId);
+                            }); 
+                
+                            $(".confirmReservation").click(function() {
+                                ///// Checking the Item Clicked Class
+                                var reservationId= $(this).closest("div").find('input[name="reservationId"]').val();
+                                confirmReservation(reservationId);
+                            }); 
+                        }///end Complete Fucntion 
                     });
-
-
-                });
-
-
-                $('#reserve').click(function() {
-                    // Getting examineType
-                    var examineTypeId = $("#examineTypeId").val();
-                    var reservationWayId = $("#reservationWayId").val();
-                    var patientId = $("#patientId").val();
-                    var currentDate = $("#currentDate").val();
-
-                    alert("ExamineType : " + examineTypeId
-                            + "\n Reservation Way : " + reservationWayId
-                            + "\n Patient ID : " + patientId
-                            + "\n Current Date : " + currentDate);
-
-                });
-
-
-
+                    
+                }//end reloadReservations 
+                
             });
-
-
-
         </script>
             
-         <%@include file="../basic/scripts.jsp" %>
-         
+        <%@include file="../basic/scripts.jsp" %>
+        
     </head>
     
-      <body class="nav-md">
+       
+         <body class="nav-md">
 
             <div class="container body">
 
@@ -162,33 +174,29 @@
                     <!-- Header -->
 
                     <%@include file="../basic/header.jsp" %>
-          
-       <div class="right_col" role="main">
 
+                     <div class="right_col" role="main">
+
+                         
                           
-             <div class="clearfix"></div>  
-          <!-- Content --->
+                    <div class="clearfix"></div>   
+           
+                  <!-- Content --->
           
-          <div id="page-wrapper">
+             <div id="page-wrapper">
                 <div id="page-inner">
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1 class="page-header" style="padding-top: 15px;">
-                                Reservation List
-                            </h1>
-                        </div>
-                    </div>
-                    
+                    <div class="page-title"></div>   
                     <!-- /. ROW  -->
                     <div id="notifaction" class="alert alert-success hidden" role="alert">Operation done successfully</div>
                     <div class="row expandUp">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="panel panel-default">
-                             
-                                <div class="panel-heading" style="padding-top: 15px;">
-                                   Reservation Process
+                                <div class="panel-heading">
+                                   Reservation List
                                 </div>
+          
+                            <input type="hidden" id="currentDate" value="${currentDate}">   
           <!--- ==============================================================================================--->
             <!--- Calendar Section --->
             <!--- ==============================================================================================--->
@@ -313,89 +321,38 @@
                                     </div>
                                     <div class="cb"></div>
                                 </div>
-                                <!-- Time Range Section  -->
-                                <div class="cb"></div>
-                                <!-- Time Slices -->
-                                 <!--   Showing Shift TABS -->
-                                <div class="card col-md-12 col-sm-12 col-xs-12 fadeIn">
-                                    
-                                        <img class="userImg"src="<c:url value='/resources/images/khaled.jpg'/>" />
-                                        <div class="details">
-                                                            <h3 class="name">Name</h3>
-                                                <h3 class="code">Code</h3>
-                                                <h3 class="examineType">Examine Type</h3>
-                                                <h3 class="date">07:15 PM 12/1/2016</h3>
-                                        </div>
-                                        <div class="actions">
-                                                <a href="#" class="delete"><img src="<c:url value='/resources/images/Cancel.png'/>" /></a>
-                                                <a href="#" class="check"><img src="<c:url value='/resources/images/checkround.png'/>" /></a>
-                                        </div>
-                                <div class="ViewMoreContainer"><a href="#" class="ViewMore" data-toggle="modal" data-target="#myModal">View More</a></div>
-                                </div>
+                        
+                                 <div class="cb"></div>
                                
-                                        <div class="card col-md-12 col-sm-12 col-xs-12 fadeIn">
-                                    
-                                        <img class="userImg"src="<c:url value='/resources/images/khaled.jpg'/>" />
-                                        <div class="details">
-                                                            <h3 class="name">Name</h3>
-                                                <h3 class="code">Code</h3>
-                                                <h3 class="examineType">Examine Type</h3>
-                                                <h3 class="date">07:15 PM 12/1/2016</h3>
-                                        </div>
-                                        <div class="actions">
-                                                <a href="#" class="delete"><img src="<c:url value='/resources/images/Cancel.png'/>" /></a>
-                                                <a href="#" class="check"><img src="<c:url value='/resources/images/checkround.png'/>" /></a>
-                                        </div>
-                                <div class="ViewMoreContainer"><a href="#" class="ViewMore" data-toggle="modal" data-target="#myModal">View More</a></div>
-                                </div>
-                                   
-                             <div class="card col-md-12 col-sm-12 col-xs-12 fadeIn">
-                                    
-                                        <img class="userImg"src="<c:url value='/resources/images/khaled.jpg'/>" />
-                                        <div class="details">
-                                                            <h3 class="name">Name</h3>
-                                                <h3 class="code">Code</h3>
-                                                <h3 class="examineType">Examine Type</h3>
-                                                <h3 class="date">07:15 PM 12/1/2016</h3>
-                                        </div>
-                                        <div class="actions">
-                                                <a href="#" class="delete"><img src="<c:url value='/resources/images/Cancel.png'/>" /></a>
-                                                <a href="#" class="check"><img src="<c:url value='/resources/images/checkround.png'/>" /></a>
-                                        </div>
-                                <div class="ViewMoreContainer"><a href="#" class="ViewMore" data-toggle="modal" data-target="#myModal">View More</a></div>
-                                </div>
-                                        
-                           <div class="card col-md-12 col-sm-12 col-xs-12 fadeIn">
-                                    
-                                        <img class="userImg"src="<c:url value='/resources/images/khaled.jpg'/>" />
-                                        <div class="details">
-                                                            <h3 class="name">Name</h3>
-                                                <h3 class="code">Code</h3>
-                                                <h3 class="examineType">Examine Type</h3>
-                                                <h3 class="date">07:15 PM 12/1/2016</h3>
-                                        </div>
-                                        <div class="actions">
-                                                <a href="#" class="delete"><img src="<c:url value='/resources/images/Cancel.png'/>" /></a>
-                                                <a href="#" class="check"><img src="<c:url value='/resources/images/checkround.png'/>" /></a>
-                                        </div>
-                                <div class="ViewMoreContainer"><a href="#" class="ViewMore" data-toggle="modal" data-target="#myModal">View More</a></div>
-                                </div>             
-                                        
-                                        
-                                        
-                                
-                        </section>
-            <!--- ==============================================================================================--->
-            <!--- End Calendar Section --->
-            <!--- ==============================================================================================--->                        
-                               </div>
+                                 <!--   Showing Shift TABS -->
+                                <div class="panel-group calender_matches tab_${currentDate}" id="accordion" role="tablist" aria-multiselectable="true">
+                                    <div class="no_matches" id="a7a">
+                                       
+                                        <c:import  url="/reservation/reservationElement/${currentDate}" />
 
-                        </div>
-                    </div>
+                                    </div>
+                                </div>
+                                 
+                        </section>
+                        <!--- ==============================================================================================--->
+                        <!--- End Calendar Section --->
+                        <!--- ==============================================================================================--->                        
+                                </div>
+                                     
+                                        <!--*********************************here************************************-->
+                                        
+                                    <!-- Widget -->
+                                    <%@include file="../basic/widgets.jsp" %>
+                                        
+                             </div>
+                                   
+                         </div>
                     <!-- /. ROW  -->
 
                     <!-- /. PAGE INNER  -->
                 </div>
+                   
+                
                 <!-- /. PAGE WRAPPER  -->
             </div>
         
@@ -404,20 +361,24 @@
             <!-- Morris Chart Js -->
             <script src="<c:url value='/resources/js/raphael-2.1.0.min.js'/>"></script>
             <script src="<c:url value='/resources/js/morris.js'/>"></script>
-         <!-- Modal -->
+            <!-- Custom Js -->
+            <script src="<c:url value='/resources/js/custom-scripts.js'/>"></script>   
+           
+            
+            <!-- POPUPs Here ---->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                     <div class="modal-dialog" role="document">
+                <div class="modal-dialog" role="document">
                              <div class="modal-content">
                                     <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                              <h4 class="modal-title" id="myModalLabel">Patient Name</h4>
                                      </div>
-                                     <div class="modal-body">
+                 <div class="modal-body">
 
-                                    <div class="row">
-            <div class="userImgContainer"><img class="userImg"src="<c:url value='/resources/images/khaled.jpg'/>" /></div>
+                       <div class="row">
+                          <div class="userImgContainer"><img class="userImg"src="<c:url value='/resources/images/khaled.jpg'/>" /></div>
                                             <div class="details">
-                                                            <h3 class="name">Name</h3>
+                                            <h3 class="name">Name</h3>
                                             <h3 class="code">Code</h3>
                                             <h3 class="examineType">Examine Type</h3>
                                             <h3 class="date">07:15 PM 12/1/2016</h3>
@@ -427,20 +388,19 @@
                                             <a href="#" class="check"><img src="<c:url value='/resources/images/checkround.png'/>" /></a>
                                     </div>			
                             </div>
-                  </div>
+                        </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   </div>
                 </div>
               </div>
-            </div>   
+            </div> 
+                      
+             </div>
+                                  
+      </div><!--End Main Container-->
 
-            
-                                    
-                    </div>
-            </div><!--End Main Container-->
-
-    </div><!--End Body Container-->                             
+    </div><!--End Body Container-->
             
     </body>
 </html>

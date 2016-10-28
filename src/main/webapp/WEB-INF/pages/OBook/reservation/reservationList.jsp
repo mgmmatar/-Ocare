@@ -22,16 +22,17 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/owl.theme.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/reservation.css'/>">
+         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/popup.css'/>">
         <!---  JS Scripts Files --->
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/owl.carousel.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/calender.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/squad.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/underscore.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/calendarReservationList.js'/>"></script>
-        <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
-        
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery.bpopup.min.js'/>"></script>
         <!-- NEW -->
         <script type="text/javascript" src="<c:url value='/resources/js/nprogress.js'/>"></script>
         <script>
@@ -42,7 +43,6 @@
             <!-- FontAwesome Styles-->
             <link href="<c:url value='/resources/css/font-awesome.css'/>" rel="stylesheet" />
             <!-- Morris Chart Styles-->
-            <link href="<c:url value='/resources/js/morris/morris-0.4.3.min.css'/>" rel="stylesheet" />
             <link href="<c:url value='/resources/css/animation.css'/>" rel="stylesheet" />
             <!-- Custom Styles-->
             <!-- Google Fonts-->
@@ -66,6 +66,22 @@
                     confirmReservation(reservationId);
                 }); 
 
+
+
+                $(".container").on("click",".ViewMore", function(e) {
+                   
+                    var reservationInfo= $(this).parents(".mainContainer").find('.reservationInfo'); 
+                    console.log(reservationInfo);
+                       reservationInfo.show();
+//                     $('#informationMessage').empty();
+//                                    
+//                     $('#informationMessage').append(reservationInfo.show());
+//                    
+//                    $("#reservationInfoPopup").bPopup();
+                   
+                });
+                
+                
                 
                 function cancelReservation(reservationId) {
                     var b;
@@ -363,44 +379,27 @@
             <script src="<c:url value='/resources/js/morris.js'/>"></script>
             <!-- Custom Js -->
             <script src="<c:url value='/resources/js/custom-scripts.js'/>"></script>   
-           
-            
-            <!-- POPUPs Here ---->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                             <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                             <h4 class="modal-title" id="myModalLabel">Patient Name</h4>
-                                     </div>
-                 <div class="modal-body">
-
-                       <div class="row">
-                          <div class="userImgContainer"><img class="userImg"src="<c:url value='/resources/images/khaled.jpg'/>" /></div>
-                                            <div class="details">
-                                            <h3 class="name">Name</h3>
-                                            <h3 class="code">Code</h3>
-                                            <h3 class="examineType">Examine Type</h3>
-                                            <h3 class="date">07:15 PM 12/1/2016</h3>
-                                    </div>
-                                    <div class="actions">
-                                            <a href="#" class="delete"><img src="<c:url value='/resources/images/Cancel.png'/>" /></a>
-                                            <a href="#" class="check"><img src="<c:url value='/resources/images/checkround.png'/>" /></a>
-                                    </div>			
-                            </div>
-                        </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div> 
-                      
+                     
              </div>
                                   
       </div><!--End Main Container-->
 
     </div><!--End Body Container-->
-            
+           
+    <!-- POPUPs Here ---->
+                    <div id="reservationInfoPopup" class="popupDesign popup">
+                            <span class="button b-close"><span class="popup_close_icon">X</span></span>
+    
+                                <div class="popupMyHeader">
+                                    <span class="logo">Reservation Info</span>
+                                </div> 
+                                
+                                <div id="informationMessage">
+                                    
+                                </div>
+                                
+                            
+                    </div>
+    
     </body>
 </html>

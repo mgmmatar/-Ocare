@@ -58,7 +58,7 @@
                                </c:when>
                                <c:otherwise>
                                     <c:forEach items="${shift.reservations}" var="reservation" varStatus="counter">
-                                        <div class="card col-md-12 col-sm-12 col-xs-12 fadeIn">
+                                    <div class="card col-md-12 col-sm-12 col-xs-12 mainContainer">
                                            <img class="userImg"src="<c:url value='/resources/images/avatar.jpg'/>" />
                                              <div class="details">
                                                      <h3 class="name">${reservation.patient.fName} ${reservation.patient.midName} ${reservation.patient.lName}</h3>
@@ -71,7 +71,66 @@
                                                      <a href="#" class="cancelReservation" data-toggle="modal" data-target="#myModal"><img src="<c:url value='/resources/images/Cancel.png'/>" /></a>
                                                      <a href="#" class="confirmReservation" data-toggle="modal" data-target="#myModal"><img src="<c:url value='/resources/images/checkround.png'/>" /></a>
                                              </div>
-                                     <div class="ViewMoreContainer"><a href="#" class="ViewMore" data-toggle="modal" data-target="#myModal">View More</a></div>
+                                     <div class="ViewMoreContainer"><a class="ViewMore" data-toggle="modal" data-target="#myModal">View More</a></div>
+                                     <table style="display: none" class="confirmationDesign reservationInfo">
+                                          <tr>
+                                              <td><b>Name</b></td>
+                                              <td>${reservation.patient.fName} ${reservation.patient.midName} ${reservation.patient.lName}</td>
+                                          </tr>
+                                          <tr>
+                                              <td><b>Code </b></td>
+                                              <td>${reservation.patient.code}</td>
+                                          </tr>
+                                          
+                                          <tr>
+                                              <td><b>Age</b></td>
+                                              <td>${reservation.patient.age}</td>
+                                          </tr>    
+                                          
+                                          <tr>
+                                              <td><b>Mobile</b></td>
+                                              <td>
+                                                  <c:choose>
+                                                        <c:when test="${not empty reservation.patient.phoneNumber1}">
+                                                             ${reservation.patient.phoneNumber1}
+                                                             <c:if test="${not empty reservation.patient.phoneNumber2}">
+                                                                 - ${reservation.patient.phoneNumber2}
+                                                             </c:if>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <c:choose>
+                                                                    <c:when test="${not empty reservation.patient.phoneNumber2}">
+                                                                         ${reservation.patient.phoneNumber2}
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                         No Numbers
+                                                                    </c:otherwise>
+                                                            </c:choose>
+                                                        </c:otherwise>
+                                                  </c:choose>                                                  
+                                              </td>
+                                          </tr>    
+                                              
+                                          <tr>
+                                              <td><b>Insurred</b></td>
+                                              <td>
+                                                        <c:choose>
+                                                            <c:when test="${not empty reservation.patient.insuranceCompany}">
+                                                                         ${reservation.patient.insuranceCompany.nameEn}
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                         No
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                              </td>
+                                          </tr>    
+                                             
+                                              
+                                          <tr>
+                                              <td><b>Way </b></td>
+                                              <td>${reservation.reservationWay.nameEn}</td>
+                                          </tr>    
+                                     </table>
                                      </div>
                                     </c:forEach>
                                </c:otherwise>
