@@ -28,6 +28,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,6 +46,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller("reservationController")
 @RequestMapping("/reservation")
+
 public class ReservationController {
 
     private final String MODULE_ROOT = "/OBook/reservation/";
@@ -64,6 +69,7 @@ public class ReservationController {
     @Autowired
     private InsuranceProfileService insuranceProfileService;
 
+    @Secured("RULE_ADMIN")
     @RequestMapping("/process/{id}")
     public String processReservation(@PathVariable("id") Integer patientId, Model model) {
         // Get patient
@@ -111,10 +117,11 @@ public class ReservationController {
         return MODULE_ROOT + "reservationPreview";
     }//end registerPatient
     
-    
     @RequestMapping("/list")
     public String reservationProcess2(Model model) {
         // Get patient
+        //User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //System.out.println(">>>>>>>>>>>>>>> "+user.toString());
         //Date currentDate = ODate.getDateFromString("2015-10-17");
         Date currentDate = new Date();
         String dayShortName = ODate.getWeekDay(currentDate);

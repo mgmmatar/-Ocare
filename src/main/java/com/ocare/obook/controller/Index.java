@@ -36,7 +36,7 @@ public class Index {
     
     @RequestMapping(value = "/")
     public String indexPage(Model model) {
-        return "index";
+        return "redirect:/auth/login";
     }//end registerPatient
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

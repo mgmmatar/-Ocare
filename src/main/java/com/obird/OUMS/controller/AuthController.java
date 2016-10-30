@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/auth")
 public class AuthController {
     
-        private final String MODULE_PATH="/obird/auth/";
+        private final String MODULE_PATH="/OBird/auth/";
 	
 	private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 	

@@ -19,12 +19,12 @@
 		<beans:constructor-arg name="decisionVoters"
 			ref="roleVoter" />
 	</beans:bean>
-
+        
 	<http authentication-manager-ref="dao-auth"
 		access-decision-manager-ref="accessDecisionManager"
                 use-expressions="false" auto-config="true" disable-url-rewriting="false">
                 <csrf disabled="true"/>	
-		<!--<intercept-url pattern="/reservation/**" access="RULE_ADMIN" />-->
+               <!--<intercept-url pattern="/reservation/**" access="RULE_ADMIN" />-->
 		<form-login login-page="/auth/login" 
                         authentication-failure-url="/auth/denied"
 			username-parameter="username" password-parameter="password"
