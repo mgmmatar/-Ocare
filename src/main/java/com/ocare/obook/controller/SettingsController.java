@@ -23,6 +23,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,6 +39,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller("settingsController")
 @RequestMapping("/settings")
+@Secured({"ROLE_SUPER_ADMIN"})
 public class SettingsController {
 
     private final String PACKAGE_ROOT = "/OBook/settings/";

@@ -22,13 +22,13 @@
         
 	<http authentication-manager-ref="dao-auth"
 		access-decision-manager-ref="accessDecisionManager"
-                use-expressions="false" auto-config="true" disable-url-rewriting="false">
+                use-expressions="true" auto-config="true" disable-url-rewriting="false">
                 <csrf disabled="true"/>	
                <!--<intercept-url pattern="/reservation/**" access="RULE_ADMIN" />-->
 		<form-login login-page="/auth/login" 
-                        authentication-failure-url="/auth/denied"
+                        authentication-failure-url="/auth/login"
 			username-parameter="username" password-parameter="password"
-			default-target-url="/reservation/list" />
+			default-target-url="/proxy" />
 		<logout invalidate-session="true" logout-success-url="/login"
 			logout-url="/auth/j_spring_security_logout" />
 		<access-denied-handler error-page="/auth/denied"/>

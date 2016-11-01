@@ -1,8 +1,11 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <div class="col-md-3 left_col" style="position: fixed;">
             <div class="left_col">
 
                 <div class="navbar nav_title" style="border: 0;">
-                    <a id="menu_toggle" class="site_title"><i class="fa fa-paw"></i> <span>öBird</span></a>
+                    <a id="menu_toggle" class="site_title"><i class="fa fa-paw"></i> <span>Ã¶Bird</span></a>
 
                 </div>
 
@@ -29,7 +32,11 @@
                     <div class="menu_section">
                         <h3>General</h3>
                         <ul class="nav side-menu">
-                            <li class=""><a><i class="fa fa-home"></i> <label class="menuText">Reservation </label><span
+                            
+                        <sec:authorize access="hasRole('SUPER_ADMIN') 
+                                       or hasRole('ADMIN')
+                                       or hasRole('RESERVATION_USER')">
+                            <li class=""><a><i class="fa fa-home"></i> <label class="menuText">Home</label><span
                                     class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="/zmed/reservation/list">Reservations</a>
@@ -37,6 +44,11 @@
                                     
                                 </ul>
                             </li>
+                        </sec:authorize>    
+                        
+                        <sec:authorize access="hasRole('SUPER_ADMIN') 
+                                       or hasRole('ADMIN')
+                                       or hasRole('ENTRY_USER')">
                             <li class=""><a><i class="fa fa-edit"></i> <label class="menuText">Patient </label><span
                                     class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
@@ -44,6 +56,9 @@
                                     </li>
                                 </ul>
                             </li>
+                        </sec:authorize>
+                            
+                        <sec:authorize access="hasRole('SUPER_ADMIN')">        
                             <li class=""><a><i class="fa fa-desktop"></i> <label class="menuText">Settings</label> <span
                                     class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
@@ -58,7 +73,12 @@
                                     
                                 </ul>
                             </li>
-
+                        </sec:authorize>    
+                            
+                        <sec:authorize access="hasRole('SUPER_ADMIN') 
+                                       or hasRole('ADMIN')
+                                       ">    
+                            
                             <li class=""><a><i class="fa fa-desktop"></i> <label class="menuText">Reports</label> <span
                                     class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
@@ -69,6 +89,19 @@
                                 </ul>
                             </li>
                             
+                        </sec:authorize> 
+                        
+                        <sec:authorize access="hasRole('SUPER_ADMIN') 
+                                       or hasRole('ADMIN')
+                                       ">    
+                            <li class=""><a><i class="fa fa-desktop"></i> <label class="menuText">Users</label> <span
+                                    class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none">
+                                    <li><a href="/zmed/settings/examineType/list">Users</a>
+                                    </li>
+                                </ul>
+                            </li>
+                         </sec:authorize>   
                         </ul>
                     </div>
 
@@ -86,7 +119,7 @@
                     <a data-toggle="tooltip" data-placement="top" title="Lock">
                         <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                     </a>
-                    <a data-toggle="tooltip" data-placement="top" title="Logout" href="/zmed/auth/logout">
+                    <a data-toggle="tooltip" data-placement="top" title="Logout" href="/zmed/auth/j_spring_security_logout">
                         <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                     </a>
                 </div>

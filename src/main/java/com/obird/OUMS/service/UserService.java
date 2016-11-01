@@ -8,6 +8,7 @@ package com.obird.OUMS.service;
 
 import com.obird.OUMS.domain.User;
 import java.util.List;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  *
@@ -27,4 +28,16 @@ public interface UserService {
     
     public User getUserByUserName(String userName);
     
+    public UserDetails getLoggedInUser();
+    
+    public boolean isSuperAdmin();
+    
+    public boolean isAdmin();
+    
+    public boolean isReservationUser();
+    
+    public boolean isEntryUser();
+    
+    public boolean isInquiryUser();
+        
 }

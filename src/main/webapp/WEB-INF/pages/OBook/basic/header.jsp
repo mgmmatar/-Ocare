@@ -27,7 +27,7 @@
                                 <li>
                                     <a href="javascript:;">Help</a>
                                 </li>
-                                <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                                <li><a href="/zmed/auth/j_spring_security_logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                                 </li>
                             </ul>
                         </li>
@@ -112,7 +112,7 @@
                      
                     </ul>
                     <ul class="navbar-left">
-                        <input type="text" id="patientSearch" name="Search" class="searchBox" placeholder="Search For Patient" id="search" required />
+                         <input type="text" id="patientSearch" name="Search" class="searchBox" placeholder="Search For Patient"  required />
                          <img src="<c:url value='/resources/images/patient-icon.png'/>" class="patient-icon" id="searchPatientProfileFlag">
                          <img src="<c:url value='/resources/images/reservation.png'/>" class="reservation-icon" id="searchReservationProfileFlag">
                     </ul>              

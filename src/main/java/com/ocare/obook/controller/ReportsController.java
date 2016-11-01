@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +35,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller("reportsController")
 @RequestMapping("/report")
+@Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN"})
 public class ReportsController {
     
     private final String MODULE_PATH="/OBook/reports/";

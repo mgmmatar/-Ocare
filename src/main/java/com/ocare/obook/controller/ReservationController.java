@@ -44,9 +44,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *
  * @author khaledeng
  */
+
 @Controller("reservationController")
 @RequestMapping("/reservation")
-
 public class ReservationController {
 
     private final String MODULE_ROOT = "/OBook/reservation/";
@@ -69,7 +69,7 @@ public class ReservationController {
     @Autowired
     private InsuranceProfileService insuranceProfileService;
 
-    @Secured("RULE_ADMIN")
+    @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN","ROLE_RESERVATION_USER"})
     @RequestMapping("/process/{id}")
     public String processReservation(@PathVariable("id") Integer patientId, Model model) {
         // Get patient
@@ -98,6 +98,7 @@ public class ReservationController {
         return MODULE_ROOT + "reservationProcess";
     }//end registerPatient
 
+    @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN","ROLE_RESERVATION_USER","ROLE_INQUIRY_USER"})
     @RequestMapping("/preview")
     public String reservationPreviewProcess(Model model) {
         // Get Important Information for Preview 
@@ -118,6 +119,7 @@ public class ReservationController {
     }//end registerPatient
     
     @RequestMapping("/list")
+    @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN","ROLE_RESERVATION_USER"})
     public String reservationProcess2(Model model) {
         // Get patient
         //User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -133,6 +135,7 @@ public class ReservationController {
         return MODULE_ROOT + "reservationList";
     }//end registerPatient
 
+    @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN","ROLE_RESERVATION_USER"})
     @RequestMapping(value = "/processReservation", method = RequestMethod.POST)
     public String registerationProcess(@ModelAttribute ReservationHolder reservationHolder, BindingResult result, Model model, HttpServletRequest request) {
         // TODO Validate PatientHolder
@@ -143,7 +146,7 @@ public class ReservationController {
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///          TimeSlicing Loader
 //////////////////////////////////////////////////////////////////////////////////////////
-
+    @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN","ROLE_RESERVATION_USER","ROLE_INQUIRY_USER"})
     @RequestMapping(value = "/timeSlice/{date},{examineType}", method = RequestMethod.GET, produces = "application/json")
     public String slicingTimeForDate(@PathVariable("date") String dateString, @PathVariable("examineType") Integer examineTypeId, Model model) {
         ////////////////////////////////////////////////////////////        
@@ -164,6 +167,7 @@ public class ReservationController {
     }
     
     ////////////////////////////////////////////////////////
+    @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN","ROLE_RESERVATION_USER","ROLE_INQUIRY_USER"})
     @RequestMapping(value = "/examineCost/{patient},{examineType}", method = RequestMethod.GET, produces = "application/json")
     public String costForExamine(@PathVariable("patient") Integer patientId, @PathVariable("examineType") Integer examineTypeId, Model model) {
         ////////////////////////////////////////////////////////////
@@ -199,6 +203,7 @@ public class ReservationController {
     
 /////////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value = "/reservationElement/{date}", method = RequestMethod.GET, produces = "application/json")
+    @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN","ROLE_RESERVATION_USER","ROLE_INQUIRY_USER"})
     public String reservationListForDate(@PathVariable("date") String dateString, Model model) {
         ////////////////////////////////////////////////////////////
         Date currentDate = ODate.getDateFromString(dateString);
@@ -218,6 +223,7 @@ public class ReservationController {
     
     /////////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value = "/cancelReservation/{reservationId}", method = RequestMethod.GET)
+    @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN","ROLE_RESERVATION_USER"})
     public void cancelPatientReservation(@PathVariable("reservationId") Integer reservationId, Model model,HttpServletResponse response) throws IOException {
         /// Getting Reservation 
         boolean cancelled=reservationService.cancelReservation(reservationId);
@@ -230,6 +236,7 @@ public class ReservationController {
     }//cancelReservation process 
         /////////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value = "/confirmReservation/{reservationId}", method = RequestMethod.GET)
+    @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN","ROLE_RESERVATION_USER"})
     public void confirmPatientReservation(@PathVariable("reservationId") Integer reservationId, Model model,HttpServletResponse response) throws IOException {
         /// Getting Reservation 
         boolean confirmed=reservationService.confirmReservation(reservationId);

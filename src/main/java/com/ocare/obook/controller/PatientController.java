@@ -16,6 +16,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -48,6 +50,7 @@ public class PatientController {
     /******************************************************
      *   Patient List Process
     ******************************************************/    
+    @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN","ROLE_ENTRY_USER"})
     @RequestMapping(value = "/list")
     public String patientList(Model model){
         // return View         
@@ -72,6 +75,7 @@ public class PatientController {
       return MODULE_PATH+"patientTable";
     }//end fastSearchPatient 
     
+    @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN","ROLE_ENTRY_USER"})
     @RequestMapping(value = "/register")
     public String registerPatient(Model model){
         // Adding Data to Model
@@ -80,6 +84,7 @@ public class PatientController {
         return MODULE_PATH+"patient";
     }//end registerPatient
     
+    @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN","ROLE_ENTRY_USER"})
     @RequestMapping("/edit/{id}")
     public String updatePatientById(@PathVariable("id") Integer patientId, Model model, HttpServletRequest request) {
         // Get patient 
@@ -91,6 +96,7 @@ public class PatientController {
         return MODULE_PATH+"patient";
     }//end registerPatient
     
+    @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN","ROLE_ENTRY_USER"})
     @RequestMapping(value = "/process", method = RequestMethod.POST)
     public String registerationProcess(@ModelAttribute("patient")PatientHolder patientHolder,BindingResult result,Model model,HttpServletRequest request){
         // Check the Patient Mode
@@ -106,6 +112,7 @@ public class PatientController {
     /****************************************************************** 
     *    View Process
     ******************************************************************/
+    
     @RequestMapping("/view/{id}")
     public String viewPatientById(@PathVariable("id") Integer patientId, Model model, HttpServletRequest request) {
         // Get Patient Information
@@ -120,6 +127,7 @@ public class PatientController {
     /****************************************************************** 
     *   Delete Process
     ******************************************************************/
+    @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN","ROLE_ENTRY_USER"})
     @RequestMapping("/delete/{id}")
     public void deletePatientByCode(@PathVariable("id") Integer patientId, Model model, HttpServletRequest request,HttpServletResponse response) throws IOException {
         /// Getting List of Patients 
@@ -145,7 +153,7 @@ public class PatientController {
         **  Patient Data Popup 
     */
     ///////////////////////////////////////////////////////////////////////////////////
-    
+    @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN","ROLE_ENTRY_USER"})
     @RequestMapping(value = "/data/{patientId}", method = RequestMethod.GET, produces = "application/json")
     public String insurranceCompanyProfiles(@PathVariable("patientId") Integer patientId, Model model) {
        
