@@ -27,4 +27,6 @@ public interface RoleService {
     
     public Role getRoleByName(String roleName);
     
+    public List<Role> getAllNonAdminRoles();
+    
 }

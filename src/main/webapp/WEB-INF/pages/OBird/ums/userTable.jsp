@@ -19,12 +19,13 @@
                 <th style="font-size: 16px">Phone</th>
                 <th style="font-size: 16px">Active</th>
                 <th style="font-size: 16px">Profile</th>
-                <th><img src="<c:url value='/resources/images/add-sign.png'/>" id="AddNewInsurranceCompany" class="insurranceCompanyAddButton"/></th>
+                <th><img src="<c:url value='/resources/images/add-sign.png'/>" id="RegisterUser" class="insurranceCompanyAddButton"/></th>
             </tr>
         </thead>
         <tbody>
             <c:forEach items="${myUsers}" var="myUser" varStatus="counter">
                 <tr class="insurranceRow">
+                    <input type="hidden" name="userId" value="${myUser.id}"/>
                     <th>${counter.count}</th>
                     <td tabindex="1">${myUser.firstName} ${myUser.lastName}</td>
                     <td tabindex="2">${myUser.auth.userName}</td>

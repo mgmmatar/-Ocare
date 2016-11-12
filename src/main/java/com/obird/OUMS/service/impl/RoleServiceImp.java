@@ -52,5 +52,10 @@ public class RoleServiceImp implements RoleService{
     public Role getRoleByName(String roleName) {
         return roleDao.getRoleByName(roleName);
     }
+
+    @Override
+    public List<Role> getAllNonAdminRoles() {
+        return roleDao.getAllNonAdminRoles();
+    }
     
 }

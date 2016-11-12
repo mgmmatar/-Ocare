@@ -27,4 +27,6 @@ public interface RoleDao {
     
     public List<Role> getAllRoles();
     
+    public List<Role> getAllNonAdminRoles();
+    
 }

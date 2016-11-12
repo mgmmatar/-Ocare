@@ -14,20 +14,45 @@
 <span class="button b-close"><span class="popup_close_icon">X</span></span>
     
    
+    <div class="popupMyHeader">
         <c:choose>
             <c:when test="${register}">
-                    <span class="logo">Register Admin</span>
+                    <span class="logo">Register User</span>
             </c:when>   
             <c:otherwise>
                     <span class="logo">${myUser.firstName} ${myUser.middleName} ${myUser.lastName} Profile</span>
             </c:otherwise>
         </c:choose>
+        
+    </div> 
 
-    <form id="aboutChefForm" method="POST" action="/zmed/ums/admin/createOrUpdate" modelAttribute="userHolder" accept-charset="utf-8" >
+    <form id="aboutChefForm" method="POST" action="/zmed/ums/user/createOrUpdate" modelAttribute="userHolder" accept-charset="utf-8" >
     <input type="hidden" name="userId" value="${myUser.id}"/>
-    <input type="hidden" name="roleName" value="ADMIN"/>
     <div>
-    <img class="patientPopupAvatar" src="<c:url value='/resources/images/avatar.jpg'/>" />
+        <div class="patientDivContainer">
+            <img class="patientPopupAvatar" src="<c:url value='/resources/images/avatar.jpg'/>" />
+            <div class="patientLabelTitle">
+                    <label class="patientDataText" style="margin-top: 5px" > User Type : </label>
+                </div>
+
+                <div class="styled-select slate company">
+                    <select id="roleName" name="roleName" style="margin-left: 8px">
+                        <c:forEach items="${roles}" var="role">
+                            <option value="${role.name}">${role.displayName}</option>    
+                            <%-- <c:choose>
+                                    <c:when test="${company.nameEn eq patient.insuranceCompany.nameEn}">
+                                        <option value="${company.id}" selected="selected">${company.nameEn}</option>            
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${company.id}">${company.nameEn}</option>            
+                                    </c:otherwise>
+                                </c:choose>  --%>
+                        </c:forEach>
+                    </select>
+                </div>
+                
+        </div>   
+    
     
         <div class="patientDivContainer">
             <div class="patientLabelTitle">
@@ -46,7 +71,7 @@
                 <input type="text" name="lastName" placeholder="Last name" class="patientInputFieldDesign" style="width:158px!important;" required value="${myUser.lastName}"/>
             </div>
         </div>
-            
+        
         <div class="patientDivContainer">
             <div class="patientLabelTitle">
                 <label class="patientDataText"> UserName : </label>

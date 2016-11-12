@@ -123,8 +123,10 @@ public class UserHolder {
 
     @Override
     public String toString() {
-        return "UserHolder{" + "userId=" + userId + ", firstName=" + firstName + ", middleName=" + middleName + ", lastName=" + lastName + ", userName=" + userName + ", email=" + email + ", password=" + password + ", rePassword=" + rePassword + ", phoneNumber1=" + phoneNumber1 + ", phoneNumber2=" + phoneNumber2 + ", address=" + address + '}';
+        return "UserHolder{" + "userId=" + userId + ", roleName=" + roleName + ", firstName=" + firstName + ", middleName=" + middleName + ", lastName=" + lastName + ", userName=" + userName + ", email=" + email + ", password=" + password + ", rePassword=" + rePassword + ", phoneNumber1=" + phoneNumber1 + ", phoneNumber2=" + phoneNumber2 + ", address=" + address + '}';
     }
+
+    
     
     
 }

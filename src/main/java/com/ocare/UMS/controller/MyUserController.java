@@ -6,6 +6,8 @@
 
 package com.ocare.UMS.controller;
 
+import com.obird.OUMS.domain.Role;
+import com.obird.OUMS.service.RoleService;
 import com.ocare.UMS.domain.MyUser;
 import com.ocare.UMS.holder.UserHolder;
 import com.ocare.UMS.service.MyUserService;
@@ -32,6 +34,9 @@ public class MyUserController {
     
     @Autowired
     private MyUserService userService;
+    
+    @Autowired
+    private RoleService roleService;
     ////////////////////////////////////////////////////////////////////////////
     /*   
         * Admin Module *
@@ -102,5 +107,35 @@ public class MyUserController {
         // return AdminTable with Data Model
         return MODULE_PATH + "userTable";
     }//end loadAdminTable
+    
+    @RequestMapping(value = "/user/data/{userId}", method = RequestMethod.GET)
+    public String gettingUserProfile(@PathVariable("userId") Integer userId, Model model) {
+        // Check if the Request for Registeration or Editing Profile 
+        List<Role> roles=roleService.getAllNonAdminRoles();
+        
+        model.addAttribute("roles", roles);
+        
+        if(userId==0){
+            model.addAttribute("mode", "Register");
+            model.addAttribute("register", true);
+        }else{
+             MyUser myUser=userService.getUserById(userId);
+           
+             model.addAttribute("register", false);
+             model.addAttribute("myUser", myUser);
+             model.addAttribute("mode", "Save Changes");             
+        }//end Else If Block 
+        // return the User data 
+        return MODULE_PATH + "userData";
+    }
+    
+    @RequestMapping(value = "/user/createOrUpdate", method = RequestMethod.POST)
+    public String createUsers(@ModelAttribute("userHolder")UserHolder userHolder, Model model) {
+        // Check if the Request for Registeration or Editing Profile 
+        userService.registerOrUpdateUser(userHolder);
+        // return the User data 
+        return "redirect:/ums/user";
+    }
+    
     
 }

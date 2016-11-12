@@ -46,7 +46,54 @@
 
         <script type="text/javascript">
             $(document).ready(function() {
-              
+                
+        
+        
+                $(".container").on("click","#RegisterUser", function(e) { 
+                     // URL for insurrance Profile
+                    var profileURL = "/zmed/ums/user/data/"+0;
+                    // getting visit
+                    var request = $.ajax({
+                        url: profileURL,
+                        type: "GET",
+                        dataType: 'json',
+                        data: {
+                        },
+                        complete: function(data) {
+                            $('#userPopup').empty();
+                            // Filling Last Information
+                            $('#userPopup').append(data.responseText);
+                        }//end onComplete Method
+                     });/// end Ajax Call Request
+                     // Showing the Popup After Call
+                     $('#userPopup').bPopup();  
+                }); 
+                
+                ///////////////////////////////////////////////////////////////////
+                // Showing User Edit Popup
+                $(".container").on("click",".profiles", function(e) { 
+                    // delete Current Patient
+                    var userId=$(this).parents("tr").find('input[type="hidden"][name="userId"]').val();
+                     // URL for insurrance Profile
+                    var profileURL = "/zmed/ums/user/data/"+userId;
+                    // getting visit
+                    var request = $.ajax({
+                        url: profileURL,
+                        type: "GET",
+                        dataType: 'json',
+                        data: {
+                        },
+                        complete: function(data) {
+                            $('#userPopup').empty();
+                            // Filling Last Information
+                            $('#userPopup').append(data.responseText);
+                        }//end onComplete Method
+                     });/// end Ajax Call Request
+                     // Showing the Popup After Call
+                     $('#userPopup').bPopup();  
+                }); 
+                
+                
             });
         </script>
             
@@ -114,5 +161,10 @@
             </div><!--End Main Container-->
     </div><!--End Body Container-->
 
+    <!-- POPUP -->
+    <div id="userPopup" class="popupDesign popup">
+        <c:import  url="/ums/user/data/0" />
+    </div>
+    
   </body>      
 </html>
