@@ -28,6 +28,7 @@ public class Role {
     
     private Integer id;
     private String name;
+    private String displayName;
     private String description;
     private boolean enabled=true;
     private boolean deleted=false;
@@ -51,6 +52,15 @@ public class Role {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Column(name="displayName",nullable =true)
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
     @Column(name="description",nullable =true)
@@ -92,6 +102,7 @@ public class Role {
         this.deleted = deleted;
     }
 
+    
     @Override
     public String toString() {
         return "Role{" + "id=" + id + ", name=" + name + ", description=" + description + ", enabled=" + enabled + ", deleted=" + deleted +"}";

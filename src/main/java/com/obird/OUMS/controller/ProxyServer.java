@@ -46,8 +46,5 @@ public class ProxyServer {
         
         return redirectURL;
     }//end registerPatient
-    
-    
-    
-    
+   
 }

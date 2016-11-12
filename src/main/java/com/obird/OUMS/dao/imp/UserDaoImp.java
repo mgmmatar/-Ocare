@@ -41,12 +41,16 @@ public class UserDaoImp extends GenericDAO<User> implements UserDao{
 
     @Override
     public User getUserByUserName(final String userName) {
+    
+        System.out.println(">>>>> IN DAO");
         return getHibernateTemplate().execute(new HibernateCallback<User>() {
             @Override
             public User doInHibernate(Session sn) throws HibernateException {
                 Query query = sn.createQuery("select u from User u inner join u.auth a where a.userName =:userName");
                 query.setString("userName", userName);
-                return (User) query.uniqueResult();
+                User user=(User) query.uniqueResult();
+                System.out.println("%%%%%% "+user.toString());
+                return user;
             }
         });
     }

@@ -23,6 +23,8 @@ public interface RoleDao {
     
     public Role get(Integer roleId);
     
+    public Role getRoleByName(String roleName);
+    
     public List<Role> getAllRoles();
     
 }

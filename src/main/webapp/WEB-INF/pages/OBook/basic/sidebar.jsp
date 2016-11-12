@@ -96,8 +96,15 @@
                                        ">    
                             <li class=""><a><i class="fa fa-desktop"></i> <label class="menuText">Users</label> <span
                                     class="fa fa-chevron-down"></span></a>
+                                    
+                                <sec:authorize access="hasRole('SUPER_ADMIN')">    
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="/zmed/settings/examineType/list">Users</a>
+                                    <li><a href="/zmed/ums/admin">Admins</a>
+                                    </li>
+                                </ul>    
+                                </sec:authorize>
+                                <ul class="nav child_menu" style="display: none">
+                                    <li><a href="/zmed/ums/user">Users</a>
                                     </li>
                                 </ul>
                             </li>

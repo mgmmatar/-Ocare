@@ -62,6 +62,7 @@ public class UserServiceImp implements UserService , UserDetailsService{
 
     @Override
     public User getUserByUserName(String userName) {
+        System.out.println(">>>>> HERE");
         return userDao.getUserByUserName(userName);
     }
 
@@ -69,14 +70,15 @@ public class UserServiceImp implements UserService , UserDetailsService{
     @Transactional(readOnly=true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // Getting USer
-        System.out.println("User : "+username);
+        System.out.println(">>>>> User : "+username);
         User user = getUserByUserName(username);
+                System.out.println("Password : "+user.getAuth().getPassword());   
 		System.out.println("User : "+user.toString());
 		if(user==null){
 			System.out.println("User not found");
 			throw new UsernameNotFoundException("Username not found");
 		}
-			return new org.springframework.security.core.userdetails.User(user.getAuth().getUserName(), user.getAuth().getPassword(), 
+               	return new org.springframework.security.core.userdetails.User(user.getAuth().getUserName(), user.getAuth().getPassword(), 
 				 user.isActive(), true, true, true, getGrantedAuthorities(user));
     }//end loadUserByUserName
     

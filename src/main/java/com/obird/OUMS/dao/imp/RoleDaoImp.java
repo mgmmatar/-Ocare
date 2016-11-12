@@ -38,6 +38,18 @@ public class RoleDaoImp extends GenericDAO<Role> implements RoleDao{
             }
         });       
     }
+
+    @Override
+    public Role getRoleByName(final String roleName) {
+        return getHibernateTemplate().execute(new HibernateCallback<Role>() {
+            @Override
+            public Role doInHibernate(Session sn) throws HibernateException {
+                Query query = sn.createQuery("select r from Role r where r.name = :roleName");
+                query.setString("roleName", roleName);
+                return (Role)query.uniqueResult();
+            }
+        });
+    }
     
     
     

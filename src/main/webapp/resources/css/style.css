@@ -4354,6 +4354,10 @@ input.custom_save{
     cursor: pointer;
 }
 
+.userActive{
+    margin-left: 15px!important;
+}
+
 .patientLabelTitle{
     float: left; 
     //width:15%;
