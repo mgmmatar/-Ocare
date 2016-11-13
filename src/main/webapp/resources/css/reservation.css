@@ -171,7 +171,7 @@ a.ViewMore:hover {
 /// Adding Section of Price 
 
 @media (min-width: 992px)
-.col-md-3 {
+.col-md-3{
     width: 25%;
 }
 
