@@ -21,7 +21,6 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +44,12 @@ public class ReportsController {
     
     @Autowired
     private PatientService patientService;
+    
+    
+    @RequestMapping("/patient")
+    public String patientReport(Model model) {    
+        return MODULE_PATH+"patientReport";
+    }//end reservationReport
     
     @RequestMapping("/reservation/download")
     @ResponseBody
@@ -147,11 +152,6 @@ public class ReportsController {
     */    
 //////////////////////////////////////////////////////////////////////////////////////////////////////// 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    @RequestMapping("/patient")
-    public String patientReport(Model model) {    
-        return "patientReport";
-    }//end reservationReport
     
     @RequestMapping(value = "/searchPatientReport", method = RequestMethod.POST)
     public String searchPatientReport(@RequestParam(value="patientName",required = false) String patientName,
