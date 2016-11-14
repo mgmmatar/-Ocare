@@ -7,6 +7,7 @@
 package com.obird.OUMS.service.impl;
 
 import com.obird.OUMS.dao.UserDao;
+import com.obird.OUMS.domain.MyUserDetails;
 import com.obird.OUMS.domain.Role;
 import com.obird.OUMS.domain.User;
 import com.obird.OUMS.enums.UserType;
@@ -70,7 +71,6 @@ public class UserServiceImp implements UserService , UserDetailsService{
     @Transactional(readOnly=true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // Getting USer
-        System.out.println(">>>>> User : "+username);
         User user = getUserByUserName(username);
                 System.out.println("Password : "+user.getAuth().getPassword());   
 		System.out.println("User : "+user.toString());
@@ -78,8 +78,14 @@ public class UserServiceImp implements UserService , UserDetailsService{
 			System.out.println("User not found");
 			throw new UsernameNotFoundException("Username not found");
 		}
-               	return new org.springframework.security.core.userdetails.User(user.getAuth().getUserName(), user.getAuth().getPassword(), 
-				 user.isActive(), true, true, true, getGrantedAuthorities(user));
+                // Getting User Role 
+                String roles="";
+                for(Role role : user.getRoles()){
+			roles+=role.getDisplayName();
+		}
+                
+               	return new MyUserDetails(user.getAuth().getUserName(), user.getAuth().getPassword(), 
+				 user.isActive(), true, true, true, getGrantedAuthorities(user),user.getId(),user.getFirstName()+" "+user.getLastName(),roles);
     }//end loadUserByUserName
     
     

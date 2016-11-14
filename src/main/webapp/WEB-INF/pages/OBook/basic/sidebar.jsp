@@ -14,12 +14,12 @@
                 <!-- menu prile quick info -->
                 <div class="profile">
                     <div class="profile_pic">
-                        <img src="<c:url value='/resources/images/khaled.jpg'/>" alt="..." class="img-circle profile_img">
+                        <img src="<c:url value='/resources/images/avatar.jpg'/>" alt="..." class="img-circle profile_img">
                     </div>
                     <div class="profile_info">
                         <span>Welcome,</span>
 
-                        <h2>Khaled Mosaad</h2>
+                        <h2><sec:authentication property="principal.fullName"/></h2>
                     </div>
                 </div>
                 <!-- /menu prile quick info -->
@@ -30,7 +30,7 @@
                 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
                     <div class="menu_section">
-                        <h3>General</h3>
+                        <h3><sec:authentication property="principal.roleName"/></h3>
                         <ul class="nav side-menu">
                             
                         <sec:authorize access="hasRole('SUPER_ADMIN') 

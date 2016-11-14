@@ -113,6 +113,11 @@
                                 assignDefaultSearchBy("RESERVATION");
                         }//end if
                     });
+                    
+                     $(".container").on("click",".fullScreen", function(e) {
+                            alert("WWW");
+                       });
+                    
             });
     </script> 
     
