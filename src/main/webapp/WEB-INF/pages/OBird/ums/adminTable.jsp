@@ -47,10 +47,17 @@
                     <td tabindex="4">
                        <c:choose>
                             <c:when test="${myAdmin.active}">
-                                <input type="checkbox" class="userActive" checked>
+                                
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                <div class="slider round"></div>
+                                </label>
                             </c:when>
                             <c:otherwise>
-                                <input type="checkbox" class="userActive">
+                                <label class="switch">
+                                <input type="checkbox">
+                                <div class="slider round"></div>
+                                </label>
                             </c:otherwise>    
                         </c:choose> 
                     </td>
@@ -58,5 +65,5 @@
                     <th tabindex="5"><img src="<c:url value='/resources/images/delete-sign.png'/>" id="DeleteInsurranceCompany" class="insurranceCompanyDeleteButton"/></th>
                 </tr>
             </c:forEach>
-        </tbody>
+            </tbody>
     </table>

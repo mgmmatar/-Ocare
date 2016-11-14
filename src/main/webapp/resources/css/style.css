@@ -4453,12 +4453,13 @@ input.custom_save{
    border: 1px solid #ccc;
    font-size: 16px;
    height: 34px;
+   width: 200px;
 }
 
 .styled-select.slate.company{
    background: url(images/arrow2.jpg) no-repeat right center;
    height: 34px;
-   width: 120px;
+   width: 255px;
 }
 
 .patientPopupAvatar{
@@ -8022,5 +8023,136 @@ table.table_reword thead tr th{
     .stadium {
         height: 234px;
     }
+}
     
+    .switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 18px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #d8d9db;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: -5px;
+  bottom: 0px;
+  background-color: #ffffff;
+ -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color:  #4bd765;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 0px #5c6b7a;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(30px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 1px;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 10px;
+    box-shadow: 2px 2px 2px #dddddd;
+    border-radius: 300px;
+    z-index: 1;
+    border-width: 1px;
+    border-color: #dddddd;
+    border-style: solid;
+}
+
+
+.slider.round:before {
+  border-radius: 50%;
+}
+.slider.round:hover {
+      width: 100%; 
+     height: 100%; 
+     left: 0%; 
+     top: 0%; 
+    font-size: 33px;
+     padding-top: 0px; 
+    -webkit-box-shadow: 5px 5px 10px rgba(0,0,0,.3);
+    -o-box-shadow: 5px 5px 10px rgba(0,0,0,.3);
+    -moz-box-shadow: 5px 5px 10px rgba(0,0,0,.3);
+    box-shadow: 5px 5px 10px rgba(0,0,0,.3);
+    z-index: 2;
+    border-size: 10px;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+
+
+.styled-select.slate.usertype {
+    background: url(images/arrow2.jpg) no-repeat right center;
+    height: 34px;
+    width: 258px;
+    margin-left: 40px;
+
+}
+.styled-select.slate.usertype select {
+    -webkit-appearance: none;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    height: 34px;
+    width: 250px;
+}
+.styled-select.slate.month select {
+    -webkit-appearance: none;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    height: 34px;
+    width: 120px;
+}
+.styled-select.slate.day select {
+    -webkit-appearance: none;   
+    border: 1px solid #ccc;
+    font-size: 16px;
+    height: 34px;
+    width: 70px;
+}
+.styled-select.slate.year select {
+    -webkit-appearance: none;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    height: 34px;
+    width: 90px;
+}
+.styled-select.slate.company select {
+    -webkit-appearance: none;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    height: 34px;
+    width: 247px;
 }
