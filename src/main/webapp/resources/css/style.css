@@ -4459,7 +4459,7 @@ input.custom_save{
 .styled-select.slate.company{
    background: url(images/arrow2.jpg) no-repeat right center;
    height: 34px;
-   width: 120px;
+   width: 255px;
 }
 
 .patientPopupAvatar{
@@ -8110,4 +8110,42 @@ input:checked + .slider:before {
 .styled-select.slate.usertype {
     background: url(images/arrow2.jpg) no-repeat right center;
     height: 34px;
-    width: 208px;}
+    width: 258px;
+    margin-left: 40px;
+
+}
+.styled-select.slate.usertype select {
+    -webkit-appearance: none;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    height: 34px;
+    width: 250px;
+}
+.styled-select.slate.month select {
+    -webkit-appearance: none;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    height: 34px;
+    width: 120px;
+}
+.styled-select.slate.day select {
+    -webkit-appearance: none;   
+    border: 1px solid #ccc;
+    font-size: 16px;
+    height: 34px;
+    width: 70px;
+}
+.styled-select.slate.year select {
+    -webkit-appearance: none;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    height: 34px;
+    width: 90px;
+}
+.styled-select.slate.company select {
+    -webkit-appearance: none;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    height: 34px;
+    width: 247px;
+}
