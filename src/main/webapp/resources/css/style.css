@@ -4453,6 +4453,7 @@ input.custom_save{
    border: 1px solid #ccc;
    font-size: 16px;
    height: 34px;
+   width: 200px;
 }
 
 .styled-select.slate.company{
@@ -8106,3 +8107,7 @@ input:checked + .slider:before {
     -o-transform: rotate(0deg);
     transform: rotate(0deg);
 }
+.styled-select.slate.usertype {
+    background: url(images/arrow2.jpg) no-repeat right center;
+    height: 34px;
+    width: 208px;}

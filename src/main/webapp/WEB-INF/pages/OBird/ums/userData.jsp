@@ -29,13 +29,14 @@
     <form id="aboutChefForm" method="POST" action="/zmed/ums/user/createOrUpdate" modelAttribute="userHolder" accept-charset="utf-8" >
     <input type="hidden" name="userId" value="${myUser.id}"/>
     <div>
-        <div class="patientDivContainer">
-            <img class="patientPopupAvatar" src="<c:url value='/resources/images/avatar.jpg'/>" />
-            <div class="patientLabelTitle">
+        <div class="patientLabelTitle">
                     <label class="patientDataText" style="margin-top: 5px" > User Type : </label>
                 </div>
+        <div class="patientDivContainer">
+            <img class="patientPopupAvatar" src="<c:url value='/resources/images/avatar.jpg'/>" />
+            
 
-                <div class="styled-select slate company">
+                <div class="styled-select slate usertype">
                     <select id="roleName" name="roleName" style="margin-left: 8px">
                         <c:forEach items="${roles}" var="role">
                             <option value="${role.name}">${role.displayName}</option>    
