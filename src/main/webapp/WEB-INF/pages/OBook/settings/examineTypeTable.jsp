@@ -35,10 +35,16 @@
                                             <th tabindex="1">
                                                 <c:choose>
                                                     <c:when test="${examineType.defaultOne}">
-                                                        <input type="checkbox" class="defaultExamineTypeChecker" checked>
+                                                       <label class="switch">
+                                                           <input type="checkbox" class="defaultExamineTypeChecker" checked>
+                                                             <div class="slider round"></div>
+                                                                </label>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <input type="checkbox" class="defaultExamineTypeChecker">
+                                                        <label class="switch">
+                                    <input type="checkbox" class="defaultExamineTypeChecker" >
+                                <div class="slider round"></div>
+                                </label>
                                                     </c:otherwise>    
                                                 </c:choose>
                                                 

@@ -31,10 +31,16 @@
                                             <th tabindex="1">
                                                 <c:choose>
                                                     <c:when test="${reservationWay.defaultOne}">
-                                                        <input type="checkbox" class="defaultReservationWayChecker" checked>
+                                                       <label class="switch">
+                                                           <input type="checkbox" class="defaultReservationWayChecker" checked>
+                                                             <div class="slider round"></div>
+                                                                </label>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <input type="checkbox" class="defaultReservationWayChecker">
+                                                        <label class="switch">
+                                                           <input type="checkbox" class="defaultReservationWayChecker" >
+                                                             <div class="slider round"></div>
+                                                                </label>
                                                     </c:otherwise>    
                                                 </c:choose>
                                                 

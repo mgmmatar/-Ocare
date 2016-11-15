@@ -8024,6 +8024,14 @@ table.table_reword thead tr th{
         height: 234px;
     }
 }
+
+/* 
+/////////////////////////////////////////////////
+////////////////////////////////////////////
+Toggle  check box 
+///////////////////////////////////////////
+//////////////////////////////////////////////////
+                        */
     
     .switch {
   position: relative;
@@ -8112,13 +8120,19 @@ input:checked + .slider:before {
     -o-transform: rotate(0deg);
     transform: rotate(0deg);
 }
-
+/* 
+/////////////////////////////////////////////////
+////////////////////////////////////////////
+End  of  Toggle  check box 
+///////////////////////////////////////////
+//////////////////////////////////////////////////
+                        */
 
 .styled-select.slate.usertype {
     background: url(images/arrow2.jpg) no-repeat right center;
     height: 34px;
     width: 258px;
-    margin-left: 40px;
+    margin-left: 15px;
 
 }
 .styled-select.slate.usertype select {
@@ -8127,6 +8141,7 @@ input:checked + .slider:before {
     font-size: 16px;
     height: 34px;
     width: 250px;
+    
 }
 .styled-select.slate.month select {
     -webkit-appearance: none;
@@ -8155,4 +8170,26 @@ input:checked + .slider:before {
     font-size: 16px;
     height: 34px;
     width: 247px;
+}
+
+.userDivContainer{
+    height:100%; 
+    width:100%; 
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+.userPopupAvatar{
+    width: 128px;
+    height: 134px;
+    border-radius: 60%;
+    margin-top: 15px;
+    margin-left: 21px;
+    margin-bottom: 10px;
+}
+.userDataText{
+    font-size: 18px;
+    font-style: italic;
+    margin-top: 10px;
+    margin-left: 25px;
+    margin-right: 10px;
 }
