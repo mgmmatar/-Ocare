@@ -36,8 +36,8 @@
                         <sec:authorize access="hasRole('SUPER_ADMIN') 
                                        or hasRole('ADMIN')
                                        or hasRole('RESERVATION_USER')">
-                            <li class=""><a><i class="fa fa-home"></i> <label class="menuText">Home</label><span
-                                    class="fa fa-chevron-down"></span></a>
+                            <li class="" style="cursor: pointer"><a><i class="fa fa-home" style="cursor: pointer"></i> <label class="menuText" style="cursor: pointer">Home</label><span
+                                    class="fa fa-chevron-down" style="cursor: pointer"></span></a>
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="/zmed/reservation/list">Reservations</a>
                                     </li>
@@ -49,8 +49,8 @@
                         <sec:authorize access="hasRole('SUPER_ADMIN') 
                                        or hasRole('ADMIN')
                                        or hasRole('ENTRY_USER')">
-                            <li class=""><a><i class="fa fa-edit"></i> <label class="menuText">Patient </label><span
-                                    class="fa fa-chevron-down"></span></a>
+                            <li class="" style="cursor: pointer"><a><i class="fa fa-edit" style="cursor: pointer"></i> <label class="menuText" style="cursor: pointer">Patient </label><span
+                                    class="fa fa-chevron-down" style="cursor: pointer"></span></a>
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="/zmed/patient/list">Patient List</a>
                                     </li>
@@ -59,8 +59,8 @@
                         </sec:authorize>
                             
                         <sec:authorize access="hasRole('SUPER_ADMIN')">        
-                            <li class=""><a><i class="fa fa-desktop"></i> <label class="menuText">Settings</label> <span
-                                    class="fa fa-chevron-down"></span></a>
+                            <li class="" style="cursor: pointer"><a><i class="fa fa-desktop" style="cursor: pointer"></i> <label class="menuText" style="cursor: pointer">Settings</label> <span
+                                    class="fa fa-chevron-down" style="cursor: pointer"></span></a>
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="/zmed/settings/examineType/list">Examine Type</a>
                                     </li>
@@ -79,8 +79,8 @@
                                        or hasRole('ADMIN')
                                        ">    
                             
-                            <li class=""><a><i class="fa fa-desktop"></i> <label class="menuText">Reports</label> <span
-                                    class="fa fa-chevron-down"></span></a>
+                            <li class="" style="cursor: pointer"><a><i class="fa fa-desktop" style="cursor: pointer"></i> <label class="menuText" style="cursor: pointer">Reports</label> <span
+                                    class="fa fa-chevron-down" style="cursor: pointer"></span></a>
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="/zmed/settings/examineType/list">Patient Report</a>
                                     </li>
@@ -94,8 +94,8 @@
                         <sec:authorize access="hasRole('SUPER_ADMIN') 
                                        or hasRole('ADMIN')
                                        ">    
-                            <li class=""><a><i class="fa fa-desktop"></i> <label class="menuText">Users</label> <span
-                                    class="fa fa-chevron-down"></span></a>
+                            <li class="" style="cursor: pointer"><a><i class="fa fa-desktop" style="cursor: pointer"></i> <label class="menuText" style="cursor: pointer">Users</label> <span
+                                    class="fa fa-chevron-down" style="cursor: pointer"></span></a>
                                     
                                 
                                 <ul class="nav child_menu" style="display: none">

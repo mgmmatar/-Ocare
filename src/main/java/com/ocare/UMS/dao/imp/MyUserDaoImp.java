@@ -58,6 +58,47 @@ public class MyUserDaoImp extends GenericDAO<MyUser> implements MyUserDao{
         });
     }
 
+    @Override
+    public List<MyUser> getAdminsWithPattern(final String pattern) {
+            return getHibernateTemplate().execute(new HibernateCallback<List<MyUser>>() {
+            @Override
+            public List<MyUser> doInHibernate(Session sn) throws HibernateException {
+                Query query = sn.createQuery("select u from MyUser u inner join u.auth a inner join u.roles r where u.deleted =:deleted AND r.name = :roleName "+
+                        " and ( u.firstName like :firstName OR u.middleName like :middleName OR u.lastName like :lastName OR a.userName like :userName)");
+                query.setBoolean("deleted", false);
+                query.setString("roleName","ADMIN");
+                query.setString("firstName","%"+pattern+"%");
+                query.setString("middleName","%"+pattern+"%");
+                query.setString("lastName","%"+pattern+"%");
+                query.setString("userName","%"+pattern+"%");
+                List<MyUser> users= query.list();
+                //return result 
+                return users;
+            }
+        });
+    }
+
+    @Override
+    public List<MyUser> getUsersWithPattern(final String pattern) {
+        return getHibernateTemplate().execute(new HibernateCallback<List<MyUser>>() {
+            @Override
+            public List<MyUser> doInHibernate(Session sn) throws HibernateException {
+                Query query = sn.createQuery("select u from MyUser u inner join u.auth a inner join u.roles r where u.deleted =:deleted AND r.name <> :superAdminRole AND r.name <> :adminRole "+
+                        " and ( u.firstName like :firstName OR u.middleName like :middleName OR u.lastName like :lastName OR a.userName like :userName)");
+                        
+                query.setBoolean("deleted", false);
+                query.setString("superAdminRole","SUPER_ADMIN");
+                query.setString("adminRole","ADMIN");
+                query.setString("firstName","%"+pattern+"%");
+                query.setString("middleName","%"+pattern+"%");
+                query.setString("lastName","%"+pattern+"%");
+                query.setString("userName","%"+pattern+"%");
+                List<MyUser> users= query.list();
+                //return result 
+                return users;
+            }
+        });       
+    }
 
     
 }

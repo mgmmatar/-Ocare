@@ -11,7 +11,10 @@ import com.obird.OUMS.service.RoleService;
 import com.ocare.UMS.domain.MyUser;
 import com.ocare.UMS.holder.UserHolder;
 import com.ocare.UMS.service.MyUserService;
+import java.io.IOException;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -37,16 +41,17 @@ public class MyUserController {
     
     @Autowired
     private RoleService roleService;
-    ////////////////////////////////////////////////////////////////////////////
-    /*   
-        * Admin Module *
-    */
-    ////////////////////////////////////////////////////////////////////////////
+    
+    ///////////////////////////////////////////////////////////////////////////////
+    /*****************************************************************************
+    *           <   Admin MODULE  >
+    *****************************************************************************/
+    ///////////////////////////////////////////////////////////////////////////////
+    
     @Secured({"ROLE_SUPER_ADMIN"})
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminUsers(Model model) {
         //////////////////////////////////////////////////////////////
-        
         // returning Wanted Page
         return MODULE_PATH + "admin";
     }
@@ -62,7 +67,7 @@ public class MyUserController {
         return MODULE_PATH + "adminTable";
     }//end loadAdminTable
     
-    
+    @Secured({"ROLE_SUPER_ADMIN"})
     @RequestMapping(value = "/admin/data/{adminId}", method = RequestMethod.GET)
     public String gettingAdminProfile(@PathVariable("adminId") Integer adminId, Model model) {
         // Check if the Request for Registeration or Editing Profile 
@@ -81,6 +86,7 @@ public class MyUserController {
         return MODULE_PATH + "adminData";
     }
     
+    @Secured({"ROLE_SUPER_ADMIN"})
     @RequestMapping(value = "/admin/createOrUpdate", method = RequestMethod.POST)
     public String createAdmins(@ModelAttribute("userHolder")UserHolder userHolder, Model model) {
         // Check if the Request for Registeration or Editing Profile 
@@ -88,6 +94,57 @@ public class MyUserController {
         // return the User data 
         return "redirect:/ums/admin";
     }
+    
+    @Secured({"ROLE_SUPER_ADMIN"})
+    @RequestMapping(value = "/admin/activeOrDeactive", method = RequestMethod.POST)
+    public String activateDeactivateAdmin(@ModelAttribute("adminId") Integer adminId,@ModelAttribute("status") boolean status,Model model) {
+        // Update User Status
+        userService.activateOrDeactivateUser(adminId, status);
+        // Getting all Admins
+        List<MyUser> myAdmins =userService.getAllAdmins();
+        /// Adding Admins to View 
+        model.addAttribute("myAdmins", myAdmins);
+        // return AdminTable with Data Model
+        return MODULE_PATH + "adminTable";
+    }//end registerPatient
+    
+    @Secured({"ROLE_SUPER_ADMIN"})
+    @RequestMapping(value = "/admin/delete/{adminId}", method = RequestMethod.GET)
+    public void deleteAdmin(@PathVariable("adminId") Integer adminId,Model model,HttpServletResponse response) throws IOException {
+        // Update User Status
+        boolean deleted=userService.deleteUser(adminId);
+        
+        String done="true";
+        if(!deleted){
+             done="false";
+        }
+        ////////////////////////////////////////////////////////////
+        response.getWriter().write(done);
+    }//end 
+    
+    @Secured({"ROLE_SUPER_ADMIN"})
+    @RequestMapping(value = "/admin/search", method = {RequestMethod.GET, RequestMethod.POST})
+    public String searchForAdmin(@RequestParam(value="query", required=false) String query, Model model, HttpServletRequest request, HttpServletResponse response){
+        /// Getting List of Patients 
+        List<MyUser> myAdmins;
+        /// Check if There is Parameter for Filter
+        if(query!=null){
+            myAdmins =userService.getAdminsWithPattern(query);
+        }else{
+            myAdmins =userService.getAllAdmins();
+        }//end if-Else Block
+        /// Adding Admins to View 
+        model.addAttribute("myAdmins", myAdmins);
+        // return AdminTable with Data Model
+        return MODULE_PATH + "adminTable";
+    }//end fastSearchPatient 
+    
+    
+    ///////////////////////////////////////////////////////////////////////////////
+    /*****************************************************************************
+    *           <   USER MODULE  >
+    *****************************************************************************/
+    ///////////////////////////////////////////////////////////////////////////////
     
     @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN"})
     @RequestMapping(value = "/user", method = RequestMethod.GET)
@@ -108,6 +165,7 @@ public class MyUserController {
         return MODULE_PATH + "userTable";
     }//end loadAdminTable
     
+    @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN"})
     @RequestMapping(value = "/user/data/{userId}", method = RequestMethod.GET)
     public String gettingUserProfile(@PathVariable("userId") Integer userId, Model model) {
         // Check if the Request for Registeration or Editing Profile 
@@ -129,6 +187,7 @@ public class MyUserController {
         return MODULE_PATH + "userData";
     }
     
+    @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN"})
     @RequestMapping(value = "/user/createOrUpdate", method = RequestMethod.POST)
     public String createUsers(@ModelAttribute("userHolder")UserHolder userHolder, Model model) {
         // Check if the Request for Registeration or Editing Profile 
@@ -137,5 +196,47 @@ public class MyUserController {
         return "redirect:/ums/user";
     }
     
+    @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN"})
+    @RequestMapping(value = "/user/activeOrDeactive", method = RequestMethod.POST)
+    public String activateDeactivateUser(@ModelAttribute("userId") Integer userId,@ModelAttribute("status") boolean status,Model model) {
+        // Update User Status
+        userService.activateOrDeactivateUser(userId, status);
+        // Getting all System Admins
+        List<MyUser> myUsers =userService.getAllUsers();
+        /// Append Models
+        model.addAttribute("myUsers", myUsers);
+        // return AdminTable with Data Model
+        return MODULE_PATH + "userTable";
+    }//end registerPatient
+    
+    @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN"})
+    @RequestMapping(value = "/user/delete/{userId}", method = RequestMethod.GET)
+    public void deleteUser(@PathVariable("userId") Integer userId,Model model,HttpServletResponse response) throws IOException {
+        // Update User Status
+        boolean deleted=userService.deleteUser(userId);
+        
+        String done="true";
+        if(!deleted){
+             done="false";
+        }
+        ////////////////////////////////////////////////////////////
+        response.getWriter().write(done);
+    }//end registerPatient
+    
+    @RequestMapping(value = "/user/search", method = {RequestMethod.GET, RequestMethod.POST})
+    public String searchForUser(@RequestParam(value="query", required=false) String query, Model model, HttpServletRequest request, HttpServletResponse response){
+        /// Getting List of Patients 
+        List<MyUser> myUsers;
+        /// Check if There is Parameter for Filter
+        if(query!=null){
+            myUsers =userService.getUsersWithPattern(query);
+        }else{
+            myUsers =userService.getAllAdmins();
+        }//end if-Else Block
+        /// Adding Admins to View 
+        model.addAttribute("myUsers", myUsers);
+        // return AdminTable with Data Model
+        return MODULE_PATH + "userTable";
+    }//end fastSearchPatient 
     
 }

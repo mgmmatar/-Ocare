@@ -8,8 +8,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-   
-    <table id="mainTable" class="table table-striped" style="cursor: pointer;">
+     
+    <table id="userTable" class="table table-striped" style="cursor: pointer;">
         <thead>
             <tr>
                 <th style="font-size: 18px">#</th>
@@ -23,47 +23,62 @@
             </tr>
         </thead>
         <tbody>
-            <c:forEach items="${myUsers}" var="myUser" varStatus="counter">
-                <tr class="insurranceRow">
-                    <input type="hidden" name="userId" value="${myUser.id}"/>
-                    <th>${counter.count}</th>
-                    <td tabindex="1">${myUser.firstName} ${myUser.lastName}</td>
-                    <td tabindex="2">${myUser.auth.userName}</td>
-                    <td tabindex="3">ROLE</td>
-                    
-                    <c:choose>
-                        <c:when test="${not empty myUser.phoneNumber1}">
-                            <td tabindex="4">${myUser.phoneNumber1} </td>
-                        </c:when>
-                        <c:otherwise>
-                            <c:when test="${not empty myUser.phoneNumber2}">
-                                <td tabindex="4">${myUser.phoneNumber2} </td>
+           <c:choose>
+            <c:when test="${empty myUsers}">
+                <tr><td  colspan="8"><center><lable>No User Found</lable></center></td></tr>
+            </c:when>
+            <c:otherwise>    
+                <c:forEach items="${myUsers}" var="myUser" varStatus="counter">
+                    <tr class="insurranceRow">
+                        <input type="hidden" name="userId" value="${myUser.id}"/>
+                        <th>${counter.count}</th>
+                        <td tabindex="1">${myUser.firstName} ${myUser.lastName}</td>
+                        <td tabindex="2">${myUser.auth.userName}</td>
+                        <td tabindex="3">ROLE</td>
+
+                        <c:choose>
+                            <c:when test="${not empty myUser.phoneNumber1}">
+                                <td tabindex="4">${myUser.phoneNumber1} </td>
                             </c:when>
                             <c:otherwise>
-                                <td tabindex="4">Empty</td>
+                                <c:when test="${not empty myUser.phoneNumber2}">
+                                    <td tabindex="4">${myUser.phoneNumber2} </td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td tabindex="4">Empty</td>
+                                </c:otherwise>
                             </c:otherwise>
-                        </c:otherwise>
-                    </c:choose>
-                    
-                    <td tabindex="5">
-                       <c:choose>
-                            <c:when test="${myUser.active}">
-                               <label class="switch">
-                                    <input type="checkbox" checked>
-                                <div class="slider round"></div>
-                                </label>
-                            </c:when>
-                            <c:otherwise>
-                                <label class="switch">
-                                    <input type="checkbox" >
-                                <div class="slider round"></div>
-                                </label>
-                            </c:otherwise>    
-                        </c:choose> 
-                    </td>
-                    <th><a class="btn profiles" style="display: inline-table;">Profile</a></th>
-                    <th tabindex="6"><img src="<c:url value='/resources/images/delete-sign.png'/>" id="DeleteInsurranceCompany" class="insurranceCompanyDeleteButton"/></th>
-                </tr>
-            </c:forEach>
+                        </c:choose>
+
+                        <td tabindex="5">
+                           <c:choose>
+                                <c:when test="${myUser.active}">
+                                   <label class="switch">
+                                       <input type="checkbox" class="enableUser" checked>
+                                    <div class="slider round"></div>
+                                    </label>
+                                </c:when>
+                                <c:otherwise>
+                                    <label class="switch">
+                                        <input type="checkbox" class="enableUser" >
+                                    <div class="slider round"></div>
+                                    </label>
+                                </c:otherwise>    
+                            </c:choose> 
+                        </td>
+                        <th><a class="btn profiles" style="display: inline-table;">Profile</a></th>
+                        <th tabindex="6"><img src="<c:url value='/resources/images/delete-sign.png'/>" id="DeleteInsurranceCompany" class="insurranceCompanyDeleteButton"
+                                              data-ssd-confirm-trigger="remove"
+                                            data-ssd-confirm-message="Are you sure you wish to remove ${myUser.firstName} ${myUser.lastName}  ?<br />There is no undo!"
+                                            data-ssd-confirm-url="/zmed/ums/user/delete/${myUser.id}"
+                                            data-ssd-confirm-behaviour="reload"/>
+                        </th>
+                    </tr>
+                </c:forEach>
+             </c:otherwise>
+            </c:choose>    
         </tbody>
     </table>
+            
+    
+            

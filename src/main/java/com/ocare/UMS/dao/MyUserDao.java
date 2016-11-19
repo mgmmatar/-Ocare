@@ -26,5 +26,9 @@ public interface MyUserDao {
     public List<MyUser> getAllUsers();
     
     public List<MyUser> getAllAdmins();
+    
+    public List<MyUser> getAdminsWithPattern(String pattern);
+    
+    public List<MyUser> getUsersWithPattern(String pattern);
         
 }

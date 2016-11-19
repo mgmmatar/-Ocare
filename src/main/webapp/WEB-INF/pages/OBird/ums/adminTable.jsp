@@ -8,8 +8,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-   
-    <table id="mainTable" class="table table-striped" style="cursor: pointer;">
+
+    <table id="adminTable" class="table table-striped" style="cursor: pointer;">
         <thead>
             <tr>
                 <th style="font-size: 18px">#</th>
@@ -22,6 +22,11 @@
             </tr>
         </thead>
         <tbody>
+           <c:choose>
+            <c:when test="${empty myAdmins}">
+                <tr><td  colspan="8"><center><lable>No Admin Found</lable></center></td></tr>
+            </c:when>
+            <c:otherwise>
             <c:forEach items="${myAdmins}" var="myAdmin" varStatus="counter">
                 <tr class="insurranceRow">
                     <input type="hidden" name="userId" value="${myAdmin.id}"/>
@@ -49,21 +54,28 @@
                             <c:when test="${myAdmin.active}">
                                 
                                 <label class="switch">
-                                    <input type="checkbox" checked>
+                                    <input type="checkbox" class="enableUser" checked>
                                 <div class="slider round"></div>
                                 </label>
                             </c:when>
                             <c:otherwise>
                                 <label class="switch">
-                                <input type="checkbox">
+                                    <input type="checkbox" class="enableUser">
                                 <div class="slider round"></div>
                                 </label>
                             </c:otherwise>    
                         </c:choose> 
                     </td>
                     <th><a class="btn profiles" style="display: inline-table;">Profile</a></th>
-                    <th tabindex="5"><img src="<c:url value='/resources/images/delete-sign.png'/>" id="DeleteInsurranceCompany" class="insurranceCompanyDeleteButton"/></th>
+                    <th tabindex="5"><img src="<c:url value='/resources/images/delete-sign.png'/>" id="DeleteInsurranceCompany" class="insurranceCompanyDeleteButton deleteAdmin"
+                                        data-ssd-confirm-trigger="remove"
+                                        data-ssd-confirm-message="Are you sure you wish to remove ${myAdmin.firstName} ${myAdmin.lastName}  ?<br />There is no undo!"
+                                        data-ssd-confirm-url="/zmed/ums/admin/delete/${myAdmin.id}"
+                                        data-ssd-confirm-behaviour="reload"/>
+                    </th>
                 </tr>
             </c:forEach>
-            </tbody>
+         </c:otherwise> 
+        </c:choose>    
+      </tbody>
     </table>

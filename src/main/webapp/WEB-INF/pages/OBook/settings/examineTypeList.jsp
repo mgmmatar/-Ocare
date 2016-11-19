@@ -104,11 +104,13 @@
                             examineTypeID:examineTypeID
                         },
                         complete: function(data) {
-                              $('.panel-body').empty();
+                          setTimeout(function () { 
+                            $('.panel-body').empty();
                             // Draw New Search Results
                             $('.panel-body').append(data.responseText);
                             ///// Adding the Action Again 
                             $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).examineTypeEditable().find('td:first').focus();            
+                          }, 200);   
                         }//end Complete Function
                     });
                 }//end if Condition 

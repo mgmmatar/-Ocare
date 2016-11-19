@@ -4255,6 +4255,18 @@ input.custom_save{
     cursor: pointer;
 }
 
+.listSearchBar{
+    width: 60%;
+    border-radius: 10px;
+    outline: 0;
+    border: 1px solid #aca9a9;
+    height: 34px;
+    color: #000;
+    padding: 6px 12px;
+    font-size: 15px;
+    line-height: 1.42857143;
+}
+
 .confirmMessage{
     font-size: 22px;
     line-height: 1.6;

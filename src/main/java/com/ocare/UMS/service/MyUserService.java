@@ -26,5 +26,12 @@ public interface MyUserService {
     
     public void registerOrUpdateUser(UserHolder userHolder);
     
+    public boolean activateOrDeactivateUser(Integer myUserId,boolean status);
+    
+    public boolean deleteUser(Integer myUserId);
+    
+    public List<MyUser> getAdminsWithPattern(String pattern);
+    
+    public List<MyUser> getUsersWithPattern(String pattern);
     
 }

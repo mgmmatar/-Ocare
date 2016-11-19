@@ -20,8 +20,10 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/reservation.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/ssd-confirm.css'/>">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/font-awesome.min.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/popup.css'/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/paging.css'/>">
+        
         <!---  JS Scripts Files --->
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
@@ -31,6 +33,7 @@
         <script type="text/javascript" src="<c:url value='/resources/js/underscore.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery.ssd-confirm.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery.bpopup.min.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/paging.js'/>"></script>
         <!-- NEW -->
         <script type="text/javascript" src="<c:url value='/resources/js/nprogress.js'/>"></script>
         <script>
@@ -42,12 +45,18 @@
             <link href="<c:url value='/resources/css/animation.css'/>" rel="stylesheet" />
             <!-- Google Fonts-->
             <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-
-
-        <script type="text/javascript">
-            $(document).ready(function() {
                 
-        
+             <script type="text/javascript">
+            $(document).ready(function() {
+                  
+                var maxResult=5;  
+                  
+                $('#adminTable').paging({
+                    limit:maxResult,
+                    rowDisplayStyle: 'block'
+                });    
+                
+                $('[data-ssd-confirm-trigger]').ssdConfirm();
         
                 $(".container").on("click","#RegisterAdmin", function(e) { 
                      // URL for insurrance Profile
@@ -92,8 +101,76 @@
                      // Showing the Popup After Call
                      $('#patientDataPopup').bPopup();  
                 }); 
+                /// Enable and Disable the USer 
+                ////////////////////////////////////////////////////////////
+                /**********************************************************
+                 *    Enable and Disable the User 
+                 *********************************************************/
+                ////////////////////////////////////////////////////////////
+                $(".container").on("click",".enableUser", function(e) {
+                    // Getting Admin
+                    var adminId = $(this).closest("tr").find('input[type="hidden"][name="userId"]').val();
+                    var status=false;
+                    /// Check Operation
+                    if($(this).is(":checked")){
+                        status=true;
+                    }//end if Condition
+                    //// Sending Activation , De-Activation
+                    var request = $.ajax({
+                            url: "/zmed/ums/admin/activeOrDeactive",
+                            type: "POST",
+                            dataType: 'json',
+                        data: {  
+                                adminId:adminId,
+                                status:status
+                        },
+                        complete: function(data) {
+                            setTimeout(function () { 
+                                  $('.myDataTable').empty();
+                                //Draw New Search Results
+                                $('.myDataTable').append(data.responseText);                                
+                                $('#adminTable').paging({
+                                        limit:maxResult,
+                                        rowDisplayStyle: 'block',
+                                    });    
                 
+                                $('[data-ssd-confirm-trigger]').ssdConfirm();        
+                              }, 200);
+                        }//end Complete Function
+                    });
+                });
                 
+                //////////////////////////////////////////////////////////////
+                /*
+                 *  Search for Admin
+                 */
+                //////////////////////////////////////////////////////////////
+                $( "#searchForAdmin" ).keyup(function() {
+                    var searchValue=$(this).val();
+                    /// Reloading Patient Table Result
+                    var request = $.ajax({
+                        url: "/zmed/ums/admin/search",
+                        type: "POST",
+                        dataType: 'json',
+                        data: {
+                            query:searchValue
+                        },
+                        complete: function(data) {
+                            $('.myDataTable').empty();
+                            // Draw New Search Results
+                            $('.myDataTable').append(data.responseText);
+                            ///// Adding the Action Again 
+                            $('#adminTable').paging({
+                                        limit:maxResult,
+                                        rowDisplayStyle: 'block',
+                                    });    
+                
+                            $('[data-ssd-confirm-trigger]').ssdConfirm();
+                            // Adding New examineType 
+                        }//end Complete Function
+                    });
+                 });
+                        
             });
         </script>
             
@@ -125,7 +202,7 @@
                     </div>
                     <!-- /. ROW  -->
                     <div id="notifaction" class="alert alert-success hidden" role="alert">Operation done successfully</div>
-                    <div class="row expandUp">
+                    <div class="row">
                         
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="panel panel-default">
@@ -134,7 +211,12 @@
                                 </div>
                                      <!--- List of Admins --->
                                     <div class="panel-body">
-                                           <c:import  url="/ums/admin/loadAdminTable" />     
+                                           <center>
+                                                <input type="text" id="searchForAdmin" name="Search" class="listSearchBar" placeholder="Filter Admins"  required />    
+                                            </center>
+                                            <div class="myDataTable">     
+                                                <c:import  url="/ums/admin/loadAdminTable" />     
+                                           </div>
                                     </div>
                             </div>        
                             <!-- Widget -->
@@ -162,6 +244,40 @@
     <div id="patientDataPopup" class="popupDesign popup">
         <c:import  url="/ums/admin/data/0" />
     </div>
+    
+    <!-- Confirm Delete Popup -->
+    <div data-ssd-confirm-overlay></div>
+    
+    <div data-ssd-confirm>
+        
+    <div data-ssd-confirm-block="remove">
+
+        <p class="confirmMessage" data-ssd-confirm-content></p>
+
+        <nav>
+
+            <span data-button-wrapper>
+
+                <span
+                    class="alert confirmMessageYesButton deletePatient"
+                    data-ssd-confirm-yes
+                    data-trigger
+                >YES</span>
+
+                <span
+                    class="small alert disabled button hide"
+                    data-processing
+                ><i class="fa fa-spinner fa-spin fa-fw"></i></span>
+
+            </span>
+
+            <span class="small confirmMessageNoButton" data-ssd-confirm-no>NO</span>
+
+        </nav>
+
+    </div>
+
+</div>
     
   </body>      
 </html>

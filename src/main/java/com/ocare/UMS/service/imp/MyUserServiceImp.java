@@ -113,5 +113,49 @@ public class MyUserServiceImp implements MyUserService{
         // return result 
         return myUser;
     }//end myUser
+
+    @Override
+    public boolean activateOrDeactivateUser(Integer myUserId, boolean status) {
+        // Init Boolean 
+        boolean isActivated=false;
+        // Getting User
+        MyUser myUser=getUserById(myUserId);
+        if(myUser!=null){
+            // Assing User Status 
+            myUser.setActive(status);
+            myUserDao.update(myUser);
+            /// Assign the Service as Done
+            isActivated=true;
+        }//end if condition
+        // return result 
+        return isActivated;
+    }
+
+    @Override
+    public boolean deleteUser(Integer myUserId) {
+       // Init Boolean 
+        boolean isDeleted=false;
+        // Getting User
+        MyUser myUser=getUserById(myUserId);
+        if(myUser!=null){
+            // Assing User Status 
+            myUser.setDeleted(true);
+            myUserDao.update(myUser);
+            /// Assign the Service as Done
+            isDeleted=true;
+        }//end if condition
+        // return result 
+        return isDeleted;
+    }
+
+    @Override
+    public List<MyUser> getAdminsWithPattern(String pattern) {
+        return myUserDao.getAdminsWithPattern(pattern);
+    }
+
+    @Override
+    public List<MyUser> getUsersWithPattern(String pattern) {
+        return myUserDao.getUsersWithPattern(pattern);
+    }
     
 }
