@@ -25,4 +25,6 @@ public interface InsuranceCompanyDao {
     
     public List<InsuranceCompany> getAllInsuranceCompanys();
     
+    public List<InsuranceCompany> getInsurranceCompaniesWithPattern(String pattern);
+    
 }

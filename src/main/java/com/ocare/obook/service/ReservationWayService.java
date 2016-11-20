@@ -27,5 +27,7 @@ public interface ReservationWayService {
     public ReservationWay getDefaultReservationWay();
     
     public void assignDefaultReservationWay(Integer reservationWayId);
+    
+    public List<ReservationWay> getReservationWaysWithPattern(String pattern);
 
 }

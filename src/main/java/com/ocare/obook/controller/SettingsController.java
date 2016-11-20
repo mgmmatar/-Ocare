@@ -5,9 +5,11 @@
  */
 package com.ocare.obook.controller;
 
+import com.ocare.UMS.domain.MyUser;
 import com.ocare.obook.domain.ExamineType;
 import com.ocare.obook.domain.InsuranceCompany;
 import com.ocare.obook.domain.InsuranceProfile;
+import com.ocare.obook.domain.Patient;
 import com.ocare.obook.domain.ReservationWay;
 import com.ocare.obook.domain.WeekDay;
 import com.ocare.obook.holder.WorkingDayHolder;
@@ -32,6 +34,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -102,18 +105,17 @@ public class SettingsController {
         return PACKAGE_ROOT + "examineTypeTable";
     }//end registerPatient
 
-    @RequestMapping(value = "/examineType/delete", method = RequestMethod.POST)
-    public String deleteExamineType(@ModelAttribute("examineTypeID") Integer examineTypeID, BindingResult result, Model model, HttpServletRequest request) {
+    @RequestMapping(value = "/examineType/delete/{examineTypeId}", method = RequestMethod.GET)
+    public void deleteExamineType(@PathVariable("examineTypeId") Integer examineTypeId,Model model, HttpServletRequest request,HttpServletResponse response) throws IOException {
         // Getting Examine Type
-        ExamineType examineType = examineTypeService.get(examineTypeID);
+        ExamineType examineType = examineTypeService.get(examineTypeId);
         // Deleting the ExamineType
         examineTypeService.delete(examineType);
         // Getting all ExamineTypes
-        List<ExamineType> examineTypes = examineTypeService.getAllExamineTypes();
-        /// Append Models
-        model.addAttribute("examineTypes", examineTypes);
-        // return Back to List 
-        return PACKAGE_ROOT + "examineTypeTable";
+        /// Getting List of Patients 
+        String done="true";
+        // open List        
+        response.getWriter().write(done);
     }//end registerPatient
     
     @RequestMapping(value = "/examineType/defaultOne", method = RequestMethod.POST)
@@ -137,7 +139,6 @@ public class SettingsController {
         request.setCharacterEncoding("utf-8");
 
         ExamineType examineType = examineTypeService.get(examineTypeID);
-            System.out.println("?????????????? "+changedValue.getBytes("UTF-8"));
         /// chossing the result
         switch(changedColumn){
             case 2:
@@ -169,6 +170,24 @@ public class SettingsController {
         ////////////////////////////////////////////////////////////
         response.getWriter().write(done);
     }//cancelReservation process 
+    
+     @RequestMapping(value = "/examineType/search", method = {RequestMethod.GET, RequestMethod.POST})
+    public String searchForExamineType(@RequestParam(value="query", required=false) String query, Model model, HttpServletRequest request, HttpServletResponse response){
+        /// Getting List of Patients 
+        List<ExamineType> examineTypes;
+        /// Check if There is Parameter for Filter        
+        if(!query.isEmpty()){
+            examineTypes =examineTypeService.getExamineTypesWithPattern(query);
+        }else{
+            examineTypes =examineTypeService.getAllExamineTypes();
+        }//end if-Else Block
+        // Getting all ExamineTypes
+        /// Append Models
+        model.addAttribute("examineTypes", examineTypes);
+        // Getting List
+        return PACKAGE_ROOT + "examineTypeTable";
+    }//end fastSearchPatient
+    
    ////////////////////////////////////////////////////////////////////////////////////
    /*
      * Settings -- Reservation Way Module
@@ -202,19 +221,6 @@ public class SettingsController {
         return PACKAGE_ROOT + "reservationWaysTable";
     }//end registerPatient
 
-    @RequestMapping(value = "/reservationWay/delete", method = RequestMethod.POST)
-    public String deleteReservationWayId(@ModelAttribute("reservationWayID") Integer reservationWayID, BindingResult result, Model model, HttpServletRequest request) {
-        // Getting ReservationWay
-        ReservationWay reservationWay = reservationWayService.get(reservationWayID);
-        // Deleting ReservationWay
-        reservationWayService.delete(reservationWay);
-        // Getting all reservationWays
-        List<ReservationWay> reservationWays = reservationWayService.getAllReservationWays();
-        /// Append Models
-        model.addAttribute("reservationWays", reservationWays);
-        // Getting List
-        return PACKAGE_ROOT + "reservationWaysTable";
-    }//end registerPatient
     
     @RequestMapping(value = "/reservationWay/defaultOne", method = RequestMethod.POST)
     public String assignDefaultReservationWay(@ModelAttribute("reservationWayID") Integer reservationWayID, BindingResult result, Model model, HttpServletRequest request) {
@@ -261,7 +267,35 @@ public class SettingsController {
         response.getWriter().write(done);
     }//cancelReservation process 
 
+    @RequestMapping(value = "/reservationWay/search", method = {RequestMethod.GET, RequestMethod.POST})
+    public String searchForReservationWay(@RequestParam(value="query", required=false) String query, Model model, HttpServletRequest request, HttpServletResponse response){
+        /// Getting List of Patients 
+        List<ReservationWay> reservationWays;
+        /// Check if There is Parameter for Filter        
+        if(!query.isEmpty()){
+            reservationWays = reservationWayService.getReservationWaysWithPattern(query);
+        }else{
+            reservationWays = reservationWayService.getAllReservationWays();
+        }//end if-Else Block
+        /// Append Models
+        model.addAttribute("reservationWays", reservationWays);
+        // Getting List
+        return PACKAGE_ROOT + "reservationWaysTable";
+    }//end fastSearchPatient
     
+    
+    @RequestMapping(value = "/reservationWay/delete/{reservationWayId}", method = RequestMethod.GET)
+    public void deleteReservationWay(@PathVariable("reservationWayId") Integer reservationWayId,Model model, HttpServletRequest request,HttpServletResponse response) throws IOException {
+        // Getting Examine Type
+        ReservationWay reservationWay = reservationWayService.get(reservationWayId);
+        // Deleting the ExamineType
+        reservationWayService.delete(reservationWay);
+        // Getting all ExamineTypes
+        /// Getting List of Patients 
+        String done="true";
+        // open List        
+        response.getWriter().write(done);
+    }//end registerPatient
     ////////////////////////////////////////////////////////////////////////////////////
    /*
      * Settings -- Insurrance Company Module
@@ -308,6 +342,19 @@ public class SettingsController {
         model.addAttribute("insuranceCompanys", insuranceCompanys);
         // Getting List
         return PACKAGE_ROOT + "insurranceCompanyTable";
+    }//end registerPatient
+    
+    @RequestMapping(value = "/insurrance/delete/{companyId}", method = RequestMethod.GET)
+    public void deleteInsurranceCompany(@PathVariable("companyId") Integer companyId,Model model, HttpServletRequest request,HttpServletResponse response) throws IOException {
+        // Getting Examine Type
+        InsuranceCompany insuranceCompany = insuranceCompanyService.get(companyId);
+        // Deleting the ExamineType
+        insuranceCompanyService.delete(insuranceCompany);
+        // Getting all ExamineTypes
+        /// Getting List of Patients 
+        String done="true";
+        // open List        
+        response.getWriter().write(done);
     }//end registerPatient
     
     @RequestMapping(value = "/insurranceCompanyEditable/{insurranceCompanyID},{changedColumn},{changedValue}", method = RequestMethod.GET)
@@ -426,6 +473,22 @@ public class SettingsController {
         // returning Wanted Page
         response.getWriter().write(done);
     }
+    
+    @RequestMapping(value = "/insurrance/search", method = {RequestMethod.GET, RequestMethod.POST})
+    public String searchForInsurrance(@RequestParam(value="query", required=false) String query, Model model, HttpServletRequest request, HttpServletResponse response){
+        /// Getting List of Patients 
+        List<InsuranceCompany> insuranceCompanys;
+        /// Check if There is Parameter for Filter        
+        if(!query.isEmpty()){
+            insuranceCompanys = insuranceCompanyService.getInsurranceCompaniesWithPattern(query);
+        }else{
+            insuranceCompanys = insuranceCompanyService.getAllInsuranceCompanys();
+        }//end if-Else Block
+        /// Append Models
+        model.addAttribute("insuranceCompanys", insuranceCompanys);
+        // Getting List
+        return PACKAGE_ROOT + "insurranceCompanyTable";
+    }//end fastSearchPatient
     ///////////////////////////////////////////////////
    /*
      * Settings -- Working Days Module

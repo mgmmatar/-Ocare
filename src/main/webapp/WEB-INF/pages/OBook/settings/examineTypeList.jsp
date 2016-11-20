@@ -21,6 +21,9 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/owl.theme.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/reservation.css'/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/font-awesome.min.css'/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/paging.css'/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/ssd-confirm.css'/>">
 
         <!---  JS Scripts Files --->
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
@@ -29,12 +32,10 @@
         <script type="text/javascript" src="<c:url value='/resources/js/squad.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/underscore.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
-        
         <script type="text/javascript" src="<c:url value='/resources/js/mindmup-editabletable.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/examineType-editable.js'/>"></script>
-        
-        
-
+        <script type="text/javascript" src="<c:url value='/resources/js/paging.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery.ssd-confirm.js'/>"></script>
         <!-- NEW -->
         <script type="text/javascript" src="<c:url value='/resources/js/nprogress.js'/>"></script>
         <script>
@@ -59,34 +60,20 @@
 	</style>        
         <script type="text/javascript">
             $(document).ready(function() {
-                var newClicked=0;
-             //$('#mainTable').editableTableWidget().examineTypeEditable().find('td:first').focus();
-             //  $('#mainTable').editableTableWidget({ editor: $('<input>'), preventColumns: [ 1, 7 ] }).examineTypeEditable().find('td:first').focus();            
-            $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).examineTypeEditable().find('td:first').focus();            
-              //////////////////////////////////////////////////////////////////////////////////
-              //// Delete Operation 
-              //////////////////////////////////////////////////////////////////////////////////
-              $(".container").on("click",".examineTypeDeleteButton", function(e) {
-                   var examineTypeID = $(this).closest("tr").find('input[type="hidden"][name="examineTypeId"]').val();
-                   // Sending Delete Request 
-                    var b;
-                    var request = $.ajax({
-                        url: "/zmed/settings/examineType/delete",
-                        type: "POST",
-                        dataType: 'json',
-                        data: {
-                            examineTypeID:examineTypeID
-                        },
-                        complete: function(data) {
-                            $('.panel-body').empty();
-                            // Draw New Search Results
-                            $('.panel-body').append(data.responseText);
-                            ///// Adding the Action Again 
-                            $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).examineTypeEditable().find('td:first').focus();            
-                            // Adding New examineType 
-                        }//end Complete Function
-                    });
-                }); 
+             // New Clicked    
+             var newClicked=0;
+             
+             // Max Result 
+             var maxResult=5;  
+             
+             $('#examineTypeTable').paging({
+                    limit:maxResult,
+                    rowDisplayStyle: 'block'
+              });    
+                
+             $('[data-ssd-confirm-trigger]').ssdConfirm();
+             
+             $('#examineTypeTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).examineTypeEditable();            
              //////////////////////////////////////////////////////////////////////////////////////////
              // Assign Default ExamineType
              ////////////////////////////////////////////////////////////////////////////////
@@ -104,13 +91,20 @@
                             examineTypeID:examineTypeID
                         },
                         complete: function(data) {
-                          setTimeout(function () { 
-                            $('.panel-body').empty();
-                            // Draw New Search Results
-                            $('.panel-body').append(data.responseText);
-                            ///// Adding the Action Again 
-                            $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).examineTypeEditable().find('td:first').focus();            
-                          }, 200);   
+                            setTimeout(function () { 
+                              $('.myDataTable').empty();
+                              // Draw New Search Results
+                              $('.myDataTable').append(data.responseText);
+                              ///// Adding the Action Again 
+                              $('#examineTypeTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).examineTypeEditable();            
+                              $('#examineTypeTable').paging({
+                                      limit:maxResult,
+                                      rowDisplayStyle: 'block'
+                                });    
+
+                               $('[data-ssd-confirm-trigger]').ssdConfirm();
+
+                            }, 200);   
                         }//end Complete Function
                     });
                 }//end if Condition 
@@ -121,7 +115,7 @@
            $(".container").on("click","#AddNewExamineType", function(e) {
                if(newClicked===0){
                // Draw the New Row     
-               $('#mainTable').append("<tr id='newExamine'>"
+               $('#examineTypeTable').append("<tr id='newExamine'>"
                             +"<th> # </th>"
                             +"<td id='nameAr'> </td>"
                             +"<td id='nameEn'> </td>"
@@ -129,10 +123,22 @@
                             +"<td id='cost'> </td>"
                             +"<td id='period'> </td>"
                             +"<th id='isDefault'> <input type='checkbox' name='examineDefault' value='default'></th>"
+                            +"<th id='isDefault'> <label class='switch'>"
+                            +"<input type='checkbox' class='defaultExamineTypeChecker' checked>"
+                            +"<div class='slider round'></div>"
+                            +"</label>"
+                            +"</th>"
                             +"<th><img src='<c:url value='/resources/images/save-icon.png'/>' id='saveNewExamine' class='examineTypeCancelButton'/> <img src='<c:url value='/resources/images/cancel-icon.png'/>' id='cancelAddExamine' class='examineTypeCancelButton'/></th>"
                             +"</tr>");
                             // refresh Table
-                            $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).examineTypeEditable().find('td:last').focus();            
+                                $('#examineTypeTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).examineTypeEditable();
+                                $('#examineTypeTable').paging({
+                                        limit:maxResult,
+                                        rowDisplayStyle: 'block'
+                                  });    
+
+                                $('[data-ssd-confirm-trigger]').ssdConfirm();
+                                
                                 $('#saveNewExamine').on("click", function(e) {
                                     var nameAr=$('#nameAr').text();
                                     var nameEn=$('#nameEn').text();
@@ -152,11 +158,17 @@
                                                 estimatedPeriod:period
                                             },
                                             complete: function(data) {
-                                                $('.panel-body').empty();
+                                                $('.myDataTable').empty();
                                                 // Draw New Search Results
-                                                $('.panel-body').append(data.responseText);
+                                                $('.myDataTable').append(data.responseText);
                                                 ///// Adding the Action Again 
-                                                $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).examineTypeEditable().find('td:first').focus();             
+                                                $('#examineTypeTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).examineTypeEditable();             
+                                                $('#examineTypeTable').paging({
+                                                        limit:maxResult,
+                                                        rowDisplayStyle: 'block'
+                                                  });    
+
+                                                 $('[data-ssd-confirm-trigger]').ssdConfirm();
                                                 /// Rising Flag
                                                 newClicked = 0 ; 
                                                 
@@ -174,9 +186,38 @@
                                     // Flag that Add Button Clicked
                                     newClicked=1;
                         }//end if  
-                    });
-               
+                    });               
                //setInterval(function() { document.body.scrollIntoView() = document.body.scrollHeight; }, 50);
+               /////////////////////////////////////////
+               /// Search 
+               $("#searchForExamine").keyup(function() {
+                    var searchValue=$(this).val();
+                    /// Reloading Patient Table Result
+                    var request = $.ajax({
+                        url: "/zmed/settings/examineType/search",
+                        type: "POST",
+                        dataType: 'json',
+                        data: {
+                            query:searchValue
+                        },
+                        complete: function(data) {
+                            $('.myDataTable').empty();
+                            // Draw New Search Results
+                            $('.myDataTable').append(data.responseText);
+                            ///// Adding the Action Again 
+                            $('#examineTypeTable').paging({
+                                        limit:maxResult,
+                                        rowDisplayStyle: 'block',
+                                    });    
+                
+                            $('[data-ssd-confirm-trigger]').ssdConfirm();
+                            
+                            $('#examineTypeTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).examineTypeEditable();
+                            // Adding New examineType 
+                        }//end Complete Function
+                    });
+                 });
+               
                document.body.scrollIntoView();
                
             });
@@ -213,21 +254,24 @@
                     </div>
                     <!-- /. ROW  -->
                     <div id="notifaction" class="alert alert-success hidden" role="alert">Operation done successfully</div>
-                    <div class="row expandUp">
+                    <div class="row">
                         
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                    Examine Type List
                                 </div>
-          
-                                     <!---Examine Type List --->
-                                <div class="panel-body">
-                                    <c:import  url="/settings/examineType/loadExamineTable" />
-                                </div>
-                                    
-                            </div>   
-                            
+                                    <!--- List of Admins --->
+                                    <div class="panel-body">
+                                           <center>
+                                                <input type="text" id="searchForExamine" name="Search" class="listSearchBar" placeholder="Filter Examine Types"  required />    
+                                            </center>
+                                            <div class="myDataTable">     
+                                                <c:import  url="/settings/examineType/loadExamineTable" />
+                                           </div>
+                                    </div>
+                            </div>    
                             
                             <!-- Widget -->
                             <%@include file="../basic/widgets.jsp" %>
@@ -256,5 +300,39 @@
 
     </div><!--End Body Container-->
           
+    <!-- Confirm Delete Popup -->
+    <div data-ssd-confirm-overlay></div>
+    
+    <div data-ssd-confirm>
+        
+    <div data-ssd-confirm-block="remove">
+
+        <p class="confirmMessage" data-ssd-confirm-content></p>
+
+        <nav>
+
+            <span data-button-wrapper>
+
+                <span
+                    class="alert confirmMessageYesButton deletePatient"
+                    data-ssd-confirm-yes
+                    data-trigger
+                >YES</span>
+
+                <span
+                    class="small alert disabled button hide"
+                    data-processing
+                ><i class="fa fa-spinner fa-spin fa-fw"></i></span>
+
+            </span>
+
+            <span class="small confirmMessageNoButton" data-ssd-confirm-no>NO</span>
+
+        </nav>
+
+    </div>
+
+</div>
+    
     </body>
 </html>

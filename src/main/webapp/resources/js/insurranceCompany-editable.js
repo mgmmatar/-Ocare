@@ -49,23 +49,19 @@ $.fn.insurranceCompanyEditable= function () {
                         data: {
                         },
                         complete: function(data) {
-                            $('.panel-body').empty();
+                             $('.myDataTable').empty();
                             // Draw New Search Results
-                            $('.panel-body').append(data.responseText);
+                            $('.myDataTable').append(data.responseText);
                             ///// Adding the Action Again 
-                            $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).insurranceCompanyEditable().find('td:first').focus();            
-                            // Adding New examineType 
-//                              $('#AddNewInsurranceCompany').on("click", function(e) {
-//                                  $('#mainTable').append("<tr>"
-//                                          +"<th> # </th>"
-//                                          +"<td> </td>"
-//                                          +"<td> </td>"
-//                                          +"<td> </td>"
-//                                          +"<th> <input type='checkbox' name='examineDefault' value='default'></th>"
-//                                          +"<th><img src='../images/save-icon.png' id='AddNewInsurranceCompany' class='insurranceCompanyDeleteButton'/></th>"
-//                                          +"</tr>");
-//                                  $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).insurranceCompanyEditable().find('td:last').focus();            
-//                              });
+                            $('#insurranceCompanyTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).insurranceCompanyEditable();
+                            
+                            $('#insurranceCompanyTable').paging({
+                                        limit:5,
+                                        rowDisplayStyle: 'block',
+                                    });    
+                
+                            $('[data-ssd-confirm-trigger]').ssdConfirm();
+                            
                         },
                         async: false
                     });

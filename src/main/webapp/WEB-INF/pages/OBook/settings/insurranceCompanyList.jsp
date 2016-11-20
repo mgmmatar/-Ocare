@@ -22,6 +22,9 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/reservation.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/popup.css'/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/font-awesome.min.css'/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/paging.css'/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/ssd-confirm.css'/>">
 
         <!---  JS Scripts Files --->
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
@@ -31,11 +34,11 @@
         <script type="text/javascript" src="<c:url value='/resources/js/underscore.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery.bpopup.min.js'/>"></script>
-        
         <script type="text/javascript" src="<c:url value='/resources/js/mindmup-editabletable.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/insurranceCompany-editable.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/leanModal.js'/>"></script>
-        
+                <script type="text/javascript" src="<c:url value='/resources/js/paging.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery.ssd-confirm.js'/>"></script>
 
         <!-- NEW -->
         <script type="text/javascript" src="<c:url value='/resources/js/nprogress.js'/>"></script>
@@ -85,8 +88,17 @@
             $(document).ready(function() {
            // $(".profiles").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
              var newClicked=0;
-             $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).insurranceCompanyEditable().find('td:first').focus();
-            
+             // Max Result 
+             var maxResult=5;  
+             
+             $('#insurranceCompanyTable').paging({
+                    limit:maxResult,
+                    rowDisplayStyle: 'block'
+              });    
+                
+             $('[data-ssd-confirm-trigger]').ssdConfirm();
+             
+             $('#insurranceCompanyTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).insurranceCompanyEditable();
              // Click Profile Link 
              $(".container").on("click",".profiles", function(e) {
                    var insurranceCompanyID = $(this).closest("tr").find('input[type="hidden"][name="insurranceCompanyId"]').val();
@@ -108,35 +120,13 @@
                      // Showing the Popup After Call
                      $('#profilePopup').bPopup();  
                 });  
-             ////////////////////////////////////////////////////////
-              //// Delete Operation 
-              //////////////////////////////////////////////////////////////////////////////////
-              $(".container").on("click",".insurranceCompanyDeleteButton", function(e) {
-                   var insurranceCompanyID = $(this).closest("tr").find('input[type="hidden"][name="insurranceCompanyId"]').val();
-                   // Sending Delete Request 
-                   var request = $.ajax({
-                        url: "/zmed/settings/insurrance/delete",
-                        type: "POST",
-                        dataType: 'json',
-                        data: {
-                            insurranceCompanyID:insurranceCompanyID
-                        },
-                        complete: function(data) {
-                            $('.panel-body').empty();
-                            // Draw New Search Results
-                            $('.panel-body').append(data.responseText);
-                            ///// Adding the Action Again 
-                            $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).insurranceCompanyEditable().find('td:first').focus();            
-                        }//end Complete Function
-                    });
-                }); 
-           //////////////////////////////////////////////////////////////////////////////////////////
+           ////////////////////////////////////////////////////////////////////////////////////////
            // Add New Insurrance Company
            //////////////////////////////////////////////////////////////////////////////// 
            $(".container").on("click","#AddNewInsurranceCompany", function(e) {
                if(newClicked===0){
                // Draw the New Row     
-               $('#mainTable').append("<tr id='newInsurrance'>"
+               $('#insurranceCompanyTable').append("<tr id='newInsurrance'>"
                             +"<th> # </th>"
                             +"<td id='nameAr'> </td>"
                             +"<td id='nameEn'> </td>"
@@ -144,10 +134,8 @@
                             +"<th id='profile'>Profile</th>"
                             +"<th><img src='<c:url value='/resources/images/save-icon.png'/>' id='saveNewInsurrance' class='insurranceCompanyCancelButton'/> <img src='<c:url value='/resources/images/cancel-icon.png'/>' id='cancelAddInsurrance' class='insurranceCompanyCancelButton'/></th>"
                             +"</tr>");
-                            
-                            
                             // refresh Table
-                            $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).insurranceCompanyEditable().find('td:last').focus();            
+                                $('#insurranceCompanyTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).insurranceCompanyEditable();            
                                 
                                 $('#saveNewInsurrance').on("click", function(e) {
                                     var nameAr=$('#nameAr').text();
@@ -164,11 +152,19 @@
                                                 description:description
                                             },
                                             complete: function(data) {
-                                                $('.panel-body').empty();
-                                                // Draw New Search Results
-                                                $('.panel-body').append(data.responseText);
-                                                ///// Adding the Action Again 
-                                                $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).insurranceCompanyEditable().find('td:first').focus();             
+                                                        $('.myDataTable').empty();
+                                                        // Draw New Search Results
+                                                        $('.myDataTable').append(data.responseText);
+                                                        ///// Adding the Action Again 
+                                                        $('#insurranceCompanyTable').paging({
+                                                                    limit:maxResult,
+                                                                    rowDisplayStyle: 'block',
+                                                                });    
+
+                                                        $('[data-ssd-confirm-trigger]').ssdConfirm();
+
+                                                        $('#insurranceCompanyTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).insurranceCompanyEditable();
+
                                                 /// Rising Flag
                                                 newClicked = 0 ; 
                                             }//end Complete Function
@@ -184,7 +180,35 @@
                                     newClicked=1;
                         }//end if  
                     });
-                    
+                    $("#searchForInsurrance").keyup(function() {
+                    var searchValue=$(this).val();
+                    /// Reloading Patient Table Result
+                    var request = $.ajax({
+                        url: "/zmed/settings/insurrance/search",
+                        type: "POST",
+                        dataType: 'json',
+                        data: {
+                            query:searchValue
+                        },
+                        complete: function(data) {
+                            $('.myDataTable').empty();
+                            // Draw New Search Results
+                            $('.myDataTable').append(data.responseText);
+                            ///// Adding the Action Again 
+                            $('#insurranceCompanyTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).insurranceCompanyEditable();
+                            
+                            $('#insurranceCompanyTable').paging({
+                                        limit:maxResult,
+                                        rowDisplayStyle: 'block',
+                                    });    
+                
+                            $('[data-ssd-confirm-trigger]').ssdConfirm();
+                            
+                            
+                            // Adding New examineType 
+                        }//end Complete Function
+                    });
+                 });
                     // Scrol Top Again
                     document.body.scrollIntoView();
             });
@@ -224,17 +248,20 @@
                     <div class="row expandUp">
                         
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="panel panel-default">
+                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                    Insurance Company List
                                 </div>
-          
-                                     <!---Examine Type List --->
-                                <div class="panel-body">
-                                    <c:import  url="/settings/insurrance/loadInsurranceCompanyTable" />
-                                </div>
-                                    
-                            </div>   
+                                    <!--- List of Admins --->
+                                    <div class="panel-body">
+                                           <center>
+                                                <input type="text" id="searchForInsurrance" name="Search" class="listSearchBar" placeholder="Filter Insurrance"  required />    
+                                            </center>
+                                            <div class="myDataTable">     
+                                                <c:import  url="/settings/insurrance/loadInsurranceCompanyTable" />
+                                           </div>
+                                    </div>
+                            </div>        
                             
                             
                             <!-- Widget -->
@@ -283,5 +310,41 @@
      <div id="profilePopup" class="popupDesign popup">
       
     </div>
+    
+    <!-- Confirm Delete Popup -->
+    <div data-ssd-confirm-overlay></div>
+    
+    <div data-ssd-confirm>
+        
+    <div data-ssd-confirm-block="remove">
+
+        <p class="confirmMessage" data-ssd-confirm-content></p>
+
+        <nav>
+
+            <span data-button-wrapper>
+
+                <span
+                    class="alert confirmMessageYesButton deletePatient"
+                    data-ssd-confirm-yes
+                    data-trigger
+                >YES</span>
+
+                <span
+                    class="small alert disabled button hide"
+                    data-processing
+                ><i class="fa fa-spinner fa-spin fa-fw"></i></span>
+
+            </span>
+
+            <span class="small confirmMessageNoButton" data-ssd-confirm-no>NO</span>
+
+        </nav>
+
+    </div>
+
+</div>
+    
+    
     </body>
 </html>

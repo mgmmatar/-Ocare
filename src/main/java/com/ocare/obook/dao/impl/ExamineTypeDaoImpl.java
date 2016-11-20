@@ -55,4 +55,18 @@ public class ExamineTypeDaoImpl extends GenericDAO<ExamineType> implements Exami
             }
         });
     }
+
+    @Override
+    public List<ExamineType> getExamineTypesWithPattern(final String pattern) {
+          return getHibernateTemplate().execute(new HibernateCallback<List<ExamineType>>() {
+            @Override
+            public List<ExamineType> doInHibernate(Session sn) throws HibernateException {
+                Query query = sn.createQuery("from ExamineType e where e.isDeleted=:deleted AND (e.nameEn LIKE :nameEn OR e.nameAr LIKE :nameAr)");
+                query.setString("nameAr","%"+pattern+"%");
+                query.setString("nameEn","%"+pattern+"%");
+                query.setBoolean("deleted", false);
+                return (List<ExamineType>)query.list();
+            }
+        });
+    }
 }

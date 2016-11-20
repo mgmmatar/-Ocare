@@ -37,7 +37,8 @@ public class InsuranceCompanyServiceImpl implements InsuranceCompanyService{
 
     @Override
     public void delete(InsuranceCompany insuranceCompany) {
-        insuranceCompanyDao.delete(insuranceCompany);
+        insuranceCompany.setIsDeleted(true);
+        update(insuranceCompany);
     }
 
     @Override
@@ -48,6 +49,11 @@ public class InsuranceCompanyServiceImpl implements InsuranceCompanyService{
     @Override
     public List<InsuranceCompany> getAllInsuranceCompanys() {
         return insuranceCompanyDao.getAllInsuranceCompanys();
+    }
+
+    @Override
+    public List<InsuranceCompany> getInsurranceCompaniesWithPattern(String pattern) {
+        return insuranceCompanyDao.getInsurranceCompaniesWithPattern(pattern);
     }
 
 }

@@ -53,25 +53,20 @@ $.fn.examineTypeEditable= function () {
                         data: {
                         },
                         complete: function(data) {
-                            $('.panel-body').empty();
+                            setTimeout(function () { 
+                            $('.myDataTable').empty();
                             // Draw New Search Results
-                            $('.panel-body').append(data.responseText);
+                            $('.myDataTable').append(data.responseText);
                             ///// Adding the Action Again 
-                            $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).examineTypeEditable().find('td:first').focus();            
-                            // Adding New examineType 
-//                              $('#AddNewExamineType').on("click", function(e) {
-//                                  $('#mainTable').append("<tr>"
-//                                          +"<th> # </th>"
-//                                          +"<td> </td>"
-//                                          +"<td> </td>"
-//                                          +"<td> </td>"
-//                                          +"<td> </td>"
-//                                          +"<td> </td>"
-//                                          +"<th> <input type='checkbox' name='examineDefault' value='default'></th>"
-//                                          +"<th><img src='../images/save-icon.png' id='AddNewExamineType' class='examineTypeDeleteButton'/></th>"
-//                                          +"</tr>");
-//                                  $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).examineTypeEditable().find('td:last').focus();            
-//                              });
+                            $('#examineTypeTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).examineTypeEditable().find('td:first').focus();            
+                            $('#examineTypeTable').paging({
+                                    limit:5,
+                                    rowDisplayStyle: 'block'
+                              });    
+
+                             $('[data-ssd-confirm-trigger]').ssdConfirm();
+                            
+                          }, 200);
                         },
                         async: false
                     });

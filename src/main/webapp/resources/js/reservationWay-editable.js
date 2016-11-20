@@ -50,25 +50,18 @@ $.fn.reservationWayEditable= function () {
                         data: {
                         },
                         complete: function(data) {
-                            $('.panel-body').empty();
+                            $('.myDataTable').empty();
                             // Draw New Search Results
-                            $('.panel-body').append(data.responseText);
+                            $('.myDataTable').append(data.responseText);
                             ///// Adding the Action Again 
-                            $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).reservationWayEditable().find('td:first').focus();            
-                            // Adding New examineType 
-//                              $('#AddNewExamineType').on("click", function(e) {
-//                                  $('#mainTable').append("<tr>"
-//                                          +"<th> # </th>"
-//                                          +"<td> </td>"
-//                                          +"<td> </td>"
-//                                          +"<td> </td>"
-//                                          +"<td> </td>"
-//                                          +"<td> </td>"
-//                                          +"<th> <input type='checkbox' name='examineDefault' value='default'></th>"
-//                                          +"<th><img src='../images/save-icon.png' id='AddNewExamineType' class='examineTypeDeleteButton'/></th>"
-//                                          +"</tr>");
-//                                  $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).reservationWayEditable().find('td:last').focus();            
-//                              });
+                            $('#reservationWayTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).reservationWayEditable();
+                            
+                            $('#reservationWayTable').paging({
+                                        limit:5,
+                                        rowDisplayStyle: 'block',
+                            });    
+                
+                            $('[data-ssd-confirm-trigger]').ssdConfirm();
                         },
                         async: false
                     });

@@ -71,4 +71,9 @@ public class ReservationWayServiceImpl implements ReservationWayService {
         save(newDefaultReservationWay);
     }
 
+    @Override
+    public List<ReservationWay> getReservationWaysWithPattern(String pattern) {
+        return reservationWayDao.getReservationWaysWithPattern(pattern);
+    }
+
 }

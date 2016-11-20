@@ -27,5 +27,7 @@ public interface ExamineTypeService {
     public ExamineType getDefaultExamineType();
     
     public void assignDefaultExamineType(Integer examineTypeId);
+    
+    public List<ExamineType> getExamineTypesWithPattern(String pattern);
 
 }

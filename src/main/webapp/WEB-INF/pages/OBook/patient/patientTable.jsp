@@ -9,14 +9,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-
-                        
-                <c:choose>
-                    <c:when  test="${not empty patients}">
-                        
-                        <center><h4 class="patientListTitle">Patient List</h4></center>
-                        
-                        <table id="mainTable" class="table table-striped" style="cursor: pointer;">
+                        <table id="patientTable" class="table table-striped" style="cursor: pointer;">
                                 <thead>
                                     <tr>
                                         <th style="font-size: 18px">#</th>
@@ -30,8 +23,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach items="${patients}" var="patient" varStatus="counter">
-                                        <tr class="patientRow">
+                                    <c:choose>
+                                    <c:when test="${empty patients}">
+                                        <tr><td  colspan="8"><center><lable>No Patient Found</lable></center></td></tr>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:forEach items="${patients}" var="patient" varStatus="counter">
+                                            <tr class="patientRow">
                                             <input type="hidden" name="patientId" value="${patient.id}"/>
                                             <th>${counter.count}</th>
                                             <td tabindex="1">${patient.fName} ${patient.midName} ${patient.lName} </td>
@@ -46,21 +44,18 @@
                                                     <td tabindex="1">${patient.phoneNumber2} </td>
                                                 </c:otherwise>
                                             </c:choose>
-                                            <th><a class="thePatientProfile">Open</a></th>
+                                            <th><a class="thePatientProfile">Profile</a></th>
                                             <th tabindex="1"><img src="<c:url value='/resources/images/delete-sign.png'/>" 
                                                                   class="examineTypeDeleteButton"
                                                                   data-ssd-confirm-trigger="remove"
                                                                   data-ssd-confirm-message="Are you sure you wish to remove ${patient.fName} ${patient.midName} ${patient.lName} ?<br />There is no undo!"
                                                                   data-ssd-confirm-url="/zmed/patient/delete/${patient.id}"
-                                                                  data-ssd-confirm-behaviour="reloadReservations()"/>
+                                                                  data-ssd-confirm-behaviour="reload"/>
                                             </th>
                                         </tr>
                                     </c:forEach>
-                                    </tbody>
-
-                            </table>
-                    </c:when>
-                    <c:otherwise>
-                                No Result Found
-                    </c:otherwise>
-                </c:choose>                                    
+                                  </c:otherwise>
+                                </c:choose>      
+                            </tbody>
+                        </table>
+                                                        

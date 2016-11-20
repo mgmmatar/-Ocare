@@ -25,4 +25,6 @@ public interface InsuranceCompanyService {
     
     public List<InsuranceCompany> getAllInsuranceCompanys();
     
+    public List<InsuranceCompany> getInsurranceCompaniesWithPattern(String pattern);
+    
 }

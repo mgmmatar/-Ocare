@@ -74,4 +74,9 @@ public class ExamineTypeServiceImpl implements ExamineTypeService {
         save(newDefaultExamine);
     }
 
+    @Override
+    public List<ExamineType> getExamineTypesWithPattern(String pattern) {
+        return examineTypeDao.getExamineTypesWithPattern(pattern);
+    }
+
 }

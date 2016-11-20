@@ -38,5 +38,19 @@ public class InsuranceCompanyDaoImpl extends GenericDAO<InsuranceCompany> implem
             }
         });
     }  
+
+    @Override
+    public List<InsuranceCompany> getInsurranceCompaniesWithPattern(final String pattern) {
+        return getHibernateTemplate().execute(new HibernateCallback<List<InsuranceCompany>>() {
+            @Override
+            public List<InsuranceCompany> doInHibernate(Session sn) throws HibernateException {
+                Query query = sn.createQuery("from InsuranceCompany i where i.isDeleted = :deleted AND (i.nameEn LIKE :nameEn OR i.nameAr LIKE :nameAr)");
+                query.setString("nameAr","%"+pattern+"%");
+                query.setString("nameEn","%"+pattern+"%");
+                query.setBoolean("deleted", false);
+                return (List<InsuranceCompany>)query.list();
+            }
+        });
+    }
    
 }

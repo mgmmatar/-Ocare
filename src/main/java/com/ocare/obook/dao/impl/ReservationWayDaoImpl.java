@@ -49,5 +49,19 @@ public class ReservationWayDaoImpl extends GenericDAO<ReservationWay> implements
             }
         });
     }
+
+    @Override
+    public List<ReservationWay> getReservationWaysWithPattern(final String pattern) {
+        return getHibernateTemplate().execute(new HibernateCallback<List<ReservationWay>>() {
+            @Override
+            public List<ReservationWay> doInHibernate(Session sn) throws HibernateException {
+                Query query = sn.createQuery("from ReservationWay r where r.isDeleted=:deleted AND (r.nameEn LIKE :nameEn OR r.nameAr LIKE :nameAr)");
+                query.setBoolean("deleted", false);
+                query.setString("nameAr","%"+pattern+"%");
+                query.setString("nameEn","%"+pattern+"%");
+                return (List<ReservationWay>)query.list();
+            }
+        });
+    }
     
 }

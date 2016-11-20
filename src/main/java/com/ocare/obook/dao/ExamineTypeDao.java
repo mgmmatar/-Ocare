@@ -27,4 +27,6 @@ public interface ExamineTypeDao {
     
     public ExamineType getDefaultExamineType();
     
+    public List<ExamineType> getExamineTypesWithPattern(String pattern);
+    
 }

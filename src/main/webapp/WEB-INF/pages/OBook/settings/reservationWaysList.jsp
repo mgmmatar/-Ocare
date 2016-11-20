@@ -21,7 +21,9 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/owl.theme.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/reservation.css'/>">
-
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/font-awesome.min.css'/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/paging.css'/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/ssd-confirm.css'/>">    
         <!---  JS Scripts Files --->
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
@@ -32,6 +34,8 @@
         
         <script type="text/javascript" src="<c:url value='/resources/js/mindmup-editabletable.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/reservationWay-editable.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/paging.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery.ssd-confirm.js'/>"></script>
         
         
 
@@ -60,30 +64,19 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 var newClicked=0;
-            $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).reservationWayEditable().find('td:first').focus();            
-              //////////////////////////////////////////////////////////////////////////////////
-              //// Delete Operation 
-              //////////////////////////////////////////////////////////////////////////////////
-              $(".container").on("click",".reservationWayDeleteButton", function(e) {
-                   var reservationWayID = $(this).closest("tr").find('input[type="hidden"][name="reservationWayId"]').val();
-                   // Sending Delete Request 
-                    var b;
-                    var request = $.ajax({
-                        url: "/zmed/settings/reservationWay/delete",
-                        type: "POST",
-                        dataType: 'json',
-                        data: {
-                            reservationWayID:reservationWayID
-                        },
-                        complete: function(data) {
-                            $('.panel-body').empty();
-                            // Draw New Search Results
-                            $('.panel-body').append(data.responseText);
-                            ///// Adding the Action Again 
-                            $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).reservationWayEditable().find('td:first').focus();            
-                        }//end Complete Function
-                    });
-                }); 
+                // Max Result 
+                var maxResult=5;  
+
+                $('#reservationWayTable').paging({
+                       limit:maxResult,
+                       rowDisplayStyle: 'block'
+                 });    
+
+                $('[data-ssd-confirm-trigger]').ssdConfirm();
+                
+                
+                $('#reservationWayTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).reservationWayEditable();            
+              
              //////////////////////////////////////////////////////////////////////////////////////////
              // Assign Default reservationWay
              ////////////////////////////////////////////////////////////////////////////////
@@ -102,11 +95,20 @@
                         },
                         complete: function(data) {
                           setTimeout(function () { 
-                             $('.panel-body').empty();
-                            // Draw New Search Results
-                            $('.panel-body').append(data.responseText);
-                            ///// Adding the Action Again 
-                            $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).reservationWayEditable().find('td:first').focus();            
+                             
+                              $('.myDataTable').empty();
+                                                        // Draw New Search Results
+                              $('.myDataTable').append(data.responseText);
+                              ///// Adding the Action Again 
+                              $('#reservationWayTable').paging({
+                                          limit:maxResult,
+                                          rowDisplayStyle: 'block',
+                                      });    
+  
+                              $('[data-ssd-confirm-trigger]').ssdConfirm();
+  
+                              $('#reservationWayTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).reservationWayEditable();            
+
                           }, 200);                                
                         }//end Complete Function
                     });
@@ -118,7 +120,7 @@
            $(".container").on("click","#AddNewReservationWay", function(e) {
                if(newClicked===0){
                // Draw the New Row     
-               $('#mainTable').append("<tr id='newReservation'>"
+               $('#reservationWayTable').append("<tr id='newReservation'>"
                             +"<th> # </th>"
                             +"<td id='nameAr'> </td>"
                             +"<td id='nameEn'> </td>"
@@ -126,8 +128,8 @@
                             +"<th id='isDefault'> <input type='checkbox' name='examineDefault' value='default'></th>"
                             +"<th><img src='<c:url value='/resources/images/save-icon.png'/>' id='saveNewReservationWay' class='reservationWayCancelButton'/> <img src='<c:url value='/resources/images/cancel-icon.png'/>' id='cancelAddReservationWay' class='reservationWayCancelButton'/></th>"
                             +"</tr>");
-                            // refresh Table
-                            $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).reservationWayEditable().find('td:last').focus();            
+                             
+                              $('#reservationWayTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).reservationWayEditable();
                                 $('#saveNewReservationWay').on("click", function(e) {
                                     var nameAr=$('#nameAr').text();
                                     var nameEn=$('#nameEn').text();
@@ -143,11 +145,18 @@
                                                 description:description
                                             },
                                             complete: function(data) {
-                                                $('.panel-body').empty();
-                                                // Draw New Search Results
-                                                $('.panel-body').append(data.responseText);
-                                                ///// Adding the Action Again 
-                                                $('#mainTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).reservationWayEditable().find('td:first').focus();             
+                                                $('.myDataTable').empty();
+                                                        // Draw New Search Results
+                                                $('.myDataTable').append(data.responseText);
+                                                    ///// Adding the Action Again 
+                                                $('#reservationWayTable').paging({
+                                                            limit:maxResult,
+                                                            rowDisplayStyle: 'block',
+                                                });    
+
+                                                $('[data-ssd-confirm-trigger]').ssdConfirm();
+
+                                                $('#reservationWayTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).reservationWayEditable();
                                                 /// Rising Flag
                                                 newClicked = 0 ; 
                                                 
@@ -167,6 +176,37 @@
                                     newClicked=1;
                         }//end if  
                     });
+                    
+                    $("#searchForReservationWay").keyup(function() {
+                    var searchValue=$(this).val();
+                    /// Reloading Patient Table Result
+                    var request = $.ajax({
+                        url: "/zmed/settings/reservationWay/search",
+                        type: "POST",
+                        dataType: 'json',
+                        data: {
+                            query:searchValue
+                        },
+                        complete: function(data) {
+                            $('.myDataTable').empty();
+                            // Draw New Search Results
+                            $('.myDataTable').append(data.responseText);
+                            ///// Adding the Action Again 
+                            $('#reservationWayTable').editableTableWidget({ editor: $('<textarea>'), preventColumns: [ 1 , 8 ] }).reservationWayEditable();
+                            
+                            $('#reservationWayTable').paging({
+                                        limit:maxResult,
+                                        rowDisplayStyle: 'block',
+                            });    
+                
+                            $('[data-ssd-confirm-trigger]').ssdConfirm();
+                            
+                            
+                            // Adding New examineType 
+                        }//end Complete Function
+                    });
+                 });
+                    
                    // Scrol Top Again
                     document.body.scrollIntoView();                         
 
@@ -207,17 +247,23 @@
                     <div class="row expandUp">
                         
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            
+                                
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                    Reservation Way List
                                 </div>
-          
-                                     <!---Examine Type List --->
-                                <div class="panel-body">
-                                    <c:import  url="/settings/reservationWay/loadReservationWayTable" />
-                                </div>
-                                    
-                            </div>   
+                                    <!--- List of Admins --->
+                                    <div class="panel-body">
+                                           <center>
+                                                <input type="text" id="searchForReservationWay" name="Search" class="listSearchBar" placeholder="Filter Reservation Way"  required />    
+                                            </center>
+                                            <div class="myDataTable">     
+                                                <c:import  url="/settings/reservationWay/loadReservationWayTable" />
+                                           </div>
+                                    </div>
+                            </div>    
+                                
                             
                             
                             <!-- Widget -->
@@ -246,6 +292,40 @@
             </div><!--End Main Container-->
 
     </div><!--End Body Container-->
-          
+    
+    <!-- Confirm Delete Popup -->
+    <div data-ssd-confirm-overlay></div>
+    
+    <div data-ssd-confirm>
+        
+    <div data-ssd-confirm-block="remove">
+
+        <p class="confirmMessage" data-ssd-confirm-content></p>
+
+        <nav>
+
+            <span data-button-wrapper>
+
+                <span
+                    class="alert confirmMessageYesButton deletePatient"
+                    data-ssd-confirm-yes
+                    data-trigger
+                >YES</span>
+
+                <span
+                    class="small alert disabled button hide"
+                    data-processing
+                ><i class="fa fa-spinner fa-spin fa-fw"></i></span>
+
+            </span>
+
+            <span class="small confirmMessageNoButton" data-ssd-confirm-no>NO</span>
+
+        </nav>
+
+    </div>
+
+</div>
+    
     </body>
 </html>

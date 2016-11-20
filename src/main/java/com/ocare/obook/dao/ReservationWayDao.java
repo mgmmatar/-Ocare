@@ -27,4 +27,6 @@ public interface ReservationWayDao {
      
     public ReservationWay getDefaultReservationWay();
     
+    public List<ReservationWay> getReservationWaysWithPattern(String pattern);
+    
 }
