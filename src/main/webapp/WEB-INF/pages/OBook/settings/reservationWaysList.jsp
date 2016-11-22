@@ -125,7 +125,11 @@
                             +"<td id='nameAr'> </td>"
                             +"<td id='nameEn'> </td>"
                             +"<td id='description'> </td>"
-                            +"<th id='isDefault'> <input type='checkbox' name='examineDefault' value='default'></th>"
+                            +"<th id='isDefault'>  <label class='switch'> "
+                            +"<input type='checkbox' class='defaultReservationWayChecker'>"
+                            +"<div class='slider round'></div>"
+                            +"</label>"
+                            +"</th>"
                             +"<th><img src='<c:url value='/resources/images/save-icon.png'/>' id='saveNewReservationWay' class='reservationWayCancelButton'/> <img src='<c:url value='/resources/images/cancel-icon.png'/>' id='cancelAddReservationWay' class='reservationWayCancelButton'/></th>"
                             +"</tr>");
                              
