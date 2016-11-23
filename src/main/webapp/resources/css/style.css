@@ -8144,7 +8144,8 @@ End  of  Toggle  check box
     background: url(images/arrow2.jpg) no-repeat right center;
     height: 34px;
     width: 258px;
-    margin-left: 15px;
+    margin-left: -7px;
+    margin-bottom: -10px;
 
 }
 .styled-select.slate.usertype select {
@@ -8204,4 +8205,5 @@ End  of  Toggle  check box
     margin-top: 10px;
     margin-left: 25px;
     margin-right: 10px;
+    margin-bottom: 25px;
 }

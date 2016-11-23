@@ -35,11 +35,9 @@
                     <div class="userDivContainer">
                    <img class="userPopupAvatar" src="<c:url value='/resources/images/avatar.jpg'/>" />
             </div>
-                    
-                    <label class="userDataText" style="margin-top: 0px" > User Type : </label>
-        
             
-                   
+            <label class="userDataText" > User Type : </label>
+              
                 <div class="styled-select slate usertype">
                     <select id="roleName" name="roleName" style="margin-left: 8px">
                         <c:forEach items="${roles}" var="role">
@@ -55,7 +53,10 @@
                         </c:forEach>
                     </select>
                 
-                </div></div>
+                </div>        
+            
+                    </div>
+            
         </div>   
     
     
