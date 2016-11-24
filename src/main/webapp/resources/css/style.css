@@ -3872,6 +3872,7 @@ ul.edit_tab li{
     padding-left: 10px;
     color: #2a3940;
     height: 55px;
+    
 }
 .img_edit_profile{
     width: 200px;
@@ -4267,6 +4268,11 @@ input.custom_save{
     padding: 6px 12px;
     font-size: 15px;
     line-height: 1.42857143;
+    border-color: #0762cc;
+    background-image: url("images/Search-icon.png") ;
+    background-repeat: no-repeat;
+    background-size: 30px;
+    background-position: right;
 }
 
 .confirmMessage{

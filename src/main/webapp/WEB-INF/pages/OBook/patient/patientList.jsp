@@ -170,8 +170,9 @@
                                 </div>
                                      <!--- List of Admins --->
                                     <div class="panel-body">
-                                           <center>
-                                                <input type="text" id="searchForPatient" name="Search" class="listSearchBar" placeholder="Filter Patients"  required />    
+                                        
+                                        <center>
+                                                <input type="text" id="searchForPatient" name="Search" class="listSearchBar"  placeholder="Filter Patients"  required />    
                                             </center>
                                             <div class="myDataTable">     
                                                 <c:import  url="/patient/loadPatientTable" />     

@@ -52,11 +52,11 @@
         <c:url var="loginUrl" value="/login"></c:url>
         <form action="${loginUrl}" method="POST">
             <div class="control">
-              <label for="username" class="fa fa-envelope"></label>
+              <label for="username" class="fa fa-user"></label>
               <input id="username" placeholder="UserName" type="username" name="username"></input>
             </div>
             <div class="control">
-              <label for="password" class="fa fa-asterisk"></label>
+              <label for="password" class="fa fa-lock"></label>
               <input id="password" name="password" placeholder="Password" type="password"></input>
               <button type="submit" id="login-button" class="btn">Login</button>
             </div>

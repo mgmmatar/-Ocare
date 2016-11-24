@@ -7,6 +7,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+
 <c:choose>
     <c:when test="${not weekDay.offLine}">            
             <span class="title_main_con d_block margin_bottom_10 margin_top_20">Reservation Shifts </span>       
