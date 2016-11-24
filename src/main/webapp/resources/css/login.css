@@ -1,9 +1,9 @@
 body {
   
-  background-image: url("images/banner-img44.jpg") , url("images/CopyRights2.png");
-  background-position: left top,110% 100%;
+  background-image: url("images/banner-img44.jpg");
+  background-position: left top;
   background-repeat:no-repeat;
-  background-size: 100% 145%, 40% 50% ;
+  background-size: 100% 145%;
   
 }
 

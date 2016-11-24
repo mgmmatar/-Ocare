@@ -46,7 +46,7 @@
             <link href="<c:url value='/resources/css/animation.css'/>" rel="stylesheet" />
             <!-- Custom Styles-->
             <!-- Google Fonts-->
-            <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+            <link href="<c:url value='/resources/css/googlefonts.css'/>" rel="stylesheet" />
         
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/timeRanges.css'/>">
         <script type="text/javascript" src="<c:url value='/resources/js/timeRanges.js'/>"></script>

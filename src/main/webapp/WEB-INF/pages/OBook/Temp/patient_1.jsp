@@ -20,7 +20,7 @@
             <!-- Custom Styles-->
             <link href="<c:url value='/resources/css/custom-styles.css" rel="stylesheet'/>" />
             <!-- Google Fonts-->
-            <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+            <link href="<c:url value='/resources/css/googlefonts.css'/>" rel="stylesheet" />
                 <script src= "<c:url value='/resources/jquery.metisMenu.js'/>"></script>
             <!-- Morris Chart Js -->
             <script src= "<c:url value='/resources/js/raphael-2.1.0.min.js'/>"></script>

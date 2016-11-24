@@ -44,7 +44,7 @@
             <link href="<c:url value='/resources/css/animation.css'/>" rel="stylesheet" />
             <!-- Custom Styles-->
             <!-- Google Fonts-->
-            <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+            <link href="<c:url value='/resources/css/googlefonts.css'/>" rel="stylesheet" />
         <script type="text/javascript" src="<c:url value='/resources/js/jquery.canvasjs.min.js'/>"></script>
         <script type="text/javascript"> 
           $(document).ready(function() {

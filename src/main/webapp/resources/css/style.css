@@ -4310,7 +4310,7 @@ input.custom_save{
     line-height: 1;
     cursor: pointer;
     -webkit-appearance: none;
-    transition: background-color .25s ease-out,color .25s ease-out;
+    transition: background-color 0s ease-out,color 0s ease-out;
     vertical-align: middle;
     border: 1px solid transparent;
     border-radius: 0;
