@@ -1,3 +1,4 @@
+
 <%--
     Document   : reservationProcess
     Created on : Sep 24, 2015, 12:54:02 AM
@@ -95,132 +96,158 @@
           
                                       <form id="aboutChefForm" method="POST" action="/zmed/patient/process" modelAttribute="patient" accept-charset="utf-8" >
                                         <input type="hidden" name="id" value="${patient.id}"/>
-                                           <table class="registerationTable">
-                                                    <tr>
-                                                      <td>
-                                                         <label class="registerLable">First Name  </label>
-                                                     </td>
-                                                     <td>
-                                                         <input type="text" name="fName" placeholder="First name" class="registerField" id="User_name" required value="${patient.fName}"/>
-                                                     </td>    
-                                                </tr>   
-                                                <tr>
-                                                     <td>
-                                                         <label class="registerLable">Middle Name  </label>
-                                                     </td>
-                                                     <td>
-                                                           <input type="text" name="midName" placeholder="Middle name" class="registerField" id="User_name" required value="${patient.midName}"/> 
-                                                     </td>    
-                                                </tr>
+                                           
+                                        <div>
+    <img class="patientPopupAvatar" src="<c:url value='/resources/images/avatar.jpg'/>" />
+    
+                                                 <div class="patientDivContainer">
+            <div class="patientLabelTitle">
+                <label class="patientDataText" style="margin-right: 52px;"> Name : </label>
+            </div>
+        
+            <div class="PatientInputFields">
+                <input type="text" name="fName" placeholder="First name" class="patientInputFieldDesign" style="width: 220px !important; " id="User_name" required value="${patient.fName}"/>
+            </div>
+        
+            <div class="PatientInputFields">
+                <input type="text" name="midName" placeholder="Middle name" class="patientInputFieldDesign" style="width: 220px !important;" id="User_name" required value="${patient.midName}"/> 
+            </div>
+        
+            <div class="PatientInputFields">
+                <input type="text" name="lName" placeholder="Last name" class="patientInputFieldDesign" style="width: 220px !important;"  id="User_name"  required value="${patient.lName}"/>
+            </div>
+        </div>   
+                                     
+          <div class="patientDivContainer">
+                 
+                <div class="patientLabelTitle">
+                    <label class="patientDataText" style="margin-right: 45px;"> Phone : </label>
+                </div>
 
-                                                <tr>
-                                                     <td>
-                                                         <label class="registerLable">Last Name  </label>
-                                                     </td>
-                                                     <td>
-                                                            <input type="text" name="lName" placeholder="Last name" id="User_name" class="registerField" required value="${patient.lName}"/>
-                                                     </td>    
-                                                </tr>
-                                                
-                                                <tr>
-                                                     <td>
-                                                         <label class="registerLable">Gender  </label>
-                                                     </td>
-                                                     <td>
+                <div class="PatientInputFields">
+                    <input type="text" name="phoneNumber1" class="patientInputFieldDesign" style="width: 220px !important;"  id="phoneNumber1"  placeholder="Phone Number1" required value="${patient.phoneNumber1}"/>
+                </div>
+                
+
+                <div class="PatientInputFields">
+                    <input type="text" name="phoneNumber2" class="patientInputFieldDesign" style="width: 220px !important;" id="phoneNumber2"  placeholder="Phone Number2" required value="${patient.phoneNumber2}"/>
+                </div>
+                
+        </div>                   
+                <div class="patientDivContainer">
+                                             <div class="patientLabelTitle">
+                <label class="patientDataText" style="margin-right: 20px;"> Gender : </label>
+            
+                                                    
                                                             <c:if test="${patient.gender eq 'Male'||empty patient.gender}">
-                                                                <input type="radio" name="gender" value="Male" checked="checked" class="registerField">Male
-                                                                <input type="radio" name="gender" value="Female" class="registerField">Female
+                                                                <input type="radio" name="gender" value="Male" checked="checked" id="radio1" class="css-checkbox"><label for="radio1" class="css-label radGroup1">Male</label>
+                                                                <input type="radio" name="gender" value="Female" id="radio2" class="css-checkbox"><label for="radio2" class="css-label radGroup1">Female</label>
                                                             </c:if>
                                                             <c:if test="${patient.gender eq 'Female'}">
-                                                                 <input type="radio" name="gender" value="Male" class="registerField">Male
-                                                                 <input type="radio" name="gender" value="Female" checked="checked" class="registerField">Female
+                                                                 <input type="radio" name="gender" value="Male" id="radio1" class="css-checkbox"><label for="radio1" class="css-label radGroup1">Male</label>
+                                                                 <input type="radio" name="gender" value="Female" id="radio2"  checked="checked" class="css-checkbox"><label for="radio2" class="css-label radGroup1">Female</label>
                                                             </c:if>  
-                                                     </td>    
-                                                </tr>
+                                                    
+                                             </div>      </div>
+                                                         
+             <div class="patientDivContainer">
+                                  
+                <div class="patientLabelTitle">
+                    <label class="patientDataText" style="margin-right: 30px"> Address : </label>
+                </div>
 
-                                                <tr>
-                                                     <td>
-                                                         <label class="registerLable">Address  </label>
-                                                     </td>
-                                                     <td>
-                                                           <input type="text" name="address" placeholder="Address" id="address" class="registerField" required value="${patient.address}"/>  
-                                                     </td>    
-                                                </tr>
-                                                
-                                                <tr>
-                                                     <td>
-                                                         <label class="registerLable">Phone 1  </label>
-                                                     </td>
-                                                     <td>
-                                                            <input type="tel" name="phoneNumber1" id="phoneNumber1" class="registerField"placeholder="Phone Number1" required value="${patient.phoneNumber1}"/>
-                                                     </td>    
-                                                </tr>
-                                                
-                                                <tr>
-                                                     <td>
-                                                         <label class="registerLable">Phone 2  </label>
-                                                     </td>
-                                                     <td>
-                                                            <input type="tel" name="phoneNumber2" id="phoneNumber2" class="registerField" placeholder="Phone Number2" required value="${patient.phoneNumber2}"/>
-                                                     </td>    
-                                                </tr>
-                                                
-                                                <tr>
-                                                     <td>
-                                                         <label class="registerLable">Email </label>
-                                                     </td>
-                                                     <td>
-                                                         <input type="email" name="email" id="email" placeholder="E-mail" class="registerField" required value="${patient.email}"/>
-                                                     </td>    
-                                                </tr>
-                                                
-                                                <tr>
-                                                     <td>
-                                                         <label class="registerLable">Birth-Date  </label>
-                                                     </td>
-                                                     <td>
-                                                         <input type="date" name="birthDate" id="birthDate" placeholder="birthDate" class="registerField" required value="${patient.birthDate}"/>
-                                                     </td>    
-                                                </tr>
-                                                
-                                                <tr>
-                                                     <td>
-                                                         <label class="registerLable">Age </label>
-                                                     </td>
-                                                     <td>
-                                                         <input type="number" name="age" id="age" placeholder="Age" class="registerField" required value="${patient.age}"/>
-                                                     </td>    
-                                                </tr>
-                                                
-                                                
-                                                <tr>
-                                                     <td>
-                                                         <label class="registerLable">Insurance Company</label>
-                                                     </td>
-                                                     <td>
-                                                         <select name="insuranceCompany" id="insuranceCompany" class="registerField">
-                                                            <option value="0" selected="selected">--Select--</option>
-                                                                <c:forEach items="${insuranceCompanies}" var="company">
-                                                                    <c:choose>
-                                                                        <c:when test="${company.nameEn eq patient.insuranceCompany.nameEn}">
-                                                                            <option value="${company.id}" selected="selected">${company.nameEn}</option>            
-                                                                        </c:when>
-                                                                        <c:otherwise>
-                                                                            <option value="${company.id}">${company.nameEn}</option>            
-                                                                        </c:otherwise>
-                                                                    </c:choose>
-
-                                                                </c:forEach> 
-                                                        </select>
-                                                     </td>    
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <button type="submit">${operation}<i class=""></i></button>
-                                                    </td> 
-                                                </tr>
-                                                
-                                            </table>
+                <div class="PatientInputFields">
+                    <input type="text" name="address" placeholder="Address" class="patientInputFieldDesign" style="width:280px!important;" id="address" required value="${patient.address}"/>  
+                </div>
+            
+             <div class="patientLabelTitle">
+                 <label class="patientDataText" style="margin-right: 30px;margin-left: 30px;"> Email : </label>
+            </div>
+        
+            <div class="PatientInputFields">
+                <input type="text" name="email" placeholder="E-mail" class="patientInputFieldDesign" style="width:280px!important;" id="email" required value="${patient.email}"/>  
+            </div>    
+        </div>
+                                                       
+            <div class="patientDivContainer">
+                    
+            <div class="patientLabelTitle">
+                <label class="patientDataText" style="margin-right: 66px;"> Age : </label>
+            </div>
+        
+            <div class="PatientInputFields">
+                <input type="text" name="age" placeholder="Age" class="patientInputFieldDesign" style="width:120px!important" required value="${patient.age}"/>
+            </div>
+                
+            <div class="patientLabelTitle">
+                <label class="patientDataText" style="margin-right: 20px;margin-left: 140px"> Birth Date : </label>
+            </div>
+        
+            <div class="PatientInputFields">
+                
+                <div class="styled-select slate month">
+                   
+                    <select id="month">
+                        <c:forEach items="${months}" var="month">
+                                <option>${month}</option>
+                        </c:forEach>
+                    </select>
+                    
+                    
+                </div>
+                
+                
+                <div class="styled-select slate day">
+                    <select id="day">
+                        <c:forEach items="${days}" var="day">
+                                <option>${day}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                
+                
+                <div class="styled-select slate year">
+                    <select id="theYear">
+                        <c:forEach items="${years}" var="year">
+                                <option>${year}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                
+            </div>
+            
+        
+           
+        </div>     
+            
+                                                         
+             <div class="patientDivContainer">
+                 
+                <div class="patientLabelTitle">
+                    <label class="patientDataText"  > Insurance : </label>
+                </div>
+            <div class="styled-select slate company">
+                    <select id="insuranceCompany" style="margin-left: 8px">
+                        <option value="0" selected="selected">-- Select --</option>
+                        <c:forEach items="${insuranceCompanies}" var="company">
+                                <c:choose>
+                                    <c:when test="${company.nameEn eq patient.insuranceCompany.nameEn}">
+                                        <option value="${company.id}" selected="selected">${company.nameEn}</option>            
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${company.id}">${company.nameEn}</option>            
+                                    </c:otherwise>
+                                </c:choose>
+                        </c:forEach>
+                    </select>
+            </div></div>
+                                               
+                                        <div style="margin-top: -2%;">
+                                                        <button class="registerbutton" >${operation}</button>
+                                        
+                                        </div>
+                                        </div>
+                                        
                                     </form>
       
                             </div>          

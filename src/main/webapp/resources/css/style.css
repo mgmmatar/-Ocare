@@ -2028,18 +2028,20 @@ ul.team1.formation-5-4-1 li.player-1, ul.team2.formation-5-4-1 li.player-1{
     margin-top: 20px;
 }
 
-table.registerationTable td{
-     width: 200px;
+.registerationTable td{
+     width: 50px;
+     
 }
 
-.registerField{
-    width: 200px;
-    margin: 15px;
-}
 
 .registerLable{
     margin-left: 30px;
-    width: 150px;
+    width: 100px;
+}
+
+.radioField
+{
+   width: 20px; 
 }
 
 .titles{
@@ -3804,7 +3806,7 @@ input.registration_inpu:focus{
     background-color: #f39c12
 }
 .male{
-    margin-left: 40px;
+    margin-left: 90px;
 }
 .img-registration{
     width: 200px;
@@ -8206,4 +8208,61 @@ End  of  Toggle  check box
     margin-left: 25px;
     margin-right: 10px;
     margin-bottom: 25px;
+}
+
+input[type=radio].css-checkbox {
+    position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+}
+input[type=radio].css-checkbox + label.css-label {
+	padding-left:30px;
+	height:23px; 
+	display:inline-block;
+	line-height:23px;
+	background-repeat:no-repeat;
+	background-position: 0 0;
+	font-size:15px;
+	vertical-align:middle;
+	cursor:pointer;
+
+}
+
+input[type=radio].css-checkbox:checked + label.css-label {
+	background-position: 0 -23px;
+}
+label.css-label {
+	background-image:url("images/radbutt.png");
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+        margin-left: 20px;
+}
+
+.registerbutton {
+  display: inline-block;
+  padding: 8px 8px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #caf1ff;
+  background-color: #268d51;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px #999;
+  margin-left:  80%;
+}
+
+.registerbutton:hover {
+     background-color: #FCC409 !important;
+  color: #000;
+}
+
+.registerbutton:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
