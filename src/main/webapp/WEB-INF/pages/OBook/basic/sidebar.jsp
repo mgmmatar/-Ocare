@@ -116,18 +116,19 @@
 
                 <!-- /menu footer buttons -->
                 <div class="sidebar-footer hidden-small" style="display: block;">
-                    <a data-toggle="tooltip" data-placement="top" title="Settings">
+                   <a data-toggle="tooltip" data-placement="top" title="Logout" href="/zmed/auth/j_spring_security_logout">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="Settings" >
                         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                     </a>
                     <a data-toggle="tooltip" data-placement="top" title="FullScreen">
                         <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
                     </a>
-                    <a data-toggle="tooltip" data-placement="top" title="Lock">
-                        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                    <a data-toggle="tooltip" data-placement="top" title="help">
+                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                     </a>
-                    <a data-toggle="tooltip" data-placement="top" title="Logout" href="/zmed/auth/j_spring_security_logout">
-                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                    </a>
+                    
                 </div>
                 <!-- /menu footer buttons -->
             </div>
