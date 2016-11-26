@@ -408,8 +408,8 @@ body {
     /*background: #2A3F54;*/
     /*#ECF0F1; #FCFCFC*/
     background: #394A59;
-    /*    font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;*/
-    font-family: Comic Sans, Comic Sans MS, cursive;
+   /*     font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif; */
+   /* font-family: Comic Sans, Comic Sans MS, cursive;*/
     font-size: 13px;
     font-weight: 400;
     line-height: 1.471;
@@ -664,8 +664,8 @@ table.no-margin .progress {
     position: relative;
     min-height: 1px;
     float: left;
-    padding-right: 10px;
-    padding-left: 10px;
+    padding-right: 0px;
+    padding-left: 15px;
 }
 
 .row {
@@ -6184,7 +6184,7 @@ login_content form input[type="submit"], #content form .submit {
 }
 
 .button a {
-    background: url(http://cssdeck.com/uploads/media/items/8/8bcLQqF.png) 0 -112px no-repeat;
+    background: url('../images/8bcLQqF.png') 0 -112px no-repeat;
     color: #7E7E7E;
     font-size: 17px;
     padding: 2px 0 2px 40px;
