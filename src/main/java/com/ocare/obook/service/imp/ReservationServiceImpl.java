@@ -28,13 +28,9 @@ import com.ocare.obook.holder.TimeSlice;
 import com.ocare.obook.service.ExamineTypeService;
 import com.ocare.obook.service.ReservationService;
 import com.ocare.obook.service.WeekDayService;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -372,13 +368,23 @@ public class ReservationServiceImpl implements ReservationService{
     }
 
     @Override
-    public List<StatisticReportModule> getReservationExamineTypeMoneyStatistic(Date fromDate, Date toDate) {
-         return reservationDao.getReservationExamineTypeMoneyStatistic(fromDate, toDate);
+    public List<StatisticReportModule> getTodayReservationReport(Date today) {
+        return reservationDao.getTodayReservationReport(today);
     }
 
     @Override
-    public List<StatisticReportModule> getReservationExamineTypePatientsStatistic(Date fromDate, Date toDate) {
-         return reservationDao.getReservationExamineTypePatientsStatistic(fromDate, toDate);
+    public List<StatisticReportModule> getTodayInsurranceReport(Date today) {
+        return reservationDao.getTodayInsurranceReport(today);
+    }
+
+    @Override
+    public List<StatisticReportModule> getReservationReportWithRange(Date fromDate, Date toDate) {
+        return reservationDao.getReservationReportWithRange(fromDate, toDate);
+    }
+
+    @Override
+    public List<StatisticReportModule> getInsuranceReportWithRange(Date fromDate, Date toDate) {
+        return reservationDao.getInsuranceReportWithRange(fromDate, toDate);
     }
 
 

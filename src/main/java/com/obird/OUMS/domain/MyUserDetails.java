@@ -15,6 +15,8 @@ import org.springframework.security.core.userdetails.User;
  */
 public class MyUserDetails extends User{
     
+    private static final long serialVersionUID = 1L;
+    
     private final Object id;
     private final String fullName;
     private final String roleName;

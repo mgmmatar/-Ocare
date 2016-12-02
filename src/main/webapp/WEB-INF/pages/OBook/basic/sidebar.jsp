@@ -82,10 +82,12 @@
                             <li class="" style="cursor: pointer"><a><i class="fa fa-pie-chart" style="cursor: pointer"></i> <label class="menuText" style="cursor: pointer">Reports</label> <span
                                     class="fa fa-chevron-down" style="cursor: pointer"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="/zmed/settings/examineType/list">Patient Report</a>
+                                    <li><a href="/zmed/report/today">Today Report</a>
                                     </li>
-                                    <li><a href="/zmed/settings/reservationWay/list">Reservation Report</a>
+                                    <li><a href="/zmed/report/reservation">Reservation Report</a>
                                     </li>
+                                    <li><a href="/zmed/report/patient">Patient Report</a>
+                                    </li>                                   
                                 </ul>
                             </li>
                             

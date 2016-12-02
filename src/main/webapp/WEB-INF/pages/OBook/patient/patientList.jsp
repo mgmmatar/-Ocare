@@ -51,7 +51,7 @@
             <link href="<c:url value='/resources/css/animation.css'/>" rel="stylesheet" />
             <!-- Custom Styles-->
             <!-- Google Fonts-->
-            <link href="<c:url value='/resources/css/googlefonts.css'/>" rel="stylesheet" />
+            <%-- <link href="<c:url value='/resources/css/googlefonts.css'/>" rel="stylesheet" /> --%>
             
 
         <script type="text/javascript">

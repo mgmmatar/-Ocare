@@ -50,8 +50,18 @@ public interface ReservationService {
     
     public List<ReportReservationStatus> getReservationStatusByDates(Integer patientId,Date fromDate,Date toDate);
      
-    public List<StatisticReportModule> getReservationExamineTypeMoneyStatistic(Date fromDate,Date toDate);
+    //////////////////////////////////////////////////////////////////////////////
+    /*       
+               Today Reservation Report 
+    */
+    //////////////////////////////////////////////////////////////////////////////
+    public List<StatisticReportModule> getTodayReservationReport(Date today);
     
-    public List<StatisticReportModule> getReservationExamineTypePatientsStatistic(Date fromDate,Date toDate);
+    public List<StatisticReportModule> getTodayInsurranceReport(Date today);
+    /////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////    
+    public List<StatisticReportModule> getReservationReportWithRange(Date fromDate,Date toDate);
+    
+    public List<StatisticReportModule> getInsuranceReportWithRange(Date fromDate,Date toDate);
     
 }

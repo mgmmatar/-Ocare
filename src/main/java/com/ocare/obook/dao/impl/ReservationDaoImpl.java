@@ -98,7 +98,9 @@ public class ReservationDaoImpl extends GenericDAO<Reservation> implements Reser
             }
         });
     }
-
+    
+        
+    
     @Override
     public List<ReportReservationStatus> getReservationStatus(final Integer patientId) {
             return getHibernateTemplate().execute(new HibernateCallback<List<ReportReservationStatus>>() {
@@ -113,6 +115,7 @@ public class ReservationDaoImpl extends GenericDAO<Reservation> implements Reser
         });
     }
 
+    
     @Override
     public List<ReportReservationStatus> getReservationStatusByDates(final Integer patientId,final Date fromDate,final Date toDate) {
                 return getHibernateTemplate().execute(new HibernateCallback<List<ReportReservationStatus>>() {
@@ -130,11 +133,41 @@ public class ReservationDaoImpl extends GenericDAO<Reservation> implements Reser
     }
 
     @Override
-    public List<StatisticReportModule> getReservationExamineTypeMoneyStatistic(final Date fromDate,final Date toDate) {
+    public List<StatisticReportModule> getTodayReservationReport(final Date today) {
         return getHibernateTemplate().execute(new HibernateCallback<List<StatisticReportModule>>() {
             @Override
             public List<StatisticReportModule> doInHibernate(Session sn) throws HibernateException {
-                Query query = sn.createQuery("select ex.nameEn as moduleName , sum(r.paid) as moduleSum from Reservation r inner join r.examineType ex where r.status =:status and r.reservationDate BETWEEN :fromDate AND :toDate group by ex.nameEn");
+                Query query = sn.createQuery("select ex.nameEn as moduleName ,count(ex.nameEn) as occuranceNumber , sum(r.paid) as moduleSum from Reservation r inner join r.examineType ex where r.status =:status and r.reservationDate = :today group by ex.nameEn");
+                query.setString("status", "CONFIRMED");
+                query.setDate("today", today);
+                List<StatisticReportModule> reportReservationStatuses=query.setResultTransformer(Transformers.aliasToBean(StatisticReportModule.class)).list();  
+                // return result List
+                return reportReservationStatuses;
+            }
+        });
+     }
+    
+    @Override
+    public List<StatisticReportModule> getTodayInsurranceReport(final Date today) {
+        return getHibernateTemplate().execute(new HibernateCallback<List<StatisticReportModule>>() {
+            @Override
+            public List<StatisticReportModule> doInHibernate(Session sn) throws HibernateException {
+                Query query = sn.createQuery("select i.nameEn as moduleName ,count(i.nameEn) as occuranceNumber , sum(r.paid) as moduleSum from Reservation r inner join r.patient p inner join p.insuranceCompany i where r.status =:status and r.reservationDate = :today group by i.nameEn");
+                query.setString("status", "CONFIRMED");
+                query.setDate("today", today);
+                List<StatisticReportModule> reportReservationStatuses=query.setResultTransformer(Transformers.aliasToBean(StatisticReportModule.class)).list();  
+                // return result List
+                return reportReservationStatuses;
+            }
+        });        
+    }
+   
+    @Override
+    public List<StatisticReportModule> getReservationReportWithRange(final Date fromDate,final Date toDate) {
+        return getHibernateTemplate().execute(new HibernateCallback<List<StatisticReportModule>>() {
+            @Override
+            public List<StatisticReportModule> doInHibernate(Session sn) throws HibernateException {
+                Query query = sn.createQuery("select ex.nameEn as moduleName ,count(ex.nameEn) as occuranceNumber , sum(r.paid) as moduleSum from Reservation r inner join r.examineType ex where r.status =:status and r.reservationDate BETWEEN :fromDate AND :toDate group by ex.nameEn");
                 query.setString("status", "CONFIRMED");
                 query.setDate("fromDate", fromDate);
                 query.setDate("toDate", toDate);
@@ -146,11 +179,11 @@ public class ReservationDaoImpl extends GenericDAO<Reservation> implements Reser
     }
 
     @Override
-    public List<StatisticReportModule> getReservationExamineTypePatientsStatistic(final Date fromDate,final Date toDate) {
-           return getHibernateTemplate().execute(new HibernateCallback<List<StatisticReportModule>>() {
+    public List<StatisticReportModule> getInsuranceReportWithRange(final Date fromDate,final Date toDate) {
+        return getHibernateTemplate().execute(new HibernateCallback<List<StatisticReportModule>>() {
             @Override
             public List<StatisticReportModule> doInHibernate(Session sn) throws HibernateException {
-                Query query = sn.createQuery("select ex.nameEn as moduleName , count(r.status) as occuranceNumber from Reservation r inner join r.examineType ex where r.status =:status and r.reservationDate BETWEEN :fromDate AND :toDate group by ex.nameEn");
+                Query query = sn.createQuery("select i.nameEn as moduleName ,count(i.nameEn) as occuranceNumber , sum(r.paid) as moduleSum from Reservation r inner join r.patient p inner join p.insuranceCompany i where r.status =:status and r.reservationDate BETWEEN :fromDate AND :toDate group by i.nameEn");
                 query.setString("status", "CONFIRMED");
                 query.setDate("fromDate", fromDate);
                 query.setDate("toDate", toDate);
@@ -159,8 +192,8 @@ public class ReservationDaoImpl extends GenericDAO<Reservation> implements Reser
                 return reportReservationStatuses;
             }
         });
-    
     }
-    
+
+
     
 }

@@ -1,65 +1,62 @@
-<%--
-    Document   : reservationProcess
-    Created on : Sep 24, 2015, 12:54:02 AM
+<%-- 
+    Document   : users
+    Created on : Nov 3, 2016, 9:36:08 PM
     Author     : khaledeng
 --%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-
 <html>
-    
-    
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-         <title> Reservation </title>
+         <title> Reservation Report </title>
         <!-- Styles -->
-        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/calendar.css'/>" >
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/bootstrap.css'/>" />
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/owl.carousel.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/owl.theme.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/reservation.css'/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/ssd-confirm.css'/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/font-awesome.min.css'/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/popup.css'/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/paging.css'/>">
+        
         <!---  JS Scripts Files --->
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/owl.carousel.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/squad.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/underscore.js'/>"></script>
-        <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
-        
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery.ssd-confirm.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery.bpopup.min.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/paging.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery.canvasjs.min.js'/>"></script>
+
         <!-- NEW -->
         <script type="text/javascript" src="<c:url value='/resources/js/nprogress.js'/>"></script>
         <script>
             NProgress.start();
         </script>
-        <!--- Page Styles--->
-        <!-- Bootstrap Styles-->
             <!-- FontAwesome Styles-->
             <link href="<c:url value='/resources/css/font-awesome.css'/>" rel="stylesheet" />
             <!-- Morris Chart Styles-->
-            <link href="<c:url value='/resources/js/morris/morris-0.4.3.min.css'/>" rel="stylesheet" />
             <link href="<c:url value='/resources/css/animation.css'/>" rel="stylesheet" />
-            <!-- Custom Styles-->
             <!-- Google Fonts-->
             <link href="<c:url value='/resources/css/googlefonts.css'/>" rel="stylesheet" />
-        <script type="text/javascript" src="<c:url value='/resources/js/jquery.canvasjs.min.js'/>"></script>
-        <script type="text/javascript"> 
-          $(document).ready(function() {
-                var statusInfo =[];
-//                  // filling the Canvas Array
-                    function fillChartData(){
-                            <c:forEach items="${examineTypePatients}" var="examineTypeReport">
-                                  statusInfo.push({ label: "${examineTypeReport.moduleName}",  y: ${examineTypeReport.occuranceNumber}, legendText: "${examineTypeReport.moduleName}"});           
-                            </c:forEach>
-                    }//fillChartData
-                    
-                    ////////////////////////////////////////////////////////////
-                     var chart = new CanvasJS.Chart("chartContainer",{   
+                
+            <script type="text/javascript">
+            $(document).ready(function() {
+               
+                var reservationInfo =[];
+                var insurranceInfo =[];
+                ////////////////////////////////////////////////////////////
+                     var reservationChart = new CanvasJS.Chart("reservationChartContainer",{   
                             title: { 
-                                    text: "Examine Type Report",
+                                    text: "Today Reservation Report",
                                     fontSize: 24
                             }, 
                             axisY: { 
@@ -75,24 +72,95 @@
                                     showInLegend: true, 
                                     toolTipContent: "{label} <br/> #percent%", 
                                     //indexLabel: "#percent% - {label}", 
-                                    indexLabel: "{label} - {y} Times", 
-                                    dataPoints: statusInfo
+                                    indexLabel: "({label} , {name} L.E , {y} Patients)", 
+                                    dataPoints: reservationInfo
+                            }   
+                            ] 
+                    }); 
+                    
+                    ////////////////////////////////////////////////////////////
+                     var insurranceChart = new CanvasJS.Chart("insurranceChartContainer",{   
+                            title: { 
+                                    text: "Today Insurrance Report",
+                                    fontSize: 24
+                            }, 
+                            axisY: { 
+                                    title: "Products in %" 
+                            }, 
+                            legend :{ 
+                                    verticalAlign: "bottom", 
+                                    horizontalAlign: "center" 
+                            }, 
+                            data: [ 
+                            { 
+                                    type: "pie", 
+                                    showInLegend: true, 
+                                    toolTipContent: "{label} <br/> #percent%", 
+                                    //indexLabel: "#percent% - {label}", 
+                                    indexLabel: "({label} , {name} L.E , {y} Times)", 
+                                    dataPoints: insurranceInfo
                             }   
                             ] 
                     }); 
              
-             fillChartData();   
-             chart.render();	         
-            }); 
-            </script>     
+                $(".container").on("click","#searchNow", function(e) { 
+                 
+                    var dateFrom = $('#dateFrom').val();
+                    var dateTo = $('#dateTo').val();
+                 
+                    var request = $.ajax({
+                        url: "/zmed/report/reservation/search",
+                        type: "POST",
+                        dataType: 'json',
+                        data: {
+                            dateFrom:dateFrom,
+                            dateTo:dateTo
+                        },
+                        complete: function(data) {
+                              // Getting Reponse JSON
+                              var parsedJson = $.parseJSON(data.responseText);
+                              var reservationReports=parsedJson['myReservationReport'];
+                              var insuranceReports=parsedJson['myInsurranceReport'];
+                              
         
+                              var totalPatient=parsedJson['totalPatient'];
+                              var totalProfit=parsedJson['totalProfit'];
+                              
+                              var totalInsurredPatient=parsedJson['totalInsurredPatient'];
+                              var totalInsurranceProfit=parsedJson['totalInsurranceProfit'];
+                              /// Filling Reservation Report
+                              $.each( reservationReports, function( index, report){
+                                    reservationInfo.push({ label: report['moduleName'], name: report['moduleSum'], y: report['occuranceNumber'], legendText: report['moduleName']});           
+                              });
+
+                              /// Filling Insurrance Report
+                              $.each( insuranceReports, function( index, report){
+                                    insurranceInfo.push({ label: report['moduleName'], name: report['moduleSum'], y: report['occuranceNumber'], legendText: report['moduleName']});           
+                              });
+                              
+                              $('#totalPatient').text(totalPatient);
+                              $('#totalProfit').text(totalProfit);
+                              $('#totalInsurredPatient').text(totalInsurredPatient);
+                              $('#totalInsurranceProfit').text(totalInsurranceProfit);
+                              
+                              $('#reportResults').show();
+                              //// Generate Charts 
+                              reservationChart.render();	  
+                              insurranceChart.render();
+                              
+                              reservationInfo=[];
+                              insurranceInfo=[];
+                              
+                        }//end Complete Function
+                    });
+              });
+             
+            });  
+            </script>
             
-        <%@include file="../basic/scripts.jsp" %>
-        
+        <%@include file="../../OBook/basic/scripts.jsp" %>
     </head>
-    
-       
-         <body class="nav-md" >
+    <body class="nav-md">
 
             <div class="container body">
 
@@ -100,105 +168,124 @@
  
                     <!---  Importing SideBar --->
 
-                    <%@include file="../basic/sidebar.jsp" %>
+                    <%@include file="../../OBook/basic/sidebar.jsp" %>
 
                     <!-- Header -->
 
-                    <%@include file="../basic/header.jsp" %>
+                    <%@include file="../../OBook/basic/header.jsp" %>
 
                      <div class="right_col" role="main">
-
-                          
+     
                     <div class="clearfix"></div>   
            
                   <!-- Content --->
           
              <div id="page-wrapper">
                 <div id="page-inner">
-
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1 class="page-header" style="padding-top: 15px;">
-                                Patient Report
-                            </h1>
-                        </div>
+                    <div class="page-title">
                     </div>
                     <!-- /. ROW  -->
-                    <!-- /. ROW  -->
                     <div id="notifaction" class="alert alert-success hidden" role="alert">Operation done successfully</div>
-                    <div class="row expandUp">
+                    <div class="row">
+                        
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                    Reservation Report
                                 </div>
-          
-                            <input type="hidden" id="currentDate" value="${currentDate}">   
-          <!--- ==============================================================================================--->
-            <!--- Calendar Section --->
-            <!--- ==============================================================================================--->
-                      
-                                            <div id="chartContainer" style="width: 100%; height: 300px"></div>      
-                                      
-                     
-                           
-
-                            </div>
-
-                             </div>
-                         </div>
+                                    <!--- List of XX --->
+                                    <div class="panel-body">
+                                           <div class="costViewer">
+                                                   
+                                               <!-- Search Form -->
+                                               <div>
+                                                   From : <input type="text" name="dateFrom" id="dateFrom" value="2016-01-01"/>
+                                                   To  : <input type="text" name="dateFrom" id="dateTo" value="2016-12-03"/>
+                                                   
+                                                   <center>
+                                                        <button id="searchNow" class="reserveButton">Show Report</button>  
+                                                   </center> 
+                                                   
+                                               </div> 
+                                               
+                                            <div style="display: none" id="reportResults"/>
+                                                    <!-- Reservation Report-->
+                                                    <div id="reservationChartContainer" style="width: 100%; height: 300px"></div>     
+                                                    <div> 
+                                                        <h3> Total Patients : <span id="totalPatient"></span></h3>   
+                                                        <h3> Total Profit :  <span id="totalProfit"></h3>  
+                                                    </div>
+                                                    
+                                                    <hr>
+                                                    <!-- Insurance Report-->
+                                                    <div id="insurranceChartContainer" style="width: 100%; height: 300px"></div>      
+                                                    <div> <h3> Insured Patients : <span id="totalInsurredPatient"></h3>
+                                                        <h3> Insurance Profit : <span id="totalInsurranceProfit"></h3>  
+                                                    </div>    
+                                           </div>
+                                                    
+                                            </div>      
+                                    </div>
+                            </div>        
+                            <!-- Widget -->
+                            <%@include file="../../OBook/basic/widgets.jsp" %>
+                        </div>
+                    </div>
                     <!-- /. ROW  -->
 
                     <!-- /. PAGE INNER  -->
                 </div>
                 <!-- /. PAGE WRAPPER  -->
+                 
             </div>
-        
-            <!-- Metis Menu Js -->
-            <script src="<c:url value='/resources/js/jquery.metisMenu.js'/>"></script>
-            <!-- Morris Chart Js -->
-            <script src="<c:url value='/resources/js/raphael-2.1.0.min.js'/>"></script>
-            <script src="<c:url value='/resources/js/morris.js'/>"></script>
-            <!-- Custom Js -->
-            <script src="<c:url value='/resources/js/custom-scripts.js'/>"></script>   
-           
-            
-            <!-- POPUPs Here ---->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                             <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                             <h4 class="modal-title" id="myModalLabel">Patient Name</h4>
-                                     </div>
-                 <div class="modal-body">
-
-                       <div class="row">
-                          <div class="userImgContainer"><img class="userImg"src="<c:url value='/resources/images/khaled.jpg'/>" /></div>
-                                            <div class="details">
-                                            <h3 class="name">Name</h3>
-                                            <h3 class="code">Code</h3>
-                                            <h3 class="examineType">Examine Type</h3>
-                                            <h3 class="date">07:15 PM 12/1/2016</h3>
-                                    </div>
-                                    <div class="actions">
-                                            <a href="#" class="delete"><img src="<c:url value='/resources/images/Cancel.png'/>" /></a>
-                                            <a href="#" class="check"><img src="<c:url value='/resources/images/checkround.png'/>" /></a>
-                                    </div>			
-                            </div>
-                        </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div> 
-            
-             </div>
+                    <!-- Metis Menu Js -->
+                    <script src="<c:url value='/resources/js/jquery.metisMenu.js'/>"></script>
+                    <!-- Morris Chart Js -->
+                    <script src="<c:url value='/resources/js/raphael-2.1.0.min.js'/>"></script>
+                    <!-- Custom Js -->
+                    <script src="<c:url value='/resources/js/custom-scripts.js'/>"></script>   
+                 </div>
             </div><!--End Main Container-->
-
     </div><!--End Body Container-->
-            
-    </body>
+
+    
+    <div id="patientDataPopup" class="popupDesign popup">
+        <c:import  url="/ums/admin/data/0" />
+    </div>
+    
+    <!-- Confirm Delete Popup -->
+    <div data-ssd-confirm-overlay></div>
+    
+    <div data-ssd-confirm>
+        
+    <div data-ssd-confirm-block="remove">
+
+        <p class="confirmMessage" data-ssd-confirm-content></p>
+
+        <nav>
+
+            <span data-button-wrapper>
+
+                <span
+                    class="alert confirmMessageYesButton deletePatient"
+                    data-ssd-confirm-yes
+                    data-trigger
+                >YES</span>
+
+                <span
+                    class="small alert disabled button hide"
+                    data-processing
+                ><i class="fa fa-spinner fa-spin fa-fw"></i></span>
+
+            </span>
+
+            <span class="small confirmMessageNoButton" data-ssd-confirm-no>NO</span>
+
+        </nav>
+
+    </div>
+
+</div>
+    
+  </body>      
 </html>

@@ -14,7 +14,9 @@ import com.ocare.obook.holder.ReportReservationStatus;
 import com.ocare.obook.holder.StatisticReportModule;
 import com.ocare.obook.service.ReservationService;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -45,12 +47,113 @@ public class ReportsController {
     @Autowired
     private PatientService patientService;
     
+   
+     
+    @RequestMapping("/today")
+    public String dailyReport(Model model) {
+        /// Simulating the Search Parameters 
+        Date todayDate=new Date();      
+        /// Getting reservationReport For Today
+        List<StatisticReportModule> todayReservationReport=reservationService.getTodayReservationReport(todayDate);
+        /// Getting InsuranceReport for Today
+        List<StatisticReportModule> todayInsurranceReport=reservationService.getTodayInsurranceReport(todayDate);
+        // Calculate Total Number of Patient for Reservation Report 
+        long totalPatient=0;
+        double totalProfit=0;
+        if(!todayReservationReport.isEmpty()){
+            for(StatisticReportModule reportModule:todayReservationReport){
+                totalPatient+=reportModule.getOccuranceNumber();
+                totalProfit+=reportModule.getModuleSum();
+            }//end For Lop 
+        }//end if Condition
+        // Calculate Total Number of Patient for Reservation Report 
+        long totalInsurredPatient=0;
+        double totalInsurranceProfit=0;
+        if(!todayInsurranceReport.isEmpty()){
+            for(StatisticReportModule reportModule:todayInsurranceReport){
+                totalInsurredPatient+=reportModule.getOccuranceNumber();
+                totalInsurranceProfit+=reportModule.getModuleSum();
+            }//end For Lop 
+        }//end if Condition
+        /// Send Result to View
+        model.addAttribute("Process", "Process");
+        model.addAttribute("todayReservationReport", todayReservationReport);
+        model.addAttribute("todayInsurranceReport", todayInsurranceReport);
+        model.addAttribute("totalPatient", totalPatient);
+        model.addAttribute("totalProfit", totalProfit);
+        model.addAttribute("totalInsurredPatient", totalInsurredPatient);
+        model.addAttribute("totalInsurranceProfit", totalInsurranceProfit);
+        
+        return MODULE_PATH+"todayReport";
+    }//end todayReport
+    
+    @RequestMapping("/reservation")
+    public String reservationReport(Model model) {
+        
+        return MODULE_PATH+"reservationReport";
+    }//end reservationReport
+    
+    @RequestMapping(value = "/reservation/search", method = RequestMethod.POST,produces="application/json")
+    public @ResponseBody Map<String,Object> searchReservationReport(@RequestParam(value="dateFrom",required = true) String dateFromString,
+             @RequestParam(value="dateTo",required = true) String dateToString,Model model) {
+        
+        Map<String,Object> models=new HashMap<String,Object>();
+        
+        if((dateFromString!=null)&&(dateToString!=null)){
+                /// Simulating the Search Parameters 
+               Date dateFrom=ODate.getDateFromString(dateFromString);        
+               Date dateTo=ODate.getDateFromString(dateToString);
+               if(dateTo.compareTo(dateFrom)>=0){
+                    /// Getting reservationReport For Date Range
+                    List<StatisticReportModule> myReservationReport=reservationService.getReservationReportWithRange(dateFrom, dateTo);
+                    /// Getting InsuranceReport for Today
+                    List<StatisticReportModule> myInsurranceReport=reservationService.getInsuranceReportWithRange(dateFrom, dateTo);
+                    // Calculate Total Number of Patient for Reservation Report 
+                    long totalPatient=0;
+                    double totalProfit=0;
+                    if(!myReservationReport.isEmpty()){
+                        for(StatisticReportModule reportModule:myReservationReport){
+                            totalPatient+=reportModule.getOccuranceNumber();
+                            totalProfit+=reportModule.getModuleSum();
+                        }//end For Lop 
+                    }//end if Condition
+                    // Calculate Total Number of Patient for Reservation Report 
+                    long totalInsurredPatient=0;
+                    double totalInsurranceProfit=0;
+                    if(!myInsurranceReport.isEmpty()){
+                        for(StatisticReportModule reportModule:myInsurranceReport){
+                            totalInsurredPatient+=reportModule.getOccuranceNumber();
+                            totalInsurranceProfit+=reportModule.getModuleSum();
+                        }//end For Lop 
+                    }//end if Condition
+                    /// Send Result to View
+                    models.put("myReservationReport", myReservationReport);
+                    models.put("myInsurranceReport", myInsurranceReport);
+                    models.put("totalPatient", totalPatient);
+                    models.put("totalProfit", totalProfit);
+                    models.put("totalInsurredPatient", totalInsurredPatient);
+                    models.put("totalInsurranceProfit", totalInsurranceProfit);
+                   System.out.println(">>> Reservation Report "+myReservationReport);
+                   System.out.println(">>> Insurance Report "+myInsurranceReport);
+                   
+               }//end Inner If Condition
+        }//end if Condition     
+        // return result 
+        return models;
+    }//end reservationReport
+    
     
     @RequestMapping("/patient")
     public String patientReport(Model model) {    
         return MODULE_PATH+"patientReport";
     }//end reservationReport
     
+    
+    ///////////////////////////////////////////////////////////////////////////
+    /*
+     *  Test Cases 
+     */
+    ///////////////////////////////////////////////////////////////////////////
     @RequestMapping("/reservation/download")
     @ResponseBody
     public void reservationReport(HttpServletResponse response,Model model) {
@@ -117,37 +220,6 @@ public class ReportsController {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////    
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
-    Reservation Report Module
-    */    
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @RequestMapping("/reservation")
-    public String searchReservationReport(Model model) {
-        
-        return null;
-    }//end reservationReport
-    
-    @RequestMapping("/reservation/process")
-    public String reservationReport(Model model) {
-        /// Simulating the Search Parameters 
-        Date fromDate=ODate.getDateFromString("2015-10-01");
-        Date toDate=ODate.getDateFromString("2015-11-01");
-        /// Getting ExamineTypePatients
-        List<StatisticReportModule> examineTypePatients=reservationService.getReservationExamineTypePatientsStatistic(fromDate, toDate);
-        /// Getting ExamineTypeMoney
-        List<StatisticReportModule> examineTypeMoney=reservationService.getReservationExamineTypeMoneyStatistic(fromDate, toDate);
-       //// Send Result to View
-        model.addAttribute("Process", "Process");
-        model.addAttribute("examineTypePatients", examineTypePatients);
-        model.addAttribute("examineTypeMoney", examineTypeMoney);
-        // return result
-        return MODULE_PATH+"reservationReport";
-    }//end reservationReport
-
-    
-////////////////////////////////////////////////////////////////////////////////////////////////////////    
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
     Patient Report Module
     */    
 //////////////////////////////////////////////////////////////////////////////////////////////////////// 
@@ -200,11 +272,5 @@ public class ReportsController {
         // return result 
         return MODULE_PATH+"patientReport";
     }//end searchPatient
-    
-    @RequestMapping("/daily")
-    public String dailyReport(Model model) {
-        
-        return null;
-    }//end reservationReport
-    
+   
 }//end Reports Controller

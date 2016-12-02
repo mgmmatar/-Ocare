@@ -12,7 +12,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-         <title> Patient Report </title>
+         <title> Today Report </title>
         <!-- Styles -->
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/bootstrap.css'/>" />
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/owl.carousel.css'/>">
@@ -34,6 +34,8 @@
         <script type="text/javascript" src="<c:url value='/resources/js/jquery.ssd-confirm.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery.bpopup.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/paging.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery.canvasjs.min.js'/>"></script>
+
         <!-- NEW -->
         <script type="text/javascript" src="<c:url value='/resources/js/nprogress.js'/>"></script>
         <script>
@@ -48,7 +50,78 @@
                 
             <script type="text/javascript">
             $(document).ready(function() {
+                var reservationInfo =[];
+                var insurranceInfo =[];
                 
+                function fillReservationChartData(){
+                    <c:forEach items="${todayReservationReport}" var="todayReservationReportInst">
+                            reservationInfo.push({ label: "${todayReservationReportInst.moduleName}", name: "${todayReservationReportInst.moduleSum}", y: ${todayReservationReportInst.occuranceNumber}, legendText: "${todayReservationReportInst.moduleName}"});           
+                    </c:forEach>
+                }//fillChartData
+                    
+                function fillInsuuranceChartData(){
+                    <c:forEach items="${todayInsurranceReport}" var="todayInsurranceReportInst">
+                            insurranceInfo.push({ label: "${todayInsurranceReportInst.moduleName}", name: "${todayInsurranceReportInst.moduleSum}", y: ${todayInsurranceReportInst.occuranceNumber}, legendText: "${todayInsurranceReportInst.moduleName}"});           
+                    </c:forEach>
+                }//fillChartData
+
+                    ////////////////////////////////////////////////////////////
+                     var reservationChart = new CanvasJS.Chart("reservationChartContainer",{   
+                            title: { 
+                                    text: "Today Reservation Report",
+                                    fontSize: 24
+                            }, 
+                            axisY: { 
+                                    title: "Products in %" 
+                            }, 
+                            legend :{ 
+                                    verticalAlign: "bottom", 
+                                    horizontalAlign: "center" 
+                            }, 
+                            data: [ 
+                            { 
+                                    type: "pie", 
+                                    showInLegend: true, 
+                                    toolTipContent: "{label} <br/> #percent%", 
+                                    //indexLabel: "#percent% - {label}", 
+                                    indexLabel: "({label} , {name} L.E , {y} Patients)", 
+                                    dataPoints: reservationInfo
+                            }   
+                            ] 
+                    }); 
+                    
+                    ////////////////////////////////////////////////////////////
+                     var insurranceChart = new CanvasJS.Chart("insurranceChartContainer",{   
+                            title: { 
+                                    text: "Today Insurrance Report",
+                                    fontSize: 24
+                            }, 
+                            axisY: { 
+                                    title: "Products in %" 
+                            }, 
+                            legend :{ 
+                                    verticalAlign: "bottom", 
+                                    horizontalAlign: "center" 
+                            }, 
+                            data: [ 
+                            { 
+                                    type: "pie", 
+                                    showInLegend: true, 
+                                    toolTipContent: "{label} <br/> #percent%", 
+                                    //indexLabel: "#percent% - {label}", 
+                                    indexLabel: "({label} , {name} L.E , {y} Times)", 
+                                    dataPoints: insurranceInfo
+                            }   
+                            ] 
+                    }); 
+             
+             // Filling Reservation Chart 
+             fillReservationChartData();   
+             reservationChart.render();	  
+             // Filling Insurrance Chart
+             fillInsuuranceChartData();   
+             insurranceChart.render();
+             
             });  
             </script>
             
@@ -85,11 +158,25 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                   Patient Report
+                                   Today Report
                                 </div>
                                     <!--- List of XX --->
                                     <div class="panel-body">
-
+                                           <div class="costViewer">
+                                                    
+                                                    <!-- Reservation Report-->
+                                                    <div id="reservationChartContainer" style="width: 100%; height: 300px"></div>     
+                                                    <div> 
+                                                        <h3> Total Patients : ${totalPatient}</h3><h3> Total Profit : ${totalProfit}</h3>  
+                                                    </div>
+                                                    
+                                                    <hr>
+                                                    <!-- Insurance Report-->
+                                                    <div id="insurranceChartContainer" style="width: 100%; height: 300px"></div>      
+                                                    <div> <h3> Insured Patients : ${totalInsurredPatient}</h3><h3> Insurance Profit : ${totalInsurranceProfit}</h3>  
+                                                    </div>    
+                                                    
+                                            </div>      
                                     </div>
                             </div>        
                             <!-- Widget -->
