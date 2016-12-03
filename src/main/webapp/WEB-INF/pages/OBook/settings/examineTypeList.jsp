@@ -48,6 +48,7 @@
             <!-- FontAwesome Styles-->
             <link href="<c:url value='/resources/css/font-awesome.css'/>" rel="stylesheet" />
             <!-- Morris Chart Styles-->
+            <link href="<c:url value='/resources/css/morris-0.4.3.min.css'/>" rel="stylesheet" />
             <link href="<c:url value='/resources/css/animation.css'/>" rel="stylesheet" />
             <!-- Custom Styles-->
             <!-- Google Fonts-->
