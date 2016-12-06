@@ -37,7 +37,7 @@ CREATE TABLE `common` (
 
 LOCK TABLES `common` WRITE;
 /*!40000 ALTER TABLE `common` DISABLE KEYS */;
-INSERT INTO `common` VALUES (1,'RESERVATION');
+INSERT INTO `common` VALUES (1,'PROFILE');
 /*!40000 ALTER TABLE `common` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +117,7 @@ CREATE TABLE `examine_type` (
   `isDeleted` bit(1) DEFAULT b'0',
   `isDefault` bit(1) DEFAULT b'0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +126,7 @@ CREATE TABLE `examine_type` (
 
 LOCK TABLES `examine_type` WRITE;
 /*!40000 ALTER TABLE `examine_type` DISABLE KEYS */;
-INSERT INTO `examine_type` VALUES (1,'«·ﬂ‘› «·ÃœÌœ','Examine','Examination',50,10,'\0','\0'),(2,'≈⁄«œ… «·ﬂ‘›','Re-Examine','Re-Examine',50,15,'\0','\0'),(19,' Õ·Ì· œ„','Blood Test','Blood Test',80,20,'\0',''),(20,'dsdsad','asdasd','asdasd',40,20,'','\0'),(31,'csdfgh','dsfdgdf','fdfdds',10,10,'','\0'),(33,'‰Ê⁄ ÃœÌœ','New Type',' New Type Examine',20,20,'','\0'),(34,'‰Ê⁄ ÃœÌœ','Another One','fdsafsdfsdfds',50,30,'\0','\0'),(35,'»Ì”»Ì»','Ì»Ì”»Ì”»','Ì”»Ì”»Ì”»',20,20,'','\0');
+INSERT INTO `examine_type` VALUES (1,'«·ﬂ‘› «·⁄«œÌ','Examination','Examination',30,20,'\0','\0'),(2,'≈⁄«œ… «·ﬂ‘›','Re-Examine','Re-Examine',50,15,'\0','\0'),(19,' Õ·Ì· œ„','Blood Test','Blood Test',80,20,'\0','\0'),(20,'Œ«·œ','asdasd','asdasd',40,20,'\0','\0'),(31,'csdfgh','dsfdgdf','fdfdds',10,10,'\0',''),(33,'‰Ê⁄ ÃœÌœ','New Type',' New Type Examine',20,20,'\0','\0'),(34,'‰Ê⁄ ÃœÌœ','Another One','fdsafsdfsdfds',50,30,'\0','\0'),(35,'»Ì”»Ì»','Ì»Ì”»Ì”»','Ì”»Ì”»Ì”»',20,20,'','\0'),(36,'X-Ray','X-Ray','X-ray',100,20,'\0','\0');
 /*!40000 ALTER TABLE `examine_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -170,7 +170,7 @@ CREATE TABLE `insurance_company` (
   `joinDate` date DEFAULT NULL,
   `isDeleted` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -179,7 +179,7 @@ CREATE TABLE `insurance_company` (
 
 LOCK TABLES `insurance_company` WRITE;
 /*!40000 ALTER TABLE `insurance_company` DISABLE KEYS */;
-INSERT INTO `insurance_company` VALUES (1,'','OMED','OMed Company for Inssurance',NULL,'\0'),(2,'‘—ﬂ… „Ìœ—«Ìœ','MedRight','MedRight Company for Insurrance',NULL,'\0'),(3,'«·⁄—»Ì…','Arabian','Welcome to Arabian Company',NULL,'\0'),(4,'dadasdasdas','fdsfdsf','dsadsadsadasdasd',NULL,''),(9,'ÃœÌœ…','New One','New One Integration System',NULL,''),(10,'Dalia','Dalia','Dalia Company for Insurrance',NULL,'\0');
+INSERT INTO `insurance_company` VALUES (1,'‘—ﬂ… √Ê„Ìœ','OMED','OMed Company for Inssurance',NULL,'\0'),(2,'‘—ﬂ… „Ìœ—«Ìœ','MedRight','MedRight Company for Insurrance',NULL,'\0'),(3,' gffhgfhfg','Arabian','Welcome to Arabian Company',NULL,'\0'),(4,'dadasdasdas','fdsfdsf','dsadsadsadasdasd',NULL,''),(9,'ÃœÌœ…','New One','New One Integration System',NULL,''),(10,'Dalia','Dalia','Dalia Company for Insurrance',NULL,''),(11,'Dalia',' Dalia Company','dalia Company',NULL,'');
 /*!40000 ALTER TABLE `insurance_company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,7 +200,7 @@ CREATE TABLE `insurance_profile` (
   KEY `fk_insurance_profile_2_idx` (`companyId`),
   CONSTRAINT `fk_insurance_profile_1` FOREIGN KEY (`examineTypeId`) REFERENCES `examine_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_insurance_profile_2` FOREIGN KEY (`companyId`) REFERENCES `insurance_company` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -209,7 +209,7 @@ CREATE TABLE `insurance_profile` (
 
 LOCK TABLES `insurance_profile` WRITE;
 /*!40000 ALTER TABLE `insurance_profile` DISABLE KEYS */;
-INSERT INTO `insurance_profile` VALUES (46,9,1,40),(47,1,1,35),(49,2,1,50),(50,2,19,30),(53,10,1,85);
+INSERT INTO `insurance_profile` VALUES (46,9,1,40),(47,1,1,35),(49,2,1,50),(50,2,19,30),(53,10,1,85),(54,11,36,60),(55,11,1,50);
 /*!40000 ALTER TABLE `insurance_profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -355,7 +355,7 @@ CREATE TABLE `obird_auth` (
   `userName` varchar(45) DEFAULT NULL,
   `password` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -364,8 +364,36 @@ CREATE TABLE `obird_auth` (
 
 LOCK TABLES `obird_auth` WRITE;
 /*!40000 ALTER TABLE `obird_auth` DISABLE KEYS */;
-INSERT INTO `obird_auth` VALUES (1,'khaledeng','thegenius'),(2,'ali','ali'),(3,'amr','amr'),(4,'admin','admin'),(5,'fsdafsd','23123'),(6,'change','123'),(7,'fsdafsdfdsf','12312'),(8,'fdsfsdf','fsdafsdf');
+INSERT INTO `obird_auth` VALUES (1,'khaledeng','thegenius'),(2,'ali','ali'),(3,'amr','amr'),(4,'admin','admin'),(5,'fsdafsd','23123'),(6,'change','123'),(7,'khaledUSer','12312'),(8,'fdsfsdf','fsdafsdf'),(9,'fsdafds','fdfds'),(10,'dasdsad','dasdsad'),(11,'sdfsdf','fsdfds'),(12,'dasdas','dasdasd'),(13,'fdsf','fsdfsd'),(14,'gdffdg','gdfgd'),(15,'fsdfdsf','fdsfsdf');
 /*!40000 ALTER TABLE `obird_auth` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `obird_log_action`
+--
+
+DROP TABLE IF EXISTS `obird_log_action`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `obird_log_action` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) DEFAULT NULL,
+  `action` varchar(255) DEFAULT NULL,
+  `created` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_obird_log_action_1_idx` (`userId`),
+  CONSTRAINT `fk_obird_log_action_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `obird_log_action`
+--
+
+LOCK TABLES `obird_log_action` WRITE;
+/*!40000 ALTER TABLE `obird_log_action` DISABLE KEYS */;
+INSERT INTO `obird_log_action` VALUES (1,1,'ADD Examine Type : Examine','2016-12-03');
+/*!40000 ALTER TABLE `obird_log_action` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -417,7 +445,7 @@ CREATE TABLE `obird_user` (
   PRIMARY KEY (`id`),
   KEY `fk_obird_user_1_idx` (`authId`),
   CONSTRAINT `fk_obird_user_1` FOREIGN KEY (`authId`) REFERENCES `obird_auth` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -426,7 +454,7 @@ CREATE TABLE `obird_user` (
 
 LOCK TABLES `obird_user` WRITE;
 /*!40000 ALTER TABLE `obird_user` DISABLE KEYS */;
-INSERT INTO `obird_user` VALUES (1,'khaled','KOKO','Mosaad','efafsdfsda',NULL,NULL,'','\0',1),(2,'ali','ali','ali','ali',NULL,'2016-11-12','','\0',2),(3,'amr','amr','amr','amr',NULL,NULL,'','\0',3),(4,'admin','admin','admin','admin@mail.com',NULL,NULL,'','\0',4),(7,'Change','ChageMe','Chagnge','fdsfdsfdsf',NULL,'2016-11-12','','\0',6),(8,'fdfdsaf','fdsfdsfdsfs','ASD','fsdafsdfds','2016-11-12','2016-11-12','','\0',7),(9,'dsasad','dsadas','fsdfdsa','fsdfasdf','2016-11-12',NULL,'','\0',8);
+INSERT INTO `obird_user` VALUES (1,'khaled','KOKO','Mosaad','efafsdfsda',NULL,NULL,'','\0',1),(2,'ali','ali','ali','ali',NULL,'2016-11-12','','\0',2),(3,'amr','amr','amr','amr',NULL,NULL,'','\0',3),(4,'admin','admin','admin','admin@mail.com',NULL,NULL,'','\0',4),(7,'Change','ChageMe','Chagnge','fdsfdsfdsf',NULL,'2016-11-12','','\0',6),(8,'My Name','is','khaled','khaled@mail.com','2016-11-12','2016-11-25','','\0',7),(9,'dsasad','dsadas','fsdfdsa','fsdfasdf','2016-11-12',NULL,'','',8),(10,'dsa','fdfasd','fsdfasd','fsadf','2016-11-19',NULL,'','\0',9),(11,'dasdasdsad','dasdsad','dasdsad','dsadasdsa','2016-11-19',NULL,'','',10),(12,'dasd','dsadsad','dfdsfs','fsdfsdfdsf','2016-11-19',NULL,'','\0',11),(13,'asdsad','dsadsa','dasdsad','adsad','2016-11-19',NULL,'','',12),(14,'fsdfd','fsdfsf','fdsfsdfd','fsfsdf','2016-11-19',NULL,'','\0',13),(15,'fgdfg1fgdg','dfgfdqgdfgfd','gddfgqgdfgf','gdfgf','2016-11-19',NULL,'','\0',14),(16,'sdfdf','fsdfdsf','fsdfds','fsdfdsf','2016-11-19',NULL,'','\0',15);
 /*!40000 ALTER TABLE `obird_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -446,7 +474,7 @@ CREATE TABLE `obird_user_role` (
   KEY `fk_obird_user_role_2_idx` (`userId`),
   CONSTRAINT `fk_obird_user_role_1` FOREIGN KEY (`roleId`) REFERENCES `obird_role` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_obird_user_role_2` FOREIGN KEY (`userId`) REFERENCES `obird_user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -455,7 +483,7 @@ CREATE TABLE `obird_user_role` (
 
 LOCK TABLES `obird_user_role` WRITE;
 /*!40000 ALTER TABLE `obird_user_role` DISABLE KEYS */;
-INSERT INTO `obird_user_role` VALUES (1,1,1),(4,3,7),(2,4,8),(2,7,12),(2,8,14),(2,2,15),(4,9,16);
+INSERT INTO `obird_user_role` VALUES (1,1,1),(4,3,7),(2,4,8),(2,7,12),(3,2,15),(4,9,16),(2,10,17),(2,11,18),(2,12,19),(2,13,20),(2,14,21),(2,15,22),(2,16,23),(3,8,25);
 /*!40000 ALTER TABLE `obird_user_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -487,8 +515,12 @@ CREATE TABLE `patient` (
   `isDeleted` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_patient_1_idx` (`insuranceId`),
-  CONSTRAINT `fk_patient_1` FOREIGN KEY (`insuranceId`) REFERENCES `insurance_company` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+  KEY `fk_patient_2_idx` (`modifiedBy`),
+  KEY `fk_patient_3_idx` (`registeredBy`),
+  CONSTRAINT `fk_patient_1` FOREIGN KEY (`insuranceId`) REFERENCES `insurance_company` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_patient_2` FOREIGN KEY (`modifiedBy`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_patient_3` FOREIGN KEY (`registeredBy`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -497,7 +529,7 @@ CREATE TABLE `patient` (
 
 LOCK TABLES `patient` WRITE;
 /*!40000 ALTER TABLE `patient` DISABLE KEYS */;
-INSERT INTO `patient` VALUES (1,'006677','khaled','Mosaad','Abd El-Aziz','Male','Sheben El-Kom Meonofiya','01116258483','01060752335','engkhaledmos3ad@gmail.com','26','1980-05-05','2015-10-10 02:28:24',1,'2016-11-05 22:04:45',1,10,'\0'),(2,'Mohamed','Mohamed','Ahmed','El-Nagar','Female','Cairo ,Egypt ','01343413454','','mohamed@mail.com','22','1999-06-03','2015-10-10 02:31:04',1,'2015-11-10 22:41:29',1,1,''),(3,'mohamed','mohamed','Ahmed','El-Naggar','Male','Menoufia','','222222222222222','mohamed.nn90@gmail.com','25',NULL,'2015-11-03 00:15:54',1,NULL,NULL,2,''),(4,'Ali','Ali','Mohamed','Eslam','Male','Sheben el-Kom','011161112050','013454345634','Mohamed@gg.com','23','2016-06-08','2015-11-03 21:56:04',1,'2016-06-13 00:54:09',1,1,''),(5,'Eslam','Eslam','Mohamed','Ali','Female','Sheben El-Kom Meonofiya','012223445435','5646356573','eslam@gmail.com','21',NULL,'2015-11-04 22:38:50',1,'2015-11-04 22:39:02',1,1,''),(6,'dafsddsf','dafsddsf','sadfdsfdsf','fadsf','Female','afsdfadsf','asfdasdfads','azsdfasdf','fdsafasdf@gfdgdsfgdf.com','23',NULL,'2015-11-10 22:41:07',1,NULL,NULL,2,''),(7,'Mahmoud','Mahmoud','Matar','Ali','Male','dsfadsf','02222','','mahmod@tahoo.com','25',NULL,'2015-12-04 20:31:15',1,'2015-12-04 20:31:42',1,2,''),(8,'Amr','Amr','gvagfdafsd','fsadfdsf','Male','SADADSA','DFSADSADS','','','12',NULL,'2015-12-14 23:51:05',1,'2015-12-14 23:51:26',1,1,'\0'),(9,'dsfghfds','dsfghfds','fgdghjkhgf','gtfdghuiytre','Female','qerwtyuioytrew','56786543','89076543','wertyu@fgdsfgfdsg.com','23','2015-10-22','2015-12-26 02:10:41',1,'2015-12-26 02:20:57',1,2,''),(10,'fadsfdsf','fadsfdsf','vfasdfdsaf','bnm,50','Female','qwreewrqwerqwerewr','546463563564656','345678903424578','sdafadsfd@gdfgf.org','50','2015-10-20','2015-12-26 02:16:51',1,'2016-09-10 04:29:57',1,NULL,'\0'),(11,'fdsafds','fdsafds','fsdafds','fsadfdsaf','Female','asdfsdf','fasdfds','fasdf','engkhaledmos3ad@gmail.com','123',NULL,'2016-01-02 00:53:01',1,'2016-09-10 08:52:21',1,NULL,'\0'),(12,'Eslam','dsadsa','fdgdfgsfdgdfg','El-Sayed,20','Male','Maadi , Cairo ','0111555666','045345636','engkhaledmos3ad@gmail.com','20','2010-10-22','2016-01-12 14:11:50',1,'2016-11-05 22:05:00',1,NULL,'\0'),(13,'mahmoud','mahmoud','Matar','dsaDAS','Male','Bagoor','01115555555','034324324324','dfadf@gfsdg.com','25','1991-12-31','2016-01-30 17:20:43',1,'2016-02-10 22:34:10',1,1,''),(14,'khload','khload','dsadsa','dasdsada','Male','sdadsdsad','0213213','04313432','sAS@afdsf.com','19','1991-02-08','2016-02-27 18:42:48',1,NULL,NULL,1,'');
+INSERT INTO `patient` VALUES (1,'006677','khaled','Mosaad','Abd El-Aziz','Female','Sheben El-Kom Meonofiya','01116258483','01060752335','engkhaledmos3ad@gmail.com','21','2016-01-01','2015-10-10 02:28:24',1,'2016-12-06 00:44:10',1,1,'\0'),(2,'Mohamed','Mohamed','Ahmed','El-Nagar','Female','Cairo ,Egypt ','01343413454','1234545','mohamed@mail.com','22','1999-06-03','2015-10-10 02:31:04',1,'2016-12-02 18:34:23',1,2,'\0'),(15,'Amr','Amr','Mohamed','Sobhy','Male','Cairo , Egypt','013223','03123213','amr@mail.com','29',NULL,'2016-12-02 18:36:57',1,NULL,NULL,3,'\0'),(16,'Eslam ','Eslam ','Mohamed','hamed','Male','Cairo , Egypt','42341','423134','aam@mail.com','20',NULL,'2016-12-02 18:37:46',1,NULL,NULL,NULL,'\0'),(17,'ESSO','ESSO','khaled','Ali','Male','Cairo , Egypt','01233454325','01241323412','esso@mail.com','40','2009-10-16','2016-12-03 15:14:16',1,'2016-12-06 01:23:31',1,1,'\0'),(18,'IMA','IMA','dad','dasdasd','Female','Cairo , Egypt','121434','234231434','esso@mail.com','20','2016-01-01','2016-12-05 22:34:00',1,'2016-12-06 01:09:16',1,3,'\0'),(19,'fdsafdsf','fdsafdsf','fsdafsdqfsdf','fsdfaf','Male','Cairo , Egypt','23432143','32414','dadad@fdsafd.com','20','2010-10-16','2016-12-05 23:16:55',1,NULL,NULL,2,'\0'),(20,'dsadsad','dsadsad','dsadsa','dsadsa','Male','lcacsdc','432413534','34514354353','dfsdsafd@dff.com','34','1972-03-16','2016-12-05 23:44:47',1,'2016-12-06 02:10:54',1,NULL,'\0'),(21,'New','New','One','Gefe','Male','dsfdsfasdfdsfdsf','213214341','3441234','dfdsfds@fdsfd.com','32','2002-01-01','2016-12-06 00:55:02',1,'2016-12-06 01:09:24',1,2,'\0'),(22,'dodod','dodod','dodo','dodosd','Female','adfdfadsf','21324234','432143241','fsdfasdfdsfdasf','22',NULL,'2016-12-06 02:00:12',1,'2016-12-06 02:00:12',1,NULL,'\0'),(23,'fadsf','fadsf','fsdfsda','fsdafdsf','Female','daffdsf','14324','4234123432','ee@fdsf.com','20','2004-12-12','2016-12-06 02:03:17',1,'2016-12-06 02:09:30',1,3,'\0'),(24,'sadsads','sadsads','dsadsad','dsadsd','Male','dsfdsfds','435673','34567','dsds@fdf.com','20','2002-10-14','2016-12-06 02:10:07',1,'2016-12-06 02:10:07',1,3,'\0');
 /*!40000 ALTER TABLE `patient` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -791,7 +823,7 @@ CREATE TABLE `reservation` (
   CONSTRAINT `fk_reservation_2` FOREIGN KEY (`reservationWay`) REFERENCES `reservation_way` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_reservation_3` FOREIGN KEY (`examineType`) REFERENCES `examine_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_reservation_4` FOREIGN KEY (`workingTimeId`) REFERENCES `working_time` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -800,7 +832,7 @@ CREATE TABLE `reservation` (
 
 LOCK TABLES `reservation` WRITE;
 /*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
-INSERT INTO `reservation` VALUES (1,'2015-10-17',1,1,1,NULL,NULL,'17:05:00','17:35:00','CANCELLED',NULL,1),(2,'2015-10-17',1,1,2,NULL,NULL,'17:50:00','18:00:00','WAITING',NULL,1),(3,'2015-10-17',1,1,1,200,NULL,'18:30:00','18:55:00','CONFIRMED',NULL,1),(4,'2015-10-17',1,1,2,60,NULL,'19:00:00','19:10:00','CONFIRMED',NULL,1),(5,'2015-10-17',1,1,1,NULL,NULL,'19:20:00','19:30:00','WAITING',NULL,1),(6,'2015-10-17',2,2,1,40,NULL,'18:25:00','18:30:00','CONFIRMED',NULL,1),(7,'2015-10-17',2,1,1,NULL,NULL,'21:20:00','21:30:00','WAITING',NULL,2),(8,'2015-10-17',2,2,1,NULL,NULL,'21:10:00','21:15:00','CANCELLED',NULL,2),(9,'2015-10-18',2,1,1,NULL,NULL,'16:10:00','16:20:00','WAITING',NULL,3),(10,'2015-10-17',3,1,1,NULL,NULL,'18:10:00','18:20:00','WAITING',NULL,1),(11,'2015-10-17',2,1,1,NULL,NULL,'17:20:00','17:30:00','UNDEFINED',NULL,1),(12,'2015-10-17',2,1,1,NULL,NULL,'17:40:00','17:50:00','WAITING',NULL,1),(13,'2015-10-17',NULL,1,13,NULL,NULL,'17:20:00','17:30:00','WAITING',NULL,1),(14,'2015-10-17',1,1,1,NULL,NULL,'18:00:00','18:10:00','WAITING',NULL,1),(15,'2016-02-29',2,1,1,NULL,NULL,'18:20:00','18:30:00','WAITING',NULL,5),(16,'2016-02-25',2,1,1,NULL,NULL,'19:50:00','20:00:00','CANCELLED',NULL,11),(17,'2016-02-25',2,1,13,NULL,NULL,'19:50:00','20:00:00','CONFIRMED',NULL,11),(18,'2016-02-25',1,1,1,NULL,NULL,'19:40:00','19:50:00','WAITING',NULL,11),(19,'2016-02-27',1,2,14,NULL,NULL,'17:40:00','17:45:00','CONFIRMED',NULL,1),(20,'2016-02-27',1,2,1,NULL,NULL,'18:10:00','18:15:00','CONFIRMED',NULL,1),(21,'2016-03-24',1,2,1,NULL,NULL,'19:10:00','19:15:00','CONFIRMED',NULL,11),(22,'2016-03-24',2,2,1,NULL,NULL,'19:00:00','19:05:00','CANCELLED',NULL,11),(23,'2016-03-24',2,1,1,NULL,NULL,'19:00:00','19:10:00','CONFIRMED',NULL,11),(24,'2016-03-30',NULL,19,1,NULL,NULL,'18:40:00','19:00:00','WAITING',NULL,9),(25,'2016-04-13',2,1,14,NULL,NULL,'18:30:00','18:40:00','WAITING',NULL,9),(26,'2016-04-26',1,19,1,NULL,NULL,'18:00:00','18:20:00','WAITING',NULL,7),(27,'2016-04-26',1,19,1,NULL,NULL,'17:20:00','17:40:00','WAITING',NULL,1),(28,'2016-04-30',1,1,1,NULL,NULL,'17:30:00','17:40:00','CONFIRMED',NULL,1),(29,'2016-05-14',1,1,1,NULL,NULL,'17:20:00','17:30:00','CANCELLED',NULL,1),(30,'2016-05-30',1,1,1,NULL,NULL,'21:30:00','21:40:00','CANCELLED',NULL,6),(31,'2016-05-30',1,1,1,NULL,NULL,'18:30:00','18:45:00','WAITING',NULL,5),(32,'2016-06-28',1,19,1,NULL,NULL,'21:40:00','22:00:00','WAITING',NULL,8),(33,'2016-06-12',1,1,1,NULL,NULL,'16:20:00','16:30:00','WAITING',NULL,3),(34,'2016-06-25',14,1,1,NULL,NULL,'18:30:00','18:40:00','WAITING',NULL,1),(35,'2016-06-25',14,1,2,37.5,0,'17:20:00','17:30:00','WAITING',NULL,1),(36,'2016-06-25',14,1,5,0,37.5,'18:50:00','19:00:00','WAITING',NULL,1),(37,'2016-06-25',14,1,5,37.5,0,'18:10:00','18:20:00','WAITING',NULL,1),(38,'2016-06-25',14,1,5,37.5,0,'18:10:00','18:20:00','WAITING',NULL,1),(39,'2016-07-02',14,1,4,50,0,'17:20:00','17:30:00','WAITING',NULL,1),(40,'2016-08-01',14,1,1,0,26.75,'18:50:00','19:00:00','WAITING',NULL,5),(41,'2016-08-06',14,1,1,0,26.75,'17:10:00','17:20:00','WAITING',NULL,1),(46,'2016-09-12',2,1,1,0,25,'18:10:00','18:20:00','WAITING',NULL,5),(47,'2016-09-12',14,34,1,50,0,'18:20:00','18:50:00','WAITING',NULL,5),(48,'2016-09-12',14,34,1,50,0,'19:20:00','19:50:00','WAITING',NULL,5),(49,'2016-09-13',14,1,1,0,25,'17:20:00','17:30:00','WAITING',NULL,7),(50,'2016-09-13',14,1,1,25,0,'17:40:00','17:50:00','WAITING',NULL,7),(51,'2016-09-13',14,1,12,0,50,'17:30:00','17:40:00','WAITING',NULL,7),(52,'2016-10-09',14,1,1,0,7.5,'16:30:00','16:40:00','WAITING',NULL,3),(53,'2016-11-14',14,19,1,0,80,'18:40:00','19:00:00','WAITING',NULL,5);
+INSERT INTO `reservation` VALUES (1,'2016-12-03',1,1,1,19.5,0,'17:00:00','17:20:00','CONFIRMED',NULL,1),(2,'2016-12-03',1,2,2,15,0,'17:20:00','17:40:00','CONFIRMED',NULL,1),(3,'2016-12-03',1,1,15,30,0,'17:40:00','18:00:00','CONFIRMED',NULL,1),(4,'2016-12-03',2,19,16,30,0,'18:00:00','18:20:00','CONFIRMED',NULL,1),(5,'2016-12-05',14,36,17,40,0,'19:20:00','19:40:00','WAITING',NULL,5);
 /*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -819,7 +851,7 @@ CREATE TABLE `reservation_way` (
   `isDeleted` bit(1) DEFAULT b'0',
   `isDefault` bit(1) DEFAULT b'0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -828,7 +860,7 @@ CREATE TABLE `reservation_way` (
 
 LOCK TABLES `reservation_way` WRITE;
 /*!40000 ALTER TABLE `reservation_way` DISABLE KEYS */;
-INSERT INTO `reservation_way` VALUES (1,'»«· ·Ì›Ê‰','By Telephone','Reserve By Telephone','\0','\0'),(2,'»«·«Ì„Ì·','By Email','fdsfdsfsd','\0','\0'),(3,'»«·ÊÌ» ”«Ì ','By WebSite','Reservation by WebSite','\0','\0'),(14,'«·Õ÷Ê—','Attendence','Attend to Clinic','\0','');
+INSERT INTO `reservation_way` VALUES (1,'»«· ·›ÌÊ‰','By Telephone','Reserve By Telephone','\0',''),(2,'»«·«Ì„Ì·','By Email','fdsfdsfsd','\0','\0'),(3,'»«·ÊÌ» ”«Ì ','By WebSite','Reservation by WebSite','\0','\0'),(14,'«·Õ÷Ê—','Attendence','Attend to Clinic','\0','\0'),(15,'sadsad','dsadsad','dsadsadasdas','','\0');
 /*!40000 ALTER TABLE `reservation_way` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -883,7 +915,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Cairo','01111','022222'),(2,'Cairo','03333','04444'),(3,'Alex','05555','06666'),(4,'PORTO','456789','45678'),(7,'ALEXXX','2345674321','32456754'),(8,'FFDSFDFSDFAFSDAFDS','243241','23432423'),(9,'vdsfdsafsdfsadfsdfsdfsd','fsdfsdf','fsdfsdfsd');
+INSERT INTO `user` VALUES (1,'Cairo','01111','022222'),(2,'Cairo','03333','04444'),(3,'Alex','05555','06666'),(4,'PORTO','456789','45678'),(7,'ALEXXX','2345674321','32456754'),(8,'FFDSFDFSDFAFSDAFDS','243241','23432423'),(9,'vdsfdsafsdfsadfsdfsdfsd','fsdfsdf','fsdfsdfsd'),(10,'fsdfsdfdsf','fsdfsdf','fsdfsdf'),(11,'dasdsadsadsad','dadasd','dasdsad'),(12,'sdfdsfsdf','fsdfsdf','fsdf'),(13,'sddsfasdsa','dasdsa','dasds'),(14,'fsfsdfsdfsd','fsdfsdf','fsdfsdff'),(15,'gddfgfdgdfg','gdfgdf','gdfgdf'),(16,'fssdfsdfds','fsdfsd','fsdf');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -953,4 +985,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-15 20:54:41
+-- Dump completed on 2016-12-06  9:55:29
