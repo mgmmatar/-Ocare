@@ -160,6 +160,16 @@
             
         <%@include file="../../OBook/basic/scripts.jsp" %>
     </head>
+    <style>
+        [type="date"] {
+               background:#fff url('/zmed/resources/images/calendar.png')  97% 50% no-repeat ;}
+        [type="date"]::-webkit-inner-spin-button {
+                display: none;}
+        [type="date"]::-webkit-calendar-picker-indicator {
+                 opacity: 0;}
+        [type="date"]{border-color: #5c6b7a; color: #5c6b7a;margin-right: 20%;}
+    </style>
+    
     <body class="nav-md">
 
             <div class="container body">
@@ -199,8 +209,8 @@
                                                    
                                                <!-- Search Form -->
                                                <div>
-                                                   From : <input type="text" name="dateFrom" id="dateFrom" value="2016-01-01"/>
-                                                   To  : <input type="text" name="dateFrom" id="dateTo" value="2016-12-03"/>
+                                                   From : <input type="date"  name="dateFrom" id="dateFrom"  />
+                                                   To  : <input type="date"  name="dateFrom" id="dateTo" />
                                                    
                                                    <center>
                                                         <button id="searchNow" class="reserveButton">Show Report</button>  
