@@ -110,6 +110,18 @@
                                 </ul>
                             </li>
                          </sec:authorize>   
+                            
+                            
+                            <sec:authorize access="hasRole('SUPER_ADMIN')">    
+                            <li class="" style="cursor: pointer"><a><i class="fa fa-pie-chart" style="cursor: pointer"></i> <label class="menuText" style="cursor: pointer">Logs</label> <span
+                                    class="fa fa-chevron-down" style="cursor: pointer"></span></a>
+                                <ul class="nav child_menu" style="display: none">
+                                    <li><a href="/zmed/log/action">Action Log</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            </sec:authorize>   
+                            
                         </ul>
                     </div>
 

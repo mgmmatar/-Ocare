@@ -6,6 +6,7 @@
 
 package com.ocare.UMS.service.imp;
 
+import com.obird.OLog.service.ActionLogService;
 import com.obird.OUMS.dao.AuthDao;
 import com.obird.OUMS.domain.Auth;
 import com.obird.OUMS.domain.Role;
@@ -40,6 +41,8 @@ public class MyUserServiceImp implements MyUserService{
     @Autowired
     private RoleService roleService;
     
+    @Autowired
+    private ActionLogService actionLogService;
     
     @Autowired
     private UserService userService;
@@ -80,6 +83,8 @@ public class MyUserServiceImp implements MyUserService{
                     myUser.setAuth(auth);
                     /// Save Data 
                     myUserDao.save(myUser);
+                    // Add to Log 
+                    actionLogService.createActionLog("Create", "User",myUser.getAuth().getUserName(),"\""+myUser.getFirstName()+" "+myUser.getLastName()+"\"");
         }
         else{
             /// Getting MyUser 
@@ -93,6 +98,8 @@ public class MyUserServiceImp implements MyUserService{
                  authDao.update(auth);
                  /// Update Data
                  myUserDao.update(myUser);
+                 // Add Action to Log 
+                 actionLogService.createActionLog("Update", "User",myUser.getAuth().getUserName(),"\""+myUser.getFirstName()+" "+myUser.getLastName()+"\"");                 
             }//end if Condition 
         
         }//end else 
@@ -132,6 +139,13 @@ public class MyUserServiceImp implements MyUserService{
             myUserDao.update(myUser);
             /// Assign the Service as Done
             isActivated=true;
+            // action Log 
+            if(status){
+                   actionLogService.createActionLog("Activate", "User",myUser.getAuth().getUserName(),"\""+myUser.getFirstName()+" "+myUser.getLastName()+"\"");
+            }else{
+                   actionLogService.createActionLog("Deactivate", "User",myUser.getAuth().getUserName(),"\""+myUser.getFirstName()+" "+myUser.getLastName()+"\"");
+            }//end else-If Condition 
+            
         }//end if condition
         // return result 
         return isActivated;
@@ -149,6 +163,8 @@ public class MyUserServiceImp implements MyUserService{
             myUserDao.update(myUser);
             /// Assign the Service as Done
             isDeleted=true;
+            // Add to Log
+            actionLogService.createActionLog("Delete", "User",myUser.getAuth().getUserName(),"\""+myUser.getFirstName()+" "+myUser.getLastName()+"\"");            
         }//end if condition
         // return result 
         return isDeleted;

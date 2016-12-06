@@ -9,7 +9,6 @@ package com.obird.OUMS.dao.imp;
 import com.obird.OUMS.dao.RoleDao;
 import com.obird.OUMS.domain.Role;
 import com.obird.core.GenericDAO;
-import com.ocare.UMS.domain.MyUser;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
