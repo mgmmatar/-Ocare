@@ -10,6 +10,7 @@ import com.obird.OUMS.dao.AuthDao;
 import com.obird.OUMS.domain.Auth;
 import com.obird.OUMS.domain.Role;
 import com.obird.OUMS.service.RoleService;
+import com.obird.OUMS.service.UserService;
 import com.ocare.UMS.dao.MyUserDao;
 import com.ocare.UMS.domain.MyUser;
 import com.ocare.UMS.holder.UserHolder;
@@ -19,6 +20,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +39,10 @@ public class MyUserServiceImp implements MyUserService{
     
     @Autowired
     private RoleService roleService;
+    
+    
+    @Autowired
+    private UserService userService;
     
     @Override
     public List<MyUser> getAllAdmins() {
@@ -156,6 +162,13 @@ public class MyUserServiceImp implements MyUserService{
     @Override
     public List<MyUser> getUsersWithPattern(String pattern) {
         return myUserDao.getUsersWithPattern(pattern);
+    }
+
+    @Override
+    public MyUser getLoggedInUserObject() {
+        // Getting Current LoggedIn User
+        UserDetails userDetails=userService.getLoggedInUser();
+        return myUserDao.getByUserName(userDetails.getUsername());
     }
     
 }

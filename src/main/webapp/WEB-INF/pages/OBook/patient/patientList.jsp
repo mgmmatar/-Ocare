@@ -47,13 +47,10 @@
             <!-- FontAwesome Styles-->
             <link href="<c:url value='/resources/css/font-awesome.css'/>" rel="stylesheet" />
             <!-- Morris Chart Styles-->
-            <link href="<c:url value='/resources/js/morris/morris-0.4.3.min.css'/>" rel="stylesheet" />
+            <link href="<c:url value='/resources/css/morris-0.4.3.min.css'/>" rel="stylesheet" />
             <link href="<c:url value='/resources/css/animation.css'/>" rel="stylesheet" />
             <!-- Custom Styles-->
-            <!-- Google Fonts-->
-            <%-- <link href="<c:url value='/resources/css/googlefonts.css'/>" rel="stylesheet" /> --%>
             
-
         <script type="text/javascript">
             $(document).ready(function() {
               ///// Registering Actions  
@@ -66,9 +63,29 @@
                 });    
                 
                 $('[data-ssd-confirm-trigger]').ssdConfirm();
+
+                $(".container").on("click","#gotoProfile", function(e) {
+                    console.log("weeeeeeeeee");
+                });
               
-                $(".container").on("click","#registerNew", function(e) { 
-                    window.location.href = "/zmed/patient/register";   
+                $(".container").on("click","#AddNewPatient", function(e) { 
+                    var profileURL = "/zmed/patient/data/0";
+                    // getting visit
+                    var request = $.ajax({
+                        url: profileURL,
+                        type: "GET",
+                        dataType: 'json',
+                        data: {
+                        },
+                        complete: function(data) {
+                            $('#patientDataPopup').empty();
+                            // Filling Last Information
+                            $('#patientDataPopup').append(data.responseText);
+                        }//end onComplete Method
+                     });/// end Ajax Call Request
+                     // Showing the Popup After Call
+                     $('#patientDataPopup').bPopup();  
+                     $('#birthDatePicker').datepicker();
                 });
              
                 $(".container").on("click",".thePatientProfile", function(e) { 
@@ -92,6 +109,7 @@
                      // Showing the Popup After Call
                      $('#patientDataPopup').bPopup();  
                      $('#birthDatePicker').datepicker();    
+                    
                 }); 
                
                 ///////////////////////////////////////////////////////////////////////

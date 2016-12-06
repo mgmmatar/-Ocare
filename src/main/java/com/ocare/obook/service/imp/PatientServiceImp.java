@@ -6,6 +6,9 @@
 
 package com.ocare.obook.service.imp;
 
+
+import com.obird.utility.ODate;
+import com.ocare.UMS.service.MyUserService;
 import com.ocare.obook.dao.InsuranceCompanyDao;
 import com.ocare.obook.dao.PatientDao;
 import com.ocare.obook.domain.InsuranceCompany;
@@ -39,6 +42,9 @@ public class PatientServiceImp implements PatientService{
 
     @Autowired
     private InsuranceCompanyDao insuranceCompanyDao;
+
+    @Autowired
+    private MyUserService myUserService;
     
     @Override
     @Transactional
@@ -46,10 +52,13 @@ public class PatientServiceImp implements PatientService{
         // creating the Patient Object 
         Patient patient= new Patient();
         patient = fillPatient(patient,patientHolder);
-        patient.setCode(patient.getfName());  // TODO CODE 
-        patient.setCreationDate(new Date());
+        patient.setCode(patient.getfName());  
         patient.setIsDeleted(false);
-        patient.setRegisteredBy(1);  // TODO USER
+        // Gettting Current LoggedIn User
+        patient.setCreationDate(new Date());
+        patient.setRegisteredBy(myUserService.getLoggedInUserObject());  // TODO USER
+        patient.setLastModifiedDate(new Date());
+        patient.setModifiedBy(myUserService.getLoggedInUserObject());  // TODO
         // save Patient 
         patientDao.save(patient);
         // return result
@@ -60,12 +69,10 @@ public class PatientServiceImp implements PatientService{
     @Transactional
     public Patient update(PatientHolder patientHolder) {
         /// Getting Patient to Update
-        System.out.println(" >>> "+patientHolder.getId());
         Patient patient = patientDao.get(patientHolder.getId());
-        System.out.println("<<<<<<<<<<<<<"+patient.toString());
         patient=fillPatient(patient, patientHolder);
         patient.setLastModifiedDate(new Date());
-        patient.setModifiedBy(1);  // TODO 
+        patient.setModifiedBy(myUserService.getLoggedInUserObject());  // TODO 
         // Update Patient 
         patientDao.update(patient);
         // return Patient
@@ -101,18 +108,15 @@ public class PatientServiceImp implements PatientService{
         
         if(holder.getBirthDate()!=null){
             // Convert String to Date Format 
-            String expectedPattern = "yyyy-MM-dd";
-            SimpleDateFormat formatter = new SimpleDateFormat(expectedPattern);
-               try
-                {
-                    Date birthDate = formatter.parse(holder.getBirthDate());
-                    patient.setBirthDate(birthDate);
-                }
-                catch (ParseException e)
-                {
-                  e.printStackTrace();
-                }//end try_catch
+            Date birthDate=ODate.getDateFromString(holder.getBirthDate());
+            patient.setBirthDate(birthDate);
         }//end if Condition 
+        
+        if((holder.getBirthDay()!=null)&&(holder.getBirthMonth()!=null)&&(holder.getBirthYear()!=null)){
+            String birthDateString = holder.getBirthYear()+"-"+ODate.getMonthValue(holder.getBirthMonth())+"-"+holder.getBirthDay();
+            Date birthDate=ODate.getDateFromString(birthDateString);
+            patient.setBirthDate(birthDate);
+        }
         
         if(holder.getEmail()!=null){
             patient.setEmail(holder.getEmail());
@@ -128,11 +132,9 @@ public class PatientServiceImp implements PatientService{
         
         if(holder.getInsuranceCompany()!=null){
             // create New Insurance
-            System.out.println(">>>>>  "+holder.getInsuranceCompany());
             InsuranceCompany insuranceCompany = insuranceCompanyDao.get(holder.getInsuranceCompany());
             // set insurance Company
             patient.setInsuranceCompany(insuranceCompany);
-            
         }//end if Condition 
         
         if(holder.getGender()!=null){

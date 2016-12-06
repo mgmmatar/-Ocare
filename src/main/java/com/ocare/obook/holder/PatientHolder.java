@@ -24,6 +24,9 @@ public class PatientHolder {
     private String birthDate;
     private Integer insuranceCompany;
     private String gender;
+    private String birthMonth;
+    private String birthDay;
+    private String birthYear;
 
     public Integer getId() {
         return id;
@@ -120,5 +123,36 @@ public class PatientHolder {
     public void setGender(String gender) {
         this.gender = gender;
     }
+
+    public String getBirthMonth() {
+        return birthMonth;
+    }
+
+    public void setBirthMonth(String birthMonth) {
+        this.birthMonth = birthMonth;
+    }
+
+    public String getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(String birthDay) {
+        this.birthDay = birthDay;
+    }
+
+    public String getBirthYear() {
+        return birthYear;
+    }
+
+    public void setBirthYear(String birthYear) {
+        this.birthYear = birthYear;
+    }
+
+    
+    @Override
+    public String toString() {
+        return "PatientHolder{" + "id=" + id + ", fName=" + fName + ", midName=" + midName + ", lName=" + lName + ", address=" + address + ", phoneNumber1=" + phoneNumber1 + ", phoneNumber2=" + phoneNumber2 + ", email=" + email + ", age=" + age + ", birthDate=" + birthDate + ", insuranceCompany=" + insuranceCompany + ", gender=" + gender + ", birthMonth=" + birthMonth + ", birthDay=" + birthDay + ", birthyear=" + birthYear + '}';
+    }
+
     
 }

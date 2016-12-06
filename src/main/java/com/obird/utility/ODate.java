@@ -215,6 +215,26 @@ public class ODate {
         return months;
     }//end getMonthNameList
     
+    public static String getMonthValue(String month){
+    
+        String monthValue="";
+        
+        List<String> months= getMonthNameList();
+        for(int i=0;i<months.size();i++){
+          if(months.get(i).equalsIgnoreCase(month)){
+              int value=(i+1);
+              if(value<10){
+                  monthValue+="0"+value;
+              }else{
+                  monthValue+=value;
+              }//end if-Else
+              break;
+          }//end if 
+        }//end if 
+        // return result 
+        return monthValue;
+    }
+    
     public static List<Integer> getDaysList(){
     
         List<Integer> days=new ArrayList<Integer>();

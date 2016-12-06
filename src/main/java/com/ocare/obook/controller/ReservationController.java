@@ -29,9 +29,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -122,9 +119,6 @@ public class ReservationController {
     @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN","ROLE_RESERVATION_USER"})
     public String reservationProcess2(Model model) {
         // Get patient
-        //User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        //System.out.println(">>>>>>>>>>>>>>> "+user.toString());
-        //Date currentDate = ODate.getDateFromString("2015-10-17");
         Date currentDate = new Date();
         String dayShortName = ODate.getWeekDay(currentDate);
         WeekDay weekDay = weekDayService.getWeekDay(dayShortName);

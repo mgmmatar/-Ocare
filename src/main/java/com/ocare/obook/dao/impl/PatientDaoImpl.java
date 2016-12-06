@@ -35,7 +35,7 @@ public class PatientDaoImpl extends GenericDAO<Patient> implements PatientDao {
         return getHibernateTemplate().execute(new HibernateCallback<List<Patient>>() {
             @Override
             public List<Patient> doInHibernate(Session sn) throws HibernateException {
-                Query query = sn.createQuery("from Patient p where p.isDeleted = :deleted");
+                Query query = sn.createQuery("from Patient p where p.isDeleted = :deleted order by p.lastModifiedDate DESC");
                 query.setBoolean("deleted", false);
                 return query.list();
             }
@@ -73,18 +73,17 @@ public class PatientDaoImpl extends GenericDAO<Patient> implements PatientDao {
                 /// checker for Input
                 if ((!patientName.isEmpty()) && (patientName != null)) {
                     queryString += " and (p.fName like :patientName or p.midName like :patientName or p.lName like :patientName ) ";
-                    System.out.println(">>> " + patientName);
                 }//end if condition
                 if ((!patientCode.isEmpty()) && (patientCode != null)) {
                     queryString += " and p.code = :patientCode ";
-                    System.out.println(">>> " + patientCode);
                 }//end if condition
                 if ((!patientPhone.isEmpty()) && (patientPhone != null)) {
                     queryString += " and (p.phoneNumber1 = :patientPhone or p.phoneNumber2 = :patientPhone) ";
-                    System.out.println(">>> " + patientPhone);
                 }//end if condition
-                System.out.println(">> " + queryString);
-                Query query = sn.createQuery(queryString);
+                // Order Data 
+                 queryString +=" order by p.lastModifiedDate DESC " ;
+               
+                 Query query = sn.createQuery(queryString);
                 query.setBoolean("deleted", false);
                 if ((!patientName.isEmpty()) && (patientName != null)) {
                     query.setString("patientName", '%' + patientName + '%');
@@ -95,7 +94,6 @@ public class PatientDaoImpl extends GenericDAO<Patient> implements PatientDao {
                 if ((!patientPhone.isEmpty()) && (patientPhone != null)) {
                     query.setString("patientPhone", patientPhone);
                 }//end if condition
-
                 // return result
                 return (List<Patient>) query.list();
             }
@@ -137,7 +135,7 @@ public class PatientDaoImpl extends GenericDAO<Patient> implements PatientDao {
                 Query query = sn.createQuery("select p from Patient p "
                         + " where p.isDeleted = :deleted and ( p.code like :patientCode or p.fName like :patientFName or p.midName like :PatientMidName "
                         + " or p.lName like :PatientLName or p.phoneNumber1 like :patientPhoneNumber1 or p.phoneNumber2 like :patientPhoneNumber2  "
-                        + " ) ");
+                        + " ) order by p.lastModifiedDate DESC ");
                 query.setString("patientCode","%"+patientInfo+"%");
                 query.setString("patientFName","%"+patientInfo+"%");
                 query.setString("PatientMidName","%"+patientInfo+"%");

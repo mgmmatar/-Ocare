@@ -100,5 +100,19 @@ public class MyUserDaoImp extends GenericDAO<MyUser> implements MyUserDao{
         });       
     }
 
+    @Override
+    public MyUser getByUserName(final String userName) {
+        return getHibernateTemplate().execute(new HibernateCallback<MyUser>() {
+            @Override
+            public MyUser doInHibernate(Session sn) throws HibernateException {
+                Query query = sn.createQuery("select u from MyUser u inner join u.auth a where u.deleted =:deleted AND a.userName = :userName");
+                query.setBoolean("deleted", false);
+                query.setString("userName",userName);
+                //return result 
+                return (MyUser)query.uniqueResult();
+            }
+        });
+    }
+
     
 }

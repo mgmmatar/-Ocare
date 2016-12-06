@@ -34,4 +34,7 @@ public interface MyUserService {
     
     public List<MyUser> getUsersWithPattern(String pattern);
     
+    public MyUser getLoggedInUserObject();
+    
+    
 }

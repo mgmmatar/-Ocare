@@ -11,13 +11,11 @@ import com.ocare.obook.service.InsuranceCompanyService;
 import com.ocare.obook.service.PatientService;
 import com.ocare.obook.service.ReservationService;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -78,6 +76,14 @@ public class PatientController {
     @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN","ROLE_ENTRY_USER"})
     @RequestMapping(value = "/register")
     public String registerPatient(Model model){
+         // Preparing the BirthDate Lists
+        List<Integer> days=ODate.getDaysList();
+        List<String> months=ODate.getMonthNameList();
+        List<Integer> years=ODate.getYearsList();
+        // Adding to Model
+        model.addAttribute("years", years);
+        model.addAttribute("days", days);
+        model.addAttribute("months", months);
         // Adding Data to Model
         model.addAttribute("operation", "Register");
         model.addAttribute("insuranceCompanies",insuranceCompanyService.getAllInsuranceCompanys());
@@ -87,11 +93,19 @@ public class PatientController {
     @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN","ROLE_ENTRY_USER"})
     @RequestMapping("/edit/{id}")
     public String updatePatientById(@PathVariable("id") Integer patientId, Model model, HttpServletRequest request) {
+         // Preparing the BirthDate Lists
+        List<Integer> days=ODate.getDaysList();
+        List<String> months=ODate.getMonthNameList();
+        List<Integer> years=ODate.getYearsList();
         // Get patient 
         Patient patient = patientService.getPatientById(patientId);
         model.addAttribute("insuranceCompanies",insuranceCompanyService.getAllInsuranceCompanys());
         model.addAttribute("patient", patient);
         model.addAttribute("operation", "Update");
+        // Adding to Model
+        model.addAttribute("years", years);
+        model.addAttribute("days", days);
+        model.addAttribute("months", months);
         // open List        
         return MODULE_PATH+"patient";
     }//end registerPatient

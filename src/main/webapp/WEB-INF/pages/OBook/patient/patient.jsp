@@ -15,7 +15,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-         <title> Patient Profile </title>
+         <title> Patient</title>
         <!-- Styles -->
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/bootstrap.css'/>" />
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/owl.carousel.css'/>">
@@ -96,105 +96,108 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                   Personal Data
+                                   Register Patient
                                 </div>
           
                                       <form id="aboutChefForm" method="POST" action="/zmed/patient/process" modelAttribute="patient" accept-charset="utf-8" >
                                         <input type="hidden" name="id" value="${patient.id}"/>
                                            
                                         <div>
-    <img class="patientPopupAvatar" src="<c:url value='/resources/images/avatar.jpg'/>" />
+            <img class="patientPopupAvatar" src="<c:url value='/resources/images/avatar.jpg'/>" />
     
-                                                 <div class="patientDivContainer">
-            <div class="patientLabelTitle">
-                <label class="patientDataText" style="margin-right: 52px;"> Name : </label>
-            </div>
-        
-            <div class="PatientInputFields">
-                <input type="text" name="fName" placeholder="First name" class="patientInputFieldDesign" style="width: 220px !important; " id="User_name" required value="${patient.fName}"/>
-            </div>
-        
-            <div class="PatientInputFields">
-                <input type="text" name="midName" placeholder="Middle name" class="patientInputFieldDesign" style="width: 220px !important;" id="User_name" required value="${patient.midName}"/> 
-            </div>
-        
-            <div class="PatientInputFields">
-                <input type="text" name="lName" placeholder="Last name" class="patientInputFieldDesign" style="width: 220px !important;"  id="User_name"  required value="${patient.lName}"/>
-            </div>
-        </div>   
+            <div class="patientDivContainer">
+                        <div class="patientLabelTitle">
+                             <label class="patientDataText" style="margin-right: 20px;"> Gender : </label>
+                                <c:if test="${patient.gender eq 'Male'||empty patient.gender}">
+                                    <input type="radio" name="gender" value="Male" checked="checked" id="radio1" class="css-checkbox"><label for="radio1" class="css-label radGroup1">Male</label>
+                                    <input type="radio" name="gender" value="Female" id="radio2" class="css-checkbox"><label for="radio2" class="css-label radGroup1">Female</label>
+                                </c:if>
+                                <c:if test="${patient.gender eq 'Female'}">
+                                     <input type="radio" name="gender" value="Male" id="radio1" class="css-checkbox"><label for="radio1" class="css-label radGroup1">Male</label>
+                                     <input type="radio" name="gender" value="Female" id="radio2"  checked="checked" class="css-checkbox"><label for="radio2" class="css-label radGroup1">Female</label>
+                                </c:if>  
+                        </div>      
+            </div>    
+            
+            <div class="patientDivContainer">
+                <div class="patientLabelTitle">
+                    <label class="patientDataText" style="margin-right: 52px;">Name : </label>
+                </div>
+
+                <div class="PatientInputFields">
+                    <input type="text" name="fName" placeholder="First name" class="patientInputFieldDesign" style="width: 185px !important; " id="User_name" required value="${patient.fName}"/>
+                </div>
+
+                <div class="PatientInputFields">
+                    <input type="text" name="midName" placeholder="Middle name" class="patientInputFieldDesign" style="width: 185px !important;" id="User_name" required value="${patient.midName}"/> 
+                </div>
+
+                <div class="PatientInputFields">
+                    <input type="text" name="lName" placeholder="Last name" class="patientInputFieldDesign" style="width: 185px !important;"  id="User_name"  required value="${patient.lName}"/>
+                </div>
+            </div>   
                                      
-          <div class="patientDivContainer">
+            <div class="patientDivContainer">
                  
                 <div class="patientLabelTitle">
-                    <label class="patientDataText" style="margin-right: 45px;"> Phone : </label>
+                    <label class="patientDataText" style="margin-right: 38px;"> Phone1 : </label>
                 </div>
 
                 <div class="PatientInputFields">
                     <input type="text" name="phoneNumber1" class="patientInputFieldDesign" style="width: 220px !important;"  id="phoneNumber1"  placeholder="Phone Number1" required value="${patient.phoneNumber1}"/>
                 </div>
                 
+                <div class="patientLabelTitle">
+                    <label class="patientDataText" style="margin-right: 45px;"> Phone2: </label>
+                </div>
 
                 <div class="PatientInputFields">
                     <input type="text" name="phoneNumber2" class="patientInputFieldDesign" style="width: 220px !important;" id="phoneNumber2"  placeholder="Phone Number2" required value="${patient.phoneNumber2}"/>
                 </div>
                 
-        </div>                   
-                <div class="patientDivContainer">
-                                             <div class="patientLabelTitle">
-                <label class="patientDataText" style="margin-right: 20px;"> Gender : </label>
+            </div>                   
             
-                                                    
-                                                            <c:if test="${patient.gender eq 'Male'||empty patient.gender}">
-                                                                <input type="radio" name="gender" value="Male" checked="checked" id="radio1" class="css-checkbox"><label for="radio1" class="css-label radGroup1">Male</label>
-                                                                <input type="radio" name="gender" value="Female" id="radio2" class="css-checkbox"><label for="radio2" class="css-label radGroup1">Female</label>
-                                                            </c:if>
-                                                            <c:if test="${patient.gender eq 'Female'}">
-                                                                 <input type="radio" name="gender" value="Male" id="radio1" class="css-checkbox"><label for="radio1" class="css-label radGroup1">Male</label>
-                                                                 <input type="radio" name="gender" value="Female" id="radio2"  checked="checked" class="css-checkbox"><label for="radio2" class="css-label radGroup1">Female</label>
-                                                            </c:if>  
-                                                    
-                                             </div>      </div>
-                                                         
              <div class="patientDivContainer">
                                   
                 <div class="patientLabelTitle">
-                    <label class="patientDataText" style="margin-right: 30px"> Address : </label>
+                    <label class="patientDataText" style="margin-right: 35px"> Address : </label>
                 </div>
 
                 <div class="PatientInputFields">
-                    <input type="text" name="address" placeholder="Address" class="patientInputFieldDesign" style="width:280px!important;" id="address" required value="${patient.address}"/>  
+                    <input type="text" name="address" placeholder="Address" class="patientInputFieldDesign" style="width:500px!important;" id="address" required value="${patient.address}"/>  
                 </div>
-            
-             <div class="patientLabelTitle">
-                 <label class="patientDataText" style="margin-right: 30px;margin-left: 30px;"> Email : </label>
             </div>
-        
-            <div class="PatientInputFields">
-                <input type="text" name="email" placeholder="E-mail" class="patientInputFieldDesign" style="width:280px!important;" id="email" required value="${patient.email}"/>  
+            <div class="patientDivContainer">
+                    <div class="patientLabelTitle">
+                        <label class="patientDataText" style="margin-right: 45px;margin-left: 30px;"> Email : </label>
+                    </div>
+
+                    <div class="PatientInputFields">
+                       <input type="text" name="email" placeholder="E-mail" class="patientInputFieldDesign" style="width:500px!important;" id="email" required value="${patient.email}"/>  
+                    </div>    
             </div>    
-        </div>
+                
                                                        
             <div class="patientDivContainer">
                     
             <div class="patientLabelTitle">
-                <label class="patientDataText" style="margin-right: 66px;"> Age : </label>
-            </div>
-        
-            <div class="PatientInputFields">
-                <input type="text" name="age" placeholder="Age" class="patientInputFieldDesign" style="width:120px!important" required value="${patient.age}"/>
-            </div>
-                
-            <div class="patientLabelTitle">
-                <label class="patientDataText" style="margin-right: 20px;margin-left: 140px"> Birth Date : </label>
+                <label class="patientDataText" style="margin-right: 12px"> Birth Date : </label>
             </div>
         
             <div class="PatientInputFields">
                 
                 <div class="styled-select slate month">
-                   
-                    <select id="month">
-                        <c:forEach items="${months}" var="month">
-                                <option>${month}</option>
+                   <fmt:formatDate value="${patient.birthDate}" pattern="MMMM" var="patientBirthMonth" />
+                    <select id="month" name="birthMonth">
+                        <c:forEach items="${months}" var="month" varStatus="counter">
+                            <c:choose>
+                                <c:when test="${month eq patientBirthMonth}">
+                                    <option selected="selected">${month}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option>${month}</option>
+                                </c:otherwise>
+                            </c:choose>
                         </c:forEach>
                     </select>
                     
@@ -203,36 +206,60 @@
                 
                 
                 <div class="styled-select slate day">
-                    <select id="day">
+                    <fmt:formatDate value="${patient.birthDate}" pattern="dd" var="patientBirthDay" />
+                    <select id="day" name="birthDay">
                         <c:forEach items="${days}" var="day">
-                                <option>${day}</option>
+                            <c:choose>
+                                <c:when test="${patientBirthDay eq day}">
+                                    <option selected="selected">${day}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option>${day}</option>
+                                </c:otherwise>
+                            </c:choose>                            
                         </c:forEach>
                     </select>
                 </div>
                 
                 
                 <div class="styled-select slate year">
-                    <select id="theYear">
+                    <fmt:formatDate value="${patient.birthDate}" pattern="yyyy" var="patientBirthYear" />
+                    <select id="theYear" name="birthYear">
                         <c:forEach items="${years}" var="year">
-                                <option>${year}</option>
+                            <c:choose>
+                                <c:when test="${patientBirthYear eq year}">
+                                    <option selected="selected">${year}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option>${year}</option>
+                                </c:otherwise>
+                            </c:choose>                            
                         </c:forEach>
                     </select>
                 </div>
                 
             </div>
-            
+           
+            <div class="patientLabelTitle">
+                <label class="patientDataText" style="margin-right: 22px;"> Age : </label>
+            </div>
+        
+            <div class="PatientInputFields">
+                <input type="text" name="age" placeholder="Age" class="patientInputFieldDesign" style="width:100px!important" required value="${patient.age}"/>
+            </div>    
+                
         
            
         </div>     
             
                                                          
-             <div class="patientDivContainer">
+        <div class="patientDivContainer">
                  
                 <div class="patientLabelTitle">
                     <label class="patientDataText"  > Insurance : </label>
                 </div>
-            <div class="styled-select slate company">
-                    <select id="insuranceCompany" style="margin-left: 8px">
+                <div class="styled-select slate company">
+                    <select name="insuranceCompany" id="company" style="margin-left: 8px">
                         <option value="0" selected="selected">-- Select --</option>
                         <c:forEach items="${insuranceCompanies}" var="company">
                                 <c:choose>
@@ -245,13 +272,14 @@
                                 </c:choose>
                         </c:forEach>
                     </select>
-            </div></div>
+                </div>
+            
+               <button id="reserveNow" class="submitPatientData">${operation}</button>
+            
+        </div>
                                                
-                                        <div style="margin-top: -2%;">
-                                                        <button class="registerbutton" >${operation}</button>
                                         
-                                        </div>
-                                        </div>
+                </div>
                                         
                                     </form>
       

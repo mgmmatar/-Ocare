@@ -11,16 +11,18 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
-<style>
-  
-</style>
-
 <!DOCTYPE html>
 <span class="button b-close"><span class="popup_close_icon">X</span></span>
     
    
     <div class="popupMyHeader">
-        <span class="logo">${patient.fName} ${patient.midName} ${patient.lName} Profile</span>
+       <c:if test="${mode eq 'Register'}">
+            <span class="logo">Register New Patient</span>
+        </c:if>
+       <c:if test="${mode eq 'Save Changes'}">
+           <span class="logo">${patient.fName} ${patient.midName} ${patient.lName} Profile</span>
+        </c:if> 
+        
     </div> 
 
     <form id="aboutChefForm" method="POST" action="/zmed/patient/process" modelAttribute="patient" accept-charset="utf-8" >
@@ -29,6 +31,19 @@
     <div>
     <img class="patientPopupAvatar" src="<c:url value='/resources/images/avatar.jpg'/>" />
     
+    <c:if test="${mode ne 'Register'}">
+        <button type="button" class="registerbuttonheader controlAction openProfilePage" id="gotoProfile">Go to Profile</button>
+    </c:if>
+    
+    <c:if test="${patient.gender eq 'Male'||empty patient.gender}">
+        <input type="radio" name="gender" value="Male" checked="checked" id="radio1" class="css-checkbox"><label for="radio1" class="css-label radGroup1">Male</label>
+        <input type="radio" name="gender" value="Female" id="radio2" class="css-checkbox"><label for="radio2" class="css-label radGroup1">Female</label>
+    </c:if>
+    <c:if test="${patient.gender eq 'Female'}">
+         <input type="radio" name="gender" value="Male" id="radio1" class="css-checkbox"><label for="radio1" class="css-label radGroup1">Male</label>
+         <input type="radio" name="gender" value="Female" id="radio2"  checked="checked" class="css-checkbox"><label for="radio2" class="css-label radGroup1">Female</label>
+    </c:if>    
+        
     <div class="patientDivContainer">
             <div class="patientLabelTitle">
                 <label class="patientDataText">Full Name : </label>
@@ -56,10 +71,17 @@
             <div class="PatientInputFields">
                 
                 <div class="styled-select slate month">
-                   
-                    <select id="month">
-                        <c:forEach items="${months}" var="month">
-                                <option>${month}</option>
+                   <fmt:formatDate value="${patient.birthDate}" pattern="MMMM" var="patientBirthMonth" />
+                    <select id="month" name="birthMonth">
+                        <c:forEach items="${months}" var="month" varStatus="counter">
+                            <c:choose>
+                                <c:when test="${month eq patientBirthMonth}">
+                                    <option selected="selected">${month}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option>${month}</option>
+                                </c:otherwise>
+                            </c:choose>
                         </c:forEach>
                     </select>
                     
@@ -68,18 +90,34 @@
                 
                 
                 <div class="styled-select slate day">
-                    <select id="day">
+                    <fmt:formatDate value="${patient.birthDate}" pattern="dd" var="patientBirthDay" />
+                    <select id="day" name="birthDay">
                         <c:forEach items="${days}" var="day">
-                                <option>${day}</option>
+                            <c:choose>
+                                <c:when test="${patientBirthDay eq day}">
+                                    <option selected="selected">${day}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option>${day}</option>
+                                </c:otherwise>
+                            </c:choose>                            
                         </c:forEach>
                     </select>
                 </div>
                 
                 
                 <div class="styled-select slate year">
-                    <select id="theYear">
+                    <fmt:formatDate value="${patient.birthDate}" pattern="yyyy" var="patientBirthYear" />
+                    <select id="theYear" name="birthYear">
                         <c:forEach items="${years}" var="year">
-                                <option>${year}</option>
+                            <c:choose>
+                                <c:when test="${patientBirthYear eq year}">
+                                    <option selected="selected">${year}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option>${year}</option>
+                                </c:otherwise>
+                            </c:choose>                            
                         </c:forEach>
                     </select>
                 </div>
@@ -151,7 +189,7 @@
                 </div>
 
                 <div class="styled-select slate company">
-                    <select id="company" style="margin-left: 8px">
+                    <select name="insuranceCompany" id="company" style="margin-left: 8px">
                         <c:forEach items="${companys}" var="company">
                                 <c:choose>
                                     <c:when test="${company.nameEn eq patient.insuranceCompany.nameEn}">

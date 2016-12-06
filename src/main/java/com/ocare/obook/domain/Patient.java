@@ -1,5 +1,6 @@
 package com.ocare.obook.domain;
 
+import com.ocare.UMS.domain.MyUser;
 import com.ocare.oclinic.domain.PatientExtra;
 import java.util.Date;
 import java.util.List;
@@ -40,8 +41,8 @@ public class Patient {
 	private Date lastModifiedDate;
 	private Date birthDate;
 	private String age;
-	private Integer registeredBy;
-	private Integer modifiedBy;
+	private MyUser registeredBy;
+	private MyUser modifiedBy;
         private InsuranceCompany insuranceCompany;
         private boolean isDeleted;
         private List<PatientExtra> patientExtras;
@@ -166,19 +167,23 @@ public class Patient {
 		this.age = age;
 	}
 	
-	@Column(name="registeredBy",nullable =true)
-	public Integer getRegisteredBy() {
+        @ForeignKey(name="registeredBy")
+        @JoinColumn(name="registeredBy" , nullable=true)
+        @ManyToOne(fetch = FetchType.LAZY)
+	public MyUser getRegisteredBy() {
 		return registeredBy;
 	}
-	public void setRegisteredBy(Integer registeredBy) {
+	public void setRegisteredBy(MyUser registeredBy) {
 		this.registeredBy = registeredBy;
 	}
 	
-	@Column(name="modifiedBy",nullable =true)
-	public Integer getModifiedBy() {
+        @ForeignKey(name="modifiedBy")
+        @JoinColumn(name="modifiedBy" , nullable=true)
+        @ManyToOne(fetch = FetchType.LAZY)
+	public MyUser getModifiedBy() {
 		return modifiedBy;
 	}
-	public void setModifiedBy(Integer modifiedBy) {
+	public void setModifiedBy(MyUser modifiedBy) {
 		this.modifiedBy = modifiedBy;
 	}
 

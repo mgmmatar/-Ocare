@@ -23,6 +23,8 @@ public interface MyUserDao {
     
     public MyUser get(Integer myUserId);
     
+    public MyUser getByUserName(String userName);
+    
     public List<MyUser> getAllUsers();
     
     public List<MyUser> getAllAdmins();
