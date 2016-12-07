@@ -31,7 +31,7 @@ $.fn.reservationWayEditable= function () {
                 // Sending Ajax Call
                     var b;    
                     var request = $.ajax({
-                        url: "/zmed/settings/reservationWayEditable/" +reservationWayID+","+changedIndex+","+changedValue,
+                        url: "/ocare/settings/reservationWayEditable/" +reservationWayID+","+changedIndex+","+changedValue,
                         data: {
                         },
                         async: false
@@ -46,7 +46,7 @@ $.fn.reservationWayEditable= function () {
                     });
                     if (b == true) {
                         var request = $.ajax({
-                        url: "/zmed/settings/reservationWay/loadReservationWayTable",
+                        url: "/ocare/settings/reservationWay/loadReservationWayTable",
                         data: {
                         },
                         complete: function(data) {

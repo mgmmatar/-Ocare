@@ -63,7 +63,7 @@
                     var examineTypeId = $("#examineTypeId").val();
                     var currentDate = $("#currentDate").val();
 
-                    var reservationURL = "/zmed/reservation/timeSlice/" + currentDate + "," + examineTypeId;
+                    var reservationURL = "/ocare/reservation/timeSlice/" + currentDate + "," + examineTypeId;
 
                     //alert(reservationURL);
                     // Getting Ajax

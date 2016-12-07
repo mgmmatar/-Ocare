@@ -33,7 +33,7 @@ $.fn.examineTypeEditable= function () {
                 // Sending Ajax Call
                     var b;    
                     var request = $.ajax({
-                        url: "/zmed/settings/examineTypeEditable/" +examineTypeId+","+changedIndex+","+changedValue,
+                        url: "/ocare/settings/examineTypeEditable/" +examineTypeId+","+changedIndex+","+changedValue,
                         contentType : 'charset=utf-8',
                         data: {
                         },
@@ -49,7 +49,7 @@ $.fn.examineTypeEditable= function () {
                     });
                     if (b == true) {
                         var request = $.ajax({
-                        url: "/zmed/settings/examineType/loadExamineTable",
+                        url: "/ocare/settings/examineType/loadExamineTable",
                         data: {
                         },
                         complete: function(data) {

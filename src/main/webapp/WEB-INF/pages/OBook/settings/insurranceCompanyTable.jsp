@@ -37,7 +37,7 @@
                                             <th tabindex="1"><img src="<c:url value='/resources/images/delete-sign.png'/>" id="DeleteInsurranceCompany" class="insurranceCompanyDeleteButton"
                                                                 data-ssd-confirm-trigger="remove"
                                                                 data-ssd-confirm-message="Are you sure you wish to remove ${insuranceCompany.nameEn} ?<br />There is no undo!"
-                                                                data-ssd-confirm-url="/zmed/settings/insurrance/delete/${insuranceCompany.id}"
+                                                                data-ssd-confirm-url="/ocare/settings/insurrance/delete/${insuranceCompany.id}"
                                                                 data-ssd-confirm-behaviour="reload"/>
                                             </th>
                                         </tr>

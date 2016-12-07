@@ -66,7 +66,7 @@
                         alert(item.value());
                     },
                     ajax: {
-                        url: "/zmed/monitor/examination/fastComplain",
+                        url: "/ocare/monitor/examination/fastComplain",
                         timeout: 500,
                         dataType: "json",
                         contentType: "application/json; charset=utf-8",
@@ -104,7 +104,7 @@
                 ///// Send Complain List 
                     var b;
                     var request = $.ajax({
-                        url: "/zmed/monitor/examination/complain/save",
+                        url: "/ocare/monitor/examination/complain/save",
                         type: "GET",
                         dataType: 'json',
                         data: {
@@ -114,7 +114,7 @@
                         complete: function(data) {
                             b = (data.responseText === "true" ? true : false);
                             if (b === true) {
-                                window.location.replace("/zmed/monitor/examination/diagnosis/"+visitId);
+                                window.location.replace("/ocare/monitor/examination/diagnosis/"+visitId);
                             }//end if condition
                         }//end complete Function
                         });

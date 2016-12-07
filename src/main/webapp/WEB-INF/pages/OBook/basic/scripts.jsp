@@ -18,7 +18,7 @@
             // Function Load the Default SearchBy Key
             function loadDefaultSearchBy() {
                    var request = $.ajax({
-                        url: "/zmed/defaultSearchBy",
+                        url: "/ocare/defaultSearchBy",
                         type: "GET",
                         data: {
                         },
@@ -40,17 +40,17 @@
                         onSelect: function(item) {
                             // Check What Page to Open 
                             if(!$("#searchReservationProfileFlag").hasClass("dimming-image")){
-                               window.location.href = "/zmed/reservation/process/"+item.value;  
+                               window.location.href = "/ocare/reservation/process/"+item.value;  
                             }//end if
                                 
                             if(!$("#searchPatientProfileFlag").hasClass("dimming-image")){
-                               window.location.href = "/zmed/patient/view/"+item.value;    
+                               window.location.href = "/ocare/patient/view/"+item.value;    
                             }//end if     
                                 
                             //
                         },
                         ajax: {
-                                url: "/zmed/patient/fastSearch",
+                                url: "/ocare/patient/fastSearch",
                                 timeout: 500,
                                 dataType: "json",
                                 contentType: "application/json; charset=utf-8",
@@ -80,7 +80,7 @@
                 function assignDefaultSearchBy(searchBy){
                     var b;
                     var request = $.ajax({
-                        url: "/zmed/assignDefaultSearchBy/" + searchBy,
+                        url: "/ocare/assignDefaultSearchBy/" + searchBy,
                         data: {
                         },
                         async: false

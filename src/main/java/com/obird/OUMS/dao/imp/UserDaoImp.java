@@ -27,6 +27,7 @@ public class UserDaoImp extends GenericDAO<User> implements UserDao{
         super.setClass(User.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<User> getAllUsers() {
         return getHibernateTemplate().execute(new HibernateCallback<List<User>>() {

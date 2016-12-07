@@ -73,7 +73,7 @@
                     var searchValue=$(this).val();
                     /// Reloading Patient Table Result
                     var request = $.ajax({
-                        url: "/zmed/log/action/search",
+                        url: "/ocare/log/action/search",
                         type: "POST",
                         dataType: 'json',
                         data: {

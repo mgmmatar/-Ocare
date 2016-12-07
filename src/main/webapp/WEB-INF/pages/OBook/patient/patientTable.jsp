@@ -49,7 +49,7 @@
                                                                   class="examineTypeDeleteButton"
                                                                   data-ssd-confirm-trigger="remove"
                                                                   data-ssd-confirm-message="Are you sure you wish to remove ${patient.fName} ${patient.midName} ${patient.lName} ?<br />There is no undo!"
-                                                                  data-ssd-confirm-url="/zmed/patient/delete/${patient.id}"
+                                                                  data-ssd-confirm-url="/ocare/patient/delete/${patient.id}"
                                                                   data-ssd-confirm-behaviour="reload"/>
                                             </th>
                                         </tr>

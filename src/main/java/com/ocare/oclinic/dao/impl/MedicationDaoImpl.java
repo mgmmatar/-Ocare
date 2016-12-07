@@ -26,6 +26,7 @@ public class MedicationDaoImpl extends GenericDAO<Medication> implements Medicat
        super.setClass(Medication.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Medication> getAllMedications() {
         return getHibernateTemplate().execute(new HibernateCallback<List<Medication>>() {
@@ -37,6 +38,7 @@ public class MedicationDaoImpl extends GenericDAO<Medication> implements Medicat
         });
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Medication> getSignedMedications() {
         return getHibernateTemplate().execute(new HibernateCallback<List<Medication>>() {
@@ -49,6 +51,7 @@ public class MedicationDaoImpl extends GenericDAO<Medication> implements Medicat
         });   
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Medication> getUnSignedMedications() {
         return getHibernateTemplate().execute(new HibernateCallback<List<Medication>>() {
@@ -61,6 +64,7 @@ public class MedicationDaoImpl extends GenericDAO<Medication> implements Medicat
         });
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Medication> getMedicationWithPattern(final String namePattern) {
         return getHibernateTemplate().execute(new HibernateCallback<List<Medication>>() {

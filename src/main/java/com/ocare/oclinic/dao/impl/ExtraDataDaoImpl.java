@@ -27,6 +27,7 @@ public class ExtraDataDaoImpl extends GenericDAO<ExtraData> implements ExtraData
          super.setClass(ExtraData.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<ExtraData> getAllExtraData() {
         return getHibernateTemplate().execute(new HibernateCallback<List<ExtraData>>() {

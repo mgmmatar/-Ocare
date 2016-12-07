@@ -64,7 +64,7 @@
                         alert(item.value());
                     },
                     ajax: {
-                        url: "/zmed/monitor/examination/fastMedication",
+                        url: "/ocare/monitor/examination/fastMedication",
                         timeout: 500,
                         dataType: "json",
                         contentType: "application/json; charset=utf-8",
@@ -102,7 +102,7 @@
                 ///// Send Complain List 
                     var b;
                     var request = $.ajax({
-                        url: "/zmed/monitor/examination/medication/save",
+                        url: "/ocare/monitor/examination/medication/save",
                         type: "GET",
                         dataType: 'json',
                         data: {
@@ -113,7 +113,7 @@
                             
                             b = (data.responseText === "true" ? true : false);
                             if (b === true) {
-                               //window.location.replace("/zmed/monitor/examination/diagnosis");
+                               //window.location.replace("/ocare/monitor/examination/diagnosis");
                                alert("Medication Saved");
                             }//end if condition
                         }//end complete Function

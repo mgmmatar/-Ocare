@@ -26,6 +26,7 @@ public class WorkingTimeDaoImpl extends GenericDAO<WorkingTime> implements Worki
         super.setClass(WorkingTime.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<WorkingTime> getWorkingDayTimes(final String dayShortName) {
         return getHibernateTemplate().execute(new HibernateCallback<List<WorkingTime>>() {

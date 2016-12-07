@@ -26,6 +26,7 @@ public class PatientComplainDaoImpl extends GenericDAO<PatientComplain> implemen
          super.setClass(PatientComplain.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<PatientComplain> getAllPatientComplains() {
         return getHibernateTemplate().execute(new HibernateCallback<List<PatientComplain>>() {

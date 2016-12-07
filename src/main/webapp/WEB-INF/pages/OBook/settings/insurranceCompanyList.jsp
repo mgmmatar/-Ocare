@@ -103,7 +103,7 @@
              $(".container").on("click",".profiles", function(e) {
                    var insurranceCompanyID = $(this).closest("tr").find('input[type="hidden"][name="insurranceCompanyId"]').val();
                    // URL for insurrance Profile
-                   var profileURL = "/zmed/settings/insurrance/profile/"+insurranceCompanyID;
+                   var profileURL = "/ocare/settings/insurrance/profile/"+insurranceCompanyID;
                     // getting visit
                     var request = $.ajax({
                         url: profileURL,
@@ -143,7 +143,7 @@
                                     var description=$('#description').text();
                                         var b;
                                         var request = $.ajax({
-                                            url: "/zmed/settings/insurrance/save",
+                                            url: "/ocare/settings/insurrance/save",
                                             type: "POST",
                                             dataType: 'json',
                                             data: {
@@ -184,7 +184,7 @@
                     var searchValue=$(this).val();
                     /// Reloading Patient Table Result
                     var request = $.ajax({
-                        url: "/zmed/settings/insurrance/search",
+                        url: "/ocare/settings/insurrance/search",
                         type: "POST",
                         dataType: 'json',
                         data: {

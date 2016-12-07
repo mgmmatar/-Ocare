@@ -27,6 +27,7 @@ public class InsuranceCompanyDaoImpl extends GenericDAO<InsuranceCompany> implem
         super.setClass(InsuranceCompany.class);
     }
 
+   @SuppressWarnings("unchecked")
     @Override
     public List<InsuranceCompany> getAllInsuranceCompanys() {
         return getHibernateTemplate().execute(new HibernateCallback<List<InsuranceCompany>>() {
@@ -39,6 +40,7 @@ public class InsuranceCompanyDaoImpl extends GenericDAO<InsuranceCompany> implem
         });
     }  
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<InsuranceCompany> getInsurranceCompaniesWithPattern(final String pattern) {
         return getHibernateTemplate().execute(new HibernateCallback<List<InsuranceCompany>>() {

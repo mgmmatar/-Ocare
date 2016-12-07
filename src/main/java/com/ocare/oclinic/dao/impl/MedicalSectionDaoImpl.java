@@ -26,6 +26,7 @@ public class MedicalSectionDaoImpl extends GenericDAO<MedicalSection> implements
       super.setClass(MedicalSection.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<MedicalSection> getAllMedicalSections() {
         return getHibernateTemplate().execute(new HibernateCallback<List<MedicalSection>>() {

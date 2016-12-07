@@ -32,6 +32,7 @@ public class ExamineTypeDaoImpl extends GenericDAO<ExamineType> implements Exami
      *
      * @return
      */
+    @SuppressWarnings("unchecked")
     @Override
     public List<ExamineType> getAllExamineTypes() {
         return getHibernateTemplate().execute(new HibernateCallback<List<ExamineType>>() {
@@ -56,6 +57,7 @@ public class ExamineTypeDaoImpl extends GenericDAO<ExamineType> implements Exami
         });
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<ExamineType> getExamineTypesWithPattern(final String pattern) {
           return getHibernateTemplate().execute(new HibernateCallback<List<ExamineType>>() {

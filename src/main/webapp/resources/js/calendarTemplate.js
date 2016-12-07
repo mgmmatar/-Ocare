@@ -344,7 +344,7 @@
                 var examineTypeId=$("#examineTypeId").val();
                 $('#currentDate').val(currentDate);
                 /////////////////////////////////////////////
-                 var reservationURL="/zmed/reservation/timeSlice/"+currentDate+","+examineTypeId;
+                 var reservationURL="/ocare/reservation/timeSlice/"+currentDate+","+examineTypeId;
                  
                 // alert(reservationURL);
                  // Getting Ajax 

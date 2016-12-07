@@ -142,7 +142,7 @@
                                 </div>
           
                                 <!--- Patient List --->
-                                <form method="POST" action="/zmed/settings/workingDays/process" modelAttribute="workingDayHolder">
+                                <form method="POST" action="/ocare/settings/workingDays/process" modelAttribute="workingDayHolder">
 
                                     <c:forEach items="${weekDays}" var="weekDay" varStatus="counter">
                                         <center>

@@ -30,6 +30,7 @@ public class ReservationDaoImpl extends GenericDAO<Reservation> implements Reser
         super.setClass(Reservation.class);
     }    
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Reservation> getAllReservations() {
            return getHibernateTemplate().execute(new HibernateCallback<List<Reservation>>() {
@@ -41,6 +42,7 @@ public class ReservationDaoImpl extends GenericDAO<Reservation> implements Reser
         });
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Reservation getLastReservation(final Date day) {
         return getHibernateTemplate().execute(new HibernateCallback<Reservation>() {
@@ -59,6 +61,7 @@ public class ReservationDaoImpl extends GenericDAO<Reservation> implements Reser
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Reservation> getReservationsForShift(final Date day,final Integer shift) {
          return getHibernateTemplate().execute(new HibernateCallback<List<Reservation>>() {
@@ -73,6 +76,7 @@ public class ReservationDaoImpl extends GenericDAO<Reservation> implements Reser
         });
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Reservation> getReservationsForPatient(final Integer patientId) {
           return getHibernateTemplate().execute(new HibernateCallback<List<Reservation>>() {
@@ -85,6 +89,7 @@ public class ReservationDaoImpl extends GenericDAO<Reservation> implements Reser
         });
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Reservation> getReservationsForPatientByDates(final Integer patientId,final Date fromDate,final Date toDate) {
         return getHibernateTemplate().execute(new HibernateCallback<List<Reservation>>() {
@@ -101,6 +106,7 @@ public class ReservationDaoImpl extends GenericDAO<Reservation> implements Reser
     
         
     
+    @SuppressWarnings("unchecked")
     @Override
     public List<ReportReservationStatus> getReservationStatus(final Integer patientId) {
             return getHibernateTemplate().execute(new HibernateCallback<List<ReportReservationStatus>>() {
@@ -116,6 +122,7 @@ public class ReservationDaoImpl extends GenericDAO<Reservation> implements Reser
     }
 
     
+    @SuppressWarnings("unchecked")
     @Override
     public List<ReportReservationStatus> getReservationStatusByDates(final Integer patientId,final Date fromDate,final Date toDate) {
                 return getHibernateTemplate().execute(new HibernateCallback<List<ReportReservationStatus>>() {
@@ -132,6 +139,7 @@ public class ReservationDaoImpl extends GenericDAO<Reservation> implements Reser
         });
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<StatisticReportModule> getTodayReservationReport(final Date today) {
         return getHibernateTemplate().execute(new HibernateCallback<List<StatisticReportModule>>() {
@@ -147,6 +155,7 @@ public class ReservationDaoImpl extends GenericDAO<Reservation> implements Reser
         });
      }
     
+    @SuppressWarnings("unchecked")
     @Override
     public List<StatisticReportModule> getTodayInsurranceReport(final Date today) {
         return getHibernateTemplate().execute(new HibernateCallback<List<StatisticReportModule>>() {
@@ -162,6 +171,7 @@ public class ReservationDaoImpl extends GenericDAO<Reservation> implements Reser
         });        
     }
    
+    @SuppressWarnings("unchecked")
     @Override
     public List<StatisticReportModule> getReservationReportWithRange(final Date fromDate,final Date toDate) {
         return getHibernateTemplate().execute(new HibernateCallback<List<StatisticReportModule>>() {
@@ -178,6 +188,7 @@ public class ReservationDaoImpl extends GenericDAO<Reservation> implements Reser
         });
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<StatisticReportModule> getInsuranceReportWithRange(final Date fromDate,final Date toDate) {
         return getHibernateTemplate().execute(new HibernateCallback<List<StatisticReportModule>>() {

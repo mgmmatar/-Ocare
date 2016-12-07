@@ -42,7 +42,7 @@
 
 
 <center>
-    <a href="/zmed/monitor/prescriptiontype/add">Add New</a>
+    <a href="/ocare/monitor/prescriptiontype/add">Add New</a>
 </center>
 
 </body>

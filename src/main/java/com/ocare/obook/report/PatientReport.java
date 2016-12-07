@@ -99,7 +99,7 @@ public class PatientReport {
     }
     
     
- 
+    @SuppressWarnings("rawtypes")  
     private AbstractColumn createColumn(String property, Class type,
             String title, int width, Style headerStyle, Style detailStyle)
             throws ColumnBuilderException {

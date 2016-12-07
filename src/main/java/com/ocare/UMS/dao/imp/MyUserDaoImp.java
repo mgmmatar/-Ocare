@@ -27,6 +27,7 @@ public class MyUserDaoImp extends GenericDAO<MyUser> implements MyUserDao{
         super.setClass(MyUser.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<MyUser> getAllUsers() {
         return getHibernateTemplate().execute(new HibernateCallback<List<MyUser>>() {
@@ -43,6 +44,7 @@ public class MyUserDaoImp extends GenericDAO<MyUser> implements MyUserDao{
         });
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<MyUser> getAllAdmins() {
         return getHibernateTemplate().execute(new HibernateCallback<List<MyUser>>() {
@@ -58,6 +60,7 @@ public class MyUserDaoImp extends GenericDAO<MyUser> implements MyUserDao{
         });
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<MyUser> getAdminsWithPattern(final String pattern) {
             return getHibernateTemplate().execute(new HibernateCallback<List<MyUser>>() {
@@ -78,6 +81,7 @@ public class MyUserDaoImp extends GenericDAO<MyUser> implements MyUserDao{
         });
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<MyUser> getUsersWithPattern(final String pattern) {
         return getHibernateTemplate().execute(new HibernateCallback<List<MyUser>>() {

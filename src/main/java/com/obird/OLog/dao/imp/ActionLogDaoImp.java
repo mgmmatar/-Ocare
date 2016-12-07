@@ -27,6 +27,7 @@ public class ActionLogDaoImp extends GenericDAO<ActionLog> implements ActionLogD
        super.setClass(ActionLog.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<ActionLog> getAllActionLogs() {
         return getHibernateTemplate().execute(new HibernateCallback<List<ActionLog>>() {
@@ -38,6 +39,7 @@ public class ActionLogDaoImp extends GenericDAO<ActionLog> implements ActionLogD
         });          
     }
     
+    @SuppressWarnings("unchecked")
     @Override
     public List<ActionLog> getActionLogsWithPattern(final String pattern) {
           return getHibernateTemplate().execute(new HibernateCallback<List<ActionLog>>() {

@@ -80,12 +80,12 @@
             $(document).ready(function() {
                $('#editPatient').on("click", function(e) {
                    var patientId = '${patient.id}';
-                    window.location.href = "/zmed/patient/edit/"+patientId;   
+                    window.location.href = "/ocare/patient/edit/"+patientId;   
                 });
                 
                 $('#reservePatient').on("click", function(e) {
                     var patientId = '${patient.id}';
-                    window.location.href = "/zmed/reservation/process/"+patientId;  
+                    window.location.href = "/ocare/reservation/process/"+patientId;  
                 });
                 
            
@@ -106,7 +106,7 @@
             $('.patientVisit').click(function(){
                  // Getting the Clicked VisitId
                     var visitId =  $(this).closest('tr').find('input[type="hidden"][name="visitId"]').val();
-                    var visitPageURL = "/zmed/monitor/visitPage/"+visitId;
+                    var visitPageURL = "/ocare/monitor/visitPage/"+visitId;
                     // getting visit
                     var b;
                     var request = $.ajax({

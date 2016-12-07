@@ -26,6 +26,7 @@ public class ReservationWayDaoImpl extends GenericDAO<ReservationWay> implements
       super.setClass(ReservationWay.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<ReservationWay> getAllReservationWays() {
         return getHibernateTemplate().execute(new HibernateCallback<List<ReservationWay>>() {
@@ -50,6 +51,7 @@ public class ReservationWayDaoImpl extends GenericDAO<ReservationWay> implements
         });
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<ReservationWay> getReservationWaysWithPattern(final String pattern) {
         return getHibernateTemplate().execute(new HibernateCallback<List<ReservationWay>>() {

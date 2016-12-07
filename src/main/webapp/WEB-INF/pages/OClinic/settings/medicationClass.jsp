@@ -26,7 +26,7 @@
     <!-- Add/Edit Form -->
 
     <center>
-        <form id="demo-form2" method="POST" action="/zmed/monitor/medicationclass/process" modelAttribute="medicationClass">
+        <form id="demo-form2" method="POST" action="/ocare/monitor/medicationclass/process" modelAttribute="medicationClass">
 
             <input type="hidden" name="id"  value="${medicationClassEdit.id}"/>
 

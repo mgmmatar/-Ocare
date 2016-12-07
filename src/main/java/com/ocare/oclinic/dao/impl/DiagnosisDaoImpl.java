@@ -25,6 +25,7 @@ public class DiagnosisDaoImpl extends GenericDAO<Diagnosis> implements Diagnosis
        super.setClass(Diagnosis.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Diagnosis> getAllDiagnosises() {
         return getHibernateTemplate().execute(new HibernateCallback<List<Diagnosis>>() {
@@ -36,6 +37,7 @@ public class DiagnosisDaoImpl extends GenericDAO<Diagnosis> implements Diagnosis
         });
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Diagnosis> getSignedDiagnisises() {
         return getHibernateTemplate().execute(new HibernateCallback<List<Diagnosis>>() {
@@ -48,6 +50,7 @@ public class DiagnosisDaoImpl extends GenericDAO<Diagnosis> implements Diagnosis
         });
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Diagnosis> getUnSignedDiagnisises() {
         return getHibernateTemplate().execute(new HibernateCallback<List<Diagnosis>>() {
@@ -60,6 +63,7 @@ public class DiagnosisDaoImpl extends GenericDAO<Diagnosis> implements Diagnosis
         });    
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Diagnosis> getDiagnosisWithPattern(final String namePattern) {
         return getHibernateTemplate().execute(new HibernateCallback<List<Diagnosis>>() {

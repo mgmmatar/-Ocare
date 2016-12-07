@@ -16,11 +16,11 @@
             $('#patientSearch').typeahead({
                         onSelect: function(item) {
                             // Open Patient Page
-                               window.location.href = "/zmed/monitor/patient/"+item.value;    
+                               window.location.href = "/ocare/monitor/patient/"+item.value;    
                             //
                         },
                         ajax: {
-                                url: "/zmed/patient/fastSearch",
+                                url: "/ocare/patient/fastSearch",
                                 timeout: 500,
                                 dataType: "json",
                                 contentType: "application/json; charset=utf-8",

@@ -25,8 +25,8 @@
 <body>
   <div class="text1">You do not have permission to access this page !!! </div> 
   <div class="text2">You can goto home page , or you can change your login role</div> 
-  <a href="/zmed/auth/login" class="button button1">Log out</a>
-  <a href="/zmed/reservation/list" class="button button2">Goto Home Page</a>
+  <a href="/ocare/auth/login" class="button button1">Log out</a>
+  <a href="/ocare/reservation/list" class="button button2">Goto Home Page</a>
   <div class="text3">Access Denied :(</div>
   
 </body>

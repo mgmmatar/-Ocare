@@ -60,7 +60,7 @@
         
                 $(".container").on("click","#RegisterAdmin", function(e) { 
                      // URL for insurrance Profile
-                    var profileURL = "/zmed/ums/admin/data/"+0;
+                    var profileURL = "/ocare/ums/admin/data/"+0;
                     // getting visit
                     var request = $.ajax({
                         url: profileURL,
@@ -84,7 +84,7 @@
                     // delete Current Patient
                     var userId=$(this).parents("tr").find('input[type="hidden"][name="userId"]').val();
                      // URL for insurrance Profile
-                    var profileURL = "/zmed/ums/admin/data/"+userId;
+                    var profileURL = "/ocare/ums/admin/data/"+userId;
                     // getting visit
                     var request = $.ajax({
                         url: profileURL,
@@ -117,7 +117,7 @@
                     }//end if Condition
                     //// Sending Activation , De-Activation
                     var request = $.ajax({
-                            url: "/zmed/ums/admin/activeOrDeactive",
+                            url: "/ocare/ums/admin/activeOrDeactive",
                             type: "POST",
                             dataType: 'json',
                         data: {  
@@ -149,7 +149,7 @@
                     var searchValue=$(this).val();
                     /// Reloading Patient Table Result
                     var request = $.ajax({
-                        url: "/zmed/ums/admin/search",
+                        url: "/ocare/ums/admin/search",
                         type: "POST",
                         dataType: 'json',
                         data: {

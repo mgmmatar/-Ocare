@@ -166,8 +166,8 @@
                   <h4>
                       My Radio Promotions
                     </h4>
-                  <a href="/zmed/resources/css/images/ship_bottle.jpg" data-toggle="lightbox" data-title="My Radio Promotion">
-                    <img src="/zmed/resources/css/images/ship_bottle.jpg" class="img-thumbnail img-responsive"></a>
+                  <a href="/ocare/resources/css/images/ship_bottle.jpg" data-toggle="lightbox" data-title="My Radio Promotion">
+                    <img src="/ocare/resources/css/images/ship_bottle.jpg" class="img-thumbnail img-responsive"></a>
                   </a>
                 </div>
               </div>
@@ -185,8 +185,8 @@
                   <h4>
                     Windows & Linux Server Control
                   </h4>
-                  <a href="/zmed/resources/css/images/ship_bottle.jpg" data-toggle="lightbox" data-title="Windows & Linux Server Control">
-                    <img src="/zmed/resources/css/images/ship_bottle.jpg" class="img-thumbnail img-responsive">
+                  <a href="/ocare/resources/css/images/ship_bottle.jpg" data-toggle="lightbox" data-title="Windows & Linux Server Control">
+                    <img src="/ocare/resources/css/images/ship_bottle.jpg" class="img-thumbnail img-responsive">
                   </a>
                 </div>
               </div>
@@ -204,8 +204,8 @@
                   <h4>
                     Data Center QA Tool
                   </h4>
-                  <a href="/zmed/resources/css/images/ship_bottle.jpg" data-toggle="lightbox" data-title="Data Center Quality Assurance Tool">
-                    <img src="/zmed/resources/css/images/ship_bottle.jpg" class="img-thumbnail img-responsive">
+                  <a href="/ocare/resources/css/images/ship_bottle.jpg" data-toggle="lightbox" data-title="Data Center Quality Assurance Tool">
+                    <img src="/ocare/resources/css/images/ship_bottle.jpg" class="img-thumbnail img-responsive">
                   </a>
                 </div>
               </div>
@@ -223,8 +223,8 @@
                   <h4>
                     Queue Manager
                   </h4>
-                  <a href="/zmed/resources/css/images/ship_bottle.jpg" data-toggle="lightbox" data-title="Ticket Aggregator">
-                    <img src="/zmed/resources/css/images/ship_bottle.jpg" class="img-thumbnail img-responsive">
+                  <a href="/ocare/resources/css/images/ship_bottle.jpg" data-toggle="lightbox" data-title="Ticket Aggregator">
+                    <img src="/ocare/resources/css/images/ship_bottle.jpg" class="img-thumbnail img-responsive">
                   </a>
                 </div>
               </div>
@@ -242,8 +242,8 @@
                   <h4>
                     QA Knowledgebase
                   </h4>
-                  <a href="/zmed/resources/css/images/ship_bottle.jpg" data-toggle="lightbox" data-title="QA Knowledgebase">
-                    </i><img src="/zmed/resources/css/images/ship_bottle.jpg" class="img-thumbnail img-responsive">
+                  <a href="/ocare/resources/css/images/ship_bottle.jpg" data-toggle="lightbox" data-title="QA Knowledgebase">
+                    </i><img src="/ocare/resources/css/images/ship_bottle.jpg" class="img-thumbnail img-responsive">
                   </a>
                 </div>
               </div>
@@ -261,8 +261,8 @@
                   <h4>
                     Musik and Film Records
                   </h4>
-                  <a href="/zmed/resources/css/images/ship_bottle.jpg" data-toggle="lightbox" data-title="Musik and Film Records">
-                    <img src="/zmed/resources/css/images/ship_bottle.jpg" class="img-thumbnail img-responsive"></a>
+                  <a href="/ocare/resources/css/images/ship_bottle.jpg" data-toggle="lightbox" data-title="Musik and Film Records">
+                    <img src="/ocare/resources/css/images/ship_bottle.jpg" class="img-thumbnail img-responsive"></a>
                 </div>
               </div>
               <div class="col-md-8">

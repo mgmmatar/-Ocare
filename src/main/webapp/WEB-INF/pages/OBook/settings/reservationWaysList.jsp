@@ -87,7 +87,7 @@
                     var reservationWayID = $(this).closest("tr").find('input[type="hidden"][name="reservationWayId"]').val();
                     var b;
                     var request = $.ajax({
-                        url: "/zmed/settings/reservationWay/defaultOne",
+                        url: "/ocare/settings/reservationWay/defaultOne",
                         type: "POST",
                         dataType: 'json',
                         data: {
@@ -140,7 +140,7 @@
                                     var description=$('#description').text();
                                         var b;
                                         var request = $.ajax({
-                                            url: "/zmed/settings/reservationWay/save",
+                                            url: "/ocare/settings/reservationWay/save",
                                             type: "POST",
                                             dataType: 'json',
                                             data: {
@@ -185,7 +185,7 @@
                     var searchValue=$(this).val();
                     /// Reloading Patient Table Result
                     var request = $.ajax({
-                        url: "/zmed/settings/reservationWay/search",
+                        url: "/ocare/settings/reservationWay/search",
                         type: "POST",
                         dataType: 'json',
                         data: {

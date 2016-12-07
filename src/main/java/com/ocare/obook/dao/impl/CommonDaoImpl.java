@@ -25,6 +25,7 @@ public class CommonDaoImpl extends GenericDAO<Common> implements CommonDao{
         super.setClass(Common.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Common> getAllCommons() {
         return getHibernateTemplate().execute(new HibernateCallback<List<Common>>() {

@@ -57,7 +57,7 @@
                                                         <th tabindex="1"><img src="<c:url value='/resources/images/delete-sign.png'/>" id="DeleteExamineType" class="examineTypeDeleteButton"
                                                                               data-ssd-confirm-trigger="remove"
                                                                               data-ssd-confirm-message="Are you sure you wish to remove ${examineType.nameEn} ?<br />There is no undo!"
-                                                                              data-ssd-confirm-url="/zmed/settings/examineType/delete/${examineType.id}"
+                                                                              data-ssd-confirm-url="/ocare/settings/examineType/delete/${examineType.id}"
                                                                               data-ssd-confirm-behaviour="reload"/>
                                                                 </th>
                                                     </tr>

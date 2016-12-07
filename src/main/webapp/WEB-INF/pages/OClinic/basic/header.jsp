@@ -107,7 +107,7 @@
                         </li>
                         
                         <li>
-                                <button onclick="location.href = '/zmed/patient/register';" class="registerbuttonheader" type="submit">Register</button> 
+                                <button onclick="location.href = '/ocare/patient/register';" class="registerbuttonheader" type="submit">Register</button> 
                         </li>  
                      
                     </ul>

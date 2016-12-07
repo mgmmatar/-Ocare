@@ -44,7 +44,7 @@
 
 
 <center>
-    <a href="/zmed/monitor/prescription/add">Add New</a>
+    <a href="/ocare/monitor/prescription/add">Add New</a>
 </center>
 
 </body>

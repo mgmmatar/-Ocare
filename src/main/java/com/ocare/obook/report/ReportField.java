@@ -9,6 +9,7 @@ package com.ocare.obook.report;
  *
  * @author khaledeng
  */
+@SuppressWarnings("rawtypes")
 public class ReportField {
 
     private String name;

@@ -23,7 +23,7 @@
             </c:otherwise>
         </c:choose>
 
-    <form id="aboutChefForm" method="POST" action="/zmed/ums/admin/createOrUpdate" modelAttribute="userHolder" accept-charset="utf-8" >
+    <form id="aboutChefForm" method="POST" action="/ocare/ums/admin/createOrUpdate" modelAttribute="userHolder" accept-charset="utf-8" >
     <input type="hidden" name="userId" value="${myUser.id}"/>
     <input type="hidden" name="roleName" value="ADMIN"/>
     <div>

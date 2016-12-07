@@ -30,7 +30,7 @@ $.fn.insurranceCompanyEditable= function () {
                 // Sending Ajax Call
                     var b;    
                     var request = $.ajax({
-                        url: "/zmed/settings/insurranceCompanyEditable/" +insurranceCompanyId+","+changedIndex+","+changedValue,
+                        url: "/ocare/settings/insurranceCompanyEditable/" +insurranceCompanyId+","+changedIndex+","+changedValue,
                         data: {
                         },
                         async: false
@@ -45,7 +45,7 @@ $.fn.insurranceCompanyEditable= function () {
                     });
                     if (b == true) {
                         var request = $.ajax({
-                        url: "/zmed/settings/insurrance/loadInsurranceCompanyTable",
+                        url: "/ocare/settings/insurrance/loadInsurranceCompanyTable",
                         data: {
                         },
                         complete: function(data) {

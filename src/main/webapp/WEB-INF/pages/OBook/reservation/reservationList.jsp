@@ -92,7 +92,7 @@
                    // var reservationId= 1;
 
                     var request = $.ajax({
-                        url: "/zmed/reservation/cancelReservation/" + reservationId,
+                        url: "/ocare/reservation/cancelReservation/" + reservationId,
                         data: {
                         },
                         async: false
@@ -117,7 +117,7 @@
                   //  var reservationId= 1;
 
                     var request = $.ajax({
-                        url: "/zmed/reservation/confirmReservation/" + reservationId,
+                        url: "/ocare/reservation/confirmReservation/" + reservationId,
                         data: {
                         },
                         async: false
@@ -139,7 +139,7 @@
                     
                      var currentDate = $('#currentDate').val();
                      // reservationURL
-                     var reservationURL="/zmed/reservation/reservationElement/"+currentDate;
+                     var reservationURL="/ocare/reservation/reservationElement/"+currentDate;
                     // Getting Ajax 
                     var b;
                     var request = $.ajax({

@@ -27,6 +27,7 @@ public class PatientExtraDaoImpl extends GenericDAO<PatientExtra> implements Pat
         super.setClass(PatientExtra.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<PatientExtra> getAllPatientExtra() {
         return getHibernateTemplate().execute(new HibernateCallback<List<PatientExtra>>() {

@@ -30,6 +30,7 @@ public class PatientDaoImpl extends GenericDAO<Patient> implements PatientDao {
         super.setClass(Patient.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Patient> getAllPatients() {
         return getHibernateTemplate().execute(new HibernateCallback<List<Patient>>() {
@@ -63,6 +64,7 @@ public class PatientDaoImpl extends GenericDAO<Patient> implements PatientDao {
         update(patient);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Patient> searchPatient(final String patientName, final String patientCode, final String patientPhone) {
         return getHibernateTemplate().execute(new HibernateCallback<List<Patient>>() {
@@ -100,6 +102,7 @@ public class PatientDaoImpl extends GenericDAO<Patient> implements PatientDao {
         });
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<FastPatient> getFastPatientList(final String patientInfo) {
         return getHibernateTemplate().execute(new HibernateCallback<List<FastPatient>>() {
@@ -126,6 +129,7 @@ public class PatientDaoImpl extends GenericDAO<Patient> implements PatientDao {
         });
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Patient> searchForPatient(final String patientInfo) {
         return getHibernateTemplate().execute(new HibernateCallback<List<Patient>>() {

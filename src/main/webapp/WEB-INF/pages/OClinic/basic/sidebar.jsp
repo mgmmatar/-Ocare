@@ -32,7 +32,7 @@
                             <li class=""><a><i class="fa fa-home"></i> <label class="menuText">Main </label><span
                                     class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="/zmed/reservation/list">Main</a>
+                                    <li><a href="/ocare/reservation/list">Main</a>
                                     </li>
                                     
                                 </ul>
@@ -40,13 +40,13 @@
                             <li class=""><a><i class="fa fa-edit"></i> <label class="menuText">Settings </label><span
                                     class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="/zmed/patient/register">Complains</a>
+                                    <li><a href="/ocare/patient/register">Complains</a>
                                     </li>
-                                    <li><a href="/zmed/patient/list">Diagnosis</a>
+                                    <li><a href="/ocare/patient/list">Diagnosis</a>
                                     </li>
-                                    <li><a href="/zmed/patient/search">Prescriptions</a>
+                                    <li><a href="/ocare/patient/search">Prescriptions</a>
                                     </li>
-                                    <li><a href="/zmed/patient/search">Medications</a>
+                                    <li><a href="/ocare/patient/search">Medications</a>
                                     </li>
                                 </ul>
                             </li>

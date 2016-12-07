@@ -26,7 +26,7 @@
           var profileID= $(this).closest("tr").find('input[type="hidden"][name="profileId"]').val();
           var selectedValue=$(this).val();
           // Define the ServiceURL
-          var profileURL = "/zmed/settings/insurrance/profile/"+profileID+"/edit/examine,"+selectedValue;
+          var profileURL = "/ocare/settings/insurrance/profile/"+profileID+"/edit/examine,"+selectedValue;
           // Send Edit Request for the Current Profile
             var request = $.ajax({
                 url: profileURL,
@@ -47,7 +47,7 @@
           var profileID= $(this).closest("tr").find('input[type="hidden"][name="profileId"]').val();
           var selectedValue=$(this).val();
           // Define the ServiceURL
-          var profileURL = "/zmed/settings/insurrance/profile/"+profileID+"/edit/percentage,"+selectedValue;
+          var profileURL = "/ocare/settings/insurrance/profile/"+profileID+"/edit/percentage,"+selectedValue;
             var request = $.ajax({
                 url: profileURL,
                 type: "GET",
@@ -105,7 +105,7 @@
                     // Sending request 
                     var b;
                     var request = $.ajax({
-                        url: "/zmed/settings/insurrance/profile/create",
+                        url: "/ocare/settings/insurrance/profile/create",
                         type: "POST",
                         dataType: 'json',
                         data: {
@@ -114,7 +114,7 @@
                             percentage:percentage
                         },
                         complete: function(data) {
-                         var profileURL = "/zmed/settings/insurrance/profile/"+insurranceId;
+                         var profileURL = "/ocare/settings/insurrance/profile/"+insurranceId;
                                     // getting visit
                                     var b;
                                     var request = $.ajax({
@@ -153,14 +153,14 @@
          var profileId= $(this).closest("tr").find('input[type="hidden"][name="profileId"]').val();
          var insurranceId=${company.id};
          var request = $.ajax({
-                url: "/zmed/settings/insurrance/profile/delete",
+                url: "/ocare/settings/insurrance/profile/delete",
                 type: "POST",
                 dataType: 'json',
                 data: {
                     profileId:profileId
                 },
                 complete: function(data) {
-                 var profileURL = "/zmed/settings/insurrance/profile/"+insurranceId;
+                 var profileURL = "/ocare/settings/insurrance/profile/"+insurranceId;
                             // getting visit
                             var b;
                             var request = $.ajax({
@@ -225,7 +225,7 @@
                     // Sending request 
                     var b;
                     var request = $.ajax({
-                        url: "/zmed/settings/insurrance/profile/create",
+                        url: "/ocare/settings/insurrance/profile/create",
                         type: "POST",
                         dataType: 'json',
                         data: {
@@ -234,7 +234,7 @@
                             percentage:percentage
                         },
                         complete: function(data) {
-                         var profileURL = "/zmed/settings/insurrance/profile/"+insurranceId;
+                         var profileURL = "/ocare/settings/insurrance/profile/"+insurranceId;
                                     // getting visit
                                     var b;
                                     var request = $.ajax({
@@ -263,7 +263,7 @@
                         // Remove Row 
                         var insurranceCompanyID = ${company.id};
                         // URL for insurrance Profile
-                        var profileURL = "/zmed/settings/insurrance/profile/"+insurranceCompanyID;
+                        var profileURL = "/ocare/settings/insurrance/profile/"+insurranceCompanyID;
                          // getting visit
                          var request = $.ajax({
                              url: profileURL,

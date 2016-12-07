@@ -28,6 +28,7 @@ public class MeasurementDaoImpl extends GenericDAO<Measurement> implements Measu
        super.setClass(Measurement.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Measurement> getAllMeasurements() {
         return getHibernateTemplate().execute(new HibernateCallback<List<Measurement>>() {

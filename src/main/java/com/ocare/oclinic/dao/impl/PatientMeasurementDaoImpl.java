@@ -28,6 +28,7 @@ public class PatientMeasurementDaoImpl extends GenericDAO<PatientMeasurement> im
        super.setClass(PatientMeasurement.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<PatientMeasurement> getAllPatientMeasurements() {
         return getHibernateTemplate().execute(new HibernateCallback<List<PatientMeasurement>>() {

@@ -27,6 +27,7 @@ public class WeekDayDaoImpl extends GenericDAO<WeekDay> implements WeekDayDao{
       super.setClass(WeekDay.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<WeekDay> getAllWeekDays() {
         return getHibernateTemplate().execute(new HibernateCallback<List<WeekDay>>() {
@@ -40,6 +41,7 @@ public class WeekDayDaoImpl extends GenericDAO<WeekDay> implements WeekDayDao{
         });
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<WeekDay> getWorkingWeekDays() {
         return getHibernateTemplate().execute(new HibernateCallback<List<WeekDay>>() {

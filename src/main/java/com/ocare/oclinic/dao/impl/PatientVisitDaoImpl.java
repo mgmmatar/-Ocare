@@ -26,6 +26,7 @@ public class PatientVisitDaoImpl extends GenericDAO<PatientVisit> implements Pat
        super.setClass(PatientVisit.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<PatientVisit> getAllPatientVisits() {
         return getHibernateTemplate().execute(new HibernateCallback<List<PatientVisit>>() {
@@ -50,6 +51,7 @@ public class PatientVisitDaoImpl extends GenericDAO<PatientVisit> implements Pat
         });
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<PatientVisit> getNofLastVisit(final Integer patientId,final Integer nOfVisits) {
           return getHibernateTemplate().execute(new HibernateCallback<List<PatientVisit>>() {

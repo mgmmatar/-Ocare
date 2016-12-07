@@ -239,4 +239,16 @@ public class MyUserController {
         return MODULE_PATH + "userTable";
     }//end fastSearchPatient 
     
+    @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN"})
+    @RequestMapping(value = "/user/profile", method = RequestMethod.GET)
+    public String userProfile(Model model,HttpServletResponse response) throws IOException {
+        // Update User Status
+        MyUser myUser=userService.getLoggedInUserObject();
+        
+        model.addAttribute("myUser", myUser);
+        // return profile Page 
+        return MODULE_PATH + "userProfile";
+    }//end 
+    
+    
 }

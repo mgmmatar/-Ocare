@@ -27,6 +27,7 @@ public class PrescriptionTypeDaoImpl extends GenericDAO<PrescriptionType> implem
        super.setClass(PrescriptionType.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<PrescriptionType> getAllPrescriptionTypes() {
         return getHibernateTemplate().execute(new HibernateCallback<List<PrescriptionType>>() {

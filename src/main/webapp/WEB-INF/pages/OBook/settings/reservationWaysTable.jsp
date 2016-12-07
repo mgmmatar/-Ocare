@@ -53,7 +53,7 @@
                                             <th tabindex="1"><img src="<c:url value='/resources/images/delete-sign.png'/>" id="DeleteReservationWay" class="reservationWayDeleteButton"
                                                                   data-ssd-confirm-trigger="remove"
                                                                               data-ssd-confirm-message="Are you sure you wish to remove ${reservationWay.nameEn} ?<br />There is no undo!"
-                                                                              data-ssd-confirm-url="/zmed/settings/reservationWay/delete/${reservationWay.id}"
+                                                                              data-ssd-confirm-url="/ocare/settings/reservationWay/delete/${reservationWay.id}"
                                                                               data-ssd-confirm-behaviour="reload"/>
                                             </th>
                                         </tr>

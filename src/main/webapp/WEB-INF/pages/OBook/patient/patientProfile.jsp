@@ -52,12 +52,12 @@
             $(document).ready(function() {
                $('#editPatient').on("click", function(e) {
                    var patientId = '${patient.id}';
-                    window.location.href = "/zmed/patient/edit/"+patientId;   
+                    window.location.href = "/ocare/patient/edit/"+patientId;   
                 });
                 
                 $('#reservePatient').on("click", function(e) {
                     var patientId = '${patient.id}';
-                    window.location.href = "/zmed/reservation/process/"+patientId;  
+                    window.location.href = "/ocare/reservation/process/"+patientId;  
                 });
             });
         </script>

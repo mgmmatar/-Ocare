@@ -42,7 +42,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller("settingsController")
 @RequestMapping("/settings")
-@Secured({"ROLE_SUPER_ADMIN"})
+@Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN"})
 public class SettingsController {
 
     private final String PACKAGE_ROOT = "/OBook/settings/";

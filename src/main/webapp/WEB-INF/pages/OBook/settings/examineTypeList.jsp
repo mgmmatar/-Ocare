@@ -87,7 +87,7 @@
                     var examineTypeID = $(this).closest("tr").find('input[type="hidden"][name="examineTypeId"]').val();
                     var b;
                     var request = $.ajax({
-                        url: "/zmed/settings/examineType/defaultOne",
+                        url: "/ocare/settings/examineType/defaultOne",
                         type: "POST",
                         dataType: 'json',
                         data: {
@@ -149,7 +149,7 @@
                                     var period=$('#period').text();
                                         var b;
                                         var request = $.ajax({
-                                            url: "/zmed/settings/examineType/save",
+                                            url: "/ocare/settings/examineType/save",
                                             type: "POST",
                                             dataType: 'json',
                                             data: {
@@ -196,7 +196,7 @@
                     var searchValue=$(this).val();
                     /// Reloading Patient Table Result
                     var request = $.ajax({
-                        url: "/zmed/settings/examineType/search",
+                        url: "/ocare/settings/examineType/search",
                         type: "POST",
                         dataType: 'json',
                         data: {

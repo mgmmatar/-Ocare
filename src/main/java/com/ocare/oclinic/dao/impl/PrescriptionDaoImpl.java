@@ -26,6 +26,7 @@ public class PrescriptionDaoImpl extends GenericDAO<Prescription> implements Pre
        super.setClass(Prescription.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Prescription> getAllPrescriptions() {
         return getHibernateTemplate().execute(new HibernateCallback<List<Prescription>>() {
@@ -37,6 +38,7 @@ public class PrescriptionDaoImpl extends GenericDAO<Prescription> implements Pre
         });
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Prescription> getSignedPrescriptions() {
         return getHibernateTemplate().execute(new HibernateCallback<List<Prescription>>() {
@@ -49,6 +51,7 @@ public class PrescriptionDaoImpl extends GenericDAO<Prescription> implements Pre
         });
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Prescription> getUnSignedPrescriptions() {
         return getHibernateTemplate().execute(new HibernateCallback<List<Prescription>>() {
@@ -61,6 +64,7 @@ public class PrescriptionDaoImpl extends GenericDAO<Prescription> implements Pre
         });
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Prescription> getPrescriptionWithPattern(final String namePattern) {
         return getHibernateTemplate().execute(new HibernateCallback<List<Prescription>>() {

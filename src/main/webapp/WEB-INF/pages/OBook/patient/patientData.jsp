@@ -25,7 +25,7 @@
         
     </div> 
 
-    <form id="aboutChefForm" method="POST" action="/zmed/patient/process" modelAttribute="patient" accept-charset="utf-8" >
+    <form id="aboutChefForm" method="POST" action="/ocare/patient/process" modelAttribute="patient" accept-charset="utf-8" >
     <input type="hidden" name="id" value="${patient.id}"/>
     
     <div>

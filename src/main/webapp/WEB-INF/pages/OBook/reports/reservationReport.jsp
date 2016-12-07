@@ -109,7 +109,7 @@
                     var dateTo = $('#dateTo').val();
                  
                     var request = $.ajax({
-                        url: "/zmed/report/reservation/search",
+                        url: "/ocare/report/reservation/search",
                         type: "POST",
                         dataType: 'json',
                         data: {
@@ -162,7 +162,7 @@
     </head>
     <style>
         [type="date"] {
-               background:#fff url('/zmed/resources/images/calendar.png')  97% 50% no-repeat ;}
+               background:#fff url('/ocare/resources/images/calendar.png')  97% 50% no-repeat ;}
         [type="date"]::-webkit-inner-spin-button {
                 display: none;}
         [type="date"]::-webkit-calendar-picker-indicator {

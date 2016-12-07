@@ -26,7 +26,7 @@
     <!-- Add/Edit Form -->
 
     <center>
-        <form id="demo-form2" method="POST" action="/zmed/monitor/complain/process" modelAttribute="complain">
+        <form id="demo-form2" method="POST" action="/ocare/monitor/complain/process" modelAttribute="complain">
 
             <input type="hidden" name="id"  value="${complain.id}"/>
 

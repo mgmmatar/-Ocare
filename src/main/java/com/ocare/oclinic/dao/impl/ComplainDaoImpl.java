@@ -26,6 +26,7 @@ public class ComplainDaoImpl extends GenericDAO<Complain> implements ComplainDao
         super.setClass(Complain.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Complain> getAllComplains() {
         return getHibernateTemplate().execute(new HibernateCallback<List<Complain>>() {
@@ -37,6 +38,7 @@ public class ComplainDaoImpl extends GenericDAO<Complain> implements ComplainDao
         });        
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Complain> getSignedComplains() {
         return getHibernateTemplate().execute(new HibernateCallback<List<Complain>>() {
@@ -49,6 +51,7 @@ public class ComplainDaoImpl extends GenericDAO<Complain> implements ComplainDao
         });       
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Complain> getUnSignedComplains() {
         return getHibernateTemplate().execute(new HibernateCallback<List<Complain>>() {
@@ -61,6 +64,7 @@ public class ComplainDaoImpl extends GenericDAO<Complain> implements ComplainDao
         });         
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Complain> getComplainWithPattern(final String namePattern) {
         return getHibernateTemplate().execute(new HibernateCallback<List<Complain>>() {

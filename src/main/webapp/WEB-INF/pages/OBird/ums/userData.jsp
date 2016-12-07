@@ -26,7 +26,7 @@
         
     </div> 
 
-    <form id="aboutChefForm" method="POST" action="/zmed/ums/user/createOrUpdate" modelAttribute="userHolder" accept-charset="utf-8" >
+    <form id="aboutChefForm" method="POST" action="/ocare/ums/user/createOrUpdate" modelAttribute="userHolder" accept-charset="utf-8" >
     <input type="hidden" name="userId" value="${myUser.id}"/>
     <div>
         

@@ -28,6 +28,7 @@ public class RoleDaoImp extends GenericDAO<Role> implements RoleDao{
        super.setClass(Role.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Role> getAllRoles() {
         return getHibernateTemplate().execute(new HibernateCallback<List<Role>>() {
@@ -51,6 +52,7 @@ public class RoleDaoImp extends GenericDAO<Role> implements RoleDao{
         });
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Role> getAllNonAdminRoles() {
            return getHibernateTemplate().execute(new HibernateCallback<List<Role>>() {

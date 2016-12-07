@@ -69,7 +69,7 @@
                 });
               
                 $(".container").on("click","#AddNewPatient", function(e) { 
-                    var profileURL = "/zmed/patient/data/0";
+                    var profileURL = "/ocare/patient/data/0";
                     // getting visit
                     var request = $.ajax({
                         url: profileURL,
@@ -92,7 +92,7 @@
                     // delete Current Patient
                     var patientId=$(this).parents("tr").find('input[type="hidden"][name="patientId"]').val();
                      // URL for insurrance Profile
-                    var profileURL = "/zmed/patient/data/"+patientId;
+                    var profileURL = "/ocare/patient/data/"+patientId;
                     // getting visit
                     var request = $.ajax({
                         url: profileURL,
@@ -122,7 +122,7 @@
                  function LoadPatientTableFor(searchValue){
                       /// Sending Ajax Request To Reload Table
                         var request = $.ajax({
-                        url: "/zmed/patient/loadPatientTable",
+                        url: "/ocare/patient/loadPatientTable",
                         type: "POST",
                         dataType: 'json',
                         data: {

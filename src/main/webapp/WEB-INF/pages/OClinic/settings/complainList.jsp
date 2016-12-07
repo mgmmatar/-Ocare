@@ -46,7 +46,7 @@
 
 
 <center>
-    <a href="/zmed/monitor/complain/add">Add New</a>
+    <a href="/ocare/monitor/complain/add">Add New</a>
 </center>
 
 </body>

@@ -100,7 +100,7 @@
             $('.patientVisit').click(function(){
                  // Getting the Clicked VisitId
                     var visitId =  $(this).closest('tr').find('input[type="hidden"][name="visitId"]').val();
-                    var visitPageURL = "/zmed/monitor/visitPage/"+visitId;
+                    var visitPageURL = "/ocare/monitor/visitPage/"+visitId;
                     // getting visit
                     var b;
                     var request = $.ajax({
@@ -128,7 +128,7 @@
             
             $('#visitBooklet').click(function(){
                 // Open Booklet of All Visits    
-                var visitListBookletURL = "/zmed/monitor/visitBooklet";
+                var visitListBookletURL = "/ocare/monitor/visitBooklet";
                     // getting visit
                     var b;
                     var request = $.ajax({

@@ -140,7 +140,7 @@
                     var currentDate = $("#currentDate").val();
                     var patientId = $("#patientId").val();   // Gertting Patient Information
 
-                    var reservationURL = "/zmed/reservation/timeSlice/" + currentDate + "," + examineTypeId;
+                    var reservationURL = "/ocare/reservation/timeSlice/" + currentDate + "," + examineTypeId;
 
                     //alert(reservationURL);
                     // Getting Ajax
@@ -192,7 +192,7 @@
                     });
                     
                     //// Change Cost according to ExamineType
-                    var reservationCostURL = "/zmed/reservation/examineCost/" + patientId + "," + examineTypeId;
+                    var reservationCostURL = "/ocare/reservation/examineCost/" + patientId + "," + examineTypeId;
                     var b;
                     var request = $.ajax({
                         url: reservationCostURL,
@@ -270,7 +270,7 @@
                 
                 function reserveNow(){
                     //// Collect Reservation Confirmation Data  
-                    var reservationURL = "/zmed/reservation/processReservation";
+                    var reservationURL = "/ocare/reservation/processReservation";
                     // Getting Reservation Information
                     var patientId = $("#patientId").val();   // Gertting Patient Information
                     var examineTypeId = $("#examineTypeId").val();   // Getting ExamineType 
@@ -301,7 +301,7 @@
                               var doneMessage=$("#reservationDone").bPopup();
                               setTimeout(function () { 
                                   doneMessage.close();
-                                  window.location.href = "/zmed/reservation/list";
+                                  window.location.href = "/ocare/reservation/list";
                               }, 1000);
                               
                         }//end Complete Function
