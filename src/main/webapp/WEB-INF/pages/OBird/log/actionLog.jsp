@@ -60,6 +60,16 @@
 			.tbl-qa{width: 100%;font-size:0.9em;background-color: #f5f5f5;}
 			.tbl-qa th.table-header {padding: 5px;text-align: left;padding:10px;}
 			.tbl-qa .table-row td {padding:10px;background-color: #FDFDFD;}
+                        
+                         [type="date"] {
+               background:#fff url('/ocare/resources/images/calendar.png')  97% 50% no-repeat ;
+               background-size: 100% 100%;
+               height: .8%;
+               width: 3%;}
+        [type="date"]::-webkit-inner-spin-button {display: none;}
+        [type="date"]::-webkit-calendar-picker-indicator {opacity: 0;}
+       /* [type="date"]{border-color: #c1c1c1; color: #1479b8;} */
+        [type="date"]:hover{cursor: pointer;box-shadow: 10px 10px 10px #888888;}
 	</style>        
         <script type="text/javascript">
             $(document).ready(function() {
@@ -138,7 +148,8 @@
                                     <!--- List of Admins --->
                                     <div class="panel-body">
                                            <center>
-                                                <input type="text" id="searchForLog" name="Search" class="listSearchBar" placeholder="Filter Log List"  required />    
+                                                <input type="text" id="searchForLog" name="Search" class="listSearchBar" placeholder="Filter Log List"  required /> 
+                                                <input type="date" style="margin-left: 1%;"  name="dateFrom" id="dateTo" />
                                             </center>
                                             <div class="myDataTable">     
                                                 <c:import  url="/log/action/loadActionLogTable" />

@@ -165,15 +165,17 @@
                                            <div class="costViewer">
                                                     
                                                     <!-- Reservation Report-->
-                                                    <div id="reservationChartContainer" style="width: 100%; height: 300px"></div>     
+                                                    <div id="reservationChartContainer" style="width: 100%; height: 300px; margin-top: 2%;"></div>     
                                                     <div> 
-                                                        <h3> Total Patients : ${totalPatient}</h3><h3> Total Profit : ${totalProfit}</h3>  
+                                                        <br><br>
+                                                        <h3 style="color: #268d51;"> Total Patients : ${totalPatient} &nbsp;&nbsp;&nbsp;  Total Profit : ${totalProfit}</h3>  
                                                     </div>
                                                     
-                                                    <hr>
+                                                    <hr style="border-top: 3px solid #c1c1c1 ;margin-top: 5%;">
                                                     <!-- Insurance Report-->
-                                                    <div id="insurranceChartContainer" style="width: 100%; height: 300px"></div>      
-                                                    <div> <h3> Insured Patients : ${totalInsurredPatient}</h3><h3> Insurance Profit : ${totalInsurranceProfit}</h3>  
+                                                    <div id="insurranceChartContainer" style="width: 100%; height: 300px;margin-top: 2%;"></div>      
+                                                    <br><br>
+                                                    <div> <h3 style="color: #268d51;"> Insured Patients : ${totalInsurredPatient} &nbsp;&nbsp;&nbsp;  Insurance Profit : ${totalInsurranceProfit}</h3>  
                                                     </div>    
                                                     
                                             </div>      

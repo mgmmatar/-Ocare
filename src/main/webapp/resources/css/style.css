@@ -8272,3 +8272,17 @@ label.css-label {
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
+.reportButton{
+    margin-right: 13%;
+    background-color: #268D51!important;
+    border-radius: 25px;
+    height: 45px;
+    width: 135px;
+    color: white;
+    font-size: 18px;
+}
+
+.reportButton:hover {
+    background-color: #FCC409 !important;
+    color: #000;
+}

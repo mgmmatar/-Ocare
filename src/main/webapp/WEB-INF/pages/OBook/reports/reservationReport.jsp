@@ -24,6 +24,7 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/popup.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/paging.css'/>">
         
+        
         <!---  JS Scripts Files --->
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
@@ -162,12 +163,13 @@
     </head>
     <style>
         [type="date"] {
-               background:#fff url('/ocare/resources/images/calendar.png')  97% 50% no-repeat ;}
-        [type="date"]::-webkit-inner-spin-button {
-                display: none;}
-        [type="date"]::-webkit-calendar-picker-indicator {
-                 opacity: 0;}
-        [type="date"]{border-color: #5c6b7a; color: #5c6b7a;margin-right: 20%;}
+               background:#fff url('/ocare/resources/images/calendar.png')  97% 50% no-repeat ;
+               height: 52px;
+               width: 24%;}
+        [type="date"]::-webkit-inner-spin-button {display: none;}
+        [type="date"]::-webkit-calendar-picker-indicator {opacity: 0;}
+        [type="date"]{border-color: #c1c1c1; color: #1479b8;}
+        [type="date"]:hover{cursor: pointer;box-shadow: 10px 10px 10px #888888;}
     </style>
     
     <body class="nav-md">
@@ -205,33 +207,33 @@
                                 </div>
                                     <!--- List of XX --->
                                     <div class="panel-body">
-                                           <div class="costViewer">
+                                        <div class="costViewer" >
                                                    
                                                <!-- Search Form -->
-                                               <div>
-                                                   From : <input type="date"  name="dateFrom" id="dateFrom"  />
-                                                   To  : <input type="date"  name="dateFrom" id="dateTo" />
+                                               <div style="padding-top: 6%;padding-bottom: 3%;padding-left: 10px;margin-left: -11%;border-color: #ffffff; border-radius: 30px;;border-style: groove;border-width: 2px;">
+                                                   From : <input type="date" style="margin-left: 2%;margin-right:  24%;"  name="dateFrom" id="dateFrom"  />
+                                                   To  : <input type="date" style="margin-left: 2%;"  name="dateFrom" id="dateTo" />
                                                    
                                                    <center>
-                                                        <button id="searchNow" class="reserveButton">Show Report</button>  
+                                                       <button id="searchNow" class="reportButton" style="margin-left: 4%; margin-top: 3%;">Show Report</button>  
                                                    </center> 
                                                    
                                                </div> 
                                                
                                             <div style="display: none" id="reportResults"/>
                                                     <!-- Reservation Report-->
-                                                    <div id="reservationChartContainer" style="width: 100%; height: 300px"></div>     
+                                                    <div id="reservationChartContainer" style="width: 100%; height: 300px;margin-top: 5%;"></div>     
                                                     <div> 
-                                                        <h3> Total Patients : <span id="totalPatient"></span></h3>   
-                                                        <h3> Total Profit :  <span id="totalProfit"></h3>  
+                                                        <br><br>
+                                                        <h2 style="color: #268d51;"> Total Patients : <span id="totalPatient" style="color: #000"></span> &nbsp;&nbsp;&nbsp;   Total Profit :  <span id="totalProfit"  style="color: #000"></span></h2>   
                                                     </div>
                                                     
-                                                    <hr>
+                                                    <hr style="border-top: 3px solid #c1c1c1 ;margin-top: 5%;">
                                                     <!-- Insurance Report-->
-                                                    <div id="insurranceChartContainer" style="width: 100%; height: 300px"></div>      
-                                                    <div> <h3> Insured Patients : <span id="totalInsurredPatient"></h3>
-                                                        <h3> Insurance Profit : <span id="totalInsurranceProfit"></h3>  
-                                                    </div>    
+                                                    <div id="insurranceChartContainer" style="width: 100%; height: 300px;margin-top: 5%;"></div>      
+                                                    <br><br>
+                                                    <div> <h2 style="color: #268d51;"> Insured Patients : <span id="totalInsurredPatient" style="color: #000"></span> &nbsp;&nbsp;&nbsp;  Insurance Profit : <span id="totalInsurranceProfit" style="color: #000"></span></h2>  
+                                                   </div>    
                                            </div>
                                                     
                                             </div>      

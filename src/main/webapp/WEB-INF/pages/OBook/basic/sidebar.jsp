@@ -115,7 +115,7 @@
                             
                             
                             <sec:authorize access="hasRole('SUPER_ADMIN')">    
-                            <li class="" style="cursor: pointer"><a><i class="fa fa-pie-chart" style="cursor: pointer"></i> <label class="menuText" style="cursor: pointer">Logs</label> <span
+                            <li class="" style="cursor: pointer"><a><i class="fa fa-tripadvisor" style="cursor: pointer"></i> <label class="menuText" style="cursor: pointer">Logs</label> <span
                                     class="fa fa-chevron-down" style="cursor: pointer"></span></a>
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="/ocare/log/action">Action Log</a>

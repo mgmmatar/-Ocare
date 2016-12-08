@@ -15,10 +15,10 @@
                         <table id="actionLogTable" class="table table-striped" style="cursor: pointer;">
                                 <thead>
                                     <tr>
-                                        <th style="font-size: 18px">#</th>
-                                        <th style="font-size: 18px">Date</th>
-                                        <th style="font-size: 16px">User</th>
-                                        <th style="font-size: 16px">Action</th>
+                                        <th style="font-size: 18px;text-align: center">#</th>
+                                        <th style="font-size: 18px;text-align: center">Date</th>
+                                        <th style="font-size: 16px;text-align: center">User</th>
+                                        <th style="font-size: 16px;text-align: center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -30,7 +30,7 @@
                                                 <c:forEach items="${logs}" var="log" varStatus="counter">
                                                     <tr class="examineRow">
                                                         <th>${counter.count}</th>
-                                                        <td tabindex="1">
+                                                        <td tabindex="1" style="text-align: center">
                                                             <fmt:formatDate type="date" value="${log.created}" var="logDate" pattern="yyyy-MM-dd" />
                                                             <fmt:formatDate type="date" value="${now}" var="nowDate" pattern="yyyy-MM-dd" />                                                            
                                                             <c:choose>
@@ -43,7 +43,7 @@
                                                             </c:choose>
                                                              
                                                         </td>
-                                                        <td tabindex="1">
+                                                        <td tabindex="1" style="text-align: center">
                                                             <c:choose>
                                                                 <c:when test="${log.myUser.auth.userName eq loggedUser}">    
                                                                     You
@@ -54,7 +54,7 @@
                                                             </c:choose>
                                                             
                                                         </td>
-                                                        <td tabindex="1">${log.action}</td>                                                        
+                                                        <td tabindex="1" style="text-align: center">${log.action}</td>                                                        
                                                     </tr>
                                                 </c:forEach>
                                     </c:otherwise> 
