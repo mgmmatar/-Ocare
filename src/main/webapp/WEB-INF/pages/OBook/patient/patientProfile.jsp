@@ -207,7 +207,7 @@
                              <div class="panel-body">
                                 <table border=2>
                                             <tr>
-                                                <thead style="background-color: #C0392B" >
+                                                <thead style="background-color: #fcc409" >
                                                     <td style="width: 50px"><center>ID</center></td>
                                                     <td style="width: 150px"><center>Date</center> </td>
                                                     <td style="width: 100px"><center>ExamineType</center></td>

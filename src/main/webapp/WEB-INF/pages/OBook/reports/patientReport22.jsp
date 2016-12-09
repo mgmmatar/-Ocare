@@ -184,7 +184,7 @@
                             <center><h3>Reservation History</h3>
                             <div class="patientInfo">
                             <table border=2>
-                                    <thead style="background-color: #C0392B" >
+                                    <thead style="background-color: #fcc409" >
                                         <td style="width: 100px"><center>ID</center></td>
                                         <td style="width: 150px"><center>Date</center> </td>
                                         <td style="width: 150px"><center>Time</center></td>

@@ -903,7 +903,8 @@ img.acceptChallenge, img.cancelChallenge {
     -ms-transition: all 200ms linear;
     /*	border: none!important;*/
     margin-top: 10px;
-    border-radius: 0px;
+   
+    border-radius: 20px;
     background-color: #00a651;
     padding: 0px;
     margin: 0px;
@@ -3852,7 +3853,7 @@ ul.edit_tab li{
     -moz-transition: all 200ms linear;
     -o-transition: all 200ms linear;
     -ms-transition: all 200ms linear;
-    background-color: #fcc409;
+    background-color: #ffffff;
     border-bottom: 2px solid #ffffff;
 }
 .nav-tabs li:hover a{
@@ -3862,9 +3863,10 @@ ul.edit_tab li{
     -o-transition: all 200ms linear;
     -ms-transition: all 200ms linear;
     color: #2a3940;
+    
 }
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{
-    border-radius: 0px;
+    border-radius: 20px;
     background-color: #fcc409;
     border:none;
     border-bottom: 2px solid #ffffff;

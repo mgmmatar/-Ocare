@@ -36,7 +36,7 @@
                                    <span class="title_main_con d_block margin_bottom_10 margin_top_20">Today is OFFLINE </span>   
                         </c:otherwise>
                 </c:choose>   
-                <div class="tab-content">
+                <div class="tab-content" style="display: inline-block;">
                 <c:forEach items="${shifts}" var="shift" varStatus="counter">
                         <c:choose>
                             <c:when test="${counter.count eq 1}">

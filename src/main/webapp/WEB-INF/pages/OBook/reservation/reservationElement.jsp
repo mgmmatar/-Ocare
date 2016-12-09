@@ -12,7 +12,7 @@
     <c:when test="${not weekDay.offLine}">            
             <span class="title_main_con d_block margin_bottom_10 margin_top_20">Reservation Shifts </span>       
                 <center>
-                <ul class="nav-tabs tabs_index pull-right green_nav_tab">    
+                    <ul class="nav-tabs tabs_index pull-right green_nav_tab">    
                     <c:forEach items="${weekDay.workingTimes}" var="workingTime" varStatus="counter">
                          <c:choose>
                             <c:when test="${counter.count eq 1}">
@@ -39,7 +39,7 @@
 </c:choose>
                    
                    
-<div class="tab-content">                    
+  <div class="tab-content" style="display: inline-block;">                    
      <c:forEach items="${shifts}" var="shift" varStatus="counter">
          <c:choose>
              <c:when test="${counter.count eq 1}">

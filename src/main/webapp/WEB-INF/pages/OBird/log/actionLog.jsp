@@ -24,7 +24,7 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/font-awesome.min.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/paging.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/ssd-confirm.css'/>">
-        
+         
 
         <!---  JS Scripts Files --->
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
@@ -37,8 +37,9 @@
         <script type="text/javascript" src="<c:url value='/resources/js/examineType-editable.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/paging.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery.ssd-confirm.js'/>"></script>
-        
+         <script type="text/javascript" src="<c:url value='/resources/js/jquery.bpopup.min.js'/>"></script>
         <!-- NEW -->
+        
         <script type="text/javascript" src="<c:url value='/resources/js/nprogress.js'/>"></script>
         <script>
             NProgress.start();
@@ -53,6 +54,8 @@
             <!-- Custom Styles-->
             <!-- Google Fonts-->
             <link href="<c:url value='/resources/css/googlefonts.css'/>" rel="stylesheet" />
+           
+            
         <style>
 			
 			.current-row{background-color:#B24926;color:#FFF;}
