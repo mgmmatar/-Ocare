@@ -18,6 +18,8 @@
                             <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
                                 <li><a href="/ocare/ums/user/profile"> Profile</a>
                                 </li>
+                                <li><a href="/ocare/ums/user/profile"> Help</a>
+                                </li>
                                 <li><a href="/ocare/auth/j_spring_security_logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                                 </li>
                             </ul>

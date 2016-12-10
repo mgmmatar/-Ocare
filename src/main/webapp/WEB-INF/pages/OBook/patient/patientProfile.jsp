@@ -22,6 +22,7 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/reservation.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/font-awesome.min.css'/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/paging.css'/>">
         <!---  JS Scripts Files --->
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
@@ -29,8 +30,8 @@
         <script type="text/javascript" src="<c:url value='/resources/js/squad.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/underscore.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/paging.js'/>"></script>        
         
-
         <!-- NEW -->
         <script type="text/javascript" src="<c:url value='/resources/js/nprogress.js'/>"></script>
         <script>
@@ -50,7 +51,16 @@
 
         <script type="text/javascript">
             $(document).ready(function() {
-               $('#editPatient').on("click", function(e) {
+        
+                // Max Result 
+                var maxResult=10;  
+
+                $('#reservationTable').paging({
+                       limit:maxResult,
+                       rowDisplayStyle: 'block'
+                 }); 
+            
+                $('#editPatient').on("click", function(e) {
                    var patientId = '${patient.id}';
                     window.location.href = "/ocare/patient/edit/"+patientId;   
                 });
@@ -174,6 +184,32 @@
                                         
                                         <tr>
                                              <td>
+                                                 <label>BirthDate : </label>
+                                             </td>
+                                             <td>
+                                                    <fmt:formatDate type="date" value="${patient.birthDate}" pattern="dd MMM ,yyyy" /> 
+                                             </td>    
+                                        </tr>
+                                        
+                                        <tr>
+                                             <td>
+                                                 <label>Created : </label>
+                                             </td>
+                                             <td>
+                                                <fmt:formatDate type="date" value="${patient.creationDate}" pattern="dd MMM ,yyyy" /> <b>By</b> <a href="/ums/user/profile/${patient.registeredBy.id}">${patient.registeredBy.firstName} ${patient.registeredBy.lastName}</a> 
+                                             </td>    
+                                        </tr>
+                                        
+                                        <td>
+                                                 <label>Modified : </label>
+                                        </td>
+                                             <td>
+                                                 <fmt:formatDate type="date" value="${patient.lastModifiedDate}" pattern="dd MMM ,yyyy" /> <b>By</b> <a href="/ums/user/profile/${patient.modifiedBy.id}">${patient.modifiedBy.firstName} ${patient.modifiedBy.lastName}</a> 
+                                             </td>    
+                                        </tr>
+                                        
+                                        <tr>
+                                             <td>
                                                  <label>Insurred : </label>
                                              </td>
                                              <td>
@@ -205,31 +241,39 @@
                                  <h3>Reservation History</h3>
                              </center>     
                              <div class="panel-body">
-                                <table border=2>
-                                            <tr>
-                                                <thead style="background-color: #fcc409" >
-                                                    <td style="width: 50px"><center>ID</center></td>
-                                                    <td style="width: 150px"><center>Date</center> </td>
-                                                    <td style="width: 100px"><center>ExamineType</center></td>
-                                                    <td style="width: 150px"><center>ReservationWay</center></td>
-                                                    <td style="width: 100px"><center>TimeFrom</center></td>
-                                                    <td style="width: 100px"><center>TimeTo</center></td>
-                                                    <td style="width: 200px"><center>Status</center></td>
-                                                </thead>
-                                            </tr>    
-                                            <c:forEach items="${reservations}" var="reservation" varStatus="counter">
-                                            <tr>
-                                                    <td><center>${counter.count}</center></td>
-                                                    <td><center><fmt:formatDate type="time" pattern="dd MMM yyyy " value="${reservation.reservationDate}"/></center></td>
-                                                    <td><center>${reservation.examineType.nameEn}</center></td>
-                                                    <td><center>${reservation.reservationWay.nameEn}</center></td>
-                                                    <td><center><fmt:formatDate type="time" pattern="hh:mm a" value="${reservation.attendenceTimeFrom}"/></center></td>
-                                                    <td><center><fmt:formatDate type="time" pattern="hh:mm a" value="${reservation.attendenceTimeTo}"/></center></td>
-                                                    <td><center>${reservation.status}</center></td>
-
-                                            </tr>
-                                        </c:forEach>                                                                                                        
+                                 <table id="reservationTable" class="table table-striped" style="cursor: pointer;">
+                                <thead>
+                                    <tr>
+                                        <th style="font-size: 18px">#</th>
+                                        <th style="font-size: 16px">Date</th>
+                                        <th style="font-size: 16px">Time</th>
+                                        <th style="font-size: 16px">ExamineType</th>
+                                        <th style="font-size: 16px">ReservationWay</th>
+                                        <th style="font-size: 16px">Status</th>                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        <c:choose>
+                                            <c:when test="${empty reservations}">
+                                                <tr><td  colspan="8"><center><lable>No Reservation Found</lable></center></td></tr>
+                                            </c:when>
+                                            <c:otherwise>
+                                                    <c:forEach items="${reservations}" var="reservation" varStatus="counter">
+                                                        <tr class="examineRow">
+                                                            <input type="hidden" name="reservation" value="${reservation.id}"/>
+                                                            <th>${counter.count}</th>
+                                                            <td tabindex="1"><fmt:formatDate type="time" pattern="dd MMM yyyy " value="${reservation.reservationDate}"/></td>
+                                                            <td><fmt:formatDate type="time" pattern="hh:mm a" value="${reservation.attendenceTimeFrom}"/> - <fmt:formatDate type="time" pattern="hh:mm a" value="${reservation.attendenceTimeTo}"/></td>
+                                                            <td>${reservation.examineType.nameEn}</td>
+                                                            <td>${reservation.reservationWay.nameEn}</td>                                                   
+                                                            <td>${reservation.status}</td>
+                                                        </tr>
+                                                    </c:forEach>
+                                        </c:otherwise> 
+                                    </c:choose>     
+                                    </tbody>
                                 </table>
+                                 
                                 </div>
                                              
                             </div>    
