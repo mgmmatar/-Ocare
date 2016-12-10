@@ -4264,7 +4264,7 @@ input.custom_save{
     width: 60%;
     border-radius: 10px;
     outline: 0;
-    border: 1px solid #aca9a9;
+    border: 1px solid #aca9a9; 
     height: 34px;
     color: #000;
     padding: 6px 12px;
@@ -4275,7 +4275,15 @@ input.custom_save{
     background-repeat: no-repeat;
     background-size: 30px;
     background-position: right;
+     
 }
+input.listSearchBar:hover {
+    
+    -moz-box-shadow: 1px 1px 5px #0762cc;
+    -webkit-box-shadow: 1px 1px 5px #0762cc;
+        box-shadow: 1px 1px 5px #0762cc;
+}
+
 
 .confirmMessage{
     font-size: 22px;

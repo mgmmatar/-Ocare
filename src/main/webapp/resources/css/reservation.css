@@ -89,7 +89,7 @@ h3.code,h3.date {
 }
 
 .actions a:hover {
-    padding: 5px;
+    padding: 0px;
    -webkit-transition:all .25s linear;
     -moz-transition:al .25s linear;
     -ms-transition:all .25s linear;
@@ -105,9 +105,9 @@ h3.code,h3.date {
 }
 
 a.ViewMore:hover {
-    font-size: 16px;
-	
-	-webkit-transition:all .25s linear;
+    font-size: 22px;
+    cursor: pointer;
+    -webkit-transition:all .25s linear;
     -moz-transition:al .25s linear;
     -ms-transition:all .25s linear;
 }		

@@ -5,7 +5,7 @@
             <div class="left_col">
 
                 <div class="navbar nav_title" >
-                    <a id="menu_toggle" class="site_title"><i class="fa fa-stethoscope"></i> <span>öCare</span></a>
+                    <a id="menu_toggle" class="site_title" style="width: 70%;"><i class="fa fa-stethoscope"></i> <span>öCare</span></a>
 
                 </div>
 

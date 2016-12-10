@@ -485,6 +485,12 @@ body {
     margin-left: 175px;
 }
 
+input.searchBox:hover
+{
+    -moz-box-shadow: 1px 1px 5px #0762cc;
+    -webkit-box-shadow: 1px 1px 5px #0762cc;
+        box-shadow: 1px 1px 5px whitesmoke;
+}
 .page-title .title_left h3 {
     margin: 9px 0;
 }
@@ -876,7 +882,7 @@ li.current-page a {
     width: 100%;
     color: #ECF0F1 !important;
     margin-left: 0 !important;
-    line-height: 59px;
+    line-height: 50px;
     display: block;
     height: 55px;
     margin: 0;
@@ -884,9 +890,16 @@ li.current-page a {
 }
 
 .site_title:hover,
-.site_title:focus {
-    text-decoration: none
+.site_title:focus
+{
+    text-decoration: none;
+    cursor: pointer;
+    transform: scaleY(1.3);
+    color: #fcc409 !important;
+    
 }
+.site_title:hover i { border-color: #fcc409; }
+
 
 .nav.navbar-nav > li > a {
     color: #ECF0F1 !important;
