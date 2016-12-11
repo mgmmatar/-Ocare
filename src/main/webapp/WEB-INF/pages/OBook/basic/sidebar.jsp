@@ -14,7 +14,7 @@
                 <!-- menu prile quick info -->
                 <div class="profile">
                     <div class="profile_pic">
-                        <a href="/ocare/ums/user/profile"><img src="<c:url value='/resources/images/avatar.jpg'/>" alt="..." class="img-circle profile_img"></a>
+                        <a href="/ocare/ums/user/profile"><img src="<c:url value='/resources/images/superadmin1.png'/>" alt="..." class="img-circle profile_img"></a>
                     </div>
                     <div class="profile_info">
                         <span>Welcome,</span>

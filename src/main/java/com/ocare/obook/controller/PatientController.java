@@ -87,7 +87,7 @@ public class PatientController {
         // Adding Data to Model
         model.addAttribute("operation", "Register");
         model.addAttribute("insuranceCompanies",insuranceCompanyService.getAllInsuranceCompanys());
-        return MODULE_PATH+"contactus";
+        return MODULE_PATH+"patient";
     }//end registerPatient
     
     @Secured({"ROLE_SUPER_ADMIN","ROLE_ADMIN","ROLE_ENTRY_USER"})

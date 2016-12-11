@@ -169,7 +169,7 @@
         [type="date"]::-webkit-inner-spin-button {display: none;}
         [type="date"]::-webkit-calendar-picker-indicator {opacity: 0;}
         [type="date"]{border-color: #c1c1c1; color: #1479b8;}
-        [type="date"]:hover{cursor: pointer;box-shadow: 10px 10px 10px #888888;}
+        [type="date"]:hover{cursor: pointer;box-shadow: 4px 4px 5px #888888;}
     </style>
     
     <body class="nav-md">
