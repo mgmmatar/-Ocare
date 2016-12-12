@@ -34,6 +34,8 @@ public interface ReservationDao {
     
     public List<Reservation> getReservationsForShift(Date day,Integer shift);
     
+    public List<Reservation> getDoneReservationsForShift(Date day,Integer shift);
+    
     public List<Reservation> getReservationsForPatient(Integer patientId);
     
     public List<Reservation> getReservationsForPatientByDates(Integer patientId,Date fromDate,Date toDate);

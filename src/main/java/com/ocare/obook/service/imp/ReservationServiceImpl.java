@@ -136,6 +136,14 @@ public class ReservationServiceImpl implements ReservationService{
       
     }
     
+    
+    private List<Reservation> getDoneReservationsForShift(Date day,Integer shift){
+     
+        return reservationDao.getDoneReservationsForShift(day, shift);
+      
+    }
+    
+    
     @Override
     public List<AvailableRange> getAllAvailableTimes(String reservationDate,String dayShortName, String examineTypeId) {
         //// Getting Working WeekDay
@@ -385,6 +393,31 @@ public class ReservationServiceImpl implements ReservationService{
     @Override
     public List<StatisticReportModule> getInsuranceReportWithRange(Date fromDate, Date toDate) {
         return reservationDao.getInsuranceReportWithRange(fromDate, toDate);
+    }
+
+    @Override
+    public List<ShiftReservation> getAllDoneReservations(Date day) {
+         // Create New List of Shift Reservation 
+        List<ShiftReservation> shiftReservations=new ArrayList<ShiftReservation>();
+        // Getting Day Shifts 
+        String dayShortName=ODate.getWeekDay(day);
+        WeekDay weekDay=weekDayService.getWeekDay(dayShortName);
+            /// Get Day Shifts Reservations
+            for(WorkingTime workingTime:weekDay.getWorkingTimes()){
+                // Creating New Shift Reservation
+                ShiftReservation shiftReservation=new ShiftReservation();
+                /// Getting Shift ID
+                Integer shiftId=workingTime.getId();
+                // Assign Shift Reservation
+                shiftReservation.setShiftId(shiftId);
+                List<Reservation> reservations=getDoneReservationsForShift(day,shiftId);
+                if(!reservations.isEmpty()){
+                     shiftReservation.setReservations(reservations);
+                }//end If Condition 
+                shiftReservations.add(shiftReservation);
+            }//end for Loop     
+        // return result List 
+        return shiftReservations;
     }
 
 

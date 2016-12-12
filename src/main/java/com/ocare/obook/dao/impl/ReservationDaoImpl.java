@@ -205,6 +205,20 @@ public class ReservationDaoImpl extends GenericDAO<Reservation> implements Reser
         });
     }
 
+    @Override
+    public List<Reservation> getDoneReservationsForShift(final Date day,final Integer shift) {
+           return getHibernateTemplate().execute(new HibernateCallback<List<Reservation>>() {
+            @Override
+            public List<Reservation> doInHibernate(Session sn) throws HibernateException {
+                Query query = sn.createQuery("select r from Reservation r inner join r.workingTime wt where r.reservationDate = :day and wt.id= :shift and r.status= :status order by attendenceTimeTo asc");
+                query.setDate("day", day);
+                query.setString("status", "CONFIRMED");
+                query.setInteger("shift", shift);
+                return (List<Reservation>)query.list();
+            }
+        });
+    }
+
 
     
 }

@@ -38,6 +38,8 @@ public interface ReservationService {
     
     public List<ShiftReservation> getAllShiftReservations(Date day);
     
+    public List<ShiftReservation> getAllDoneReservations(Date day);
+    
     public boolean cancelReservation(Integer reservationId);
     
     public boolean confirmReservation(Integer reservationId);

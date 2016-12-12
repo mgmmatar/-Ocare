@@ -14,7 +14,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-         <title> Reservation </title>
+         <title> Reservation Log</title>
         <!-- Styles -->
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/calendar.css'/>" >
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/bootstrap.css'/>" />
@@ -22,15 +22,19 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/owl.theme.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/reservation.css'/>">
+         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/popup.css'/>">
+         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/font-awesome.min.css'/>">
+         
         <!---  JS Scripts Files --->
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/owl.carousel.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/calender.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/squad.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/underscore.js'/>"></script>
-        <script type="text/javascript" src="<c:url value='/resources/js/calendarReservationList.js'/>"></script>
-        <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/calendarReservationLog.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery.bpopup.min.js'/>"></script>
         
         <!-- NEW -->
         <script type="text/javascript" src="<c:url value='/resources/js/nprogress.js'/>"></script>
@@ -42,7 +46,7 @@
             <!-- FontAwesome Styles-->
             <link href="<c:url value='/resources/css/font-awesome.css'/>" rel="stylesheet" />
             <!-- Morris Chart Styles-->
-            <link href="<c:url value='/resources/js/morris/morris-0.4.3.min.css'/>" rel="stylesheet" />
+            <link href="<c:url value='/resources/css/morris-0.4.3.min.css'/>" rel="stylesheet" />
             <link href="<c:url value='/resources/css/animation.css'/>" rel="stylesheet" />
             <!-- Custom Styles-->
             <!-- Google Fonts-->
@@ -54,72 +58,19 @@
         <script type="text/javascript">
             $(document).ready(function() {
       
-                $(".cancelReservation").click(function() {
-                    ///// Checking the Item Clicked Class
-                     var reservationId= $(this).closest("div").find('input[name="reservationId"]').val();
-                     cancelReservation(reservationId);
-                }); 
-                
-                $(".confirmReservation").click(function() {
-                    ///// Checking the Item Clicked Class
-                    var reservationId= $(this).closest("div").find('input[name="reservationId"]').val();
-                    confirmReservation(reservationId);
-                }); 
-
-                
-                function cancelReservation(reservationId) {
-                    var b;
-                   // var reservationId= 1;
-
-                    var request = $.ajax({
-                        url: "/ocare/reservation/cancelReservation/" + reservationId,
-                        data: {
-                        },
-                        async: false
-                    });
-
-                    request.done(function(msg) {
-                        b = (msg == "true" ? true : false);
-                    });
-
-                    request.fail(function(jqXHR, textStatus) {
-                        b = false;
-                    });
-                    if (b == true) {
-                       reloadReservations();
-                    }//end if
-                    
-                }//end DeleteUserFunction
-                
-                ///////////////////////////////////////////////////
-                function confirmReservation(reservationId) {
-                    var b;
-                  //  var reservationId= 1;
-
-                    var request = $.ajax({
-                        url: "/ocare/reservation/confirmReservation/" + reservationId,
-                        data: {
-                        },
-                        async: false
-                    });
-
-                    request.done(function(msg) {
-                        b = (msg == "true" ? true : false);
-                    });
-
-                    request.fail(function(jqXHR, textStatus) {
-                        b = false;
-                    });
-                    if (b == true) {
-                        reloadReservations();
-                    }//end if    
-                }//end DeleteUserFunction
+        $(".container").on("click",".ViewMore", function(e) {
+                   
+                       var reservationInfo= $(this).parents(".mainContainer").find('.reservationInfo'); 
+                       console.log(reservationInfo);
+                       reservationInfo.show();
+                   
+                });
                 
                 function reloadReservations(){
                     
                      var currentDate = $('#currentDate').val();
                      // reservationURL
-                     var reservationURL="/ocare/reservation/reservationElement/"+currentDate;
+                     var reservationURL="/ocare/log/reservation/Element/"+currentDate;
                     // Getting Ajax 
                     var b;
                     var request = $.ajax({
@@ -130,24 +81,11 @@
        
                         },
                         complete: function(data) {
-                            //console.log('done :' + JSON.stringify( data));
                             var mm=$('.no_matches').html();
-                            //console.log('DDDDD :' + JSON.stringify( mm));
                             $('.no_matches').empty();
                             $('.no_matches').append(data.responseText);
                             $('#accordion').show();
-                            /// Reload Actions 
-                            $(".cancelReservation").click(function() {
-                                ///// Checking the Item Clicked Class
-                                 var reservationId= $(this).closest("div").find('input[name="reservationId"]').val();
-                                 cancelReservation(reservationId);
-                            }); 
-                
-                            $(".confirmReservation").click(function() {
-                                ///// Checking the Item Clicked Class
-                                var reservationId= $(this).closest("div").find('input[name="reservationId"]').val();
-                                confirmReservation(reservationId);
-                            }); 
+                            /// Reload Actions                             
                         }///end Complete Fucntion 
                     });
                     
@@ -156,7 +94,7 @@
             });
         </script>
             
-        <%@include file="../basic/scripts.jsp" %>
+        <%@include file="../../OBook/basic/scripts.jsp" %>
         
     </head>
     
@@ -169,11 +107,11 @@
  
                     <!---  Importing SideBar --->
 
-                    <%@include file="../basic/sidebar.jsp" %>
+                    <%@include file="../../OBook/basic/sidebar.jsp" %>
 
                     <!-- Header -->
 
-                    <%@include file="../basic/header.jsp" %>
+                    <%@include file="../../OBook/basic/header.jsp" %>
 
                      <div class="right_col" role="main">
 
@@ -193,9 +131,10 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                   Reservation List
+                                   Reservation Log
                                 </div>
-          
+          <div class="panel-body">
+              
                             <input type="hidden" id="currentDate" value="${currentDate}">   
           <!--- ==============================================================================================--->
             <!--- Calendar Section --->
@@ -328,7 +267,7 @@
                                 <div class="panel-group calender_matches tab_${currentDate}" id="accordion" role="tablist" aria-multiselectable="true">
                                     <div class="no_matches" id="a7a">
                                        
-                                        <c:import  url="/reservation/reservationElement/${currentDate}" />
+                                        <c:import  url="/log/reservation/Element/${currentDate}" />
 
                                     </div>
                                 </div>
@@ -339,10 +278,10 @@
                         <!--- ==============================================================================================--->                        
                                 </div>
                                      
-                                        <!--*********************************here************************************-->
+          </div>    <!--*********************************here************************************-->
                                         
                                     <!-- Widget -->
-                                    <%@include file="../basic/widgets.jsp" %>
+                                    <%@include file="../../OBook/basic/widgets.jsp" %>
                                         
                              </div>
                                    
@@ -363,44 +302,27 @@
             <script src="<c:url value='/resources/js/morris.js'/>"></script>
             <!-- Custom Js -->
             <script src="<c:url value='/resources/js/custom-scripts.js'/>"></script>   
-           
-            
-            <!-- POPUPs Here ---->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                             <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                             <h4 class="modal-title" id="myModalLabel">Patient Name</h4>
-                                     </div>
-                 <div class="modal-body">
-
-                       <div class="row">
-                          <div class="userImgContainer"><img class="userImg"src="<c:url value='/resources/images/khaled.jpg'/>" /></div>
-                                            <div class="details">
-                                            <h3 class="name">Name</h3>
-                                            <h3 class="code">Code</h3>
-                                            <h3 class="examineType">Examine Type</h3>
-                                            <h3 class="date">07:15 PM 12/1/2016</h3>
-                                    </div>
-                                    <div class="actions">
-                                            <a href="#" class="delete"><img src="<c:url value='/resources/images/Cancel.png'/>" /></a>
-                                            <a href="#" class="check"><img src="<c:url value='/resources/images/checkround.png'/>" /></a>
-                                    </div>			
-                            </div>
-                        </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div> 
-                      
+                     
              </div>
                                   
       </div><!--End Main Container-->
 
     </div><!--End Body Container-->
-            
+           
+    <!-- POPUPs Here ---->
+                    <div id="reservationInfoPopup" class="popupDesign popup">
+                            <span class="button b-close"><span class="popup_close_icon">X</span></span>
+    
+                                <div class="popupMyHeader">
+                                    <span class="logo">Reservation Info</span>
+                                </div> 
+                                
+                                <div id="informationMessage">
+                                    
+                                </div>
+                                
+                            
+                    </div>
+    
     </body>
 </html>
