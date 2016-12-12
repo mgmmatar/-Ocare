@@ -11,6 +11,21 @@
 
 
 <!DOCTYPE html>
+  
+         <script type="text/javascript">
+    function validateImg() {
+        var e = document.getElementById("roleName"); 
+    if (e.selectedIndex== "0") {
+        document.getElementById("userimg").src="<c:url value='/resources/images/reserveuser1.png'/>" ;
+    }
+      if (e.selectedIndex== "1") {
+        document.getElementById("userimg").src="<c:url value='/resources/images/inqueryuser1.jpg'/>" ;
+    }
+     if (e.selectedIndex== "2") {
+        document.getElementById("userimg").src="<c:url value='/resources/images/entryuser1.png'/>" ;
+    }
+    }
+           </script> 
 <span class="button b-close"><span class="popup_close_icon">X</span></span>
     
    
@@ -33,13 +48,13 @@
                 <div class="patientLabelTitle">
                     
                     <div class="userDivContainer">
-                   <img class="userPopupAvatar" src="<c:url value='/resources/images/avatar.jpg'/>" />
+                   <img class="userPopupAvatar" id="userimg" src="<c:url value='/resources/images/avatar.jpg'/>" />
             </div>
             
             <label class="userDataText" > User Type : </label>
               
                 <div class="styled-select slate usertype">
-                    <select id="roleName" name="roleName" style="margin-left: 8px">
+                    <select id="roleName" name="roleName" style="margin-left: 8px" onchange="validateImg();" onmouseover="validateImg()">
                         <c:forEach items="${roles}" var="role">
                             <option value="${role.name}">${role.displayName}</option>    
                             <%-- <c:choose>

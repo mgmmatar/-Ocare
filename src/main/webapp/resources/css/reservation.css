@@ -24,6 +24,12 @@ img.patientImg {
     margin-right: 15px;
 }
 
+img.patientImg:hover
+{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
 img.patientReport {
     width: 77px;
     height: 77px;

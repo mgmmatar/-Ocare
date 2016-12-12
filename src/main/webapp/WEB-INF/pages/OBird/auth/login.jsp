@@ -21,9 +21,11 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/Roboto.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/font-awesome.min.css'/>">
         
+        
         <!---  Scripts --->
         <script type="text/javascript" src="<c:url value='/resources/js/jquery.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/prefixfree.min.js'/>"></script>
+        
         
         <script type="text/javascript">
             $(document).ready(function() {
@@ -34,6 +36,7 @@
               });;
             });
         </script>
+        
     </head>
     
        
@@ -58,7 +61,8 @@
             <div class="control">
               <label for="password" class="fa fa-lock"></label>
               <input id="password" name="password" placeholder="Password" type="password"></input>
-              <button type="submit" id="login-button" class="btn">Login</button>
+              <button type="submit" id="login-button" class="btn btn--one" ><i class="fa fa-sign-in" aria-hidden="true"></i> Log in</button>
+              
             </div>
         </form>
     </div>

@@ -25,23 +25,35 @@
         
     </div> 
 
+              <script>
+    function validateImg() {
+    if (document.getElementById("radio1").checked === true) {
+        document.getElementById("patientimg").src="<c:url value='/resources/images/patient1.jpg'/>" ;
+    }
+    else if (document.getElementById("radio2").checked === true) {
+        document.getElementById("patientimg").src="<c:url value='/resources/images/patient2.png'/>" ;
+    }
+    }
+           </script> 
+     
+           
     <form id="aboutChefForm" method="POST" action="/ocare/patient/process" modelAttribute="patient" accept-charset="utf-8" >
     <input type="hidden" name="id" value="${patient.id}"/>
     
     <div>
-    <img class="patientPopupAvatar" src="<c:url value='/resources/images/avatar.jpg'/>" />
+    <img class="patientPopupAvatar" id="patientimg" src="<c:url value='/resources/images/patient1.jpg'/>" />
     
     <c:if test="${mode ne 'Register'}">
         <button type="button" class="registerbuttonheader controlAction openProfilePage" id="gotoProfile">Go to Profile</button>
     </c:if>
     
     <c:if test="${patient.gender eq 'Male'||empty patient.gender}">
-        <input type="radio" name="gender" value="Male" checked="checked" id="radio1" class="css-checkbox"><label for="radio1" class="css-label radGroup1">Male</label>
-        <input type="radio" name="gender" value="Female" id="radio2" class="css-checkbox"><label for="radio2" class="css-label radGroup1">Female</label>
+        <input type="radio" name="gender" value="Male" checked="checked" id="radio1" class="css-checkbox" onmouseover ="validateImg();" onclick="validateImg();" ><label for="radio1" class="css-label radGroup1">Male</label>
+        <input type="radio" name="gender" value="Female" id="radio2" class="css-checkbox" onmouseover="validateImg();" onclick="validateImg();" ><label for="radio2" class="css-label radGroup1">Female</label>
     </c:if>
     <c:if test="${patient.gender eq 'Female'}">
-         <input type="radio" name="gender" value="Male" id="radio1" class="css-checkbox"><label for="radio1" class="css-label radGroup1">Male</label>
-         <input type="radio" name="gender" value="Female" id="radio2"  checked="checked" class="css-checkbox"><label for="radio2" class="css-label radGroup1">Female</label>
+       <input type="radio" name="gender" value="Male" id="radio1" class="css-checkbox" onmouseover="validateImg();" onclick="validateImg();" ><label for="radio1" class="css-label radGroup1">Male</label>
+       <input type="radio" name="gender" value="Female" id="radio2"  checked="checked" class="css-checkbox"  onmouseover="validateImg();" onclick="validateImg();"><label for="radio2" class="css-label radGroup1">Female</label>
     </c:if>    
         
     <div class="patientDivContainer">

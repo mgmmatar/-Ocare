@@ -1,3 +1,4 @@
+html,
 body {
   
   background-image: url("images/banner-img44.jpg");
@@ -90,10 +91,11 @@ body {
 }
 
 .btn {
+  -webkit-transition: all 0.2s ease;
   border: 0px;
   font-size: 0.75rem;
   margin-top: 18px;
-  margin-left: 74px;
+  margin-left: 65px;
   height: 2.5rem;
   line-height: 2.5rem;
   padding: 0 4.5rem;
@@ -104,3 +106,76 @@ body {
   letter-spacing: .2em;
   transition: background .2s;
 }
+
+.btn--one:hover {
+  box-shadow: inset 0 0 0 1px white;
+  -webkit-transform: scale(1.1);
+  -webkit-animation: pulse 2s infinite;
+}
+.btn--one:hover:active {
+  background: #936347;
+   color: white ;
+  box-shadow: inset 0 0 5px #000000;
+  -webkit-transform: scale(1);
+  -webkit-animation-play-state: paused;
+}
+
+.owl:hover {
+  box-shadow: inset 0 0 0 1px transparent;
+  -webkit-transform: scale(1.1);
+  -webkit-animation: owlpulse 2s infinite;
+  cursor: pointer;
+}
+.owl:hover:active {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px transparent;
+  -webkit-transform: scale(1);
+  -webkit-animation-play-state: paused;
+}
+
+@keyframes pulse {
+  0% {
+    background: #936347;
+    -webkit-transform: translateX(5px);
+  }
+  25% {
+    background-color: #79523a;
+    -webkit-transform: translateX(-5px);
+  }
+  50% {
+    background: #936347;
+    -webkit-transform: translateX(5px);
+  }
+  75% {
+    background-color: #79523a;
+    -webkit-transform: translateX(-5px);
+  }
+  100% {
+    background: #936347;
+    -webkit-transform: translateX(5px);
+  }
+}
+
+@keyframes owlpulse {
+  0% {
+    
+    -webkit-transform: translateY(5px);
+  }
+  25% {
+    
+    -webkit-transform: translateY(-5px);
+  }
+  50% {
+    
+    -webkit-transform: translateY(5px);
+  }
+  75% {
+    
+    -webkit-transform: translateY(-5px);
+  }
+  100% {
+    
+    -webkit-transform: translateY(5px);
+  }
+}
+

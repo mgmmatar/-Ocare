@@ -4500,6 +4500,12 @@ input.listSearchBar:hover {
     margin-left: 21px;
     margin-bottom: 10px;
 }
+.patientPopupAvatar:hover
+{
+    cursor: -webkit-zoom-out;
+    transform: scale(1.2);
+}
+
 
 .submitPatientData{
     //margin: 20px;
@@ -8215,7 +8221,11 @@ End  of  Toggle  check box
     border-radius: 60%;
     margin-top: 15px;
     margin-left: 21px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+}
+.userPopupAvatar:hover{
+  cursor: -webkit-zoom-out;
+    transform: scale(1.2);
 }
 .userDataText{
     font-size: 18px;

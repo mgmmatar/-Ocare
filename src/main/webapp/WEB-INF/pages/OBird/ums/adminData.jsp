@@ -27,7 +27,7 @@
     <input type="hidden" name="userId" value="${myUser.id}"/>
     <input type="hidden" name="roleName" value="ADMIN"/>
     <div>
-    <img class="patientPopupAvatar" src="<c:url value='/resources/images/avatar.jpg'/>" />
+    <img class="userPopupAvatar" src="<c:url value='/resources/images/admin1.png'/>" />
     
         <div class="patientDivContainer">
             <div class="patientLabelTitle">
