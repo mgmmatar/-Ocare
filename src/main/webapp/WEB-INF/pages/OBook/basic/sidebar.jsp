@@ -120,6 +120,8 @@
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="/ocare/log/action">Action Log</a>
                                     </li>
+                                    <li><a href="/ocare/log/reservation">Reservation Log</a>
+                                    </li>
                                 </ul>
                             </li>
                             </sec:authorize>   
