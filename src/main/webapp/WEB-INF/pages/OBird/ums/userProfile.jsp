@@ -52,7 +52,11 @@
 
         <script type="text/javascript">
             $(document).ready(function() {
-
+                
+                $(".container").on("click","#changePassword", function(e) {
+                    $('#userPopup').bPopup();
+                });
+                
             });
         </script>
 
@@ -162,7 +166,8 @@
 
                                             <div class="costViewer">
                                                 <div class="col-md-3 controlButtonContainer">
-                                                    <button style="width: 165px!important;height: 40px!important;" type="button" id="editPatient" class="registerbuttonheader controlAction">Change Password</button>                                                   
+                                                    <button style="width: 165px!important;height: 40px!important;" type="button" id="editProfile" class="registerbuttonheader controlAction">Edit Information</button>
+                                                    <button style="width: 165px!important;height: 40px!important;" type="button" id="changePassword" class="registerbuttonheader controlAction">Change Password</button>                                                    
                                                 </div>
 
                                             </div>                 
@@ -206,7 +211,54 @@
         </div><!--End Body Container-->
 
         <div id="userPopup" class="popupDesign popup">
+
+            <span class="button b-close"><span class="popup_close_icon">X</span></span>
+
+            <div class="popupMyHeader">
+                <span class="logo">Change Password</span>
+            </div> 
             
+            <div class="patientLabelTitle">
+                    
+                    <div class="userDivContainer">
+                        <div class="patientDivContainer">
+                            <div class="patientLabelTitle">
+                                <label class="patientDataText">Old Password : </label>
+                            </div>
+
+                            <div class="PatientInputFields">
+                                <input type="password" name="oldPassword" style="width: 300px;margin-left: 22px;" placeholder="Old Password" class="patientInputFieldDesign" required/>
+                            </div>
+                        </div>
+                        
+                        <div class="patientDivContainer">
+                            <div class="patientLabelTitle">
+                                <label class="patientDataText">New Password : </label>
+                            </div>
+
+                            <div class="PatientInputFields">
+                                <input type="password" name="newPassword" style="width: 300px;margin-left: 16px;" placeholder="New Password" class="patientInputFieldDesign" required/>
+                            </div>
+                        </div>
+                        
+                        <div class="patientDivContainer">
+                            <div class="patientLabelTitle">
+                                <label class="patientDataText">Retype Password : </label>
+                            </div>
+
+                            <div class="PatientInputFields">
+                                <input type="password" name="reTypeNewPassword" style="width: 300px" placeholder="ReType New Password" class="patientInputFieldDesign" required/>
+                            </div>
+                        </div>
+                        
+                        <div class="patientDivContainer">
+                            
+                             <button id="reserveNow" class="submitPatientData">Save Changes</button> 
+                            
+                        </div>
+                        
+                    </div>
+            </div>        
         </div>
         
     </body>
