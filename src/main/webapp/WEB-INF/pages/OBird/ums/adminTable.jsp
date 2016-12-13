@@ -8,8 +8,17 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
+  
+<style>
 
-    <table id="adminTable" class="table table-striped" style="cursor: pointer;">
+    .btn:hover,.btn profiles:hover{
+                    
+                     text-decoration: underline;
+                     color: #0762cc;
+                     cursor: pointer;
+                }
+</style>
+    <table id="adminTable" class="table table-striped" >
         <thead>
             <tr>
                 <th style="font-size: 18px">#</th>
@@ -66,7 +75,7 @@
                             </c:otherwise>    
                         </c:choose> 
                     </td>
-                    <th><a class="btn profiles" style="display: inline-table;">Profile</a></th>
+                    <th><a class="btn profiles" style="display: inline-table;font-size: 15px;font-weight: bold">Profile</a></th>
                     <th tabindex="5"><img src="<c:url value='/resources/images/delete-sign.png'/>" id="DeleteInsurranceCompany" class="insurranceCompanyDeleteButton deleteAdmin"
                                         data-ssd-confirm-trigger="remove"
                                         data-ssd-confirm-message="Are you sure you wish to remove ${myAdmin.firstName} ${myAdmin.lastName}  ?<br />There is no undo!"

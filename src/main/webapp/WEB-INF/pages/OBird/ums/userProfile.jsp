@@ -50,6 +50,17 @@
         <link href="<c:url value='/resources/css/googlefonts.css'/>" rel="stylesheet" />
 
 
+         <style>
+           input[type="text"]:disabled {
+            background: #f1f1f1;
+            text-align: center;
+            }
+            .patientDivContainer{
+              margin-bottom: -4px;
+              margin-right: 10px;
+            }
+        </style>
+        
         <script type="text/javascript">
             $(document).ready(function() {
                 
@@ -64,6 +75,7 @@
 
     </head>
 
+    
 
     <body class="nav-md">
 
@@ -105,74 +117,73 @@
 
                                             <img class="patientImg"src="<c:url value='/resources/images/avatar.jpg'/>" />
 
-                                            <div class="patientData">
-                                                <table>
-                                                    <tr>
-                                                        <td>
-                                                            <label style="width: 150px;">Name : </label>
-                                                        </td>
-                                                        <td>
-                                                            ${myUser.firstName} ${myUser.middleName} ${myUser.lastName}
-                                                        </td>    
-                                                    </tr>   
-                                                    <tr>
-                                                        <td>
-                                                            <label>User Name : </label>
-                                                        </td>
-                                                        <td>
-                                                            ${myUser.auth.userName}
-                                                        </td>    
-                                                    </tr>
+                                                        
+                                                 <div class="costViewer" style="padding-left: 300px;">
+                                             <div class="col-md-3 controlButtonContainer">
+                                                 <button type="button"  id="editProfile"  class="registerbuttonheader controlAction" style="width: 162px!important;" >Edit Information</button>
+                                                 <button type="button" id="changePassword"  class="registerbuttonheader controlAction" style="width: 162px!important;" >Change Password</button>
+                                             </div>
 
-                                                    <tr>
-                                                        <td>
-                                                            <label>Email : </label>
-                                                        </td>
-                                                        <td>
-                                                            ${myUser.email} 
-                                                        </td>    
-                                                    </tr>
-                                                    
-                                                    <tr>
-                                                        <td>
-                                                            <label>Phone1 : </label>
-                                                        </td>
-                                                        <td>
-                                                            ${myUser.phoneNumber1}
-                                                        </td>    
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <label>Phone2:</label>
-                                                        </td>
-                                                        <td>
-                                                            ${myUser.phoneNumber2}
-                                                        </td>    
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <label>Address : </label>
-                                                        </td>
-                                                        <td>
-                                                            ${myUser.address}
-                                                        </td>    
-                                                    </tr>
-
-                                                   
-                                                </table>    
+                                    </div>                 
+                                         </div> 
+                                                        
+                                <div class="patientDivContainer">
+            <div class="patientDivContainer">
+            <div class="patientLabelTitle">
+                <label class="patientDataText" style="margin-right: 60px;"> Name : </label>
+            </div>
+            <div class="PatientInputFields">
+                <input type="text" disabled="disabled"  class="patientInputFieldDesign" style="width: 400px;" required  value="${myUser.firstName} ${myUser.middleName} ${myUser.lastName}"/>
+            </div>
+            </div>                        
+                                                                                                           
+              <div class="patientDivContainer">
+            <div class="patientLabelTitle">
+                <label class="patientDataText" style="margin-right: 15px;">User Name : </label>
+            </div>
+        
+            <div class="PatientInputFields">
+                <input type="text" disabled="disabled" name="username" class="patientInputFieldDesign" style="width:260px!important" required  value="${myUser.auth.userName}"/>
+            </div>
+            
+           <div class="patientLabelTitle">
+                <label class="patientDataText">Email : </label>
+            </div>
+        
+            <div class="PatientInputFields">
+                <input type="text"  disabled="disabled" name="email" placeholder="Age" class="patientInputFieldDesign" style="width:310px!important" required value="${myUser.email}"/>
+            </div>
+            </div>
+                                                       
+            <div class="patientDivContainer">
+            <div class="patientLabelTitle">
+                <label class="patientDataText" style="margin-right: 38px;">Phone 1 : </label>
+            </div>
+            <div class="PatientInputFields">
+               <input type="text"  disabled="disabled" name="phoneNumber1" placeholder="Telephone-1" class="patientInputFieldDesign" style="width: 260px;" required  value="${myUser.phoneNumber1}"/>
+            </div>
+            
+            <div class="patientLabelTitle">
+                <label class="patientDataText">Phone 2 : </label>
+            </div>
+            <div class="PatientInputFields">
+                <input type="text"  disabled="disabled" name="phoneNumber2" placeholder="Telephone-2" class="patientInputFieldDesign" style="width: 290px;" required  value="${myUser.phoneNumber2}"/>
+            </div>
+            </div>
+            
+             <div class="patientDivContainer">
+            <div class="patientLabelTitle">
+                <label class="patientDataText" style="margin-right: 10px;"> Address : </label>
+            </div>
+            <div class="PatientInputFields">
+                <input type="text"  disabled="disabled" name="address" placeholder="Address" class="patientInputFieldDesign" style="width:400px!important; margin-left: 25px;" required value="${myUser.address}"/>
+            </div>
+            </div>                                           
                                             </div>
 
-                                            <div class="costViewer">
-                                                <div class="col-md-3 controlButtonContainer">
-                                                    <button style="width: 165px!important;height: 40px!important;" type="button" id="editProfile" class="registerbuttonheader controlAction">Edit Information</button>
-                                                    <button style="width: 165px!important;height: 40px!important;" type="button" id="changePassword" class="registerbuttonheader controlAction">Change Password</button>                                                    
-                                                </div>
+                                            
 
-                                            </div>                 
-
-                                        </div>
+                                        
 
                                           
                                         <div class="panel-body">

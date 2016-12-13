@@ -72,6 +72,18 @@
             });
         </script>
             
+        <style>
+           input[type="text"]:disabled {
+            background: #f1f1f1;
+            text-align: center;
+            }
+            .patientDivContainer{
+              margin-bottom: -4px;
+              margin-right: 10px;
+            }
+        </style>
+            
+        
         <%@include file="../basic/scripts.jsp" %>
         
     </head>
@@ -108,138 +120,143 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                   ${patient.fName} ${patient.lName} Profile 
+                                   ${patient.fName} ${patient.lName} _ Profile 
                                 </div>
           
            <!--- Reservation Information --->
 
                         <div class="patientInfo">
-
-                                <img class="patientImg"src="<c:url value='/resources/images/avatar.jpg'/>" />
-                                
-                                <div class="patientData">
-                                    <table>
-                                        <tr>
-                                             <td>
-                                                 <label style="width: 150px;">Patient Name : </label>
-                                             </td>
-                                             <td>
-                                                 ${patient.fName} ${patient.midName} ${patient.lName}
-                                             </td>    
-                                        </tr>   
-                                        <tr>
-                                             <td>
-                                                 <label>Patient Code : </label>
-                                             </td>
-                                             <td>
-                                                     ${patient.code}
-                                             </td>    
-                                        </tr>
-
-                                        <tr>
-                                             <td>
-                                                 <label>Gender: </label>
-                                             </td>
-                                             <td>
-                                                    ${patient.gender}
-                                             </td>    
-                                        </tr>
-
-                                        <tr>
-                                             <td>
-                                                 <label>Age: </label>
-                                             </td>
-                                             <td>
-                                                    ${patient.age} Years Old.
-                                             </td>    
-                                        </tr>
-
-                                        <tr>
-                                             <td>
-                                                 <label>Address : </label>
-                                             </td>
-                                             <td>
-                                                    ${patient.address} 
-                                             </td>    
-                                        </tr>
-
-                                        <tr>
-                                             <td>
-                                                 <label>Phone Numbers : </label>
-                                             </td>
-                                             <td>
-                                                    ${patient.phoneNumber1} - ${patient.phoneNumber2}  
-                                                      
-                                             </td>    
-                                        </tr>
-                                        
-                                        <tr>
-                                             <td>
-                                                 <label>Email : </label>
-                                             </td>
-                                             <td>
-                                                    ${patient.email} 
-                                             </td>    
-                                        </tr>
-                                        
-                                        <tr>
-                                             <td>
-                                                 <label>BirthDate : </label>
-                                             </td>
-                                             <td>
-                                                    <fmt:formatDate type="date" value="${patient.birthDate}" pattern="dd MMM ,yyyy" /> 
-                                             </td>    
-                                        </tr>
-                                        
-                                        <tr>
-                                             <td>
-                                                 <label>Created : </label>
-                                             </td>
-                                             <td>
-                                                <fmt:formatDate type="date" value="${patient.creationDate}" pattern="dd MMM ,yyyy" /> <b>By</b> <a href="/ums/user/profile/${patient.registeredBy.id}">${patient.registeredBy.firstName} ${patient.registeredBy.lastName}</a> 
-                                             </td>    
-                                        </tr>
-                                        
-                                        <td>
-                                                 <label>Modified : </label>
-                                        </td>
-                                             <td>
-                                                 <fmt:formatDate type="date" value="${patient.lastModifiedDate}" pattern="dd MMM ,yyyy" /> <b>By</b> <a href="/ums/user/profile/${patient.modifiedBy.id}">${patient.modifiedBy.firstName} ${patient.modifiedBy.lastName}</a> 
-                                             </td>    
-                                        </tr>
-                                        
-                                        <tr>
-                                             <td>
-                                                 <label>Insurred : </label>
-                                             </td>
-                                             <td>
-                                                 <c:choose>
-                                                     <c:when test="${not empty patient.insuranceCompany}">
-                                                          ${patient.insuranceCompany.nameEn}  
-                                                     </c:when>
-                                                     <c:otherwise>
-                                                           NONE 
-                                                     </c:otherwise>
-                                                 </c:choose>
-                                             </td>    
-                                        </tr>
-                                        
-                                    </table>    
-                                </div>
-
-                                    <div class="costViewer">
+                            
+                                <img class="patientImg"src="<c:url value='/resources/images/avatar.jpg'/>" /> 
+                           
+                                                 <div class="costViewer" style="padding-left: 360px;">
                                              <div class="col-md-3 controlButtonContainer">
                                                  <button type="button" id="editPatient" class="registerbuttonheader controlAction">Edit</button>
                                                  <button type="button" id="reservePatient" class="registerbuttonheader controlAction">Reserve</button>
                                              </div>
 
                                     </div>                 
+                                         </div> 
                                              
-                             </div>
+             <div class="patientDivContainer">
+            <div class="patientDivContainer">
+            <div class="patientLabelTitle">
+                <label class="patientDataText" style="margin-right: 45px;"> Name : </label>
+            </div>
+            <div class="PatientInputFields">
+                <input type="text" disabled="disabled"  class="patientInputFieldDesign" style="width: 400px;" required  value="${patient.fName} ${patient.midName} ${patient.lName}"/>
+            </div>
+            
+             <div class="patientLabelTitle">
+                <label class="patientDataText">Gender : </label>
+            </div>
+        
+            <div class="PatientInputFields">
+                <input type="text" disabled="disabled"  class="patientInputFieldDesign" style="width:160px!important" required  value="${patient.gender}"/>
+            </div>
+            </div>
+            
+            
+            <div class="patientDivContainer">
+            <div class="patientLabelTitle">
+                <label class="patientDataText" style="margin-right: 50px;">Code : </label>
+            </div>
+        
+            <div class="PatientInputFields">
+                <input type="text" disabled="disabled" name="code" class="patientInputFieldDesign" style="width:140px!important" required  value="${patient.code}"/>
+            </div>
+            
+           <div class="patientLabelTitle">
+                <label class="patientDataText">BirthDate : </label>
+            </div>
+        
+            <div class="PatientInputFields">
+                <input type="text"  disabled="disabled" name="BirthDate" placeholder="Age" class="patientInputFieldDesign" style="width:150px!important" required value="${patient.birthDate}"/>
+            </div>
+            
+            <div class="patientLabelTitle">
+                <label class="patientDataText" style="margin-right: 18px;">Age : </label>
+            </div>
+        
+            <div class="PatientInputFields">
+                <input type="text"  disabled="disabled" name="age" placeholder="Age" class="patientInputFieldDesign" style="width:150px!important" required value="${patient.age}"/>
+            </div>
+            </div>
+            
+            <div class="patientDivContainer">
+            <div class="patientLabelTitle">
+                <label class="patientDataText" style="margin-right: 26px;">Phone 1 : </label>
+            </div>
+            <div class="PatientInputFields">
+               <input type="text"  disabled="disabled" name="phoneNumber1" placeholder="Telephone-1" class="patientInputFieldDesign" style="width: 260px;" required  value="${patient.phoneNumber1}"/>
+            </div>
+            
+            <div class="patientLabelTitle">
+                <label class="patientDataText">Phone 2 : </label>
+            </div>
+            <div class="PatientInputFields">
+                <input type="text"  disabled="disabled" name="phoneNumber2" placeholder="Telephone-2" class="patientInputFieldDesign" style="width: 290px;" required  value="${patient.phoneNumber2}"/>
+            </div>
+            </div>
+            
+            <div class="patientDivContainer">
+            <div class="patientLabelTitle">
+                <label class="patientDataText" style="margin-right: 0px;"> Address : </label>
+            </div>
+            <div class="PatientInputFields">
+                <input type="text"  disabled="disabled" name="address" placeholder="Address" class="patientInputFieldDesign" style="width:680px!important; margin-left: 25px;" required value="${patient.address}"/>
+            </div>
+            </div>
+            
+            <div class="patientDivContainer">
+            <div class="patientLabelTitle">
+                <label class="patientDataText" style="margin-right: -22px;">Insurance : </label>
+            </div>
+            <div class="PatientInputFields">
+               <input type="text" disabled="disabled" name="email" placeholder="E-mail" class="patientInputFieldDesign" style="width:280px!important; margin-left: 33px;" required  value="${patient.insuranceCompany.nameEn}"/>
+            </div>   
+                
+            <div class="patientLabelTitle">
+                <label class="patientDataText" >Email : </label>
+            </div>
+            <div class="PatientInputFields">
+               <input type="text" disabled="disabled" name="email" placeholder="E-mail" class="patientInputFieldDesign" style="width:300px!important; margin-left: -6px;" required  value="${patient.email}"/>
+            </div>
+            </div>
                             
-                             <center>
-                                 <h3>Reservation History</h3>
-                             </center>     
+             <div class="patientDivContainer">
+            <div class="patientLabelTitle">
+                <label class="patientDataText" style="margin-right: 8px;">Created : </label>
+            </div>
+            <div class="PatientInputFields">
+               <input type="text"  disabled="disabled" name="phoneNumber1" placeholder="Telephone-1" class="patientInputFieldDesign" style="margin-left: 21px;width: 260px;" required  value="${patient.creationDate}"/>
+            </div>
+            <div class="patientLabelTitle">
+                <label class="patientDataText">By   <a href="/ums/user/profile/${patient.registeredBy.id}">${patient.registeredBy.firstName} ${patient.registeredBy.lastName}</a></label>
+            </div>
+             </div>
+            
+             <div class="patientDivContainer">
+            <div class="patientLabelTitle">
+                <label class="patientDataText" style="margin-right: 2px;">Modified : </label>
+            </div>
+            <div class="PatientInputFields">
+                <input type="text"  disabled="disabled" name="phoneNumber2" placeholder="Telephone-2" class="patientInputFieldDesign" style="margin-left: 21px;width: 260px;" required  value="${patient.lastModifiedDate}"/>
+            </div>
+            <div class="patientLabelTitle">
+                <label class="patientDataText">By   <a href="/ums/user/profile/${patient.modifiedBy.id}">${patient.modifiedBy.firstName} ${patient.modifiedBy.lastName}</a></label>
+            </div>
+            </div>
+  
+            
+             </div>
+            
+                                       
+                            
+                            <div  class="panel-heading" style="width: 50%;margin-left: 25%;margin-top: 8%;margin-bottom: 3%;background-color: rgba(20, 121, 184, 0.85) !important;border-style: groove;">
+                                   Reservation History</h3>
+                                </div> 
+                                  
                              <div class="panel-body">
                                  <table id="reservationTable" class="table table-striped" style="cursor: pointer;">
                                 <thead>

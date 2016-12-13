@@ -62,7 +62,7 @@
             </div>
         
             <div class="PatientInputFields">
-                <input type="text" name="fName" placeholder="First name" class="patientInputFieldDesign" required value="${patient.fName}"/>
+                <input type="text"  name="fName" placeholder="First name" class="patientInputFieldDesign" required value="${patient.fName}"/>
             </div>
         
             <div class="PatientInputFields">

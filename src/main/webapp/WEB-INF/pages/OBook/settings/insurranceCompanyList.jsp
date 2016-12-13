@@ -82,7 +82,8 @@
                 .popupHeader {font-size:16px; text-transform: uppercase;}
                 .popupHeader {background:#F4F4F2; position:relative; padding:10px 20px; border-bottom:1px solid #DDD; font-weight:bold;}
                 .popupHeader .modal_close {position: absolute; right: 0; top:0; padding:10px 15px; background:#E4E4E2; cursor: pointer; color:#aaa; font-size:16px;}
-                .popupBody {padding:20px;}                    
+                .popupBody {padding:20px;}   
+                
 	</style>        
         <script type="text/javascript">
             $(document).ready(function() {

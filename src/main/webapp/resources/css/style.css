@@ -880,6 +880,7 @@ img.acceptChallenge, img.cancelChallenge {
     font-family: 'bold-65';
     padding-right: 0px;
     text-align: center;
+   display: inline-table;
 }
 .tabs_index li{
     width: 30%;
@@ -8305,4 +8306,20 @@ label.css-label {
 .reportButton:hover {
     background-color: #FCC409 !important;
     color: #000;
+}
+
+.thePatientProfile:hover,.thePatientProfile:focus{
+   font-size: 16px;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.examineTypeDeleteButton:hover,.examineTypeAddButton:hover,.examineTypeCancelButton:hover {
+    transform: scale(1.2);
+}
+.reservationWayDeleteButton:hover,.reservationWayAddButton:hover,.reservationWayCancelButton:hover{
+    transform: scale(1.2);
+}
+.insurranceCompanyDeleteButton:hover,.insurranceCompanyAddButton:hover,.insurranceCompanyCancelButton:hover{
+    transform: scale(1.2);
 }

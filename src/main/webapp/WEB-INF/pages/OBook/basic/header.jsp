@@ -35,14 +35,14 @@
                                 <li>
                                     <a>
                                                 <span class="image">
-                                                    <img src="<c:url value='/resources/images/khaled.jpg'/>" alt="Profile Image"/>
+                                                    <img src="<c:url value='/resources/images/patient1.jpg'/>" alt="Profile Image"/>
                                                 </span>
                                                 <span>
-                                                    <span>Dr.John Smith</span>
-                                                    <span class="time">3 mins ago</span>
+                                                    <span>PatientName  Come</span>
+                                                    <span class="time"> 3 mins ago</span>
                                                 </span>
                                                 <span class="message">
-                                                    Coming Soon in the new version of öcare  Loading....
+                                                   New Features Coming Soon in öcare || <p style="text-align: center;font-size: 14px;">  Loading....</p>
                                                 </span>
                                     </a>
                                 </li>

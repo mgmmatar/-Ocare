@@ -9,7 +9,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-                        <table id="patientTable" class="table table-striped" style="cursor: pointer;">
+                        <table id="patientTable" class="table table-striped" >
                                 <thead>
                                     <tr>
                                         <th style="font-size: 18px">#</th>

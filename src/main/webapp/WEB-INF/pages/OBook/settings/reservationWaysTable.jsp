@@ -9,7 +9,18 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 
-                        <table id="reservationWayTable" class="table table-striped" style="cursor: pointer;">
+<style>
+    .table td:hover{
+        background-color: #c1c1c1;
+        border-radius: 10px;
+    } 
+    .table-striped > tbody > tr:nth-child(odd) > td:hover{
+        background-color: #c1c1c1;
+        border-radius: 10px;
+    }
+</style>
+
+                        <table id="reservationWayTable" class="table table-striped" >
                                 <thead>
                                     <tr>
                                         <th style="font-size: 18px">#</th>

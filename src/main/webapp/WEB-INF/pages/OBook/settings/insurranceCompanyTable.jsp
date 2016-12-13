@@ -9,6 +9,22 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 
+<style>
+    .table td:hover{
+        background-color: #c1c1c1;
+        border-radius: 10px;
+    } 
+    .table-striped > tbody > tr:nth-child(odd) > td:hover{
+        background-color: #c1c1c1;
+        border-radius: 10px;
+    }
+    .btn:hover,.btn profiles:hover{
+                    
+                     text-decoration: underline;
+                     color: #0762cc;
+                     cursor: pointer;
+                }
+</style>
                         <table id="insurranceCompanyTable" class="table table-striped" style="cursor: pointer;">
                                 <thead>
                                     <tr>
@@ -33,7 +49,7 @@
                                             <td tabindex="1">${insuranceCompany.nameAr} <img src="<c:url value='/resources/images/editable-icon.png'/>" class="editableIcon"/></td>
                                             <td tabindex="1">${insuranceCompany.nameEn} <img src="<c:url value='/resources/images/editable-icon.png'/>" class="editableIcon"/></td>
                                             <td tabindex="1">${insuranceCompany.description} <img src="<c:url value='/resources/images/editable-icon.png'/>" class="editableIcon"/></td>
-                                            <th><a class="btn profiles" style="display: inline-table;">Profile</a></th>
+                                            <th><a class="btn profiles" style="display: inline-table;font-size: 15px;font-weight: bold">Profile</a></th>
                                             <th tabindex="1"><img src="<c:url value='/resources/images/delete-sign.png'/>" id="DeleteInsurranceCompany" class="insurranceCompanyDeleteButton"
                                                                 data-ssd-confirm-trigger="remove"
                                                                 data-ssd-confirm-message="Are you sure you wish to remove ${insuranceCompany.nameEn} ?<br />There is no undo!"
