@@ -26,11 +26,11 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/ssd-confirm.css'/>">    
         <!---  JS Scripts Files --->
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/owl.carousel.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/squad.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/underscore.js'/>"></script>
-        <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
         
         <script type="text/javascript" src="<c:url value='/resources/js/mindmup-editabletable.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/reservationWay-editable.js'/>"></script>
@@ -248,7 +248,7 @@
                     </div>
                     <!-- /. ROW  -->
                     <div id="notifaction" class="alert alert-success hidden" role="alert">Operation done successfully</div>
-                    <div class="row expandUp">
+                    <div class="row">
                         
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             

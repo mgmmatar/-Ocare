@@ -26,13 +26,13 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/font-awesome.min.css'/>">
         <!---  JS Scripts Files --->
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/owl.carousel.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/calender.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/squad.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/underscore.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/calendarTemplate.js'/>"></script>
-        <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery.fancybox.pack.js'/>"></script>
         
 

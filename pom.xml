@@ -15,6 +15,8 @@
         <hibernate.version>4.2.2.Final</hibernate.version>
         <mysql.connector.version>5.1.31</mysql.connector.version>
         <springsecurity.version>4.0.1.RELEASE</springsecurity.version>
+        <hibernate.validator.version>5.1.2.Final</hibernate.validator.version>
+        <javax.validation.version>1.1.0.Final</javax.validation.version>
     </properties>
     <dependencies>
         <!-- Spring -->
@@ -332,7 +334,20 @@
                 <artifactId>gson</artifactId>
                 <version>1.7.1</version>
         </dependency>
-                    
+         
+         <!--- Validation -->
+         <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>${javax.validation.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate.validator.version}</version>
+        </dependency>   
+        
+       
     </dependencies>
     <build>
         <plugins>

@@ -10,12 +10,6 @@ package com.obird.OUMS.controller;
  *
  * @author khaledeng
  */
-import com.obird.OUMS.domain.Role;
-import com.obird.OUMS.domain.User;
-import com.obird.OUMS.service.UserService;
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 

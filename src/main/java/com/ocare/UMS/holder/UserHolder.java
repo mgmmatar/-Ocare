@@ -6,6 +6,8 @@
 
 package com.ocare.UMS.holder;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  *
  * @author khaledeng
@@ -33,6 +35,7 @@ public class UserHolder {
         this.userId = userId;
     }
 
+    @NotEmpty
     public String getFirstName() {
         return firstName;
     }
@@ -41,6 +44,7 @@ public class UserHolder {
         this.firstName = firstName;
     }
 
+    @NotEmpty
     public String getMiddleName() {
         return middleName;
     }
@@ -53,6 +57,7 @@ public class UserHolder {
         return lastName;
     }
 
+    @NotEmpty
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }

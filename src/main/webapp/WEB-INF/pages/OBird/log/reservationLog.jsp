@@ -127,7 +127,7 @@
                     <div class="page-title"></div>   
                     <!-- /. ROW  -->
                     <div id="notifaction" class="alert alert-success hidden" role="alert">Operation done successfully</div>
-                    <div class="row expandUp">
+                    <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">

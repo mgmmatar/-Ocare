@@ -58,13 +58,14 @@
         <script type="text/javascript">
             $(document).ready(function() {
       
-                $(".cancelReservation").click(function() {
+                $(".container").on("click",".cancelReservation", function(e) {
                     ///// Checking the Item Clicked Class
+                    alert("welcome");
                      var reservationId= $(this).closest("div").find('input[name="reservationId"]').val();
                      cancelReservation(reservationId);
                 }); 
                 
-                $(".confirmReservation").click(function() {
+                $(".container").on("click",".confirmReservation", function(e) {
                     ///// Checking the Item Clicked Class
                     var reservationId= $(this).closest("div").find('input[name="reservationId"]').val();
                     confirmReservation(reservationId);
@@ -209,7 +210,7 @@
                     <div class="page-title"></div>   
                     <!-- /. ROW  -->
                     <div id="notifaction" class="alert alert-success hidden" role="alert">Operation done successfully</div>
-                    <div class="row expandUp">
+                    <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
