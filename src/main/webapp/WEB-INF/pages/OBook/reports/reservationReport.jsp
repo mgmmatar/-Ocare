@@ -54,6 +54,40 @@
                
                 var reservationInfo =[];
                 var insurranceInfo =[];
+                var emptyList=[];               
+                var emptyChart;
+                ///////////////////////////////////////////////////////
+                /*
+                  *    Create Empty Chart   
+                */
+                /////////////////////////////////////////////////////////
+                function emptyDataChart(chartcontainer,title){
+                        // Define Empty Chart
+                         emptyChart = new CanvasJS.Chart(chartcontainer,{   
+                                title: { 
+                                        text: title,
+                                        fontSize: 24
+                                }, 
+                                axisY: { 
+                                        title: "Products in %" 
+                                }, 
+                                legend :{ 
+                                        verticalAlign: "bottom", 
+                                        horizontalAlign: "center" 
+                                }, 
+                                data: [ 
+                                { 
+                                        type: "pie", 
+                                        showInLegend: true, 
+                                        toolTipContent: "{label} <br/> #percent%", 
+                                        //indexLabel: "#percent% - {label}", 
+                                        indexLabel: "({label} 0 Items)", 
+                                        dataPoints: emptyList
+                                }   
+                                ] 
+                        });
+                    }//end empty Chart
+                
                 ////////////////////////////////////////////////////////////
                      var reservationChart = new CanvasJS.Chart("reservationChartContainer",{   
                             title: { 
@@ -120,6 +154,8 @@
                         complete: function(data) {
                               // Getting Reponse JSON
                               var parsedJson = $.parseJSON(data.responseText);
+                              console.log("Received "+data.responseText);
+                              console.log("Converted "+parsedJson);
                               var reservationReports=parsedJson['myReservationReport'];
                               var insuranceReports=parsedJson['myInsurranceReport'];
                               
@@ -129,7 +165,8 @@
                               
                               var totalInsurredPatient=parsedJson['totalInsurredPatient'];
                               var totalInsurranceProfit=parsedJson['totalInsurranceProfit'];
-                              /// Filling Reservation Report
+                              
+                              // Filling data 
                               $.each( reservationReports, function( index, report){
                                     reservationInfo.push({ label: report['moduleName'], name: report['moduleSum'], y: report['occuranceNumber'], legendText: report['moduleName']});           
                               });
@@ -143,15 +180,31 @@
                               $('#totalProfit').text(totalProfit);
                               $('#totalInsurredPatient').text(totalInsurredPatient);
                               $('#totalInsurranceProfit').text(totalInsurranceProfit);
-                              
+                             
                               $('#reportResults').show();
+                              
+                              if (reservationReports.length === 0) {
+                                    // Rendering Empty Reservation Report 
+                                    emptyList.push({ label: "Empty", y: 1, legendText: "Empty Data Set"});
+                                    emptyDataChart("reservationChartContainer","Today Reservation Report");
+                                    emptyChart.render();           
+                                    // Rendering Empty Insurrance Report 
+                                    emptyDataChart("insurranceChartContainer","Today Insurance Report");
+                                    emptyChart.render();
+                                    emptyList=[];
+                                    
+                                    $('#reportResults').refresh();
+                            }else{
+                                
                               //// Generate Charts 
                               reservationChart.render();	  
                               insurranceChart.render();
+                              $('#reportResults').refresh();
                               
                               reservationInfo=[];
                               insurranceInfo=[];
                               
+                          }//end if-else Block 
                         }//end Complete Function
                     });
               });

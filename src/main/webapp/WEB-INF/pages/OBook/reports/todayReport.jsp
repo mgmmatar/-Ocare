@@ -52,6 +52,9 @@
             $(document).ready(function() {
                 var reservationInfo =[];
                 var insurranceInfo =[];
+                var emptyList=[];               
+                var emptyChart;
+                
                 
                 function fillReservationChartData(){
                     <c:forEach items="${todayReservationReport}" var="todayReservationReportInst">
@@ -65,7 +68,7 @@
                     </c:forEach>
                 }//fillChartData
 
-                    ////////////////////////////////////////////////////////////
+                    ////////////////////////////////////////////////////////////                    
                      var reservationChart = new CanvasJS.Chart("reservationChartContainer",{   
                             title: { 
                                     text: "Today Reservation Report",
@@ -113,14 +116,59 @@
                                     dataPoints: insurranceInfo
                             }   
                             ] 
-                    }); 
+                    });
+                    ///////////////////////////////////////////////////////
+                    /*
+                     *    Create Empty Chart   
+                     */
+                   /////////////////////////////////////////////////////////
+                    function emptyDataChart(chartcontainer,title){
+                        // Define Empty Chart
+                         emptyChart = new CanvasJS.Chart(chartcontainer,{   
+                                title: { 
+                                        text: title,
+                                        fontSize: 24
+                                }, 
+                                axisY: { 
+                                        title: "Products in %" 
+                                }, 
+                                legend :{ 
+                                        verticalAlign: "bottom", 
+                                        horizontalAlign: "center" 
+                                }, 
+                                data: [ 
+                                { 
+                                        type: "pie", 
+                                        showInLegend: true, 
+                                        toolTipContent: "{label} <br/> #percent%", 
+                                        //indexLabel: "#percent% - {label}", 
+                                        indexLabel: "({label} 0 Items)", 
+                                        dataPoints: emptyList
+                                }   
+                                ] 
+                        });
+                    }//end empty Chart
+                 
              
-             // Filling Reservation Chart 
-             fillReservationChartData();   
-             reservationChart.render();	  
-             // Filling Insurrance Chart
-             fillInsuuranceChartData();   
-             insurranceChart.render();
+            // Filling Reservation List 
+            fillReservationChartData();
+            fillInsuuranceChartData();
+
+             if (reservationInfo.length === 0) {
+                     // Rendering Empty Reservation Report 
+                     emptyList.push({ label: "Empty", y: 1, legendText: "Empty Data Set"});
+                     emptyDataChart("reservationChartContainer","Today Reservation Report");
+                     emptyChart.render();           
+                     // Rendering Empty Insurrance Report 
+                     emptyDataChart("insurranceChartContainer","Today Insurance Report");
+                     emptyChart.render();
+                     
+             }else{
+                // Filling Reservation Chart 
+                reservationChart.render();	  
+                // Filling Insurrance Chart                   
+                insurranceChart.render();
+             }//end else-If Condition 
              
             });  
             </script>
