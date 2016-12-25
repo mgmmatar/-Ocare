@@ -290,7 +290,7 @@
             
              </div>
             
-                             <div class="costViewer">
+                            <div class="costViewer">
                                     <div id="chartContainer" style="width: 100%; height: 300px"></div>      
                             </div> 
                                        

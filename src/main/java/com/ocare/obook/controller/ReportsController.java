@@ -133,8 +133,6 @@ public class ReportsController {
                     models.put("totalProfit", totalProfit);
                     models.put("totalInsurredPatient", totalInsurredPatient);
                     models.put("totalInsurranceProfit", totalInsurranceProfit);
-                   System.out.println(">>> Reservation Report "+myReservationReport);
-                   System.out.println(">>> Insurance Report "+myInsurranceReport);
                    
                }//end Inner If Condition
         }//end if Condition     
@@ -153,7 +151,7 @@ public class ReportsController {
     public @ResponseBody Map<String,Object> searchPatientReport(@RequestParam(value="dateFrom") String dateFromString,
              @RequestParam(value="dateTo") String dateToString,
              @RequestParam(value="patientId",required = true) Integer patientId, Model model) {
-        
+             /// Initialize the Models Map
              Map<String,Object> models=new HashMap<String,Object>();
             // Getting Patient 
             Patient patient=patientService.getPatientById(patientId);
@@ -167,22 +165,17 @@ public class ReportsController {
                   Date toDate=ODate.getDateFromString(dateToString);
                   if(toDate.compareTo(fromDate)>=0){
                       /// Getting List 
-                      reportReservationStatus=reservationService.getReservationStatusByDates(patientId, fromDate, toDate);
+                      reportReservationStatus=reservationService.getReservationStatusByDates(patientId, fromDate, toDate);                      
                       reservations = reservationService.getReservationsForPatientByDates(patientId, fromDate, toDate);
-                  }//end if Condition
-                  else{
-                        
-                  }
+                  }//end if Condition                  
             }///end outer If
             else{  
                     reportReservationStatus=reservationService.getReservationStatus(patientId);
                     reservations = reservationService.getReservationsForPatient(patientId);
             }//end Else          
             // return Models
-            model.addAttribute("patient", patient);
-            model.addAttribute("reservations", reservations);
-            model.addAttribute("reportReservationStatus", reportReservationStatus);
-        
+            //models.put("reservations", reservations);
+            models.put("reportReservationStatus", reportReservationStatus);
         // return result 
         return models;
     }//end reservationReport

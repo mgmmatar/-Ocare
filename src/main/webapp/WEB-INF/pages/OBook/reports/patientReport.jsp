@@ -52,6 +52,31 @@
             $(document).ready(function() {
                 
                 var patientId=0;
+                var statusInfo =[];
+                
+                var chart = new CanvasJS.Chart("chartContainer",{   
+                            title: { 
+                                    text: "Patient Status",
+                                    fontSize: 24
+                            }, 
+                            axisY: { 
+                                    title: "Products in %" 
+                            }, 
+                            legend :{ 
+                                    verticalAlign: "bottom", 
+                                    horizontalAlign: "center" 
+                            }, 
+                            data: [ 
+                            { 
+                                    type: "pie", 
+                                    showInLegend: true, 
+                                    toolTipContent: "{label} <br/> #percent%", 
+                                    //indexLabel: "#percent% - {label}", 
+                                    indexLabel: "{label} - {y} Times", 
+                                    dataPoints: statusInfo
+                            }   
+                            ] 
+                    });
                 
                 /// AutoComplete Search Patient Data    
                 $('#patientName').typeahead({
@@ -100,7 +125,23 @@
                             patientId:patientId
                         },
                         complete: function(data) {
-                              
+                            
+                              var parsedJson = $.parseJSON(data.responseText);
+                              console.log("Received "+data.responseText);
+                              /// Parsing the Patient Report
+                              var reportReservationStatus=parsedJson['reportReservationStatus'];                              
+                              // Filling data 
+                              $.each( reportReservationStatus, function( index, report){
+                                    statusInfo.push({ label: report['statusName'],  y: report['occuranceNumber'], legendText: report['statusName']});
+                              });
+                               // Viewing Chart
+                               chart.render(); 
+                               statusInfo=[];
+                               console.log(statusInfo);
+                               $('#reportResults').show();
+                               $('#reportResults').refresh();
+                               // empty statusInfo
+                               
                         }//end Complete Function
                     });
               });
@@ -171,22 +212,11 @@
                                                    </center> 
                                                    
                                                </div> 
-                                               
-                                            <div style="display: none" id="reportResults"/>
-                                                    <!-- Reservation Report-->
-                                                    <div id="reservationChartContainer" style="width: 100%; height: 300px;margin-top: 5%;"></div>     
-                                                    <div> 
-                                                        <br><br>
-                                                        <h2 style="color: #268d51;"> Total Patients : <span id="totalPatient" style="color: #000"></span> &nbsp;&nbsp;&nbsp;   Total Profit :  <span id="totalProfit"  style="color: #000"></span></h2>   
-                                                    </div>
+                                               <div style="display: none" id="reportResults"/>
                                                     
-                                                    <hr style="border-top: 3px solid #c1c1c1 ;margin-top: 5%;">
-                                                    <!-- Insurance Report-->
-                                                    <div id="insurranceChartContainer" style="width: 100%; height: 300px;margin-top: 5%;"></div>      
-                                                    <br><br>
-                                                    <div> <h2 style="color: #268d51;"> Insured Patients : <span id="totalInsurredPatient" style="color: #000"></span> &nbsp;&nbsp;&nbsp;  Insurance Profit : <span id="totalInsurranceProfit" style="color: #000"></span></h2>  
-                                                   </div>    
-                                           </div>
+                                                            <div id="chartContainer" style="width: 100%; height: 300px"></div>      
+
+                                               </div> 
                                                     
                                             </div>      
                                     </div>
