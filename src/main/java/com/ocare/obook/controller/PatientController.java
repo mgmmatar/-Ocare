@@ -7,6 +7,7 @@ import com.ocare.obook.domain.Patient;
 import com.ocare.obook.domain.Reservation;
 import com.ocare.obook.holder.FastPatient;
 import com.ocare.obook.holder.PatientHolder;
+import com.ocare.obook.holder.ReportReservationStatus;
 import com.ocare.obook.service.InsuranceCompanyService;
 import com.ocare.obook.service.PatientService;
 import com.ocare.obook.service.ReservationService;
@@ -133,7 +134,11 @@ public class PatientController {
         Patient patient = patientService.getPatientById(patientId);
         // Get Patient Reservation List 
         List<Reservation> reservations=reservationService.getReservationsForPatient(patientId);
+        // Getting Patient Report
+        List<ReportReservationStatus> reportReservationStatus=reservationService.getReservationStatus(patientId);
+        
         model.addAttribute("reservations",reservations);
+        model.addAttribute("reportReservationStatus", reportReservationStatus);
         model.addAttribute("patient", patient);
         // return View        
         return MODULE_PATH+"patientProfile";

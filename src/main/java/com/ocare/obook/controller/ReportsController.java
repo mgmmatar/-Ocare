@@ -149,6 +149,44 @@ public class ReportsController {
     }//end reservationReport
     
     
+    @RequestMapping(value = "/patient/search", method = RequestMethod.POST,produces="application/json")
+    public @ResponseBody Map<String,Object> searchPatientReport(@RequestParam(value="dateFrom") String dateFromString,
+             @RequestParam(value="dateTo") String dateToString,
+             @RequestParam(value="patientId",required = true) Integer patientId, Model model) {
+        
+             Map<String,Object> models=new HashMap<String,Object>();
+            // Getting Patient 
+            Patient patient=patientService.getPatientById(patientId);
+            // Getting ReportReservationStatus List and Reservations 
+            List<ReportReservationStatus> reportReservationStatus=null;
+            List<Reservation> reservations=null;
+            /// Cheking if dates Entered    
+            if((dateFromString!=null)&&(dateToString!=null)){
+                  /// Covert String to Date
+                  Date fromDate=ODate.getDateFromString(dateFromString);
+                  Date toDate=ODate.getDateFromString(dateToString);
+                  if(toDate.compareTo(fromDate)>=0){
+                      /// Getting List 
+                      reportReservationStatus=reservationService.getReservationStatusByDates(patientId, fromDate, toDate);
+                      reservations = reservationService.getReservationsForPatientByDates(patientId, fromDate, toDate);
+                  }//end if Condition
+                  else{
+                        
+                  }
+            }///end outer If
+            else{  
+                    reportReservationStatus=reservationService.getReservationStatus(patientId);
+                    reservations = reservationService.getReservationsForPatient(patientId);
+            }//end Else          
+            // return Models
+            model.addAttribute("patient", patient);
+            model.addAttribute("reservations", reservations);
+            model.addAttribute("reportReservationStatus", reportReservationStatus);
+        
+        // return result 
+        return models;
+    }//end reservationReport
+    
     ///////////////////////////////////////////////////////////////////////////
     /*
      *  Test Cases 
@@ -186,33 +224,7 @@ public class ReportsController {
             Integer patientId= 1;
             String fromDateString="2015-10-17";
             String toDateString="2015-12-17";
-            // Getting Patient 
-            Patient patient=patientService.getPatientById(patientId);
-            // Getting ReportReservationStatus List and Reservations 
-            List<ReportReservationStatus> reportReservationStatus=null;
-            List<Reservation> reservations=null;
-            /// Cheking if dates Entered    
-            if((fromDateString!=null)&&(toDateString!=null)){
-                  /// Covert String to Date
-                  Date fromDate=ODate.getDateFromString(fromDateString);
-                  Date toDate=ODate.getDateFromString(toDateString);
-                  if(toDate.compareTo(fromDate)>=0){
-                      /// Getting List 
-                      reportReservationStatus=reservationService.getReservationStatusByDates(patientId, fromDate, toDate);
-                      reservations = reservationService.getReservationsForPatientByDates(patientId, fromDate, toDate);
-                  }//end if Condition
-                  else{
-                        
-                  }
-            }///end outer If
-            else{  
-                    reportReservationStatus=reservationService.getReservationStatus(patientId);
-                    reservations = reservationService.getReservationsForPatient(patientId);
-            }//end Else          
-            // return Models
-            model.addAttribute("patient", patient);
-            model.addAttribute("reservations", reservations);
-            model.addAttribute("reportReservationStatus", reportReservationStatus);      
+                  
         
         return MODULE_PATH+"patientReport22";
     }//end reservationReport

@@ -23,7 +23,7 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/font-awesome.min.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/popup.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/paging.css'/>">
-        
+ 
         <!---  JS Scripts Files --->
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
@@ -34,6 +34,8 @@
         <script type="text/javascript" src="<c:url value='/resources/js/jquery.ssd-confirm.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery.bpopup.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/paging.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery.canvasjs.min.js'/>"></script>
+        <script src="<c:url value='/resources/js/typeahead.jquery.js'/>"></script>
         <!-- NEW -->
         <script type="text/javascript" src="<c:url value='/resources/js/nprogress.js'/>"></script>
         <script>
@@ -49,11 +51,76 @@
             <script type="text/javascript">
             $(document).ready(function() {
                 
+                var patientId=0;
+                
+                /// AutoComplete Search Patient Data    
+                $('#patientName').typeahead({
+                            onSelect: function(item) {
+                                patientId=item.value;
+                            },
+                            ajax: {
+                                    url: "/ocare/patient/fastSearch",
+                                    timeout: 500,
+                                    dataType: "json",
+                                    contentType: "application/json; charset=utf-8",
+                                    displayField: "name",
+                                    valueField: "id",
+                                    triggerLength: 1,
+                                    method: "get",
+                                    loadingClass: "loading-circle",
+                                    preDispatch: function(query) {
+
+                                        return {
+                                            q: query
+                                        };
+                                    },
+                                preProcess: function(data) {
+                                        var list = [];
+                                        $.each(data, function() {
+                                                 console.log(data.toString());
+                                                list.push({id: this.id, name: this.fName + ' ' + this.mName + ' '+ this.lName +'   | <b> Code </b>: '+this.code+'   | <b>Phone : </b>'+this.phoneNumber})
+                                        });
+                                       return list;
+                                    }
+                            }//end Ajax Request Part
+                });
+                
+                $(".container").on("click","#searchNow", function(e) { 
+                 
+                    var dateFrom = $('#dateFrom').val();
+                    var dateTo = $('#dateTo').val();
+                    
+                    var request = $.ajax({
+                        url: "/ocare/report/patient/search",
+                        type: "POST",
+                        dataType: 'json',
+                        data: {
+                            dateFrom:dateFrom,
+                            dateTo:dateTo,
+                            patientId:patientId
+                        },
+                        complete: function(data) {
+                              
+                        }//end Complete Function
+                    });
+              });
+                
             });  
             </script>
             
         <%@include file="../../OBook/basic/scripts.jsp" %>
     </head>
+    <style>
+        [type="date"] {
+               background:#fff url('/ocare/resources/images/calendar.png')  97% 50% no-repeat ;
+               height: 52px;
+               width: 24%;}
+        [type="date"]::-webkit-inner-spin-button {display: none;}
+        [type="date"]::-webkit-calendar-picker-indicator {opacity: 0;}
+        [type="date"]{border-color: #c1c1c1; color: #1479b8;}
+        [type="date"]:hover{cursor: pointer;box-shadow: 4px 4px 5px #888888;}
+    </style>
+    
     <body class="nav-md">
 
             <div class="container body">
@@ -89,7 +156,39 @@
                                 </div>
                                     <!--- List of XX --->
                                     <div class="panel-body">
-
+                                        <div class="costViewer" >
+                                                   
+                                               <!-- Search Form -->
+                                               <div style="padding-top: 6%;padding-bottom: 3%;padding-left: 10px;margin-left: -11%;border-color: #ffffff; border-radius: 30px;;border-style: groove;border-width: 2px;">
+                                                   
+                                                   From : <input type="date" style="margin-left: 2%;margin-right:  24%;"  name="dateFrom" id="dateFrom"  />
+                                                   To  : <input type="date" style="margin-left: 2%;"  name="dateFrom" id="dateTo" />
+                                                   <br>
+                                                   Patient 
+                                                   <input type="text" id="patientName" name="patientName" class="searchBox" placeholder="Search For Patient"  required />
+                                                   <center>
+                                                       <button id="searchNow" class="reportButton" style="margin-left: 4%; margin-top: 3%;">Show Report</button>  
+                                                   </center> 
+                                                   
+                                               </div> 
+                                               
+                                            <div style="display: none" id="reportResults"/>
+                                                    <!-- Reservation Report-->
+                                                    <div id="reservationChartContainer" style="width: 100%; height: 300px;margin-top: 5%;"></div>     
+                                                    <div> 
+                                                        <br><br>
+                                                        <h2 style="color: #268d51;"> Total Patients : <span id="totalPatient" style="color: #000"></span> &nbsp;&nbsp;&nbsp;   Total Profit :  <span id="totalProfit"  style="color: #000"></span></h2>   
+                                                    </div>
+                                                    
+                                                    <hr style="border-top: 3px solid #c1c1c1 ;margin-top: 5%;">
+                                                    <!-- Insurance Report-->
+                                                    <div id="insurranceChartContainer" style="width: 100%; height: 300px;margin-top: 5%;"></div>      
+                                                    <br><br>
+                                                    <div> <h2 style="color: #268d51;"> Insured Patients : <span id="totalInsurredPatient" style="color: #000"></span> &nbsp;&nbsp;&nbsp;  Insurance Profit : <span id="totalInsurranceProfit" style="color: #000"></span></h2>  
+                                                   </div>    
+                                           </div>
+                                                    
+                                            </div>      
                                     </div>
                             </div>        
                             <!-- Widget -->

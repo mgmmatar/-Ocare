@@ -30,7 +30,8 @@
         <script type="text/javascript" src="<c:url value='/resources/js/owl.carousel.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/squad.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/underscore.js'/>"></script>      
-        <script type="text/javascript" src="<c:url value='/resources/js/paging.js'/>"></script>        
+        <script type="text/javascript" src="<c:url value='/resources/js/paging.js'/>"></script>      
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery.canvasjs.min.js'/>"></script>
         
         <!-- NEW -->
         <script type="text/javascript" src="<c:url value='/resources/js/nprogress.js'/>"></script>
@@ -51,10 +52,43 @@
 
         <script type="text/javascript">
             $(document).ready(function() {
-        
-                // Max Result 
+               
+                 // Max Result 
                 var maxResult=10;  
-
+        
+                var statusInfo =[];
+                    ////////////////////////////////////////////////////////////
+                    // filling the Canvas Array
+                    function fillChartData(){
+                            <c:forEach items="${reportReservationStatus}" var="reportReservation">
+                                  statusInfo.push({ label: "${reportReservation.statusName}",  y: ${reportReservation.occuranceNumber}, legendText: "${reportReservation.statusName}"});           
+                            </c:forEach>
+                    }//fillChartData
+        
+                    var chart = new CanvasJS.Chart("chartContainer",{   
+                            title: { 
+                                    text: "Patient Status",
+                                    fontSize: 24
+                            }, 
+                            axisY: { 
+                                    title: "Products in %" 
+                            }, 
+                            legend :{ 
+                                    verticalAlign: "bottom", 
+                                    horizontalAlign: "center" 
+                            }, 
+                            data: [ 
+                            { 
+                                    type: "pie", 
+                                    showInLegend: true, 
+                                    toolTipContent: "{label} <br/> #percent%", 
+                                    //indexLabel: "#percent% - {label}", 
+                                    indexLabel: "{label} - {y} Times", 
+                                    dataPoints: statusInfo
+                            }   
+                            ] 
+                    }); 
+             
                 $('#reservationTable').paging({
                        limit:maxResult,
                        rowDisplayStyle: 'block'
@@ -69,6 +103,11 @@
                     var patientId = '${patient.id}';
                     window.location.href = "/ocare/reservation/process/"+patientId;  
                 });
+                
+                // Viewing Chart
+                fillChartData();   
+                chart.render();
+                
             });
         </script>
             
@@ -251,6 +290,9 @@
             
              </div>
             
+                             <div class="costViewer">
+                                    <div id="chartContainer" style="width: 100%; height: 300px"></div>      
+                            </div> 
                                        
                             
                             <div  class="panel-heading" style="width: 50%;margin-left: 25%;margin-top: 8%;margin-bottom: 3%;background-color: rgba(20, 121, 184, 0.85) !important;border-style: groove;">
