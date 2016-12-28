@@ -23,6 +23,8 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/reservation.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/font-awesome.min.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/paging.css'/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/monitor.css'/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/popup.css'/>">
         <!---  JS Scripts Files --->
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
@@ -32,7 +34,7 @@
         <script type="text/javascript" src="<c:url value='/resources/js/underscore.js'/>"></script>      
         <script type="text/javascript" src="<c:url value='/resources/js/paging.js'/>"></script>      
         <script type="text/javascript" src="<c:url value='/resources/js/jquery.canvasjs.min.js'/>"></script>
-        
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery.bpopup.min.js'/>"></script>
         <!-- NEW -->
         <script type="text/javascript" src="<c:url value='/resources/js/nprogress.js'/>"></script>
         <script>
@@ -122,6 +124,52 @@
             }
         </style>
             
+            <style>
+                ul.tabs{
+			margin: 0px;
+			padding: 0px;
+			list-style: none;
+		}
+		ul.tabs li{
+			background: none;
+			color: #222;
+			display: inline-block;
+			padding: 10px 15px;
+			cursor: pointer;
+		}
+
+		ul.tabs li.current{
+			background: #ededed;
+			color: #222;
+		}
+
+		.tab-content{
+			display: none;
+			background: #ededed;
+			padding: 15px;
+		}
+
+		.tab-content.current{
+			display: inherit;
+		}
+                    
+                
+            </style>
+                    <script type="text/javascript">
+            $(document).ready(function() {
+            //// Tabs  
+            $('ul.tabs li').click(function(){
+                    var tab_id = $(this).attr('data-tab');
+
+		$('ul.tabs li').removeClass('current');
+		$('.tab-content').removeClass('current');
+
+		$(this).addClass('current');
+		$("#"+tab_id).addClass('current');
+	           });
+               });
+        </script>
+        
         
         <%@include file="../basic/scripts.jsp" %>
         
@@ -162,28 +210,41 @@
                                    ${patient.fName} ${patient.lName} _ Profile 
                                 </div>
           
+                                
+                                <div class="container">
+
+                                                                    <ul class="tabs">
+                                                                            <li class="tab-link current" data-tab="tab-1">Basic Info</li>
+                                                                            <li class="tab-link" data-tab="tab-2">Status</li>
+                                                                            <li class="tab-link" data-tab="tab-3">History</li>
+                                                                            <li class="tab-link" data-tab="tab-4">Tab Four</li>
+                                                                    </ul>
+                                
+                                
            <!--- Reservation Information --->
 
+           <div id="tab-1" class="tab-content current">
+                 <div class="panel-body">
                         <div class="patientInfo">
                             
                                 <img class="patientImg"src="<c:url value='/resources/images/avatar.jpg'/>" /> 
                            
-                                                 <div class="costViewer" style="padding-left: 360px;">
-                                             <div class="col-md-3 controlButtonContainer">
-                                                 <button type="button" id="editPatient" class="registerbuttonheader controlAction">Edit</button>
-                                                 <button type="button" id="reservePatient" class="registerbuttonheader controlAction">Reserve</button>
+                                                 <div class="costViewer">
+                                                     <div class="col-md-3 controlButtonContainer" style="padding-top: 15px;padding-left: 300px;">
+                                                 <button type="button" id="editPatient" class="registerbuttonheader controlAction" style="width: 150px!important;">Edit</button>
+                                                 <button type="button" id="reservePatient" class="registerbuttonheader controlAction" style="width: 150px!important;">Reserve</button>
                                              </div>
 
                                     </div>                 
                                          </div> 
                                              
-             <div class="patientDivContainer">
+                                <div class="patientDivContainer" style="margin-left: -10px;">
             <div class="patientDivContainer">
             <div class="patientLabelTitle">
                 <label class="patientDataText" style="margin-right: 45px;"> Name : </label>
             </div>
             <div class="PatientInputFields">
-                <input type="text" disabled="disabled"  class="patientInputFieldDesign" style="width: 400px;" required  value="${patient.fName} ${patient.midName} ${patient.lName}"/>
+                <input type="text" disabled="disabled"  class="patientInputFieldDesign" style="width: 360px;" required  value="${patient.fName} ${patient.midName} ${patient.lName}"/>
             </div>
             
              <div class="patientLabelTitle">
@@ -210,7 +271,7 @@
             </div>
         
             <div class="PatientInputFields">
-                <input type="text"  disabled="disabled" name="BirthDate" placeholder="Age" class="patientInputFieldDesign" style="width:150px!important" required value="${patient.birthDate}"/>
+                <input type="text"  disabled="disabled" name="BirthDate" placeholder="BirthDate" class="patientInputFieldDesign" style="width:150px!important" required value="${patient.birthDate}"/>
             </div>
             
             <div class="patientLabelTitle">
@@ -218,7 +279,7 @@
             </div>
         
             <div class="PatientInputFields">
-                <input type="text"  disabled="disabled" name="age" placeholder="Age" class="patientInputFieldDesign" style="width:150px!important" required value="${patient.age}"/>
+                <input type="text"  disabled="disabled" name="age" placeholder="Age" class="patientInputFieldDesign" style="width:110px!important" required value="${patient.age}"/>
             </div>
             </div>
             
@@ -227,14 +288,14 @@
                 <label class="patientDataText" style="margin-right: 26px;">Phone 1 : </label>
             </div>
             <div class="PatientInputFields">
-               <input type="text"  disabled="disabled" name="phoneNumber1" placeholder="Telephone-1" class="patientInputFieldDesign" style="width: 260px;" required  value="${patient.phoneNumber1}"/>
+               <input type="text"  disabled="disabled" name="phoneNumber1" placeholder="Telephone-1" class="patientInputFieldDesign" style="width: 256px;" required  value="${patient.phoneNumber1}"/>
             </div>
             
             <div class="patientLabelTitle">
                 <label class="patientDataText">Phone 2 : </label>
             </div>
             <div class="PatientInputFields">
-                <input type="text"  disabled="disabled" name="phoneNumber2" placeholder="Telephone-2" class="patientInputFieldDesign" style="width: 290px;" required  value="${patient.phoneNumber2}"/>
+                <input type="text"  disabled="disabled" name="phoneNumber2" placeholder="Telephone-2" class="patientInputFieldDesign" style="width: 256px;" required  value="${patient.phoneNumber2}"/>
             </div>
             </div>
             
@@ -243,7 +304,7 @@
                 <label class="patientDataText" style="margin-right: 0px;"> Address : </label>
             </div>
             <div class="PatientInputFields">
-                <input type="text"  disabled="disabled" name="address" placeholder="Address" class="patientInputFieldDesign" style="width:680px!important; margin-left: 25px;" required value="${patient.address}"/>
+                <input type="text"  disabled="disabled" name="address" placeholder="Address" class="patientInputFieldDesign" style="width:640px!important; margin-left: 25px;" required value="${patient.address}"/>
             </div>
             </div>
             
@@ -252,14 +313,14 @@
                 <label class="patientDataText" style="margin-right: -22px;">Insurance : </label>
             </div>
             <div class="PatientInputFields">
-               <input type="text" disabled="disabled" name="email" placeholder="E-mail" class="patientInputFieldDesign" style="width:280px!important; margin-left: 33px;" required  value="${patient.insuranceCompany.nameEn}"/>
+               <input type="text" disabled="disabled" name="email" placeholder="Insurance" class="patientInputFieldDesign" style="width:270px!important; margin-left: 33px;" required  value="${patient.insuranceCompany.nameEn}"/>
             </div>   
                 
             <div class="patientLabelTitle">
                 <label class="patientDataText" >Email : </label>
             </div>
             <div class="PatientInputFields">
-               <input type="text" disabled="disabled" name="email" placeholder="E-mail" class="patientInputFieldDesign" style="width:300px!important; margin-left: -6px;" required  value="${patient.email}"/>
+               <input type="text" disabled="disabled" name="email" placeholder="E-mail" class="patientInputFieldDesign" style="width:270px!important; margin-left: -6px;" required  value="${patient.email}"/>
             </div>
             </div>
                             
@@ -289,17 +350,25 @@
   
             
              </div>
+             </div>
+             </div>
             
-                            <div class="costViewer">
-                                    <div id="chartContainer" style="width: 100%; height: 300px"></div>      
+            
+             <div id="tab-2" class="tab-content">
+                                                                   
+                              <div class="panel-body">                                     
+                            <div class="costViewer" style="width: 100%; height:500px;">
+                                    <div id="chartContainer" ></div>      
                             </div> 
-                                       
-                            
-                            <div  class="panel-heading" style="width: 50%;margin-left: 25%;margin-top: 8%;margin-bottom: 3%;background-color: rgba(20, 121, 184, 0.85) !important;border-style: groove;">
-                                   Reservation History</h3>
+             </div>   
+                 </div>   
+                   
+            <div id="tab-3" class="tab-content">
+                <div class="panel-body">  
+                            <div  class="panel-heading" style="width: 50%;margin-left: 36%;margin-top: 2%;margin-bottom: 3%;background-color: transparent!important;border-style: groove;border-color: transparent;">
+                                <h3 style="color: #3a3a3a;"/>     Reservation History
                                 </div> 
-                                  
-                             <div class="panel-body">
+                          
                                  <table id="reservationTable" class="table table-striped" style="cursor: pointer;">
                                 <thead>
                                     <tr>
@@ -336,7 +405,11 @@
                                 </div>
                                              
                             </div>    
-                                             
+            <div id="tab-4" class="tab-content">
+                                                                            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                               </div>
+                                         </div>    
+            </div>
                             <!-- Widget -->
                             <%@include file="../basic/widgets.jsp" %>
                                              

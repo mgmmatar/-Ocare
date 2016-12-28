@@ -8323,3 +8323,6 @@ label.css-label {
 .insurranceCompanyDeleteButton:hover,.insurranceCompanyAddButton:hover,.insurranceCompanyCancelButton:hover{
     transform: scale(1.2);
 }
+.addTimesButton:hover,.removeTimeButton:hover {
+    transform: scale(1.2);
+}

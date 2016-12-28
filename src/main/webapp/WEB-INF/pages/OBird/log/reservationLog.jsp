@@ -56,14 +56,16 @@
         <script type="text/javascript" src="<c:url value='/resources/js/timeRanges.js'/>"></script>
 
         <script type="text/javascript">
-            $(document).ready(function() {
-      
-        $(".container").on("click",".ViewMore", function(e) {
-                   
-                       var reservationInfo= $(this).parents(".mainContainer").find('.reservationInfo'); 
-                       console.log(reservationInfo);
-                       reservationInfo.show();
-                   
+           
+            $(document).ready(function() {    
+            $('.mainContainer reservationInfo').hide();
+             $(".container").on("click",".ViewMore", function(e) {
+              e.preventDefault(); 
+                 var reservationInfo= $(this).parents(".mainContainer").find('.reservationInfo'); 
+                console.log(reservationInfo);   
+                  $('.reservationInfo').not(reservationInfo).hide();
+                      reservationInfo.toggle();
+                        
                 });
                 
                 function reloadReservations(){

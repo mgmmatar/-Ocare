@@ -24,19 +24,19 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/font-awesome.min.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/paging.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/ssd-confirm.css'/>">    
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/keyboard.css'/>">
         <!---  JS Scripts Files --->
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/owl.carousel.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/squad.js'/>"></script>
-        <script type="text/javascript" src="<c:url value='/resources/js/underscore.js'/>"></script>
-        
+        <script type="text/javascript" src="<c:url value='/resources/js/underscore.js'/>"></script>   
         <script type="text/javascript" src="<c:url value='/resources/js/mindmup-editabletable.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/reservationWay-editable.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/paging.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery.ssd-confirm.js'/>"></script>
-        
+        <script type="text/javascript" src="<c:url value='/resources/js/keyboard.js'/>"></script>
         
 
         <!-- NEW -->
@@ -63,6 +63,9 @@
 	</style>        
         <script type="text/javascript">
             $(document).ready(function() {
+               /// SET the Icon of the Keyboard   
+                VKI_imageURI="<c:url value='/resources/images/keyboard.png'/>";
+        
                 var newClicked=0;
                 // Max Result 
                 var maxResult=5;  
@@ -260,7 +263,7 @@
                                     <!--- List of Admins --->
                                     <div class="panel-body">
                                            <center>
-                                                <input type="text" id="searchForReservationWay" name="Search" class="listSearchBar" placeholder="Filter Reservation Way"  required />    
+                                                <input type="text" id="searchForReservationWay" name="Search" class="listSearchBar keyboardInput" placeholder="Filter Reservation Way"  required />    
                                             </center>
                                             <div class="myDataTable">     
                                                 <c:import  url="/settings/reservationWay/loadReservationWayTable" />

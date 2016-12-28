@@ -24,6 +24,7 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/font-awesome.min.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/paging.css'/>"> 
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/ssd-confirm.css'/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/keyboard.css'/>">
          
 
         <!---  JS Scripts Files --->
@@ -38,6 +39,7 @@
         <script type="text/javascript" src="<c:url value='/resources/js/paging.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery.ssd-confirm.js'/>"></script>
          <script type="text/javascript" src="<c:url value='/resources/js/jquery.bpopup.min.js'/>"></script>
+         <script type="text/javascript" src="<c:url value='/resources/js/keyboard.js'/>"></script>
         <!-- NEW -->
         
         <script type="text/javascript" src="<c:url value='/resources/js/nprogress.js'/>"></script>
@@ -68,6 +70,8 @@
 	</style>        
         <script type="text/javascript">
             $(document).ready(function() {
+          /// SET the Icon of the Keyboard   
+                VKI_imageURI="<c:url value='/resources/images/keyboard.png'/>";
                 
                 $('#actionLogTable').paging({
                     limit:10,
@@ -143,7 +147,7 @@
                                     <!--- List of Admins --->
                                     <div class="panel-body">
                                            <center>
-                                                <input type="text" id="searchForLog" name="Search" class="listSearchBar" placeholder="Filter Log List"  required /> 
+                                                <input type="text" id="searchForLog" name="Search" class="listSearchBar keyboardInput" placeholder="Filter Log List"  required /> 
                                                 
                                             </center>
                                             <div class="myDataTable">     

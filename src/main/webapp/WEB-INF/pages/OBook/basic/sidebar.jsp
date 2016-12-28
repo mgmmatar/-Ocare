@@ -137,13 +137,13 @@
                    <a data-toggle="tooltip" data-placement="top" title="Logout" href="/ocare/auth/j_spring_security_logout">
                         <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                     </a>
-                    <a data-toggle="tooltip" data-placement="top" title="Lock" >
+                    <a data-toggle="tooltip" data-placement="top" title="Lock" href="/ocare/auth/j_spring_security_logout">
                         <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
                     </a>
-                    <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                    <a data-toggle="tooltip" data-placement="top" title="FullScreen" href="/ocare/auth/j_spring_security_logout">
                         <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
                     </a>
-                    <a data-toggle="tooltip" data-placement="top" title="help">
+                    <a data-toggle="tooltip" data-placement="top" title="help" href="/ocare/auth/j_spring_security_logout">
                         <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                     </a>
                     

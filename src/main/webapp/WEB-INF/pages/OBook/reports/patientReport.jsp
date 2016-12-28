@@ -23,6 +23,7 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/font-awesome.min.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/popup.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/paging.css'/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/keyboard.css'/>">
  
         <!---  JS Scripts Files --->
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
@@ -36,6 +37,7 @@
         <script type="text/javascript" src="<c:url value='/resources/js/paging.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery.canvasjs.min.js'/>"></script>
         <script src="<c:url value='/resources/js/typeahead.jquery.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/keyboard.js'/>"></script>
         <!-- NEW -->
         <script type="text/javascript" src="<c:url value='/resources/js/nprogress.js'/>"></script>
         <script>
@@ -50,13 +52,15 @@
                 
             <script type="text/javascript">
             $(document).ready(function() {
+           /// SET the Icon of the Keyboard   
+                VKI_imageURI="<c:url value='/resources/images/keyboard.png'/>";
                 
                 var patientId=0;
                 var statusInfo =[];
                 
                 var chart = new CanvasJS.Chart("chartContainer",{   
                             title: { 
-                                    text: "Patient Status",
+                                 //   text: "Patient Status",
                                     fontSize: 24
                             }, 
                             axisY: { 
@@ -205,16 +209,17 @@
                                                    From : <input type="date" style="margin-left: 2%;margin-right:  24%;"  name="dateFrom" id="dateFrom"  />
                                                    To  : <input type="date" style="margin-left: 2%;"  name="dateFrom" id="dateTo" />
                                                    <br>
-                                                   Patient 
-                                                   <input type="text" id="patientName" name="patientName" class="searchBox" placeholder="Search For Patient"  required />
+                                                    
+                                                   <input type="text" id="patientName" name="patientName" class="searchBox keyboardInput" placeholder="Search For Patient"  required style="margin-top: 40px;margin-left: 50px" />
                                                    <center>
                                                        <button id="searchNow" class="reportButton" style="margin-left: 4%; margin-top: 3%;">Show Report</button>  
                                                    </center> 
                                                    
                                                </div> 
                                                <div style="display: none" id="reportResults"/>
-                                                    
-                                                            <div id="chartContainer" style="width: 100%; height: 300px"></div>      
+                                                    <br><br>
+                                                    <h1 style="color: #3a3a3a;margin-left: 220px;font-size: 30px;font-weight: bold;" > Patient Status</h1>
+                                                            <div id="chartContainer" style="width: 200%; height: 500px;margin-top: 3%;margin-left: 7%;"></div>      
 
                                                </div> 
                                                     

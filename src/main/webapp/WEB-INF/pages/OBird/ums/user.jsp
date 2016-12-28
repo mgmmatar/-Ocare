@@ -23,6 +23,7 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/font-awesome.min.css'/>">        
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/popup.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/paging.css'/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/keyboard.css'/>">
         <!---  JS Scripts Files --->
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
@@ -33,6 +34,7 @@
         <script type="text/javascript" src="<c:url value='/resources/js/jquery.ssd-confirm.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery.bpopup.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/paging.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/keyboard.js'/>"></script>
         <!-- NEW -->
         <script type="text/javascript" src="<c:url value='/resources/js/nprogress.js'/>"></script>
         <script>
@@ -49,7 +51,9 @@
 
         <script type="text/javascript">
             $(document).ready(function() {
-                
+        /// SET the Icon of the Keyboard   
+                VKI_imageURI="<c:url value='/resources/images/keyboard.png'/>";   
+        
             var maxResult=5;      
                 
             $('#userTable').paging({
@@ -213,7 +217,7 @@
                                     <!--- Users List --->
                                     <div class="panel-body">
                                             <center>
-                                                <input type="text" id="searchForUser" name="Search" class="listSearchBar" placeholder="Filter Users"  required />    
+                                                <input type="text" id="searchForUser" name="Search" class="listSearchBar keyboardInput" placeholder="Filter Users"  required />    
                                             </center>
                                             <div class="myDataTable">     
                                                 <c:import  url="/ums/user/loadUserTable" />          

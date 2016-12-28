@@ -136,7 +136,7 @@
 #keyboardInputMaster thead tr th strong {
   font-weight:bold;
 }
-#keyboardInputMaster thead tr th small {keyboard
+#keyboardInputMaster thead tr th small {
   -webkit-border-radius:0.3em 0px 0px 0.3em;
   -moz-border-radius:0.3em 0px 0px 0.3em;
   border-radius:0.3em 0px 0px 0.3em;
@@ -269,4 +269,8 @@
   margin:0px 3px;
   vertical-align:middle;
   cursor:pointer;
+  opacity: 0.9;
+}
+.keyboardInputInitiator:hover {
+  opacity: 1;
 }

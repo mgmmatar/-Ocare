@@ -8,6 +8,6 @@
 <!DOCTYPE html>
 <div class="page-title">
     <div class="title_left">
-        <input type="text" name="Search" class="col-lg-10 col-md-10 col-sm-10 col-xs-9 searchBox" placeholder="Search" id="search" required />
+        <input type="text" name="Search" class="col-lg-10 col-md-10 col-sm-10 col-xs-9 searchBox " placeholder="Search" id="search" required />
     </div>
 </div>

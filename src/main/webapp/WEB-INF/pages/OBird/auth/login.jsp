@@ -1,3 +1,4 @@
+<!--
 <%-- 
     Document   : login
     Created on : Oct 27, 2016, 1:50:04 AM
@@ -6,6 +7,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+-->
+
 <!DOCTYPE html>
 
 <html>
@@ -22,10 +25,8 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/font-awesome.min.css'/>">
         
         
-        <!---  Scripts --->
-        <script type="text/javascript" src="<c:url value='/resources/js/jquery.min.js'/>"></script>
-        <script type="text/javascript" src="<c:url value='/resources/js/prefixfree.min.js'/>"></script>
-        
+		<script type="text/javascript" src="js/keyboard.js" charset="UTF-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/keyboard.css">
         
         <script type="text/javascript">
             $(document).ready(function() {
@@ -41,7 +42,7 @@
     
        
     <body>
-
+      
 	<div class="owl">
             <div class="hand"></div>
             <div class="hand hand-r"></div>

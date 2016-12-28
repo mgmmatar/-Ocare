@@ -72,12 +72,14 @@
                 }); 
 
 
-
+                $('.mainContainer reservationInfo').hide();
                 $(".container").on("click",".ViewMore", function(e) {
-                   
+                  e.preventDefault();  
                     var reservationInfo= $(this).parents(".mainContainer").find('.reservationInfo'); 
-                    console.log(reservationInfo);
-                       reservationInfo.show();
+                    console.log(reservationInfo);   
+                     $('.reservationInfo').not(reservationInfo).hide();
+                      reservationInfo.toggle();
+                       
 //                     $('#informationMessage').empty();
 //                                    
 //                     $('#informationMessage').append(reservationInfo.show());

@@ -116,11 +116,25 @@
                 }); 
                
                 ///////////////////////////////////////////////////////////////////////
-                $( "#searchForPatient" ).keyup(function() {
-                    var searchValue=$(this).val();
+            
+           
+             $( "#searchForPatient" ).keyup(function() {
+                   var  searchValue=$(this).val();
                     /// Reloading Patient Table Result
                       LoadPatientTableFor(searchValue);
                  });
+             
+     
+                        
+//              $( "#searchForPatient" ).keyup('#searchForPatient',setInterval(function() {
+//                    var searchValue=$("#searchForPatient").val();
+//                    /// Reloading Patient Table Result
+//                      LoadPatientTableFor(searchValue);
+//                 }, 500));
+// 
+                  
+
+
                  ///////////////////////////////////////////////////////////////////////
                  function LoadPatientTableFor(searchValue){
                       /// Sending Ajax Request To Reload Table
@@ -193,7 +207,7 @@
                                     <div class="panel-body">
                                         
                                         <center>
-                                                <input type="text" id="searchForPatient" name="Search" class="listSearchBar keyboardInput" placeholder="Filter Patients"  required />    
+                                            <input type="text" id="searchForPatient" name="Search" class="listSearchBar keyboardInput" placeholder="Filter Patients"  required />
                                             </center>
                                             <div class="myDataTable">     
                                                 <c:import  url="/patient/loadPatientTable" />     

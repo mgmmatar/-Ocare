@@ -25,7 +25,7 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/font-awesome.min.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/paging.css'/>">
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/ssd-confirm.css'/>">
-
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/keyboard.css'/>">
         <!---  JS Scripts Files --->
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
@@ -37,8 +37,9 @@
         <script type="text/javascript" src="<c:url value='/resources/js/mindmup-editabletable.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/insurranceCompany-editable.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/leanModal.js'/>"></script>
-                <script type="text/javascript" src="<c:url value='/resources/js/paging.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/paging.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery.ssd-confirm.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/keyboard.js'/>"></script>
 
         <!-- NEW -->
         <script type="text/javascript" src="<c:url value='/resources/js/nprogress.js'/>"></script>
@@ -87,7 +88,10 @@
 	</style>        
         <script type="text/javascript">
             $(document).ready(function() {
-           // $(".profiles").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+        /// SET the Icon of the Keyboard   
+                VKI_imageURI="<c:url value='/resources/images/keyboard.png'/>";  
+        
+        // $(".profiles").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
              var newClicked=0;
              // Max Result 
              var maxResult=5;  
@@ -256,7 +260,7 @@
                                     <!--- List of Admins --->
                                     <div class="panel-body">
                                            <center>
-                                                <input type="text" id="searchForInsurrance" name="Search" class="listSearchBar" placeholder="Filter Insurrance"  required />    
+                                                <input type="text" id="searchForInsurrance" name="Search" class="listSearchBar keyboardInput" placeholder="Filter Insurrance"  required />    
                                             </center>
                                             <div class="myDataTable">     
                                                 <c:import  url="/settings/insurrance/loadInsurranceCompanyTable" />
