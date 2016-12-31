@@ -8,22 +8,30 @@ package com.ocare.UMS.controller;
 
 import com.obird.OUMS.domain.Role;
 import com.obird.OUMS.service.RoleService;
+import com.obird.utility.OFault;
 import com.ocare.UMS.domain.MyUser;
 import com.ocare.UMS.holder.UserHolder;
 import com.ocare.UMS.service.MyUserService;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -87,13 +95,30 @@ public class MyUserController {
     }
     
     @Secured({"ROLE_SUPER_ADMIN"})
-    @RequestMapping(value = "/admin/createOrUpdate", method = RequestMethod.POST)
-    public String createAdmins(@ModelAttribute("userHolder")UserHolder userHolder, Model model) {
+    @RequestMapping(value = "/admin/createOrUpdate", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE,method = RequestMethod.POST)
+    public @ResponseBody List<OFault> createAdmins(@RequestBody @Valid UserHolder userHolder,BindingResult bindingResult, Model model) {
         // Check if the Request for Registeration or Editing Profile 
-         userService.registerOrUpdateUser(userHolder);
-        // return the User data 
-        return "redirect:/ums/admin";
-    }
+        List<OFault> faults=new ArrayList<OFault>();
+        if (bindingResult.hasErrors()) {
+            // Getting Error List 
+            for(FieldError objectError:bindingResult.getFieldErrors()){
+                /// Init New Fault
+                OFault oFault=new OFault();
+                oFault.setPropertyName(objectError.getField());
+                oFault.setErrorMessage(objectError.getDefaultMessage());
+                // Adding to Error
+                faults.add(oFault);
+            }//end for Loop
+            
+            System.out.println(">> ERROR SIZE "+faults.size());
+           
+        }else{
+            // saving Admin Data
+            userService.registerOrUpdateUser(userHolder);
+        }//end else
+        // return result 
+        return faults;
+    }//end createAdmins
     
     @Secured({"ROLE_SUPER_ADMIN"})
     @RequestMapping(value = "/admin/activeOrDeactive", method = RequestMethod.POST)

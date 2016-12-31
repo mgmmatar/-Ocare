@@ -35,6 +35,7 @@
         <script type="text/javascript" src="<c:url value='/resources/js/jquery.bpopup.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/paging.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/keyboard.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery.serialize-object.min.js'/>"></script>
         <!-- NEW -->
         <script type="text/javascript" src="<c:url value='/resources/js/nprogress.js'/>"></script>
         <script>
@@ -173,7 +174,10 @@
                         }//end Complete Function
                     });
                  });
-                        
+                 
+                 /// Adding New Admin Request
+
+                 
             });
         </script>
             
